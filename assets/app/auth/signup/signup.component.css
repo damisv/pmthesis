@@ -1,0 +1,155 @@
+
+.card-signup {
+    margin: 160px 0 40px;
+}
+
+
+.header-filter {
+    position: relative;
+}
+
+.header-filter .container {
+    z-index: 2;
+    position: relative;
+}
+
+.card {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    border-radius: 3px;
+    color: rgba(0,0,0, 0.87);
+    background: #fff;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+}
+
+.card{
+    box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
+}
+
+.header {
+    box-shadow: 0 16px 38px -12px rgba(0, 0, 0, 0.56), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: -40px;
+    padding: 20px 0;
+}
+.card-signup .text-divider {
+    margin-top: 30px;
+    margin-bottom: 0px;
+    text-align: center;
+}
+.card-signup .content {
+    padding: 0px 30px 0px 10px;
+}
+.card-signup .checkbox {
+    margin-top: 20px;
+}
+.card-signup .checkbox label {
+    margin-left: 17px;
+}
+.checkbox label {
+    cursor: pointer;
+    padding-left: 0;
+    color: rgba(0,0,0, 0.26);
+}
+.card-signup .checkbox .checkbox-material {
+    padding-right: 12px;
+}
+.card-signup .social-line {
+    margin-top: 15px;
+    text-align: center;
+}
+.card-signup .social-line .btn {
+    color: #FFFFFF;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.card .header-primary {
+    background: linear-gradient(60deg, #ab47bc, #7b1fa2);
+}
+.card [class*="header-"] {
+    color: #FFFFFF;
+}
+.card-raised {
+    box-shadow: 0 16px 38px -12px rgba(0, 0, 0, 0.56), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
+}
+
+.btn-just-icon {
+    font-size: 18px;
+    padding: 10px 10px;
+    line-height: 1em;
+}
+.btn-just-icon i {
+    width: 20px;
+}
+
+.input-group .input-group-btn {
+    padding: 0 12px;
+}
+.input-group .input-group-addon {
+    border: 0;
+    background: transparent;
+    padding: 12px 15px 0px;
+}
+
+.animated-button {
+    z-index: 2 !important;
+    position: relative;
+    display: block;
+    margin: 30px auto 0;
+    padding: 14px 15px;
+    color: #9c27b0;
+    background: #fff;
+    font-size:14px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    overflow: hidden;
+    letter-spacing: .08em;
+    border-radius: 0;
+    text-shadow: 0 0 1px rgba(0, 0, 0, 0.2), 0 1px 0 rgba(0, 0, 0, 0.2);
+    -webkit-transition: all 1s ease;
+    -moz-transition: all 1s ease;
+    -o-transition: all 1s ease;
+    transition: all 1s ease;
+}
+.animated-button:after{
+    content: "";
+    position: absolute;
+    height: 0%;
+    left: 50%;
+    top: 50%;
+    width: 150%;
+    z-index: -1;
+    -webkit-transition: all 0.75s ease 0s;
+    -moz-transition: all 0.75s ease 0s;
+    -o-transition: all 0.75s ease 0s;
+    transition: all 0.75s ease 0s;
+}
+.animated-button:hover {
+    color: #FFF;
+    text-shadow: none;
+}
+.animated-button:hover:after {
+    height: 450%;
+}
+
+.animated-button.victoria-one {
+    border: 2px solid #9c27b0;
+    width: 50%;
+}
+.animated-button.victoria-one:after {
+    background: linear-gradient(60deg, #ab47bc, #7b1fa2);
+    -moz-transform: translateX(-50%) translateY(-50%) rotate(-25deg);
+    -ms-transform: translateX(-50%) translateY(-50%) rotate(-25deg);
+    -webkit-transform: translateX(-50%) translateY(-50%) rotate(-25deg);
+    transform: translateX(-50%) translateY(-50%) rotate(-25deg);
+}
+.footer{
+    margin-bottom: 15px;
+}
+
+

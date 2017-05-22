@@ -1,0 +1,47 @@
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
+                    <div class="card card-signup">
+                        <form class="form" [formGroup]="myForm" (ngSubmit)="onSubmit()">
+                            <div class="header header-primary text-center">
+                                <h4>Sign In</h4>
+                                <div class="social-line">
+                                    <a href="#pablo" class="btn btn-simple btn-just-icon">
+                                        <i class="fa fa-facebook-square"></i>
+                                    </a>
+                                    <a href="#pablo" class="btn btn-simple btn-just-icon">
+                                        <i class="fa fa-twitter"></i>
+                                    </a>
+                                    <a href="#pablo" class="btn btn-simple btn-just-icon">
+                                        <i class="fa fa-google-plus"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <br>
+                            <p class="text-center">Or Be Classical</p>
+                            <br>
+                            <div class="content">
+
+                                <div class="input-group">
+										<span class="input-group-addon">
+											<i class="material-icons">email</i>
+										</span>
+                                    <input type="text" id="email" formControlName="email" class="form-control" placeholder="Email...">
+                                </div>
+
+                                <div class="input-group">
+										<span class="input-group-addon">
+											<i class="material-icons">lock_outline</i>
+										</span>
+                                    <input type="password" id="password" formControlName="password" placeholder="Password..." class="form-control" />
+                                </div>
+
+                            </div>
+                            <div class="footer text-center">
+                                <button class="animated-button victoria-one" type="submit" [disabled]="!myForm.valid">Get Started</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>

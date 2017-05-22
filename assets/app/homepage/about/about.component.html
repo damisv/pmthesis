@@ -1,0 +1,179 @@
+<div id="home" class="wrapper">
+
+    <div id="wallpaper" class="header header-filter">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h1 class="title">Project Management Web App.</h1>
+                    <h4>Give it a 5 minutes tour and you'll find out why is one of the best.</h4>
+                    <br />
+                    <a [routerLink]="['/homepage']" class="btn btn-sm animated-button gibson-two btn-raised">
+                        <i class="fa fa-play"></i> Watch video
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="about" class="main main-raised">
+        <div class="container">
+            <div class="section text-center section-landing">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <h2 class="title">About this application</h2>
+                        <h5 class="description">
+                            This application is the subject of a Bachelor's Degree Thesis at the University of Applied Sciences of Central Macedonia.
+                            Some of the important features are the below:
+                        </h5>
+                    </div>
+                </div>
+                <br><br><br>
+            <div id="product" class="section text-center section-landing">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <h2 class="title">Let's talk product</h2>
+                        <h5 class="description">
+                            If you're looking for a quick and easy way of directing a project, you've come to the right place.
+                            No matter the size or nature of your plan, our application is the right tool for it.
+                            Below you'll ge to know the most important features implemented in PM Web App.
+                        </h5>
+                    </div>
+                </div>
+
+                <div class="features">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="info">
+                                <div class="icon ">
+                                    <i class="material-icons icon-primary">chat</i>
+                                </div>
+                                <h4 class="info-title">Project private discussions</h4>
+                                <p>You can discuss important matters about your project, tasks, issues with the other member of your team entirely privately and secure. The chat is based on Socket.io.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="info">
+                                <div class="icon ">
+                                    <i class="material-icons icon-success">verified_user</i>
+                                </div>
+                                <h4 class="info-title">Quick & easy</h4>
+                                <p>Keep up with your tasks, issues as well as your teammates one's, through the Dashboard.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="info">
+                                <div class="icon ">
+                                    <i class="material-icons icon-danger">insert_chart</i>
+                                </div>
+                                <h4 class="info-title">Gantt charts</h4>
+                                <p>Don't lose track of time using the Gantt charts provided by our app.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="auth" class="section text-center section-landing">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <h2 class="title">What are you waiting for ?</h2>
+
+                            <h4 class="description">
+                                Register for free here, and start using this awesome thing!
+                            </h4>
+                        <div class="row">
+                            <div class="text-center">
+                                    <a [routerLink]="['/auth']" class="btn btn-sm animated-button victoria-one">Sign Up</a>
+                            </div>
+                        </div>
+
+                            <h4 class="description">
+                                Or if you already have an account:
+                            </h4>
+                        <div class="row">
+                            <div class="text-center">
+                                    <a [routerLink]="['/auth/signin']" class="btn btn-sm animated-button victoria-two">Login</a>
+                            </div>
+                        </div>
+
+                </div>
+            </div>
+
+            <br><br>
+            <div id="team" class="section text-center">
+                <h2 class="title">Here is our team</h2>
+
+                <div class="team">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="team-player">
+                                <img src="/img/gates.jpg" alt="Thumbnail Image" class="img-raised img-circle">
+                                <h4 class="title">Anastasios Gymnopoylos <br />
+                                    <small class="text-muted">Full-Stack Developer</small>
+                                </h4>
+                                <p class="description">You can write here details about one of your team members.</p>
+                                <a href="#pablo" class="btn btn-simple btn-just-icon"><i class="fa fa-linkedin-square fa-2x"></i></a>
+                                <a href="#pablo" class="btn btn-simple btn-just-icon"><i class="fa fa-github fa-2x"></i></a>
+                                <a href="#pablo" class="btn btn-simple btn-just-icon"><i class="fa fa-facebook-square fa-2x"></i></a>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="team-player">
+                                <img src="/img/jobs.jpg" alt="Thumbnail Image" class="img-raised img-circle">
+                                <h4 class="title">Damian Anchidin<br />
+                                    <small class="text-muted">Full-Stack Developer</small>
+                                </h4>
+                                <p class="description">You can write here details about one of your team members.</p>
+                                <a href="#pablo" class="btn btn-simple btn-just-icon"><i class="fa fa-linkedin-square fa-2x"></i></a>
+                                <a href="#pablo" class="btn btn-simple btn-just-icon"><i class="fa fa-github fa-2x"></i></a>
+                                <a href="#pablo" class="btn btn-simple btn-just-icon"><i class="fa fa-facebook-square fa-2x"></i></a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="contact" class="section landing-section">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <h2 class="text-center title">Contact us</h2>
+                        <h4 class="text-center description">Divide details about your inquiry. We will responde back to you in a couple of hours.</h4>
+                        <form class="contact-form">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group label-floating">
+                                        <label class="control-label">Your Name</label>
+                                        <input type="email" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group label-floating">
+                                        <label class="control-label">Your Email</label>
+                                        <input type="email" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group label-floating">
+                                <label class="control-label">Your Messge</label>
+                                <textarea class="form-control" rows="4"></textarea>
+                            </div>
+
+                            <div class="row">
+                                <div class="text-center">
+                                    <a href="#" class="btn btn-sm animated-button victoria-three">Send Message</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+        </div>
+    </div>
+</div>

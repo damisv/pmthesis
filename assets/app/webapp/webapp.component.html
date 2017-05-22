@@ -1,0 +1,70 @@
+<div class="wrapper">
+
+    <div #sidebar [className]="menuColor"  data-image="">
+
+        <div class="sidebar-wrapper">
+            <div class="logo">
+                <a [routerLink]="['/app']" class="simple-text">
+                    <div class="logo-img">
+                        <img src="/img/angular2-logo-white.png"/>
+                    </div>
+                    Project Management {{price}} <button (click)="bid()"></button>
+                </a>
+            </div>
+
+        <router-outlet  name="sidebar"></router-outlet>
+        <router-outlet name="projectsidebar"></router-outlet>
+            <div style="position:fixed;bottom: 2%;left:1%;">
+                <md-button-toggle-group #group="mdButtonToggleGroup" [vertical]="false" [ngModel]="groupColor" (ngModelChange)="changeMenuColour(group.value)">
+                    <md-button-toggle value="blue">
+                        <md-icon style="color:blue;">format_paint</md-icon>
+                    </md-button-toggle>
+                <!--<md-button-toggle value="azure">
+                        <md-icon style="color:azure;">format_paint</md-icon>
+                    </md-button-toggle>
+                    <md-button-toggle value="green">
+                        <md-icon style="color:green;">format_paint</md-icon>
+                    </md-button-toggle>-->
+                    <md-button-toggle value="orange">
+                        <md-icon style="color:orange;">format_paint</md-icon>
+                    </md-button-toggle>
+                    <md-button-toggle value="red">
+                        <md-icon style="color:red;">format_paint</md-icon>
+                    </md-button-toggle>
+                    <md-button-toggle value="purple">
+                        <md-icon style="color:purple;">format_paint</md-icon>
+                    </md-button-toggle>
+                    <!--<md-button-toggle value="gray">
+                        <md-icon style="color:gray;">format_paint</md-icon>
+                    </md-button-toggle>-->
+                </md-button-toggle-group>
+            </div>
+
+    </div>
+
+
+        <div class="sidebar-background" style="background-image: url(/img/sidebar-4.jpg)"></div>
+
+    </div>
+
+
+    <div class="main-panel">
+
+        <webapp-navbar [profile]="profile" ></webapp-navbar>
+
+        <div class="main-content">
+            <div class="container-fluid">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+
+
+
+        <div>
+            <webapp-footer></webapp-footer>
+        </div>
+
+    </div>
+</div>
+
+

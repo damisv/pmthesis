@@ -1,0 +1,12 @@
+.nothing{
+     border: none !important;
+     box-shadow: none !important;
+     position:relative;
+     width: 100%;
+ }
+.scroll{
+    min-height: 5em !important ;
+    max-height: 12em !important;
+    overflow-y: auto;
+    width: 100%;
+}

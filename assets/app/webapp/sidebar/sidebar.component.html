@@ -1,0 +1,47 @@
+
+    <ul class="nav" *ngIf="userMenuAvailable">
+        <li routerLinkActive="active">
+            <a  [routerLink]="['dashboard']"  >
+                <i class="fa fa-desktop" aria-hidden="true"></i>
+                <p>Dashboard</p>
+            </a>
+
+        </li>
+        <li routerLinkActive="active">
+            <a  [routerLink]="['myprojects']" >
+                <i class="fa fa-briefcase" aria-hidden="true"></i>
+                <p>My Projects</p>
+            </a>
+        </li>
+        <li routerLinkActive="active">
+            <a [routerLink]="['mytasks']" >
+                <i class="fa fa-tasks" aria-hidden="true"></i>
+                <p>My Tasks</p>
+            </a>
+        </li>
+        <li routerLinkActive="active">
+            <a [routerLink]="['myissues']" >
+                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                <p>My Issues</p>
+            </a>
+        </li>
+        <li routerLinkActive="active">
+            <a  hre="#">
+                <i class="fa fa-comments-o" aria-hidden="true"></i>
+                <p>Chat</p>
+            </a>
+        </li>
+        <li routerLinkActive="active">
+            <a  [routerLink]="['profile']">
+                <i class="fa fa-user" aria-hidden="true"></i>
+                <p>Profile</p>
+            </a>
+        </li>
+        <li routerLinkActive="active">
+            <a  [routerLink]="['invites']">
+                <i class="fa fa-address-book-o" aria-hidden="true"></i>
+                <p>Invites</p>
+            </a>
+        </li>
+    </ul>
+

@@ -1,0 +1,217 @@
+<button mdTooltip="Add a new task" class="btn-float" color="primary" md-fab (click)="createNewTask()">
+    <md-icon class="md-24">add</md-icon>
+</button>
+
+<md-tab-group #tab>
+    <md-tab label="Agile View">
+        <!-- Original Cards -->
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card" >
+                    <div class="header">
+                        <h4 class="title">Not Started</h4>
+                    </div>
+                    <div class="content">
+                        <div>
+                            <div class="header">
+                                <p class="category">Backend development</p>
+                            </div>
+                            <div class="table-full-width" >
+                                <table class="table" >
+                                    <tbody [dragula]='"first-bag"'>
+                                    <tr>
+                                        <td><md-checkbox></md-checkbox></td>
+                                        <td><md-card>Sign contract for "What are conference organizers afraid of?"</md-card></td>
+                                        <!-- Buttons -->
+                                    </tr>
+                                    <tr>
+                                        <td><md-checkbox></md-checkbox></td>
+                                        <td>Lines From Great Russian Literature? Or E-mails From My Boss?</td>
+                                        <!-- Buttons -->
+                                    </tr>
+                                    <tr>
+                                        <td><md-checkbox></md-checkbox></td>
+                                        <td>Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
+                                        </td>
+                                        <!-- Buttons -->
+                                    </tr>
+                                    <tr>
+                                        <td><md-checkbox></md-checkbox></td>
+                                        <td>Create 4 Invisible User Experiences you Never Knew About</td>
+                                        <!-- Buttons -->
+                                    </tr>
+                                    <tr>
+                                        <td><md-checkbox></md-checkbox></td>
+                                        <td>Read "Following makes Medium better"</td>
+                                        <!-- Buttons -->
+                                    </tr>
+                                    <tr>
+                                        <td><md-checkbox></md-checkbox></td>
+                                        <td>Unfollow 5 enemies from twitter</td>
+                                        <!-- Buttons -->
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="header">
+                                <p class="category">Frontend development</p>
+                            </div>
+                            <div [dragula]='"second-bag"'>
+                                <div>
+                                    <p>Here is the SECOND BAG first</p>
+                                </div>
+                                <div>
+                                    <p>Here is the SECOND BAG second</p>
+                                </div>
+                                <div>
+                                    <p>Here is the SECOND BAG third</p>
+                                </div>
+                                <div>
+                                    <p>Here is the SECOND BAG fourth</p>
+                                </div>
+                                <div>
+                                    <p>Here is the SECOND BAG fifth</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="footer">
+                            <hr>
+                            <div class="stats">
+                                <i class="fa fa-history"></i> Updated 3 minutes ago
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card" >
+                    <div class="header">
+                        <h4 class="title">In Progress</h4>
+                    </div>
+                    <div class="content">
+                        <div class="header">
+                            <p class="category">Backend development</p>
+                        </div>
+                        <div class="table-full-width" >
+                            <table class="table">
+                                <tbody [dragula]='"first-bag"'>
+                                <tr>
+                                    <td><md-checkbox></md-checkbox></td>
+                                    <td>Sign contract for "What are conference organizers afraid of?"</td>
+                                    <!-- Buttons -->
+                                </tr>
+                                <tr>
+                                    <td><md-checkbox></md-checkbox></td>
+                                    <td>Lines From Great Russian Literature? Or E-mails From My Boss?</td>
+                                    <!-- Buttons -->
+                                </tr>
+                                <tr>
+                                    <td><md-checkbox></md-checkbox></td>
+                                    <td>Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
+                                    </td>
+                                    <!-- Buttons -->
+                                </tr>
+                                <tr>
+                                    <td><md-checkbox></md-checkbox></td>
+                                    <td>Create 4 Invisible User Experiences you Never Knew About</td>
+                                    <!-- Buttons -->
+                                </tr>
+                                <tr>
+                                    <td><md-checkbox></md-checkbox></td>
+                                    <td>Read "Following makes Medium better"</td>
+                                    <!-- Buttons -->
+                                </tr>
+                                <tr>
+                                    <td><md-checkbox></md-checkbox></td>
+                                    <td>Unfollow 5 enemies from twitter</td>
+                                    <!-- Buttons -->
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="header">
+                            <p class="category">Frontend development</p>
+                        </div>
+                        <div [dragula]='"second-bag"'>
+                            <div>
+                                <p>This is the SECOND BAG first</p>
+                            </div>
+                            <div>
+                                <p>This is the SECOND BAG second</p>
+                            </div>
+                            <div>
+                                <p>This is the SECOND BAG  third</p>
+                            </div>
+                            <div>
+                                <p>This is the SECOND BAG  fourth</p>
+                            </div>
+                            <div>
+                                <p>This is the SECOND BAG fifth</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer">
+                        <hr>
+                        <div class="stats">
+                            <i class="fa fa-history"></i> Updated 3 minutes ago
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </md-tab>
+    <md-tab label="Classic View">
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="card" >
+                    <div class="header">
+                        <h4 class="title">Tasks</h4>
+                        <p class="category">Backend development</p>
+                    </div>
+                    <div class="content">
+                        <div class="table-full-width">
+                            <table class="table" style="text-align: center;">
+                                <thead>
+                                <td>Status</td>
+                                <td>Name</td>
+                                <td>Assigner</td>
+                                <td>Assignees</td>
+                                <td>Actions</td>
+                                </thead>
+                                <tbody >
+                                <tr *ngFor="let task of tasks;let i=index">
+                                    <td>
+                                        <md-checkbox></md-checkbox>
+                                    </td>
+                                    <td (click)="openTaskView(i)">{{ task?.name }}</td>
+                                    <td (click)="onEmailClicked(task?.assigner_email)" >{{ task?.assigner_email }}</td>
+                                    <td mdTooltip="{{task?.assignee_email}}" >{{ task.assignee_email?.length }}</td>
+                                    <td >
+                                        <button md-mini-fab color="primary"><md-icon>edit</md-icon></button>
+                                        <button md-mini-fab color="accent"><md-icon>delete</md-icon></button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="footer">
+                            <hr>
+                            <div class="stats">
+                                <i class="fa fa-history"></i> Updated 3 minutes ago
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </md-tab>
+    <md-tab label="Add new task">
+        <project-create-task (taskCreated)="addTask($event)" [email]="user.email" ></project-create-task>
+    </md-tab>
+</md-tab-group>
