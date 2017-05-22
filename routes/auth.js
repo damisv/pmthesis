@@ -83,7 +83,9 @@ router.post('/signup',function(req, res){
         ).then(
             function(result) {
                 assert.equal(1, result.result.ok);
-                res.status(200).send("ok");
+                res.status(200).send({
+                    title: 'OK'
+                });
             }
         ).catch(
             function(err){
