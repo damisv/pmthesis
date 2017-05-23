@@ -10,8 +10,7 @@
                     <div class="content">
                         <!--here goes content of card -->
                             <ul>
-                                <li>Project 1 man mou man mou man moui </li>
-                                <li>Project 2 </li>
+                                <li *ngFor="let project of projects;let i=index" (click)="openProjectDashboard(i)">{{project.name}}</li>
                             </ul>
                         <div class="footer">
                             <div class="legend">
@@ -84,103 +83,103 @@
                         <div class="table-full-width">
                             <table class="table">
                                 <tbody>
-                                    <tr>
-                                        <td>
-                                            <label class="checkbox">
-                                                <input type="checkbox" value="" >
-                                            </label>
-                                        </td>
-                                        <td>Sign contract for "What are conference organizers afraid of?"</td>
-                                        <td class="td-actions text-right">
-                                            <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
-                                                <i class="fa fa-edit"></i>
-                                            </button>
-                                            <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-                                                <i class="fa fa-times"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <label class="checkbox">
-                                                <input type="checkbox" value="" checked="">
-                                            </label>
-                                        </td>
-                                        <td>Lines From Great Russian Literature? Or E-mails From My Boss?</td>
-                                        <td class="td-actions text-right">
-                                            <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
-                                                <i class="fa fa-edit"></i>
-                                            </button>
-                                            <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-                                                <i class="fa fa-times"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <label class="checkbox">
-                                                <input type="checkbox" value="" checked="">
-                                            </label>
-                                        </td>
-                                        <td>Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
-                                        </td>
-                                        <td class="td-actions text-right">
-                                            <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
-                                                <i class="fa fa-edit"></i>
-                                            </button>
-                                            <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-                                                <i class="fa fa-times"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <label class="checkbox">
-                                                <input type="checkbox" value="">
-                                            </label>
-                                        </td>
-                                        <td>Create 4 Invisible User Experiences you Never Knew About</td>
-                                        <td class="td-actions text-right">
-                                            <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
-                                                <i class="fa fa-edit"></i>
-                                            </button>
-                                            <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-                                                <i class="fa fa-times"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <label class="checkbox">
-                                                <input type="checkbox" value="">
-                                            </label>
-                                        </td>
-                                        <td>Read "Following makes Medium better"</td>
-                                        <td class="td-actions text-right">
-                                            <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
-                                                <i class="fa fa-edit"></i>
-                                            </button>
-                                            <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-                                                <i class="fa fa-times"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <label class="checkbox">
-                                                <input type="checkbox" value="">
-                                            </label>
-                                        </td>
-                                        <td>Unfollow 5 enemies from twitter</td>
-                                        <td class="td-actions text-right">
-                                            <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
-                                                <i class="fa fa-edit"></i>
-                                            </button>
-                                            <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-                                                <i class="fa fa-times"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
+                                <tr *ngFor="let task of tasks;let i=index">
+                                    <td>
+                                        <label class="checkbox">
+                                            <input type="checkbox" value="" >
+                                        </label>
+                                    </td>
+                                    <td (click)="openTaskView(i)"><h2>{{task.name}}</h2>{{task.description}}</td>
+                                    <td class="td-actions text-right">
+                                        <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
+                                            <i class="fa fa-edit"></i>
+                                        </button>
+                                        <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
+                                            <i class="fa fa-times"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <!--<tr>
+                                     <td>
+                                         <label class="checkbox">
+                                             <input type="checkbox" value="" checked="">
+                                         </label>
+                                     </td>
+                                     <td>Lines From Great Russian Literature? Or E-mails From My Boss?</td>
+                                     <td class="td-actions text-right">
+                                         <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
+                                             <i class="fa fa-edit"></i>
+                                         </button>
+                                         <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
+                                             <i class="fa fa-times"></i>
+                                         </button>
+                                     </td>
+                                 </tr>
+                                 <tr>
+                                     <td>
+                                         <label class="checkbox">
+                                             <input type="checkbox" value="" checked="">
+                                         </label>
+                                     </td>
+                                     <td>Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
+                                     </td>
+                                     <td class="td-actions text-right">
+                                         <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
+                                             <i class="fa fa-edit"></i>
+                                         </button>
+                                         <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
+                                             <i class="fa fa-times"></i>
+                                         </button>
+                                     </td>
+                                 </tr>
+                                 <tr>
+                                     <td>
+                                         <label class="checkbox">
+                                             <input type="checkbox" value="">
+                                         </label>
+                                     </td>
+                                     <td>Create 4 Invisible User Experiences you Never Knew About</td>
+                                     <td class="td-actions text-right">
+                                         <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
+                                             <i class="fa fa-edit"></i>
+                                         </button>
+                                         <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
+                                             <i class="fa fa-times"></i>
+                                         </button>
+                                     </td>
+                                 </tr>
+                                 <tr>
+                                     <td>
+                                         <label class="checkbox">
+                                             <input type="checkbox" value="">
+                                         </label>
+                                     </td>
+                                     <td>Read "Following makes Medium better"</td>
+                                     <td class="td-actions text-right">
+                                         <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
+                                             <i class="fa fa-edit"></i>
+                                         </button>
+                                         <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
+                                             <i class="fa fa-times"></i>
+                                         </button>
+                                     </td>
+                                 </tr>
+                                 <tr>
+                                     <td>
+                                         <label class="checkbox">
+                                             <input type="checkbox" value="">
+                                         </label>
+                                     </td>
+                                     <td>Unfollow 5 enemies from twitter</td>
+                                     <td class="td-actions text-right">
+                                         <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
+                                             <i class="fa fa-edit"></i>
+                                         </button>
+                                         <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
+                                             <i class="fa fa-times"></i>
+                                         </button>
+                                     </td>
+                                 </tr>-->
                                 </tbody>
                             </table>
                         </div>
