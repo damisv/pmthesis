@@ -182,10 +182,52 @@
                                 <td>Assignees</td>
                                 <td>Actions</td>
                                 </thead>
-                                <tbody >
-                                <tr *ngFor="let task of tasks;let i=index">
-                                    <td>
+                                <tbody *ngFor="let task of tasks;let i=index">
+                                <tr *ngIf="taskCompleted(i)">
+                                    <td (click)="completeTask(i)">
                                         <md-checkbox></md-checkbox>
+                                    </td>
+                                    <td (click)="openTaskView(i)">{{ task?.name }}</td>
+                                    <td (click)="onEmailClicked(task?.assigner_email)" >{{ task?.assigner_email }}</td>
+                                    <td mdTooltip="{{task?.assignee_email}}" >{{ task.assignee_email?.length }}</td>
+                                    <td >
+                                        <button md-mini-fab color="primary"><md-icon>edit</md-icon></button>
+                                        <button md-mini-fab color="accent"><md-icon>delete</md-icon></button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="footer">
+                            <hr>
+                            <div class="stats">
+                                <i class="fa fa-history"></i> Updated 3 minutes ago
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div class="card" >
+                    <div class="header">
+                        <h4 class="title">Completed</h4>
+                        <p class="category">Backend development</p>
+                    </div>
+                    <div class="content">
+                        <div class="table-full-width">
+                            <table class="table" style="text-align: center;">
+                                <thead>
+                                <td>Status</td>
+                                <td>Name</td>
+                                <td>Assigner</td>
+                                <td>Assignees</td>
+                                <td>Actions</td>
+                                </thead>
+                                <tbody *ngFor="let task of tasks;let i=index">
+                                <tr *ngIf="!taskCompleted(i)">
+                                    <td>
+                                        <md-checkbox [checked]="true"></md-checkbox>
                                     </td>
                                     <td (click)="openTaskView(i)">{{ task?.name }}</td>
                                     <td (click)="onEmailClicked(task?.assigner_email)" >{{ task?.assigner_email }}</td>

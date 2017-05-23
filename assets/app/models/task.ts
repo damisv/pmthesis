@@ -6,6 +6,8 @@ export class Task {
                 public assignee_email?: String[],
                 private dependency?: String[],
                 public date_start?:string,
-                public date_end?:string
+                public date_end?:string,
+                public completed?:string,
+                public _id?:string
                 ) {}
 }

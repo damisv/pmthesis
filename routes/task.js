@@ -35,6 +35,41 @@ router.post('/search/projectID',function(req, res){
     );
 });
 
+router.post('/get',function(req, res){
+    var decoded = jwt.decode(req.body.token);
+    var email = decoded.info.email;
+    db.find(
+        {assignee_email:{$in:[email]}},
+        "tasks"
+    ).then(
+        function(result) {
+            assert.notEqual(null, result);
+            res.status(200).send({tasks:result});
+        }
+    ).catch(
+        function(err){
+            res.status(500).send();
+            console.log(err);
+        });
+});
+
+router.post('/complete',function(req, res){
+    db.updateOne(
+        {_id:ObjectID(req.body.task._id)},
+        {$set:{completed:"yes"}},
+        "tasks"
+    ).then(
+        function(result) {
+            assert.equal(1, result.result.ok);
+            res.status(200).send({tasks:result});
+        }
+    ).catch(
+        function(err){
+            res.status(500).send();
+            console.log(err);
+        });
+});
+
 router.post('/create',function(req, res){
     var decoded = jwt.decode(req.body.token);
     var email = decoded.info.email;
@@ -47,7 +82,8 @@ router.post('/create',function(req, res){
             description:req.body.task.description,
             date_created: 'CURRENT_DATE',
             date_start:req.body.task.date_start,
-            date_end:req.body.task.date_end
+            date_end:req.body.task.date_end,
+            completed:"no"
         },
         "tasks"
     ).then(

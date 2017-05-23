@@ -48,6 +48,18 @@ export class ProjectTasksComponent implements OnInit{
         this.tabGroup.selectedIndex='2';
     }
 
+    completeTask(index){
+        this.taskService.complete(this.tasks[index]).subscribe(
+            res => {
+                this.tasks[index].completed="yes";
+            }
+        );
+    }
+
+    taskCompleted(index){
+        return this.tasks[index].completed==="no";
+    }
+
     addTask(task:Task){
         this.tasks.push(task);
         this.tabGroup.selectedIndex='0';

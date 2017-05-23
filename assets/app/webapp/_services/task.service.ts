@@ -36,6 +36,17 @@ export class TaskService {
         this.progressBarService.availableProgress();
     }
 
+    get(){
+        this.progressBarService.availableProgress();
+        return this.post("get",{});
+    }
+
+    complete(task){
+        this.progressBarService.availableProgress();
+        const body = {task:task};
+        return this.post("complete",body);
+    }
+
     private post(url,body){
         body.token = localStorage.getItem("token");
         body = JSON.stringify(body);

@@ -85,7 +85,8 @@ function initializeDatabase(databaseConnection){
                 { description: { $exists:true }},
                 { date_created: {$exists:true }},
                 { date_start: {$exists:true }},
-                { date_end: {$exists:true }}
+                { date_end: {$exists:true }},
+                { completed: {$exists:true }}
             ]
         }
         } ).catch(error);
