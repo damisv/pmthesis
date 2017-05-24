@@ -8,6 +8,7 @@ import {Profile} from "../../../models/profile";
 import {ProfileService} from "../../_services/profile.service";
 import {MdSnackBar} from "@angular/material";
 import {Title} from "@angular/platform-browser";
+import {TaskService} from "../../_services/task.service";
 
 
 @Component({
@@ -20,6 +21,8 @@ export class ProjectsComponent implements OnInit,OnDestroy{
     user:Profile;
     project:Project;
     projects:Project[] = [];
+    progress  = [];
+    progressF = [];
     position='manager';
     positions=[
         'manager','member'
@@ -40,7 +43,7 @@ export class ProjectsComponent implements OnInit,OnDestroy{
 
     constructor(
         private projectService: ProjectService, private profileService:ProfileService ,
-        private router:Router,public snackBar: MdSnackBar,private titleService: Title) {
+        private router:Router,public snackBar: MdSnackBar,private titleService: Title,private taskService : TaskService) {
     }
 
 
@@ -79,6 +82,29 @@ export class ProjectsComponent implements OnInit,OnDestroy{
 
     ngOnInit(){
         this.titleService.setTitle("My Projects");
+        for(let project of this.projects){
+            this.taskService.getTasksOfProject(project._id).subscribe(
+                tasks => {
+                    let tasksArrived=tasks;
+                    let percentage=0;
+                    if(tasksArrived!==null){
+                        for(let task of tasksArrived){
+                            if(task.completed){percentage+=1;}
+                        }
+                        if(percentage!==0){
+                            this.progress.push((percentage/tasksArrived.length)*100);
+                            this.progressF.push(tasksArrived.length);
+                        }else{
+                            this.progress.push(0);
+                            this.progressF.push(tasksArrived.length);
+                        }
+                        }else{
+                            this.progress.push(0);
+                            this.progressF.push(0);
+                        }
+                    }
+            );
+        }
     }
 
     ngOnDestroy(){

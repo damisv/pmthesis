@@ -7,7 +7,7 @@ export class Task {
                 private dependency?: String[],
                 public date_start?:string,
                 public date_end?:string,
-                public completed?:string,
+                public completed?:boolean,
                 public _id?:string
                 ) {}
 }

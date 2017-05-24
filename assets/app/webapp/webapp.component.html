@@ -1,16 +1,15 @@
 <div class="wrapper">
 
     <div #sidebar [className]="menuColor"  data-image="">
-
         <div class="sidebar-wrapper">
             <div class="logo">
                 <a [routerLink]="['/app']" class="simple-text">
                     <div class="logo-img">
                         <img src="/img/angular2-logo-white.png"/>
                     </div>
+                    Project Management
                 </a>
             </div>
-
         <router-outlet  name="sidebar"></router-outlet>
         <router-outlet name="projectsidebar"></router-outlet>
             <div style="position:fixed;bottom: 2%;left:1%;">

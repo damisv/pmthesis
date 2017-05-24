@@ -11,7 +11,6 @@ import {Title} from "@angular/platform-browser";
 import {TaskService} from "../../_services/task.service";
 import {Router} from "@angular/router";
 
-
 @Component({
     selector: 'webapp-project-tasks',
     templateUrl: './project_tasks.component.html',
@@ -34,6 +33,7 @@ export class ProjectTasksComponent implements OnInit{
     );
 
     selectedOption;
+    filterStatus:string = 'all';
 
     constructor(
         private projectService: ProjectService,
@@ -48,16 +48,22 @@ export class ProjectTasksComponent implements OnInit{
         this.tabGroup.selectedIndex='2';
     }
 
-    completeTask(index){
+    completeTask(state:boolean,index:number){
         this.taskService.complete(this.tasks[index]).subscribe(
             res => {
-                this.tasks[index].completed="yes";
+                this.tasks[index].completed= !this.tasks[index].completed;
             }
         );
     }
 
-    taskCompleted(index){
-        return this.tasks[index].completed==="no";
+    checkStatus(index:number):boolean{
+        if(this.filterStatus=='all'){
+            return true;
+        }else if(this.filterStatus=='closed'){
+            return this.tasks[index].completed == true;
+        }else{
+            return this.tasks[index].completed == false;
+        }
     }
 
     addTask(task:Task){

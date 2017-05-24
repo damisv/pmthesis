@@ -2,7 +2,7 @@
     <md-icon class="md-24">add</md-icon>
 </button>
 
-<md-tab-group #tab>
+<md-tab-group #tab style="height:100%">
     <md-tab label="Agile View">
         <!-- Original Cards -->
         <div class="row">
@@ -164,17 +164,66 @@
         </div>
     </md-tab>
     <md-tab label="Classic View">
-        <div class="row">
-
-            <div class="col-md-12">
-                <div class="card" >
+        <md-card class="card" style="height: 70vh">
+            <md-card-title>Tasks</md-card-title>
+            <md-card-subtitle>
+                <p class="category">Show :</p>
+                <md-radio-group [(ngModel)]="filterStatus">
+                    <md-radio-button value="all">All</md-radio-button>
+                    <md-radio-button value="closed">Completed</md-radio-button>
+                    <md-radio-button value="open">Open</md-radio-button>
+                </md-radio-group>
+            </md-card-subtitle>
+            <md-card-content>
+                <div class="table-full-width" style="height: 100%;overflow:auto;display:block;">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Status</th>
+                                <th>Name</th>
+                                <th>Assigner</th>
+                                <th>Assignees</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <ng-template ngFor let-task [ngForOf]="tasks" let-i="index">
+                            <tr *ngIf="checkStatus(i)" [ngClass]="{'taskCompleted': task.completed}" >
+                                <td>
+                                    <md-checkbox (change)="completeTask($event.checked,i)" [checked]="task.completed"></md-checkbox>
+                                </td>
+                                <td (click)="openTaskView(i)">{{ task?.name }}</td>
+                                <td (click)="onEmailClicked(task?.assigner_email)" >{{ task?.assigner_email }}</td>
+                                <td mdTooltip="{{task?.assignee_email}}" >{{ task.assignee_email?.length }}</td>
+                                <td >
+                                    <button md-mini-fab color="primary"><md-icon>edit</md-icon></button>
+                                    <button md-mini-fab color="accent"><md-icon>delete</md-icon></button>
+                                </td>
+                            </tr>
+                        </ng-template>
+                        </tbody>
+                    </table>
+                </div>
+            </md-card-content>
+            <md-card-footer>
+                <div class="stats">
+                    <i class="fa fa-history"></i> Updated 3 minutes ago
+                </div>
+            </md-card-footer>
+        </md-card>
+                <!--<div class="card" style="height: 30em">
                     <div class="header">
                         <h4 class="title">Tasks</h4>
-                        <p class="category">Backend development</p>
+                        <p class="category">Show :</p>
+                        <md-radio-group [(ngModel)]="filterStatus">
+                            <md-radio-button value="all">All</md-radio-button>
+                            <md-radio-button value="closed">Completed</md-radio-button>
+                            <md-radio-button value="open">Open</md-radio-button>
+                        </md-radio-group>
                     </div>
                     <div class="content">
                         <div class="table-full-width">
-                            <table class="table" style="text-align: center;">
+                            <table class="table" >
                                 <thead>
                                 <td>Status</td>
                                 <td>Name</td>
@@ -182,19 +231,21 @@
                                 <td>Assignees</td>
                                 <td>Actions</td>
                                 </thead>
-                                <tbody *ngFor="let task of tasks;let i=index">
-                                <tr *ngIf="taskCompleted(i)">
-                                    <td (click)="completeTask(i)">
-                                        <md-checkbox></md-checkbox>
-                                    </td>
-                                    <td (click)="openTaskView(i)">{{ task?.name }}</td>
-                                    <td (click)="onEmailClicked(task?.assigner_email)" >{{ task?.assigner_email }}</td>
-                                    <td mdTooltip="{{task?.assignee_email}}" >{{ task.assignee_email?.length }}</td>
-                                    <td >
-                                        <button md-mini-fab color="primary"><md-icon>edit</md-icon></button>
-                                        <button md-mini-fab color="accent"><md-icon>delete</md-icon></button>
-                                    </td>
-                                </tr>
+                                <tbody>
+                                    <ng-template ngFor let-task [ngForOf]="tasks" let-i="index">
+                                        <tr *ngIf="checkStatus(i)" [ngClass]="{'taskCompleted': task.completed}" >
+                                            <td>
+                                                <md-checkbox (change)="completeTask($event.checked,i)" [checked]="task.completed"></md-checkbox>
+                                            </td>
+                                            <td (click)="openTaskView(i)">{{ task?.name }}</td>
+                                            <td (click)="onEmailClicked(task?.assigner_email)" >{{ task?.assigner_email }}</td>
+                                            <td mdTooltip="{{task?.assignee_email}}" >{{ task.assignee_email?.length }}</td>
+                                            <td >
+                                                <button md-mini-fab color="primary"><md-icon>edit</md-icon></button>
+                                                <button md-mini-fab color="accent"><md-icon>delete</md-icon></button>
+                                            </td>
+                                        </tr>
+                                    </ng-template>
                                 </tbody>
                             </table>
                         </div>
@@ -205,53 +256,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-
-            <div class="col-md-12">
-                <div class="card" >
-                    <div class="header">
-                        <h4 class="title">Completed</h4>
-                        <p class="category">Backend development</p>
-                    </div>
-                    <div class="content">
-                        <div class="table-full-width">
-                            <table class="table" style="text-align: center;">
-                                <thead>
-                                <td>Status</td>
-                                <td>Name</td>
-                                <td>Assigner</td>
-                                <td>Assignees</td>
-                                <td>Actions</td>
-                                </thead>
-                                <tbody *ngFor="let task of tasks;let i=index">
-                                <tr *ngIf="!taskCompleted(i)">
-                                    <td>
-                                        <md-checkbox [checked]="true"></md-checkbox>
-                                    </td>
-                                    <td (click)="openTaskView(i)">{{ task?.name }}</td>
-                                    <td (click)="onEmailClicked(task?.assigner_email)" >{{ task?.assigner_email }}</td>
-                                    <td mdTooltip="{{task?.assignee_email}}" >{{ task.assignee_email?.length }}</td>
-                                    <td >
-                                        <button md-mini-fab color="primary"><md-icon>edit</md-icon></button>
-                                        <button md-mini-fab color="accent"><md-icon>delete</md-icon></button>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="footer">
-                            <hr>
-                            <div class="stats">
-                                <i class="fa fa-history"></i> Updated 3 minutes ago
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
+                </div>-->
     </md-tab>
     <md-tab label="Add new task">
         <project-create-task (taskCreated)="addTask($event)" [email]="user.email" ></project-create-task>

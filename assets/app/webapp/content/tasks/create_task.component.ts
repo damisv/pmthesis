@@ -116,6 +116,7 @@ export class CreateTaskComponent{
             return;
         }
         this.task.assignee_email = this.assigned;
+        this.task.completed = false;
         this.taskService.create(this.task)
             .subscribe(res => {
                     this.taskCreated.emit(res.task);

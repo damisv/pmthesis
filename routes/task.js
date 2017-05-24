@@ -56,7 +56,7 @@ router.post('/get',function(req, res){
 router.post('/complete',function(req, res){
     db.updateOne(
         {_id:ObjectID(req.body.task._id)},
-        {$set:{completed:"yes"}},
+        {$set:{completed: !req.body.task.completed}},
         "tasks"
     ).then(
         function(result) {
@@ -83,7 +83,7 @@ router.post('/create',function(req, res){
             date_created: 'CURRENT_DATE',
             date_start:req.body.task.date_start,
             date_end:req.body.task.date_end,
-            completed:"no"
+            completed:false
         },
         "tasks"
     ).then(

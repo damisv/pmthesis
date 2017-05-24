@@ -49,10 +49,6 @@ export class DashboardComponent implements OnInit{
         );
     }
 
-    taskCompleted(index){
-        return this.tasks[index].completed==="no";
-    }
-
     openProjectDashboard(index){
         this.projectService.giveProject(this.projects[index]);
         this.router.navigate(['app','project','dashboard']);
