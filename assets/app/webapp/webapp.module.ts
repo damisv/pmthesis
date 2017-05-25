@@ -35,6 +35,7 @@ import {InviteService} from "./_services/invite.service";
 import {TaskService} from "./_services/task.service";
 import {ProjectGuard} from "../_guards/projectguard";
 import {ViewTaskComponent} from "./content/tasks/viewtask.component";
+import {NotificationService} from "./_services/notification.service";
 
 
 @NgModule({
@@ -79,7 +80,8 @@ import {ViewTaskComponent} from "./content/tasks/viewtask.component";
         ProfileService,
         InviteService,
         TaskService,
-        ProjectGuard
+        ProjectGuard,
+        NotificationService
     ],
     entryComponents:[
         ProfileDialogComponent

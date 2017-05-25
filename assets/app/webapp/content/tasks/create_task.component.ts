@@ -11,6 +11,8 @@ import {MdDialog, MdGridList, MdSnackBar} from "@angular/material";
 import {animate, keyframes, state, style, transition, trigger} from "@angular/animations";
 import {TaskService} from "../../_services/task.service";
 import { ObservableMedia } from "@angular/flex-layout";
+import {error} from "util";
+import {NotificationService} from "../../_services/notification.service";
 
 @Component({
     selector: 'project-create-task',
@@ -88,7 +90,8 @@ export class CreateTaskComponent{
         public snackBar: MdSnackBar,
         public dialog: MdDialog,
         private taskService:TaskService,
-        private media: ObservableMedia
+        private media: ObservableMedia,
+        private notificationService:NotificationService
     ) {
         this.assigneeCtrl = new FormControl();
         this.filteredTeam = this.assigneeCtrl.valueChanges
@@ -120,6 +123,10 @@ export class CreateTaskComponent{
         this.taskService.create(this.task)
             .subscribe(res => {
                     this.taskCreated.emit(res.task);
+                    this.notificationService.create(res.task.name,"Task has been successfully created!","success");
+                },
+                error =>{
+                    this.notificationService.create(this.task.name,"Error! Task was not created!","error");
                 }
             );
     }

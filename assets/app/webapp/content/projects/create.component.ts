@@ -7,6 +7,7 @@ import {MdGridList, MdSnackBar} from "@angular/material";
 import {ProfileService} from "../../_services/profile.service";
 import {InviteService} from "../../_services/invite.service";
 import { ObservableMedia } from "@angular/flex-layout";
+import {NotificationService} from "../../_services/notification.service";
 
 @Component({
     selector: 'project-create',
@@ -33,7 +34,8 @@ export class CreateProjectComponent implements OnInit{
                  private profileService:ProfileService,
                  public snackBar: MdSnackBar,
                  private inviteService:InviteService,
-                 private media: ObservableMedia
+                 private media: ObservableMedia,
+                 private notificationService:NotificationService
     ) {
         this.project.typeOf='public';
     }
@@ -92,6 +94,10 @@ export class CreateProjectComponent implements OnInit{
             .subscribe(res => {
                     this.inviteMembers(res.project._id);
                     this.projectCreated.emit(res.project);
+                    this.notificationService.create(res.project.name,"Project has been successfully created!","success");
+                },
+                error => {
+                    this.notificationService.create(this.project.name,"Error! Project was not created!","error");
                 }
             );
     }

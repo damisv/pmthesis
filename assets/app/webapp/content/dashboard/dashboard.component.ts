@@ -8,6 +8,7 @@ import {Router} from "@angular/router";
 import {ProjectService} from "../../_services/projects.service";
 import {Project} from "../../../models/project";
 import {Task} from "../../../models/task";
+import {NotificationService} from "../../_services/notification.service";
 
 @Component({
     selector: 'webapp-dashboard',

@@ -27,6 +27,7 @@ import {AppGuard} from "./_guards/appguard";
 import { FlexLayoutModule } from "@angular/flex-layout";
 import {ProgressBarService} from "./webapp/_services/progressbar.service";
 import { ErrorDialogComponent} from "./errors/error.component";
+import {PushNotificationsModule, SimpleNotificationsModule} from "angular2-notifications/dist";
 
 @NgModule({
     declarations: [
@@ -50,7 +51,9 @@ import { ErrorDialogComponent} from "./errors/error.component";
         WebappModule,
         MaterialModule,
         BrowserAnimationsModule,
-        FlexLayoutModule
+        FlexLayoutModule,
+        SimpleNotificationsModule.forRoot(),
+        PushNotificationsModule
     ],
     providers: [AuthService,AuthGuard,AppGuard,ProgressBarService],
     bootstrap: [AppComponent],
