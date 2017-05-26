@@ -41,9 +41,12 @@ export class ProjectsComponent implements OnInit,OnDestroy{
         }
     );
 
-    constructor(
-        private projectService: ProjectService, private profileService:ProfileService ,
-        private router:Router,public snackBar: MdSnackBar,private titleService: Title,private taskService : TaskService) {
+    constructor(private projectService: ProjectService,
+                private profileService:ProfileService ,
+                private router:Router,
+                public snackBar: MdSnackBar,
+                private titleService: Title,
+                private taskService : TaskService) {
     }
 
 

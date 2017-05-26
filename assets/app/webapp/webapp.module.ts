@@ -36,7 +36,7 @@ import {TaskService} from "./_services/task.service";
 import {ProjectGuard} from "../_guards/projectguard";
 import {ViewTaskComponent} from "./content/tasks/viewtask.component";
 import {NotificationService} from "./_services/notification.service";
-import {SocketService} from "./socket.service";
+import {SocketService} from "./_services/socket.service";
 
 
 @NgModule({

@@ -3,7 +3,7 @@ import {Router} from "@angular/router";
 import {Profile} from "../models/profile";
 import {ProfileService} from "./_services/profile.service";
 import {Subscription} from "rxjs/Subscription";
-import {SocketService} from "./socket.service";
+import {SocketService} from "./_services/socket.service";
 import {ProjectService} from "./_services/projects.service";
 import {MdButtonToggleGroup} from "@angular/material";
 

@@ -5,6 +5,18 @@ var ObjectID = require('mongodb').ObjectID;
 var assert = require('assert');
 var jwt = require('jsonwebtoken');
 
+function to(id){
+    return require('../bin/www').to(id);
+}
+
+function getClient(email){
+    return require('../bin/socket').getClient(email);
+}
+
+function getProjectName(id){
+    return require('../bin/socket').getProjectName(id);
+}
+
 //invite/member
 //invite/members
 //invite/accept/projectID
@@ -65,6 +77,18 @@ router.post('/members',function(req, res){
         function(result) {
             assert.equal(1,result.result.ok);
             res.status(200).send({ok:"ok"});
+            console.log("invite length "+req.body.invites.invites.length);
+            if(req.body.invites.invites.length > 0){
+                console.log("invites "+req.body.invites.invites);
+                console.log("project id is "+req.body.invites.project);
+                var projectName = getProjectName(req.body.invites.project);
+                console.log("project name  "+projectName);
+                req.body.invites.invites.forEach(function(member) {
+                    console.log("invite "+member);
+                    var id = getClient(member);
+                    to(id).emit("Invitation",projectName);
+                });
+            }
         }
     ).catch(
         function(err){

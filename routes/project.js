@@ -13,6 +13,10 @@ function getClient(email){
     return require('../bin/socket').getClient(email);
 }
 
+function addProject(id,name){
+    return require('../bin/socket').addProject(id,name);
+}
+
 /*
  var id = getClient(email);
  if(id!==undefined){
@@ -41,6 +45,7 @@ router.post('/create',function(req, res){
     ).then(function(result) {
         if(result!==null){
             res.status(200).send({project:result.ops[0]});
+            addProject(result.ops[0]._id,result.ops[0].name)
         }else{
             res.status(204).send();
         }

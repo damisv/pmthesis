@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { NotificationsService, PushNotificationsService} from "angular2-notifications/dist";
+import {Router} from "@angular/router";
 
 @Injectable()
 export class NotificationService {
@@ -7,7 +8,8 @@ export class NotificationService {
     types = ["error","success","info","alert","warn"];
 
     constructor(private toastService:NotificationsService,
-                private pushService:PushNotificationsService)
+                private pushService:PushNotificationsService,
+                private router:Router)
     {}
 
     toastOptions = {
@@ -18,7 +20,7 @@ export class NotificationService {
         body: "Ka8ari mera stin anoi3ia"
     };
 
-    toast(title?,content?,type?,options?){
+    toast(title?,content?,type?,options?,route?){
         if(type===undefined)
             type = this.types[2]; //info
         else
@@ -35,7 +37,13 @@ export class NotificationService {
         if(title===undefined){
             title = "";
         }
-        this.toastService.create(title,content,type,options);
+        let toast = this.toastService.create(title,content,type,options);
+
+        if(route!==undefined){
+            toast.click.subscribe(function(){//notif, mouseEvent){
+                this.router.navigate(route);
+            }.bind(this, toast));
+        }
     }
 
     push(title){
