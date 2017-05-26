@@ -5,6 +5,20 @@ var ObjectID = require('mongodb').ObjectID;
 var assert = require('assert');
 var jwt = require('jsonwebtoken');
 
+function to(id){
+    return require('../bin/www').to(id);
+}
+
+function getClient(email){
+    return require('../bin/socket').getClient(email);
+}
+
+/*
+ var id = getClient(email);
+ if(id!==undefined){
+    to(id).emit("loginSuccessful");
+ }
+*/
 //project/search/member/email ?not exist at the moment
 //project/create
 //project/edit

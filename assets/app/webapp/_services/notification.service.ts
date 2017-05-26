@@ -19,10 +19,13 @@ export class NotificationService {
     };
 
     toast(title?,content?,type?,options?){
-        if(this.types.indexOf(type.toLowerCase())<0){
-            console.log("Toast wrong type!");
+        if(type===undefined)
             type = this.types[2]; //info
-        }
+        else
+            if(this.types.indexOf(type.toLowerCase())<0){
+                console.log("Toast wrong type!");
+                type = this.types[2]; //info
+            }
         if(options===undefined){
             options=this.toastOptions;
         }

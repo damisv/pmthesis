@@ -8,6 +8,7 @@ import {BehaviorSubject, Subject} from "rxjs";
 import {toArray} from "rxjs/operator/toArray";
 import {error} from "util";
 import {ProgressBarService} from "./progressbar.service";
+import {Router} from "@angular/router";
 
 @Injectable()
 export class ProfileService {
@@ -47,11 +48,11 @@ export class ProfileService {
                 this.giveProfile(res.profile);
             },
             error=>{
+                this.router.navigate(['auth','signin']);
                 console.log(error);
             }
         )
     }
-
 
     filterEmails(email){
         this.progressBarService.availableProgress();
@@ -74,7 +75,9 @@ export class ProfileService {
             .catch(this.handleError).finally(() => this.progressBarService.availableProgress());
     }
 
-    constructor(private http: Http,private progressBarService: ProgressBarService) {
+    constructor(private http: Http,
+                private progressBarService: ProgressBarService,
+                private router:Router) {
     }
 
 

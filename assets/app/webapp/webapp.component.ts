@@ -33,23 +33,6 @@ export class WebappComponent implements OnDestroy,OnInit{
 
 
     ngOnInit(){
-        /*if(localStorage.getItem('token') === null) {
-            if(localStorage.getItem('lastLogged') !== null ){
-                this.router.navigateByUrl('/auth/lock');
-            }else{
-                this.router.navigateByUrl('/auth/signup');
-            }
-        }else{
-            this.subscription = this.profileService.profile$.subscribe(
-                profile=>{
-                    this.profile = profile;
-                }
-            );
-            this.profileService.getProfile();
-            this.projectService.getProjects();
-            this.groupColor = 'blue';
-            //this.socketService.register(localUser.id);
-        }*/
         this.subscription = this.profileService.profile$.subscribe(
             profile=>{
                 this.profile = profile;
@@ -57,8 +40,8 @@ export class WebappComponent implements OnDestroy,OnInit{
         );
         this.profileService.getProfile();
         this.projectService.getProjects();
+        this.socketService.register();
         this.groupColor = 'blue';
-        //this.socketService.register(localUser.id);
     }
     ngOnDestroy() {
         if(this.subscription!==undefined)
