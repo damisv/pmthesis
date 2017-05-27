@@ -1,7 +1,6 @@
 import { Injectable } from "@angular/core";
 import * as io from "socket.io-client";
 import {NotificationService} from "./notification.service";
-import {toArray} from "rxjs/operator/toArray";
 @Injectable()
 export class SocketService {
     socket = null;
@@ -14,7 +13,7 @@ export class SocketService {
             console.log(data);
             notificationService.toast("title","content");
         }.bind(this));
-        this.socket.on('loginSuccessful', function(data){
+        this.socket.on('loginSuccessful', function(){
             notificationService.toast("Success Login","Welcome back! Have a nice day");
             //let arg = Array.from(arguments);
         }.bind(this));
@@ -23,6 +22,12 @@ export class SocketService {
         }.bind(this));
         this.socket.on('Invitation', function(projectName){
             notificationService.toast("Congratulations!","You have a new invite for "+projectName,"info",undefined,['app','invites']);
+        }.bind(this));
+        this.socket.on('connected', function(){
+            this.register();
+        }.bind(this));
+        this.socket.on('memberJoined', function(projectName,email){
+            notificationService.toast(email+" joined project "+projectName,"A new member joined "+projectName,"info");
         }.bind(this))
     }
 

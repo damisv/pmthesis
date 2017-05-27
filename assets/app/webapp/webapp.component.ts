@@ -21,9 +21,8 @@ export class WebappComponent implements OnDestroy,OnInit{
     groupColor;
     menuColor = 'sidebar blue';
 
-    constructor(private router: Router,
-                private profileService:ProfileService,
-                private socketService:SocketService,
+    constructor(private profileService:ProfileService,
+                private socketService:SocketService, //don't delete
                 private projectService:ProjectService){
     }
 
@@ -40,7 +39,7 @@ export class WebappComponent implements OnDestroy,OnInit{
         );
         this.profileService.getProfile();
         this.projectService.getProjects();
-        this.socketService.register();
+        //this.socketService.register(); not needed anymore
         this.groupColor = 'blue';
     }
     ngOnDestroy() {

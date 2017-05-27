@@ -1,9 +1,10 @@
-import {Component, Input, OnDestroy, OnInit} from "@angular/core";
+import {Component, OnDestroy, OnInit} from "@angular/core";
 import {ProfileService} from "../../_services/profile.service";
 import {Profile} from "../../../models/profile";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Subscription} from "rxjs";
 import {Title} from "@angular/platform-browser";
+import {NotificationService} from "../../_services/notification.service";
 
 @Component({
     selector: 'webapp-profile',
@@ -19,7 +20,9 @@ export class ProfileComponent implements OnInit,OnDestroy{
             //this.titleService.setTitle(this.profile.firstName+"'s profile");
         });
 
-    constructor (private profileService: ProfileService,private titleService: Title) {
+    constructor (private profileService: ProfileService,
+                 private titleService: Title,
+                 private notificationService:NotificationService) {
     }
 
     onSubmit() {
@@ -31,8 +34,14 @@ export class ProfileComponent implements OnInit,OnDestroy{
         );
         this.profileService.edit(profile)
             .subscribe(
-                data => this.profileService.giveProfile(data),
-                error => console.error(error)
+                data => {
+                    this.profileService.giveProfile(data);
+                    this.notificationService.create("Profile Changes Saved","Profile changes have been successfully saved!","success");
+                },
+                error => {
+                    console.error(error);
+                    this.notificationService.create("Error!","An error occured while saving profile changes","error");
+                }
             );
         this.myForm.reset();
     }

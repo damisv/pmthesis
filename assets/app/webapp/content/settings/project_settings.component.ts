@@ -1,12 +1,11 @@
 import {Component, OnInit} from "@angular/core";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {ProjectService} from "../../_services/projects.service";
 import {Project} from "../../../models/project";
-import {ActivatedRoute} from "@angular/router";
 import {Subscription} from "rxjs/Subscription";
 import {Profile} from "../../../models/profile";
 import {ProfileService} from "../../_services/profile.service";
 import {Title} from "@angular/platform-browser";
+import {NotificationService} from "../../_services/notification.service";
 
 @Component({
     selector: 'webapp-project-settings',
@@ -31,7 +30,8 @@ export class ProjectSettingsComponent implements OnInit{
     constructor(
         private projectService: ProjectService,
         private profileService: ProfileService,
-        private titleService: Title)
+        private titleService: Title,
+        private notificationService:NotificationService)
     {
         if(this.project.typeOf='private') {
             this.private=true;
@@ -44,8 +44,14 @@ export class ProjectSettingsComponent implements OnInit{
         (this.private)? this.project.typeOf='private' : this.project.typeOf='public';
         this.projectService.editProject(this.project)
             .subscribe(
-                data => this.projectService.giveProject(data.project),
-                error => console.error(error)
+                data => {
+                    this.projectService.giveProject(data.project);
+                    this.notificationService.create(data.project.name,"Project settings have been successfully saved!","success");
+                },
+                error => {
+                    console.error(error);
+                    this.notificationService.create(this.project.name,"Error! Project was not created!","error");
+                }
             );
     }
 

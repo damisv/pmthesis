@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, Output} from "@angular/core";
-import {Member, Project} from "../../../models/project";
+import { Project} from "../../../models/project";
 import {InviteService} from "../../_services/invite.service";
+import {NotificationService} from "../../_services/notification.service";
 
 @Component({
     selector: 'project-invite',
@@ -8,7 +9,8 @@ import {InviteService} from "../../_services/invite.service";
     styleUrls: ['./invite.component.css']
 })
 export class InviteProjectComponent{
-    constructor (private inviteService:InviteService) {}
+    constructor (private inviteService:InviteService,
+                 private notificationService:NotificationService) {}
     @Input() project:Project;
     @Output() addInvite = new EventEmitter<string>();
 
@@ -17,6 +19,9 @@ export class InviteProjectComponent{
             .subscribe(
                 res=>{
                     this.addInvite.emit(email);
+                    this.notificationService.create("Invite send "+email,"An invite has been send to "+email,"success");
+                },error=>{
+                    this.notificationService.create(" Error Invite failed","Error! Unable to send invite to "+email,"error");
                 }
             );
     }

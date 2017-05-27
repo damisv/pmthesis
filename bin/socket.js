@@ -10,6 +10,7 @@ module.exports = {
           socket.emit('priceUpdate',parseInt(data));
           socket.broadcast.emit('priceUpdate',parseInt(data));
         });*/
+
         console.log("connected "+socket.id);
         socket.on('register', function (data) {
             console.log("register "+socket.id);
@@ -23,9 +24,9 @@ module.exports = {
                     console.log("jwt decoded. Email is "+email);
                     clients[email] = socket.id;
                     socket.emit("loginSuccessful");
-                    for(var client in clients){
+                    /*for(var client in clients){
                         console.log(client + " corresponds to " + clients[client]);
-                    }
+                    }*/
                     db.find(
                         {"team.email":email},
                         "projects",
@@ -34,12 +35,12 @@ module.exports = {
                         if(result!==null){
                             result.forEach(function(project) {
                                 socket.join(project._id);
-                                console.log(email +" is connected in "+project._id);
                                 projects[project._id] = project.name;
                             });
-                            for(var project in projects){
+                            console.log(email +" joined "+result.length + " rooms.");
+                            /*for(var project in projects){
                                 console.log(project + "-> id corresponds to name " + projects[project]);
-                            }
+                            }*/
                         }else{
                             console.log("DB find error/null.");
                         }
@@ -47,6 +48,7 @@ module.exports = {
                 }
             });
         });
+        socket.emit("connected");
     },
     getClient:function (email) {
         console.log("get clinet "+ email);

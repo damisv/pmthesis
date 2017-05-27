@@ -6,6 +6,7 @@ import {Subscription} from "rxjs";
 import {Profile} from "../../../models/profile";
 import {Title} from "@angular/platform-browser";
 import {InviteService} from "../../_services/invite.service";
+import {NotificationService} from "../../_services/notification.service";
 
 @Component({
     selector: 'webapp-invites',
@@ -35,7 +36,8 @@ export class InvitesComponent implements OnInit,OnDestroy{
     constructor (private projectService: ProjectService,
                  private profileService: ProfileService,
                  private titleService:Title,
-                 private inviteService:InviteService){
+                 private inviteService:InviteService,
+                 private notificationService:NotificationService){
     }
 
     acceptInvite(projectId){
@@ -44,6 +46,8 @@ export class InvitesComponent implements OnInit,OnDestroy{
                 res=>{
                     this.addProjectToProjects(res.id);
                     this.removeProject(res.id);
+                },error =>{
+                    this.notificationService.create("Error","Error! Unable to join project!","error");
                 }
             )
     }
@@ -53,7 +57,10 @@ export class InvitesComponent implements OnInit,OnDestroy{
             res=>{
                 this.projects.push(res.project);
                 this.projectService.giveProjects(this.projects);
-            },error=>{}
+                this.notificationService.create(res.project.name,"You have successfully joined " + res.project.name,"success");
+            },error=>{
+                console.log(error);
+            }
         );
     }
 

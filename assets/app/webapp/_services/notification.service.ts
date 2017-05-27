@@ -84,7 +84,7 @@ export class NotificationService {
                 res => console.log(res),
                 err => {
                     console.log(err);
-                    this.toast(title, "Description", "success");
+                    this.toast(title, content, type);
                 }
             )
         }

@@ -5,18 +5,6 @@ var ObjectID = require('mongodb').ObjectID;
 var assert = require('assert');
 var jwt = require('jsonwebtoken');
 
-function to(id){
-    return require('../bin/www').to(id);
-}
-
-function getClient(email){
-    return require('../bin/socket').getClient(email);
-}
-
-function getProjectName(id){
-    return require('../bin/socket').getProjectName(id);
-}
-
 //invite/member
 //invite/members
 //invite/accept/projectID
@@ -24,7 +12,7 @@ function getProjectName(id){
 //invite/search/email
 
 router.use('/',function(req,res,next){
-    jwt.verify(req.body.token,'secret',function(err,decoded){
+    jwt.verify(req.body.token,'secret',function(err){
         if(err){
             res.status(500).send();
         }else{
@@ -77,17 +65,8 @@ router.post('/members',function(req, res){
         function(result) {
             assert.equal(1,result.result.ok);
             res.status(200).send({ok:"ok"});
-            console.log("invite length "+req.body.invites.invites.length);
             if(req.body.invites.invites.length > 0){
-                console.log("invites "+req.body.invites.invites);
-                console.log("project id is "+req.body.invites.project);
-                var projectName = getProjectName(req.body.invites.project);
-                console.log("project name  "+projectName);
-                req.body.invites.invites.forEach(function(member) {
-                    console.log("invite "+member);
-                    var id = getClient(member);
-                    to(id).emit("Invitation",projectName);
-                });
+                require('../bin/www').io.inviteMemberToProject(req.body.invites.project,req.body.invites.invites);
             }
         }
     ).catch(
@@ -123,6 +102,7 @@ router.post('/accept/projectID',function(req, res){
             function(result) {
                 assert.equal(1, result.result.ok);
                 res.status(200).send({id:req.body.projectID});
+                require('../bin/www').io.memberJoinedProject(req.body.projectID,req.body.email);
             }
         ).catch(
             function(err){
@@ -133,7 +113,7 @@ router.post('/accept/projectID',function(req, res){
     }
 });
 
-router.post('/search/projectID',function(req, res, next){
+router.post('/search/projectID',function(req, res){
     db.findOne(
         { project : req.body.projectID },
         "invites"
@@ -150,7 +130,7 @@ router.post('/search/projectID',function(req, res, next){
     );
 });
 
-router.post('/search/email',function(req, res, next){
+router.post('/search/email',function(req, res){
     var transformedIds = [];
     db.find(
         { invites:  req.body.email} ,

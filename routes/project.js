@@ -5,31 +5,17 @@ var ObjectID = require('mongodb').ObjectID;
 var assert = require('assert');
 var jwt = require('jsonwebtoken');
 
-function to(id){
-    return require('../bin/www').to(id);
-}
-
-function getClient(email){
-    return require('../bin/socket').getClient(email);
-}
-
 function addProject(id,name){
     return require('../bin/socket').addProject(id,name);
 }
 
-/*
- var id = getClient(email);
- if(id!==undefined){
-    to(id).emit("loginSuccessful");
- }
-*/
 //project/search/member/email ?not exist at the moment
 //project/create
 //project/edit
 //project/search/id
 
 router.use('/',function(req,res,next){
-    jwt.verify(req.body.token,'secret',function(err,decoded){
+    jwt.verify(req.body.token,'secret',function(err){
         if(err){
             res.status(500).send();
         }else{
@@ -39,13 +25,16 @@ router.use('/',function(req,res,next){
 });
 
 router.post('/create',function(req, res){
+    var decoded = jwt.decode(req.body.token);
+    var email = decoded.info.email;
     db.insertOne(
         req.body.project,
         "projects"
     ).then(function(result) {
         if(result!==null){
             res.status(200).send({project:result.ops[0]});
-            addProject(result.ops[0]._id,result.ops[0].name)
+            addProject(result.ops[0]._id,result.ops[0].name);
+            require('../bin/www').io.joinRoom(result.ops[0]._id,email);
         }else{
             res.status(204).send();
         }
@@ -77,7 +66,6 @@ router.post('/search/id',function(req, res){
         "projects"
     ).then(function(result) {
         assert.notEqual(null, result);
-        console.log(result);
         res.status(200).send({project:result});
     }).catch(
         function(err){
