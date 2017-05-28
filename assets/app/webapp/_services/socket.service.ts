@@ -28,6 +28,12 @@ export class SocketService {
         }.bind(this));
         this.socket.on('memberJoined', function(projectName,email){
             notificationService.toast(email+" joined project "+projectName,"A new member joined "+projectName,"info");
+        }.bind(this));
+        this.socket.on('reconnecting', function(){
+            notificationService.create("Reconnecting...","Connection with server has been lost!","error",{timeOut:3000});
+        }.bind(this));
+        this.socket.on('taskAssigned', function(projectName,taskName){
+            notificationService.create("You have a new task.",taskName+" has been assigned to you!");//todo click -> taskView
         }.bind(this))
     }
 

@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { NotificationsService, PushNotificationsService} from "angular2-notifications/dist";
+import {Notification, NotificationsService, PushNotificationsService} from "angular2-notifications/dist";
 import {Router} from "@angular/router";
 
 @Injectable()
@@ -57,22 +57,15 @@ export class NotificationService {
         )
     }
 
-    create(title?,content?,type?) {
+    create(title?,content?,type?,options?,route?) {
         if(content===undefined){
             content = "";
         }
         if(title===undefined){
             title = "";
         }
-        if(this.types.indexOf(type.toLowerCase())<0){
-            console.log("Toast wrong type!");
-            type = this.types[2]; //info
-        }
 
-        if (this.pushService.permission === "denied") {
-            this.toast(title, content,type);
-        } else {
-            this.pushService.requestPermission();
+        if (this.pushService.permission === "granted") {
             this.pushService.create(
                 title,
                 {
@@ -81,12 +74,14 @@ export class NotificationService {
                     icon:"https://docs.nativescript.org/img/cli-getting-started/angular/chapter0/Angular_logo.png"
                 }
             ).subscribe(
-                res => console.log(res),
+                res => {},
                 err => {
                     console.log(err);
-                    this.toast(title, content, type);
                 }
             )
+        } else {
+            if(this.pushService.permission === "default")this.pushService.requestPermission();
+            this.toast(title, content,type,options,route);
         }
     }
 }

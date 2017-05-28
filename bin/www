@@ -101,9 +101,7 @@ var ioCustom = {
   inviteMemberToProject:function(projectID,invites){
       var projectName = require('./socket').getProjectName(projectID);
       invites.forEach(function(email) {
-          console.log("invite "+email);
           var id = require('./socket').getClient(email);
-          //io.of(projectID).connected[id].emit("loginSuccessful");
           io.to(id).emit("Invitation",projectName);
       });
   },
@@ -119,12 +117,19 @@ var ioCustom = {
         var id = require('./socket').getClient(email);
         //add user in room/project
         io.connected[id].join(roomID);
+    },
+    taskAssignedToMembers:function(members,projectID,taskName){
+        var projectName = require('./socket').getProjectName(projectID);
+        members.forEach(function(email){
+            var id = require('./socket').getClient(email);
+            io.to(id).emit("taskAssigned",projectName,taskName);
+        });
+
     }
 };
 
 module.exports = {
     to:function(id){
-        console.log("send id "+id);
         return io.to(id);
     },
     io:ioCustom

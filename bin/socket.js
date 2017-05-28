@@ -15,7 +15,6 @@ module.exports = {
         socket.on('register', function (data) {
             console.log("register "+socket.id);
             jwt.verify(data,'secret',function(err,decoded){
-                console.log("jwt verify "+socket.id);
                 if(err){
                     console.log("jwt error");
                     socket.emit("loginError");
@@ -48,21 +47,16 @@ module.exports = {
                 }
             });
         });
+
         socket.emit("connected");
     },
     getClient:function (email) {
-        console.log("get clinet "+ email);
-        console.log("id is "+ clients[email]);
         return clients[email];
     },
     getProjectName:function (id) {
-        console.log("project id "+ id);
-        console.log("project name "+ projects[id]);
         return projects[id];
     },
     addProject:function(id,name){
-        console.log("create project id "+ id);
-        console.log("create project name "+ projects[id]);
         projects[id] = name;
     }
 };
