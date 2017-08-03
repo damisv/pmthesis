@@ -1,4 +1,43 @@
-        <div class="container">
+<div id="wallpaper" class="header block">
+            <md-card class="card block" style="max-width:30em;margin:auto;">
+                <form class="form" [formGroup]="myForm" (ngSubmit)="onSubmit()">
+                <md-card-header>
+                     <md-card class="card block" style="background: rebeccapurple;width:100%;margin-left:auto;margin-right:auto;margin-top:-10%;">
+                            <md-card-header style="justify-content: center">
+                                <md-card-title style="font-size: 1.5em">Sign In</md-card-title>
+                            </md-card-header>
+                            <md-card-content style="text-align: center;font-size: 1em">
+                                <button md-icon-button><i class="fa fa-facebook-square fa-2x"></i></button>
+                                <button md-icon-button><i class="fa fa-twitter fa-2x"></i></button>
+                                <button md-icon-button><i class="fa fa-google-plus fa-2x"></i></button>
+                            </md-card-content>
+                     </md-card>
+                    <md-card-subtitle class="block">
+                        OR BE CLASSICAL
+                    </md-card-subtitle>
+                </md-card-header>
+                <md-card-content>
+                    <div fxLayout="column" fxLayoutWrap>
+                        <md-input-container fxFlex class="block">
+                            <md-icon mdPrefix>account_circle</md-icon>
+                            <input mdInput placeholder="Email or Username" type="email" formControlName="email">
+                        </md-input-container>
+                        <md-input-container fxFlex class="block">
+                            <md-icon mdPrefix>fingerprint</md-icon>
+                            <input mdInput placeholder="password" type="password" formControlName="password">
+                        </md-input-container>
+                    </div>
+                </md-card-content>
+                <md-card-actions style="text-align: center">
+                    <button md-raised-button type="submit" [disabled]="!myForm.valid" color="accent" class="block">Login</button>
+                </md-card-actions>
+                </form>
+            </md-card>
+</div>
+
+
+
+<!--      <div class="container">
             <div class="row">
                 <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
                     <div class="card card-signup">
@@ -45,3 +84,4 @@
                 </div>
             </div>
         </div>
+-->

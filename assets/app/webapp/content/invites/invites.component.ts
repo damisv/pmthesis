@@ -7,11 +7,29 @@ import {Profile} from "../../../models/profile";
 import {Title} from "@angular/platform-browser";
 import {InviteService} from "../../_services/invite.service";
 import {NotificationService} from "../../_services/notification.service";
-
+import {trigger, stagger, animate, style, group, query, transition, keyframes} from '@angular/animations';
 @Component({
     selector: 'webapp-invites',
     templateUrl: './invites.component.html',
-    styleUrls: ['./invites.component.css']
+    styleUrls: ['./invites.component.css'],
+    animations: [trigger('homeTransition', [
+        transition(':enter', [
+            query('.card', style({ opacity: 0 })),
+            query('.card', stagger(300, [
+                style({ transform: 'translateY(100px)' }),
+                animate('1s cubic-bezier(.75,-0.48,.26,1.52)', style({transform: 'translateY(0px)', opacity: 1})),
+            ])),
+        ]),
+        transition(':leave', [
+            query('.card', stagger(300, [
+                style({ transform: 'translateY(0px)', opacity: 1 }),
+                animate('1s cubic-bezier(.75,-0.48,.26,1.52)', style({transform: 'translateY(100px)', opacity: 0})),
+            ])),
+        ])
+    ]) ],
+    host: {
+        '[@homeTransition]': ''
+    }
 })
 export class InvitesComponent implements OnInit,OnDestroy{
     user:Profile;

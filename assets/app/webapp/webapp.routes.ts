@@ -16,6 +16,9 @@ import {TeamProjectComponent} from "./content/team/project_team.component";
 import {NotFoundErrorComponent} from "./errors/notfound.component";
 import {ProjectGuard} from "../_guards/projectguard";
 import {ViewTaskComponent} from "./content/tasks/viewtask.component";
+import {GanttComponent} from "./content/tasks/gantt.component";
+import {ChatComponent} from "./content/chat/chat.component";
+import {CalendarComponent} from "./content/calendar/calendar.component";
 
 export const WEBAPP_ROUTES: Routes = [
     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -27,12 +30,15 @@ export const WEBAPP_ROUTES: Routes = [
     { path: 'myissues', component: IssuesComponent},
     { path: 'myprojects', component: ProjectsComponent },
     { path: 'invites', component: InvitesComponent},
+    { path: 'chat', component: ChatComponent},
+    { path: 'calendar', component: CalendarComponent},
     { path: 'project',children:[
         { path: '',redirectTo: 'dashboard',pathMatch:'full'},
         { path: '', component: ProjectSidebarComponent, outlet: 'projectsidebar'},
         { path: 'dashboard', component: ProjectDashboardComponent},
         { path: 'tasks', component: ProjectTasksComponent},
-        {path: 'taskview',component: ViewTaskComponent},
+        { path: 'taskview',component: ViewTaskComponent},
+        { path: 'gantt', component: GanttComponent  },
         { path: 'settings', component: ProjectSettingsComponent,canActivate: [ProjectGuard]},
         { path: 'team', component: TeamProjectComponent},
         { path: '**', redirectTo: '404', pathMatch: 'full'},

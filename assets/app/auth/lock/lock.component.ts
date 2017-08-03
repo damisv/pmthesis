@@ -26,13 +26,6 @@ export class LockComponent {
             .subscribe(
                 token => {
                     localStorage.setItem('token', token.token);
-                    let user = {
-                        email:token.email,
-                        id:token.id,
-                        profile:token.profile
-                    };
-                    localStorage.setItem('user',JSON.stringify(user));
-                    localStorage.setItem('lastLogged',user.email);
                     this.router.navigate([this.returnUrl]);
                 },
                 error => console.error(error)

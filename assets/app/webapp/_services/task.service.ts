@@ -3,7 +3,6 @@ import { Http, Headers, Response } from "@angular/http";
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
-import {Profile} from "../../models/profile";
 import {Task} from "../../models/task";
 import {BehaviorSubject} from "rxjs";
 import {ProgressBarService} from "./progressbar.service";
@@ -11,9 +10,6 @@ import {ProgressBarService} from "./progressbar.service";
 @Injectable()
 export class TaskService {
 
-    private profile = new BehaviorSubject<Profile>(new Profile('sss'));
-
-    profile$ = this.profile.asObservable();
 
     private task = new BehaviorSubject<Task>(new Task('projectid','assigner','name'));
     task$ = this.task.asObservable();

@@ -1,34 +1,13 @@
-
-<div class="navbar navbar-default navbar-fixed-top" role="navigation">
-    <div class="container">
-
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" [mdMenuTriggerFor]="mobileHomepageMenu">
-                <span class="icon icon-bar"></span>
-                <span class="icon icon-bar"></span>
-                <span class="icon icon-bar"></span>
-            </button>
-            <md-menu #mobileHomepageMenu="mdMenu">
-                <a md-menu-item [routerLink]="['/homepage']" fragment="home" (click)="onAnchorClick()"><span>Home</span></a>
-                <a md-menu-item [routerLink]="['/homepage']" fragment="about" (click)="onAnchorClick()"><span>About</span></a>
-                <a md-menu-item [routerLink]="['/homepage']" fragment="product" (click)="onAnchorClick()"><span>Product</span></a>
-                <a md-menu-item [routerLink]="['/homepage']" fragment="team" (click)="onAnchorClick()"><span>Our Team</span></a>
-                <a md-menu-item [routerLink]="['/homepage']" fragment="auth" (click)="onAnchorClick()"><span>Authenticate</span></a>
-                <a md-menu-item [routerLink]="['/homepage']" fragment="contact" (click)="onAnchorClick()"><span>Contact</span></a>
-
-            </md-menu>
-            <a [routerLink]="['/homepage']" class="navbar-brand smoothScroll">Project Management</a>
-        </div>
-        <div class="collapse navbar-collapse">
-            <ul class="nav navbar-nav navbar-right">
-                <li><a [routerLink]="['/homepage']" fragment="home" (click)="onAnchorClick()"><span>Home</span></a></li>
-                <li><a [routerLink]="['/homepage']" fragment="about" (click)="onAnchorClick()"><span>About</span></a></li>
-                <li><a [routerLink]="['/homepage']" fragment="product" (click)="onAnchorClick()"><span>Product</span></a></li>
-                <li><a [routerLink]="['/homepage']" fragment="team" (click)="onAnchorClick()"><span>Our Team</span></a></li>
-                <li><a [routerLink]="['/homepage']" fragment="auth" (click)="onAnchorClick()"><span>Authenticate</span></a></li>
-                <li><a [routerLink]="['/homepage']" fragment="contact" (click)="onAnchorClick()"><span>Contact</span></a></li>
-            </ul>
-        </div>
-
+<md-toolbar class="block" color="primary" style="transition: all 1.5s ease;position: fixed;z-index:999;border-radius: 6px;" [style.background-color]="isTop"  >
+    <p style="transition: all 1.5s ease;" [style.color]="isTop">Project Management Web App</p>
+    <div style="flex:1 1 auto;"></div>
+    <div style="transition: all 1.5s ease;" [style.color]="isTransparent">
+        <button md-icon-button [ngx-scroll-to]="'#wallpaper'" mdTooltip="Top Section"><md-icon>home</md-icon></button>
+        <button md-icon-button [ngx-scroll-to]="'#about'" mdTooltip="About"><md-icon>info</md-icon></button>
+        <button md-icon-button [ngx-scroll-to]="'#product'" mdTooltip="Product"><md-icon>business_center</md-icon></button>
+        <button md-icon-button [ngx-scroll-to]="'#authenticate'" mdTooltip="Authenticate"><md-icon>card_membership</md-icon></button>
+        <button md-icon-button [ngx-scroll-to]="'#team'" mdTooltip="Our Team"><md-icon>group</md-icon></button>
+        <button md-icon-button [ngx-scroll-to]="'#contact'" mdTooltip="Contact Us"><md-icon>contact_mail</md-icon></button>
     </div>
-</div>
+
+</md-toolbar>

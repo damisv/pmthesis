@@ -27,7 +27,10 @@ import {AppGuard} from "./_guards/appguard";
 import { FlexLayoutModule } from "@angular/flex-layout";
 import {ProgressBarService} from "./webapp/_services/progressbar.service";
 import { ErrorDialogComponent} from "./errors/error.component";
-import {PushNotificationsModule, SimpleNotificationsModule} from "angular2-notifications/dist";
+import {PushNotificationsModule,SimpleNotificationsModule} from "angular2-notifications";
+import {GoogleChartComponent} from "./webapp/_services/googlechart.component";
+
+
 
 @NgModule({
     declarations: [
@@ -39,10 +42,12 @@ import {PushNotificationsModule, SimpleNotificationsModule} from "angular2-notif
         AuthfooterComponent,
         AuthnavComponent,
         NotFoundRedirectComponent,
-        ErrorDialogComponent
+        ErrorDialogComponent,
+        GoogleChartComponent
     ],
     imports: [
         BrowserModule,
+        BrowserAnimationsModule,
         FormsModule,
         HttpModule,
         ReactiveFormsModule,
@@ -50,7 +55,6 @@ import {PushNotificationsModule, SimpleNotificationsModule} from "angular2-notif
         HomepageModule,
         WebappModule,
         MaterialModule,
-        BrowserAnimationsModule,
         FlexLayoutModule,
         SimpleNotificationsModule.forRoot(),
         PushNotificationsModule

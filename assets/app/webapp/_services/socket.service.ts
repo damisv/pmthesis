@@ -5,7 +5,7 @@ import {NotificationService} from "./notification.service";
 export class SocketService {
     socket = null;
     constructor(private notificationService:NotificationService) {
-        this.socket = io('http://localhost:3000');
+        this.socket = io('https://pmthesis.herokuapp.com');
         /*this.socket.on('invite', function(data){
             this.onInvite(data);
         }.bind(this));*/

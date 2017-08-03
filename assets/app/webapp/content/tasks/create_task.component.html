@@ -1,4 +1,5 @@
 <md-card class="nothing">
+    <form #form="ngForm">
     <md-card-title>Create a new task</md-card-title>
     <md-card-subtitle></md-card-subtitle>
     <md-card-content>
@@ -11,11 +12,12 @@
                     <md-card-subtitle>Select your project name , so it represents your work and team</md-card-subtitle>
                     <md-card-content>
                         <md-input-container>
-                            <input mdInput  required placeholder="Task Name" [(ngModel)]="task.name" >
+                            <input mdInput  required placeholder="Task Name" [(ngModel)]="task.name" name="name">
                         </md-input-container>
                     </md-card-content>
                 </md-card>
             </md-grid-tile>
+
             <md-grid-tile [colspan]="1" [rowspan]="1">
                 <md-card class="nothing">
                     <md-card-title>Assign to a member</md-card-title>
@@ -53,7 +55,7 @@
                     <md-card-subtitle>Early start date time for this task</md-card-subtitle>
                     <md-card-content>
                         <md-input-container>
-                            <input mdInput [mdDatepicker]="earlyStart" placeholder="Early start" [(ngModel)]="task.date_start">
+                            <input mdInput [mdDatepicker]="earlyStart" placeholder="Early start" [(ngModel)]="task.date_start" name="earlyStart">
                             <button mdSuffix [mdDatepickerToggle]="earlyStart"></button>
                         </md-input-container>
                         <md-datepicker #earlyStart></md-datepicker>
@@ -66,7 +68,7 @@
                     <md-card-subtitle>Early end date for this task</md-card-subtitle>
                     <md-card-content>
                         <md-input-container>
-                            <input mdInput [mdDatepicker]="earlyEnd" placeholder="Early End" [(ngModel)]="task.date_end">
+                            <input mdInput [mdDatepicker]="earlyEnd" placeholder="Early End" [(ngModel)]="task.date_end" name="earlyEnd">
                             <button mdSuffix [mdDatepickerToggle]="earlyEnd"></button>
                         </md-input-container>
                         <md-datepicker #earlyEnd></md-datepicker>
@@ -79,7 +81,7 @@
                     <md-card-subtitle>Late start date time for this task</md-card-subtitle>
                     <md-card-content>
                         <md-input-container>
-                            <input mdInput [mdDatepicker]="lateStart" placeholder="Late Start" [(ngModel)]="task.date_start">
+                            <input mdInput [mdDatepicker]="lateStart" placeholder="Late Start" [(ngModel)]="task.date_start" name="lateStart">
                             <button mdSuffix [mdDatepickerToggle]="lateStart"></button>
                         </md-input-container>
                         <md-datepicker #lateStart></md-datepicker>
@@ -92,31 +94,44 @@
                     <md-card-subtitle>Late end date time</md-card-subtitle>
                     <md-card-content>
                         <md-input-container>
-                            <input mdInput [mdDatepicker]="lateEnd" placeholder="Late End" [(ngModel)]="task.date_end">
+                            <input mdInput [mdDatepicker]="lateEnd" placeholder="Late End" [(ngModel)]="task.date_end" name="lateEnd">
                             <button mdSuffix [mdDatepickerToggle]="lateEnd"></button>
                         </md-input-container>
                         <md-datepicker #lateEnd></md-datepicker>
                     </md-card-content>
                 </md-card>
             </md-grid-tile>
-            <md-grid-tile #description [colspan]="4" [rowspan]="1">
+            <md-grid-tile #description [colspan]="3" [rowspan]="1">
                 <md-card class="nothing">
                     <md-card-title>Task Description</md-card-title>
                     <md-card-subtitle>This text should be concise and readable</md-card-subtitle>
                     <md-card-content>
                         <md-input-container style="width:100%">
-                            <textarea mdInput [(ngModel)]="task.description" cols="100" rows="5" placeholder="Here can be your description"></textarea>
+                            <textarea mdInput [(ngModel)]="task.description" name="description" cols="100" rows="5" placeholder="Here can be your description"></textarea>
                         </md-input-container>
                     </md-card-content>
                 </md-card>
             </md-grid-tile>
-        </md-grid-list>
+            <md-grid-tile [colspan]="1" [rowspan]="1">
+                <md-card class="nothing">
+                    <md-card-title>Dependecies</md-card-title>
+                    <md-card-content>
 
+                    </md-card-content>
+                    <md-card-actions>
+                        <button md-raised-button (click)="addDependencies()">Select</button>
+                    </md-card-actions>
+                </md-card>
+            </md-grid-tile>
+
+
+        </md-grid-list>
     </md-card-content>
     <md-card-actions>
-        <button color="primary" style="text-align:center;width:30%" md-raised-button (click)="onSubmit()">Create {{ task?.name}}</button>
+        <button color="primary" style="text-align:center;width:30%" md-raised-button [disabled]="!createTaskForm.valid" (click)="onSubmit()">Create {{ task?.name}}</button>
     </md-card-actions>
     <md-card-footer>
         Fields with * (asterisks) are required!
     </md-card-footer>
+    </form>
 </md-card>

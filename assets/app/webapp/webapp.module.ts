@@ -1,7 +1,7 @@
 import {NgModule} from "@angular/core";
+
 import {CommonModule} from "@angular/common";
 import {RouterModule} from "@angular/router";
-import {MaterialModule, MdNativeDateModule} from "@angular/material";
 import {WebappComponent} from "./webapp.component";
 import {DashboardComponent} from "./content/dashboard/dashboard.component";
 import {SidebarComponent} from "./sidebar/sidebar.component";
@@ -11,6 +11,34 @@ import {ProfileComponent} from "./content/user/profile.component";
 import {TasksComponent} from "./content/tasks/tasks.component";
 import {ProjectsComponent} from "./content/projects/projects.component";
 import {DragulaModule} from "ng2-dragula";
+import {
+    MdButtonModule,
+    MdCheckboxModule,
+    MdDatepickerModule,
+    MdTableModule,
+    MdTabsModule,
+    MdAutocompleteModule,
+    MdChipsModule,
+    MdProgressBarModule,
+    MdDialogModule,
+    MdMenuModule,
+    MdSliderModule,
+    MdSelectModule,
+    MdInputModule,
+    MdRadioModule,
+    MdTooltipModule,
+    MdSnackBarModule,
+    MdButtonToggleModule,
+    MdSlideToggleModule,
+    MdGridListModule,
+    MdCardModule,
+    MdIconModule,
+    MdListModule,
+    MdNativeDateModule,
+    MdToolbarModule,
+    MdSidenavModule,
+    MdPaginatorModule,
+} from "@angular/material";
 
 import {ProjectTasksComponent} from "./content/tasks/project_tasks.component";
 import {IssuesComponent} from "./content/issues/issues.component";
@@ -26,7 +54,6 @@ import {ProjectSettingsComponent} from "./content/settings/project_settings.comp
 import {TeamProjectComponent} from "./content/team/project_team.component";
 import {InvitesComponent} from "./content/invites/invites.component";
 import {CreateTaskComponent} from "./content/tasks/create_task.component";
-import {MyDatePickerModule} from "mydatepicker";
 import {ProfileDialogComponent} from "./content/user/profiledialog.component";
 import {NotFoundErrorComponent} from "./errors/notfound.component";
 import {ProjectService} from "./_services/projects.service";
@@ -37,6 +64,38 @@ import {ProjectGuard} from "../_guards/projectguard";
 import {ViewTaskComponent} from "./content/tasks/viewtask.component";
 import {NotificationService} from "./_services/notification.service";
 import {SocketService} from "./_services/socket.service";
+import {NotificationsService, PushNotificationsService} from "angular2-notifications/dist";
+
+import {DependenciesDialogComponent} from "./content/tasks/dependenciesdialog.component";
+import {GanttComponent} from "./content/tasks/gantt.component";
+import {ParticlesModule} from "angular-particle";
+import {CdkTableModule} from "@angular/cdk";
+import {ChatComponent} from "./content/chat/chat.component";
+import {UserListComponent} from "./content/chat/userlist.component";
+import {MessagesComponent} from "./content/chat/messages.component";
+import {FlexLayoutModule} from "@angular/flex-layout";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {BrowserModule} from "@angular/platform-browser";
+
+import { ChartModule } from 'angular2-highcharts';
+import * as highcharts from 'highcharts';
+import { HighchartsStatic } from 'angular2-highcharts/dist/HighchartsService';
+import {CalendarModule} from "angular-calendar";
+import {CalendarComponent} from "./content/calendar/calendar.component";
+import {CalendarEventViewDialogComponent} from "./content/calendar/calendarEventViewDialog.component";
+import {ContextMenuModule} from "ngx-contextmenu";
+import {CalendarEventCreateDialogComponent} from "./content/calendar/calendarEventCreateDialog.component";
+
+
+declare var require: any;
+
+export function highchartsFactory() {
+    const hc = require('highcharts');
+    const dd = require('highcharts/modules/drilldown');
+    dd(hc);
+
+    return hc;
+}
 
 
 @NgModule({
@@ -63,17 +122,56 @@ import {SocketService} from "./_services/socket.service";
         CreateTaskComponent,
         ViewTaskComponent,
         ProfileDialogComponent,
-        NotFoundErrorComponent
+        NotFoundErrorComponent,
+        DependenciesDialogComponent,
+        GanttComponent,
+        ChatComponent,
+        UserListComponent,
+        MessagesComponent,
+        CalendarComponent,
+        CalendarEventViewDialogComponent,
+        CalendarEventCreateDialogComponent
     ],
     imports: [
         CommonModule,
         ReactiveFormsModule,
         FormsModule,
         RouterModule,
-        MaterialModule,
         DragulaModule,
-        MyDatePickerModule,
+        ChartModule,
+        ParticlesModule,
+        MdButtonModule,
+        MdCheckboxModule,
+        MdDatepickerModule,
+        MdTableModule,
+        MdTabsModule,
+        MdAutocompleteModule,
+        MdChipsModule,
+        MdProgressBarModule,
+        MdDialogModule,
+        MdMenuModule,
+        MdSliderModule,
+        MdSelectModule,
+        MdInputModule,
+        MdRadioModule,
+        MdTooltipModule,
+        MdSnackBarModule,
+        MdButtonToggleModule,
+        MdSlideToggleModule,
+        MdGridListModule,
+        MdCardModule,
+        MdIconModule,
+        MdListModule,
+        CdkTableModule,
         MdNativeDateModule,
+        MdToolbarModule,
+        MdSidenavModule,
+        MdPaginatorModule,
+        FlexLayoutModule,
+        BrowserModule,
+        BrowserAnimationsModule,
+        CalendarModule.forRoot(),
+        ContextMenuModule
     ],
     providers: [
         SidebarService,
@@ -83,10 +181,20 @@ import {SocketService} from "./_services/socket.service";
         TaskService,
         ProjectGuard,
         NotificationService,
-        SocketService
+        NotificationsService,
+        PushNotificationsService,
+        SocketService,
+        {
+            provide: HighchartsStatic,
+            useFactory: highchartsFactory
+        },
+
     ],
     entryComponents:[
-        ProfileDialogComponent
+        ProfileDialogComponent,
+        DependenciesDialogComponent,
+        CalendarEventViewDialogComponent,
+        CalendarEventCreateDialogComponent
     ]
 })
 export class WebappModule {

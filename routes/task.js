@@ -56,7 +56,10 @@ router.post('/get',function(req, res){
 router.post('/complete',function(req, res){
     db.updateOne(
         {_id:ObjectID(req.body.task._id)},
-        {$set:{completed: !req.body.task.completed}},
+        {$set:{
+            date_created: new Date(),
+            completed: !req.body.task.completed
+        }},
         "tasks"
     ).then(
         function(result) {
@@ -77,10 +80,11 @@ router.post('/create',function(req, res){
         {
             project_id:req.body.task.project_id,
             assigner_email:email,
-            assignee_email:req.body.task.assignee_email,
             name:req.body.task.name,
             description:req.body.task.description,
-            date_created: 'CURRENT_DATE',
+            assignee_email:req.body.task.assignee_email,
+            dependencies:req.body.task.dependencies,
+            date_created: new Date(),
             date_start:req.body.task.date_start,
             date_end:req.body.task.date_end,
             completed:false

@@ -1,9 +1,16 @@
+<div
+        fxLayout
+        fxLayout.xs="column"
+        fxLayoutAlign="center"
+        fxLayoutGap="10px"
+        fxLayoutGap.xs="0">
 
-<div class="row">
-    <div class="col-md-6">
+    <div fxFlex="auto">
         <md-card class="card">
-            <md-card-title>Invites</md-card-title>
-            <md-card-subtitle>Pending Ones Only</md-card-subtitle>
+            <md-card-header>
+                <md-card-title>Invites</md-card-title>
+                <md-card-subtitle>Pending Ones Only</md-card-subtitle>
+            </md-card-header>
             <md-card-content>
                 <table class="table" >
                     <thead>
@@ -13,16 +20,20 @@
                     </thead>
                     <tbody>
                     <ng-container *ngFor="let project of invites">
-                                <tr>
-                                    <td>{{project?.name}}</td>
-                                    <td>{{project?.description}}</td>
-                                    <td><button class="btn btn-info btn-fill" (click)="acceptInvite(project._id)">Accept</button></td>
-                                </tr>
+                        <tr>
+                            <td>{{project?.name}}</td>
+                            <td>{{project?.description}}</td>
+                            <td><button class="btn btn-info btn-fill" (click)="acceptInvite(project._id)">Accept</button></td>
+                        </tr>
                     </ng-container>
                     </tbody>
                 </table>
-                <md-card-footer>Updated 3 minutes ago??</md-card-footer>
             </md-card-content>
+            <md-card-actions><button md-icon-button><md-icon>favorite</md-icon></button></md-card-actions>
+            <md-card-footer>
+                <md-divider></md-divider>
+                <md-icon>history</md-icon>
+            </md-card-footer>
         </md-card>
     </div>
 </div>

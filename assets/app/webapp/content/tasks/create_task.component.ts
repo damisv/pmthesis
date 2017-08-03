@@ -1,18 +1,18 @@
-import {Component, EventEmitter, Input, Output,  ViewChild} from "@angular/core";
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from "@angular/core";
 import {Task} from "../../../models/task";
 import {ProjectService} from "../../_services/projects.service";
 import {Subscription} from "rxjs/Subscription";
 import {Project} from "../../../models/project";
 import {Profile} from "../../../models/profile";
 import {ProfileService} from "../../_services/profile.service";
-import {FormControl} from '@angular/forms';
+import { FormControl} from '@angular/forms';
 import 'rxjs/add/operator/startWith';
-import {MdDialog, MdGridList, MdSnackBar} from "@angular/material";
+import {MdDialog, MdDialogConfig, MdGridList, MdSnackBar} from "@angular/material";
 import {animate, keyframes, state, style, transition, trigger} from "@angular/animations";
 import {TaskService} from "../../_services/task.service";
 import { ObservableMedia } from "@angular/flex-layout";
-import {error} from "util";
 import {NotificationService} from "../../_services/notification.service";
+import {DependenciesDialogComponent} from "./dependenciesdialog.component";
 
 @Component({
     selector: 'project-create-task',
@@ -44,7 +44,7 @@ import {NotificationService} from "../../_services/notification.service";
 
     ]
 })
-export class CreateTaskComponent{
+export class CreateTaskComponent implements OnInit{
     @Input() email:String;
     @Output() taskCreated = new EventEmitter<Task>();
 
@@ -61,6 +61,7 @@ export class CreateTaskComponent{
 
 
     task:Task;
+    tasks;
     project:Project;
     projectSubscriptions:Subscription  = this.projectService.project$.subscribe(
         project=>{
@@ -82,13 +83,18 @@ export class CreateTaskComponent{
     assigned=[];
     team = [];
 
+    dependencies=[];
     result;
+
+    ///
+    @ViewChild('form') createTaskForm;
+    ///
 
     constructor (
         private projectService: ProjectService,
         private profileService:ProfileService,
         public snackBar: MdSnackBar,
-        public dialog: MdDialog,
+        private dialog: MdDialog,
         private taskService:TaskService,
         private media: ObservableMedia,
         private notificationService:NotificationService
@@ -97,7 +103,9 @@ export class CreateTaskComponent{
         this.filteredTeam = this.assigneeCtrl.valueChanges
             .startWith(null)
             .map(name => this.filterTeam(name));
-        this.task = new Task(this.project._id,this.user.email,'');
+        this.task = new Task(
+            this.project._id,
+            this.user.email,'')
     }
 
     filterTeam(val: string){
@@ -112,16 +120,18 @@ export class CreateTaskComponent{
     }
 
     onSubmit() {
-        this.task.project_id = this.project._id;
-        this.task.assigner_email = this.user.email;
         if(this.task.name===''){
             this.openSnackBar("Please enter a VALID name for this task",'',5000);
             return;
         }
+        this.task.dependencies = this.dependencies;
         this.task.assignee_email = this.assigned;
         this.task.completed = false;
         this.taskService.create(this.task)
             .subscribe(res => {
+                    this.createTaskForm.reset();
+                    this.assigned=[];
+                    this.dependencies = [];
                     this.taskCreated.emit(res.task);
                     this.notificationService.create(res.task.name,"Task has been successfully created!","success");
                 },
@@ -129,6 +139,7 @@ export class CreateTaskComponent{
                     this.notificationService.create(this.task.name,"Error! Task was not created!","error");
                 }
             );
+
     }
 
     onAssigned(){
@@ -150,8 +161,34 @@ export class CreateTaskComponent{
         this.openSnackBar("Assignee removed",'',2000);
     }
 
+    addDependencies(){
+        this.taskService.getTasksOfProject(this.project._id).subscribe( tasks => {
+            let dialogError = this.dialog.open(DependenciesDialogComponent,{
+                data: tasks
+            });
+            dialogError.afterClosed().subscribe(result => {
+                this.dependencies = this.checkArray(result);
+                console.log(this.dependencies);
+            });
+        });
+
+    }
+
+    checkArray(dependencies){
+        let temp = [];
+        for(let dependency of dependencies){
+            if(dependency.type!=='none'){
+                temp.push(dependency);
+            }
+        }
+        return temp;
+    }
+
     openSnackBar(message,action,duration){
         this.snackBar.open(message,action,{duration:duration});
+    }
+
+    ngOnInit(){
     }
 
     ngAfterViewInit(){
@@ -162,7 +199,7 @@ export class CreateTaskComponent{
     updateGrid(): void {
         if (this.media.isActive('xl')) { this.grid.cols = 5; }
         else if (this.media.isActive('lg')) { this.grid.cols = 4; }
-        else if (this.media.isActive('md')) { this.grid.cols = 3; this.descriptionTile.colspan=3; }
+        else if (this.media.isActive('md')) { this.grid.cols = 3; }
         else if (this.media.isActive('sm')) { this.grid.cols = 2; this.descriptionTile.colspan=2; }
         else if (this.media.isActive('xs')) { this.grid.cols = 1; this.descriptionTile.colspan=1; this.tasknameTile.colspan=1; }
     }

@@ -1,13 +1,17 @@
-import {Subject} from "rxjs";
+import {BehaviorSubject} from "rxjs/BehaviorSubject";
+import {Injectable} from "@angular/core";
 
+@Injectable()
 export class SidebarService {
-    private _subject = new Subject<any>();
 
-    newEvent(event:string){
-        this._subject.next(event);
+    status = true;
+
+    private _status = new BehaviorSubject<any>(this.status);
+    status$ = this._status.asObservable();
+
+    changeStatus(){
+        this.status = !this.status;
+        this._status.next(this.status);
     }
 
-    get events(){
-        return this._subject.asObservable();
-    }
 }

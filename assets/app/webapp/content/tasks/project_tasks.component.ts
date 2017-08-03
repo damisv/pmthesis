@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from "@angular/core";
+import {Component, ComponentRef, OnInit, ViewChild} from "@angular/core";
 import {ProjectService} from "../../_services/projects.service";
 import {Profile} from "../../../models/profile";
 import {Task} from "../../../models/task";
@@ -10,11 +10,31 @@ import {ProfileDialogComponent} from "../user/profiledialog.component";
 import {Title} from "@angular/platform-browser";
 import {TaskService} from "../../_services/task.service";
 import {Router} from "@angular/router";
+import {CreateTaskComponent} from "./create_task.component";
+import {trigger, stagger, animate, style, group, query, transition, keyframes} from '@angular/animations';
 
 @Component({
     selector: 'webapp-project-tasks',
     templateUrl: './project_tasks.component.html',
-    styleUrls: ['./project_tasks.component.css']
+    styleUrls: ['./project_tasks.component.css'],
+    animations: [ trigger('homeTransition', [
+        transition(':enter', [
+            query('.card', style({ opacity: 0 })),
+            query('.card', stagger(300, [
+                style({ transform: 'translateY(100px)' }),
+                animate('1s cubic-bezier(.75,-0.48,.26,1.52)', style({transform: 'translateY(0px)', opacity: 1})),
+            ])),
+        ]),
+        transition(':leave', [
+            query('.card', stagger(300, [
+                style({ transform: 'translateY(0px)', opacity: 1 }),
+                animate('1s cubic-bezier(.75,-0.48,.26,1.52)', style({transform: 'translateY(100px)', opacity: 0})),
+            ])),
+        ])
+    ]) ],
+    host: {
+        '[@homeTransition]': ''
+    }
 })
 export class ProjectTasksComponent implements OnInit{
     @ViewChild('tab') tabGroup;
@@ -34,6 +54,7 @@ export class ProjectTasksComponent implements OnInit{
 
     selectedOption;
     filterStatus:string = 'all';
+    @ViewChild(CreateTaskComponent) childCmpRef:ComponentRef<CreateTaskComponent>;
 
     constructor(
         private projectService: ProjectService,
@@ -71,9 +92,12 @@ export class ProjectTasksComponent implements OnInit{
         this.tabGroup.selectedIndex='0';
     }
 
+
     onEmailClicked(email){
         const configProfile = new MdDialogConfig();
         configProfile.data = email;
+        configProfile.width = '50%';
+        configProfile.height = '30%';
         let dialogProfile = this.dialog.open(ProfileDialogComponent,configProfile);
         dialogProfile.afterClosed().subscribe(result => {
             this.selectedOption = result;

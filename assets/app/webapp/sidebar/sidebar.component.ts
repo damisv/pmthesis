@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {SidebarService} from "./sidebar.service";
+import {Subscription} from "rxjs/Subscription";
 
 @Component({
     selector: 'webapp-sidebar',
@@ -7,21 +8,18 @@ import {SidebarService} from "./sidebar.service";
     styleUrls: ['./sidebar.component.css']
 })
 
-export class SidebarComponent implements OnInit{
-    userMenuAvailable=true;
+export class SidebarComponent{
 
-    constructor(private sidebarService: SidebarService){}
+    userMenuAvailable = true;
 
-    ngOnInit(){
-        this.sidebarService.events.forEach(
-            event => {
-                if(event.match('projectOpened')){
-                    this.userMenuAvailable = false;
-                }else{
-                    this.userMenuAvailable = true;
-                }
-            }
-        );
+    sidebarSubscription:Subscription = this.sidebarService.status$.subscribe(
+        status => this.userMenuAvailable = status);
 
+    constructor(private sidebarService:SidebarService){
     }
+
+    ngOnDestroy(){
+        this.sidebarSubscription.unsubscribe();
+    }
+
 }

@@ -6,12 +6,31 @@ import {Task} from "../../../models/task";
 import {MdGridList} from "@angular/material";
 import { ObservableMedia } from "@angular/flex-layout";
 import {Profile} from "../../../models/profile";
-
+import {ProfileService} from "../../_services/profile.service";
+import {trigger, stagger, animate, style, group, query, transition, keyframes} from '@angular/animations';
 
 @Component({
     selector: 'webapp-view-task',
     templateUrl: './viewtask.component.html',
-    styleUrls: ['./viewtask.component.css']
+    styleUrls: ['./viewtask.component.css'],
+    animations: [ trigger('homeTransition', [
+        transition(':enter', [
+            query('.card', style({ opacity: 0 })),
+            query('.card', stagger(300, [
+                style({ transform: 'translateY(100px)' }),
+                animate('1s cubic-bezier(.75,-0.48,.26,1.52)', style({transform: 'translateY(0px)', opacity: 1})),
+            ])),
+        ]),
+        transition(':leave', [
+            query('.card', stagger(300, [
+                style({ transform: 'translateY(0px)', opacity: 1 }),
+                animate('1s cubic-bezier(.75,-0.48,.26,1.52)', style({transform: 'translateY(100px)', opacity: 0})),
+            ])),
+        ])
+    ]) ],
+    host: {
+        '[@homeTransition]': ''
+    }
 })
 export class ViewTaskComponent {
 
@@ -20,12 +39,17 @@ export class ViewTaskComponent {
     @ViewChild('description') descriptionTile;
     @ViewChild('taskName') taskName;
 
+    lastUpdated;
 
-    canEdit:any = null;
+    canEdit:boolean = false;
+    canComplete:boolean=false;
 
     profile:Profile;
-    profileSubscription:Subscription = this.taskService.profile$.subscribe(
-        profile => this.profile = profile
+    profileSubscriptions:Subscription  =  this.profileService.profile$.subscribe(
+        profile => {
+            this.profile = profile;
+
+        }
     );
     task:Task=null;
     taskSubscription:Subscription = this.taskService.task$.subscribe(
@@ -37,7 +61,11 @@ export class ViewTaskComponent {
         }
     );
 
-    constructor(private taskService: TaskService,private titleService: Title,private media: ObservableMedia){
+    constructor(private taskService: TaskService,private titleService: Title,private media: ObservableMedia,private profileService:ProfileService){
+        (this.task.assigner_email==this.profile.email)? this.canEdit = true : this.canEdit=false ;
+        (this.task.assignee_email.find(x => x == this.profile.email))? this.canComplete=true:this.canComplete=false;
+        let temp = new Date().getTime() - new Date(this.task.date_created).getTime();
+        this.lastUpdated = new Date(temp).getMinutes();
     }
 
     ngOnDestroy(){
@@ -47,8 +75,17 @@ export class ViewTaskComponent {
     ngAfterViewInit(){
         this.updateGrid();
         this.media.subscribe(change => { this.updateGrid(); });
-        (this.task.assigner_email==this.profile.email)? this.canEdit = true : this.canEdit=null ;
-        console.log(this.canEdit);
+    }
+
+    completeTask(){
+        let temp = new Date();
+        this.taskService.complete(this.task).subscribe(
+            res => {
+                this.task.completed = !this.task.completed;
+                let temp2 = new Date().getTime() - temp.getTime();
+                this.lastUpdated = new Date(temp2).getMinutes();
+            }
+        );
     }
 
     capitalizeName(name:String){

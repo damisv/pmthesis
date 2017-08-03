@@ -1,3 +1,18 @@
-.active a{
-    background-color: rgba(0, 0, 0, 0.2);
+.mat-list-item .mat-line {
+    display: inline-block;
+}
+md-list-item {
+    margin: 0.5em 0.5em;
+    border-radius: 4px;
+    padding: 0.5em 0.25em;
+    color: whitesmoke !important;
+}
+span {
+    font-size: 115% !important;
+    font-weight: 600;
+    text-transform: uppercase;
+
+}
+.active {
+    background:rgba(255, 255, 255, 0.23);
 }

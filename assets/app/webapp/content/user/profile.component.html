@@ -1,4 +1,139 @@
-        <div class="row">
+<div fxLayout
+     fxLayout.xs="column"
+     fxLayoutAlign="center"
+     fxLayoutGap="10px"
+     fxLayoutGap.xs="0">
+    <div fxFlex>
+        <md-card class="card">
+            <md-card-header>
+                <md-card-title>
+                    Edit Profile
+                </md-card-title>
+                <md-card-subtitle>
+                    Edit your information
+                </md-card-subtitle>
+            </md-card-header>
+            <md-card-content>
+                <div fxLayout
+                     fxLayout.xs="column"
+                     fxLayoutAlign="center"
+                     fxLayoutGap="10px"
+                     fxLayoutGap.xs="0">
+                    <div fxFlex>
+                                <md-input-container>
+                                    <md-icon mdSuffix>business</md-icon>
+                                    <input mdInput placeholder="Company" >
+                                    <md-error>This input is requiredddddd</md-error>
+                                </md-input-container>
+                    </div>
+                    <div fxFlex>
+                                <md-input-container>
+                                    <md-icon mdSuffix>perm_identity</md-icon>
+                                    <input mdInput placeholder="Username">
+                                </md-input-container>
+                    </div>
+                    <div fxFlex>
+                                <md-input-container>
+                                    <md-icon mdSuffix>email</md-icon>
+                                    <input mdInput type="email" placeholder="Email">
+                                </md-input-container>
+                    </div>
+                </div>
+                <div fxLayout
+                     fxLayout.xs="column"
+                     fxLayoutAlign="center"
+                     fxLayoutGap="10px"
+                     fxLayoutGap.xs="0">
+                    <div fxFlex>
+                        <md-input-container>
+                            <input mdInput placeholder="First Name">
+                        </md-input-container>
+                    </div>
+                    <div fxFlex>
+                        <md-input-container>
+                            <input mdInput placeholder="Last Name">
+                        </md-input-container>
+                    </div>
+                </div>
+                <div fxLayout
+                     fxLayout.xs="column"
+                     fxLayoutAlign="center"
+                     fxLayoutGap="10px"
+                     fxLayoutGap.xs="0">
+                    <div fxFlex>
+                        <md-input-container>
+                            <md-icon mdSuffix>my_location</md-icon>
+                            <input mdInput placeholder="Address">
+                        </md-input-container>
+                    </div>
+                    <div fxFlex>
+                        <md-input-container>
+                            <md-icon mdSuffix>local_post_office</md-icon>
+                            <input mdInput type="number" placeholder="Postal Code">
+                        </md-input-container>
+                    </div>
+                </div>
+                <div fxLayout
+                     fxLayout.xs="column"
+                     fxLayoutAlign="center"
+                     fxLayoutGap="10px"
+                     fxLayoutGap.xs="0">
+                    <div fxFlex>
+                        <md-input-container>
+                            <md-icon mdSuffix>location_city</md-icon>
+                            <input mdInput placeholder="City">
+                        </md-input-container>
+                    </div>
+                    <div fxFlex>
+                        <md-input-container>
+                            <md-icon mdSuffix>flag</md-icon>
+                            <input mdInput placeholder="Country">
+                        </md-input-container>
+                    </div>
+                </div>
+                <div fxLayout
+                     fxLayout.xs="column"
+                     fxLayoutAlign="center"
+                     fxLayoutGap="10px"
+                     fxLayoutGap.xs="0">
+                    <div fxFlex>
+                        <md-input-container>
+                            <md-icon mdSuffix>description</md-icon>
+                            <textarea mdInput cols="100" rows="5" placeholder="About myself"></textarea>
+                        </md-input-container>
+                    </div>
+                </div>
+            </md-card-content>
+            <md-card-actions>
+                <button md-icon-button mdTooltip="Save changes"><md-icon>save</md-icon></button>
+            </md-card-actions>
+            <md-card-footer>
+                <md-divider></md-divider>
+                <md-icon>history</md-icon>Last updated : 5 days ago
+            </md-card-footer>
+        </md-card>
+    </div>
+    <div fxFlex>
+        <md-card class="card">
+            <md-card-header>
+                <div md-card-avatar class="header-image" ></div>
+                <md-card-title mdTooltip="{{profile?.username}}">{{ profile?.firstName }} {{ profile?.lastName }}</md-card-title>
+                <md-card-subtitle><a href="mailto:{{profile.email}}"><small>{{ profile.email}}</small></a></md-card-subtitle>
+            </md-card-header>
+            <img md-card-image src="/img/city.jpg">
+            <md-card-content>
+                <p>
+                    A little about myself:
+                </p><br>
+                <p>{{profile.description}}</p>
+                <p>Active projects: 26</p>
+            </md-card-content>
+        </md-card>
+    </div>
+    </div>
+
+
+<div class="row">
             <div class="col-md-8">
                 <div class="card">
                     <div class="header">

@@ -9,11 +9,30 @@ import {ProjectService} from "../../_services/projects.service";
 import {Project} from "../../../models/project";
 import {Task} from "../../../models/task";
 import {NotificationService} from "../../_services/notification.service";
+import {trigger, stagger, animate, style, group, query, transition, keyframes} from '@angular/animations';
 
 @Component({
     selector: 'webapp-dashboard',
     templateUrl: './dashboard.component.html',
-    styleUrls: ['./dashboard.component.css']
+    styleUrls: ['./dashboard.component.css'],
+    animations: [ trigger('homeTransition', [
+        transition(':enter', [
+            query('.card', style({ opacity: 0 })),
+            query('.card', stagger(300, [
+                style({ transform: 'translateY(100px)' }),
+                animate('1s cubic-bezier(.75,-0.48,.26,1.52)', style({transform: 'translateY(0px)', opacity: 1})),
+            ])),
+        ]),
+        transition(':leave', [
+            query('.card', stagger(300, [
+                style({ transform: 'translateY(0px)', opacity: 1 }),
+                animate('1s cubic-bezier(.75,-0.48,.26,1.52)', style({transform: 'translateY(100px)', opacity: 0})),
+            ])),
+        ])
+    ]) ],
+    host: {
+        '[@homeTransition]': ''
+    }
 })
 export class DashboardComponent implements OnInit{
 
@@ -60,6 +79,22 @@ export class DashboardComponent implements OnInit{
         this.router.navigate(['app','project','taskview']);
     }
 
+    isManager(team){
+        for(let member of team){
+            if(this.profile.email==member.email && member.position=="manager"){
+                return true;
+            }
+        }
+        return false;
+    }
+    isMember(team){
+        for(let member of team){
+            if(member.email==this.profile.email && member.position=="member"){
+                return true;
+            }
+        }
+        return false;
+    }
     ngOnDestroy(){
         if(this.subscription!==undefined)
             this.subscription.unsubscribe();

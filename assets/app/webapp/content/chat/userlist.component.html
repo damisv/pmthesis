@@ -1,0 +1,19 @@
+<md-list class="userlist" >
+    <h3 md-subheader>Friends</h3>
+    <ng-template ngFor let-user [ngForOf]="userlist">
+        <md-list-item (click)="selectUser(user)" class="user" >
+            <md-icon md-list-icon>folder</md-icon>
+            <h4 md-line>{{user}}</h4>
+            <p md-line>Ten Minutes Ago</p>
+        </md-list-item>
+    </ng-template>
+    <md-divider></md-divider>
+    <h3 md-subheader>Projects Discussions</h3>
+       <ng-template ngFor let-user [ngForOf]="userlist">
+        <md-list-item (click)="selectUser(user+'\'s project')" class="projectDiscussion">
+            <md-icon md-list-icon>note</md-icon>
+            <h4 md-line>{{user}}'project</h4>
+            <p md-line> 14 members </p>
+        </md-list-item>
+    </ng-template>
+</md-list>

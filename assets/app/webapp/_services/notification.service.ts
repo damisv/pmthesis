@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import {Notification, NotificationsService, PushNotificationsService} from "angular2-notifications/dist";
+import {NotificationsService, PushNotificationsService} from "angular2-notifications";
 import {Router} from "@angular/router";
 
 @Injectable()
@@ -37,6 +37,7 @@ export class NotificationService {
         if(title===undefined){
             title = "";
         }
+
         let toast = this.toastService.create(title,content,type,options);
 
         if(route!==undefined){

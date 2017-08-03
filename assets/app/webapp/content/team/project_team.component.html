@@ -1,9 +1,14 @@
-
-<div class="row">
-        <div class="col-md-6">
+<div fxLayout
+     fxLayout.xs="column"
+     fxLayoutAlign="center"
+     fxLayoutGap="1em"
+     fxLayoutGap.xs="0">
+    <div fxFlex>
         <md-card class="card">
-            <md-card-title>Project Team</md-card-title>
-            <md-card-subtitle>With status also</md-card-subtitle>
+            <md-card-header>
+                <md-card-title>Project Team</md-card-title>
+                <md-card-subtitle>With status also</md-card-subtitle>
+            </md-card-header>
             <md-card-content>
                 <h1>{{project.name}}</h1>
                 <table class="table" >
@@ -12,20 +17,27 @@
                     <th>Position</th>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let member of project?.team">
-                            <td>{{member?.email}}</td>
-                            <td>{{member?.position}}</td>
-                        </tr>
+                    <tr *ngFor="let member of project?.team">
+                        <td>{{member?.email}}</td>
+                        <td>{{member?.position}}</td>
+                    </tr>
                     </tbody>
                 </table>
-                <md-card-footer>Updated now</md-card-footer>
             </md-card-content>
-
+            <md-card-footer><md-icon>history</md-icon>Updated now</md-card-footer>
         </md-card>
-
+    </div>
+</div>
+    <div fxLayout="row"
+         fxLayout.xs="column"
+         fxLayoutAlign="center"
+         fxLayoutGap="1em">
+    <div fxFlex="auto">
         <md-card class="card">
-            <md-card-content>
+            <md-card-header>
                 <md-card-title>Invites</md-card-title>
+            </md-card-header>
+            <md-card-content>
                 <table class="table" >
                     <thead>
                     <th>Email</th>
@@ -37,10 +49,20 @@
                     </tbody>
                 </table>
             </md-card-content>
+            <md-card-footer>
+                <md-divider></md-divider>
+                <md-icon>history</md-icon> Updated 3 minutes ago
+            </md-card-footer>
         </md-card>
-
+    </div>
+    <div fxFlex="auto">
         <md-card class="card">
-            <project-invite (addInvite)="addInvite($event)" [project]="project" ></project-invite>
+            <md-card-header>
+
+            </md-card-header>
+            <md-card-content>
+                <project-invite (addInvite)="addInvite($event)" [project]="project" ></project-invite>
+            </md-card-content>
         </md-card>
     </div>
 </div>

@@ -4,9 +4,10 @@ export class Task {
                 public name:string,
                 public description?:string,
                 public assignee_email?: String[],
-                private dependency?: String[],
-                public date_start?:string,
-                public date_end?:string,
+                public dependencies?: object[],
+                public date_created?:Date,
+                public date_start?:Date,
+                public date_end?:Date,
                 public completed?:boolean,
                 public _id?:string
                 ) {}

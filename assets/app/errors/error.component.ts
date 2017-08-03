@@ -1,6 +1,7 @@
 import {Component, OnInit, Inject, Optional} from "@angular/core";
 import {MD_DIALOG_DATA,MdDialogRef} from "@angular/material";
 import {Router} from "@angular/router";
+import { Error } from "../models/error";
 
 @Component({
     selector:'error-dialog',

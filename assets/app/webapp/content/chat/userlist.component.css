@@ -1,0 +1,15 @@
+.userlist{
+    overflow-y: scroll;height:40em
+}
+.userlist .user:hover{
+    background: lightgray;
+}
+.userlist .projectDiscussion:hover{
+    background: green;
+}
+.spacer{
+    flex:1 1 auto;
+}
+.tra{
+    width:100%;
+}

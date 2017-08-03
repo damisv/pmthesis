@@ -27,8 +27,8 @@ export class SigninComponent implements OnInit{
                         id:token.id,
                         profile:token.profile
                     };
-                    localStorage.setItem('user',JSON.stringify(user));
-                    localStorage.setItem('lastLogged',user.email);*/
+                    localStorage.setItem('user',JSON.stringify(user));*/
+                    console.log(token);
                     this.router.navigate([this.returnUrl]);
                 },
                 error => console.error(error)

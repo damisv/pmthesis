@@ -1,5 +1,58 @@
+<md-nav-list *ngIf="userMenuAvailable" >
+    <span md-line>User menu</span>
+    <md-list-item routerLinkActive="active">
+        <a md-line  [routerLink]="['dashboard']" >
+            <md-icon md-list-icon>dashboard</md-icon>
+            <span md-line>Dashboard</span>
+        </a>
+    </md-list-item>
+    <md-list-item routerLinkActive="active" >
+        <a  [routerLink]="['myprojects']">
+            <md-icon md-list-icon>business_center</md-icon>
+            <span md-line>My Projects</span>
+        </a>
+    </md-list-item>
+    <md-list-item routerLinkActive="active" >
+        <a  [routerLink]="['mytasks']">
+            <md-icon md-list-icon>list</md-icon>
+            <span md-line>My Tasks</span>
+        </a>
+    </md-list-item>
+    <md-list-item routerLinkActive="active">
+        <a  [routerLink]="['myissues']">
+            <md-icon md-list-icon>warning</md-icon>
+            <span md-line>My Issues</span>
+        </a>
+    </md-list-item>
+    <md-list-item routerLinkActive="active">
+        <a  [routerLink]="['profile']">
+            <md-icon md-list-icon>account_circle</md-icon>
+            <span md-line>My Profile</span>
+        </a>
+    </md-list-item>
+    <md-list-item routerLinkActive="active">
+        <a md-line  [routerLink]="['calendar']" >
+            <md-icon md-list-icon>schedule</md-icon>
+            <span md-line>Calendar</span>
+        </a>
+    </md-list-item>
+    <md-list-item routerLinkActive="active">
+        <a  [routerLink]="['chat']">
+            <md-icon md-list-icon>chat</md-icon>
+            <span md-line>Chat</span>
+        </a>
+    </md-list-item>
+    <md-list-item routerLinkActive="active">
+        <a  [routerLink]="['invites']">
+            <md-icon md-list-icon>group_add</md-icon>
+            <span md-line>Invites</span>
+        </a>
+    </md-list-item>
+</md-nav-list>
 
-    <ul class="nav" *ngIf="userMenuAvailable">
+
+<!--
+    <ul *ngIf="userMenuAvailable">
         <li routerLinkActive="active">
             <a  [routerLink]="['dashboard']"  >
                 <i class="fa fa-desktop" aria-hidden="true"></i>
@@ -26,7 +79,7 @@
             </a>
         </li>
         <li routerLinkActive="active">
-            <a  hre="#">
+            <a  [routerLink]="['chat']">
                 <i class="fa fa-comments-o" aria-hidden="true"></i>
                 <p>Chat</p>
             </a>
@@ -43,5 +96,5 @@
                 <p>Invites</p>
             </a>
         </li>
-    </ul>
+    </ul>-->
 

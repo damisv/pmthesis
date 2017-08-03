@@ -1,6 +1,182 @@
-<div id="home" class="wrapper">
+        <div id="wallpaper" class="header">
+            <h1 class="title block" style="font-size:5em;">Project Management Web App.</h1>
+            <h4 class="description" style="color:beige;font-size:1.5em;font-family: Josefin Sans, sans-serif;">Give it a 5 minutes tour and you'll find out why is one of the best.</h4>
+            <button md-fab color="primary" style="margin-left:4em;" (click)="playVideoTour()"><md-icon>play_arrow</md-icon></button>
+            <br>
+        </div>
+        <div class="main main-raised">
+            <br>
+            <div id="about" class="block">
+                <h2 class="title" style="font-size:2em;">About this application</h2>
+                <h5 class="description">
+                    This application is the subject of a Bachelor's Degree Thesis at the University of Applied Sciences of Central Macedonia.
+                    Some of the important features are the below:
+                </h5>
 
-    <div id="wallpaper" class="header header-filter">
+            </div>
+
+            <div id="product" class="block">
+
+                <br>
+                <hr>
+                <h2 class="title" style="font-size:2em;">Let's talk product</h2>
+                <h5 class="description">
+                    If you're looking for a quick and easy way of directing a project, you've come to the right place.
+                    No matter the size or nature of your plan, our application is the right tool for it.
+                    <br>Below you'll get to know the most important features implemented in PM Web App.
+                </h5>
+
+                <div fxLayout
+                     fxLayout.xs="column"
+                     fxLayoutAlign="center"
+                     fxLayoutGap="1em"
+                     fxLayoutGap.xs="0.1em">
+                    <div fxFlex class="block">
+                        <md-card class="nothing">
+                            <md-card-title class="title">Project & Private discussions</md-card-title>
+                            <md-card-subtitle><md-icon style="font-size: 4.4em;;color:purple">chat</md-icon></md-card-subtitle>
+                            <md-card-content>
+                                <p class="description">You can discuss important matters about your project, tasks, issues with the other member of your team entirely privately and secure. The chat is based on Socket.io.</p>
+                            </md-card-content>
+                        </md-card>
+                    </div>
+                    <div fxFlex class="block">
+                        <md-card class="nothing">
+                            <md-card-title class="title">Quick & easy</md-card-title>
+                            <md-card-subtitle><md-icon style="font-size: 4.4em;;color:green">verified_user</md-icon></md-card-subtitle>
+                            <md-card-content>
+                                <p class="description">Keep up with your tasks, issues as well as your teammates one's, through the Dashboard.</p>
+                            </md-card-content>
+                        </md-card>
+                    </div>
+                    <div fxFlex class="block">
+                        <md-card class="nothing">
+                            <md-card-title class="title">Gantt Charts</md-card-title>
+                            <md-card-subtitle><md-icon style="font-size: 4.4em;;color:blue">insert_chart</md-icon></md-card-subtitle>
+                            <md-card-content>
+                                <p class="description">Don't lose track of time using the Gantt charts provided by our app.</p>
+                            </md-card-content>
+                        </md-card>
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="authenticate" class="block">
+                <hr>
+                <div fxLayout
+                     fxLayout.xs="column"
+                     fxLayoutAlign="center"
+                     fxLayoutGap="1em"
+                     fxLayoutGap.xs="0">
+                    <div fxFlex class="block">
+                        <md-card class="nothing">
+                            <md-card-title class="title">What are you waiting for?</md-card-title>
+                            <md-card-subtitle>Register for free here , and start using this awesome app!</md-card-subtitle>
+                            <md-card-content>
+                                <a md-raised-button color="accent" [routerLink]="['/auth/signup']">Register</a>
+                            </md-card-content>
+                        </md-card>
+                    </div>
+                    <div fxFlex class="block">
+                        <md-card class="nothing">
+                            <md-card-title class="title">Or if you already have an account:</md-card-title>
+                            <md-card-subtitle></md-card-subtitle>
+                            <md-card-content>
+                                <a md-raised-button  color="primary" [routerLink]="['/auth/signin']">Login</a>
+                            </md-card-content>
+                        </md-card>
+                    </div>
+                </div>
+            </div>
+
+            <div id="team" class="block">
+                <hr>
+                <div fxLayout
+                     fxLayout.xs="column"
+                     fxLayoutAlign="center"
+                     fxLayoutGap="1em"
+                     fxLayoutGap.xs="0">
+                    <div fxFlex style="margin-left:4em" class="block">
+                        <md-card class="nothing">
+                            <md-card-header>
+                                <img src="/img/gates.jpg" alt="Thumbnail Image" md-card-avatar class="img-raised img-avatar" fxShow.xs="false">
+                                <img src="/img/gates.jpg" alt="Thumbnail Image" md-card-avatar class="img-raised" fxShow.xs="true" fxHide.gt-xs="true">
+                                <md-card-title class="title" style="font-size:2em;">Anastasios Gymnopoylos</md-card-title>
+                                <md-card-subtitle class="description">Full Stack Developer</md-card-subtitle>
+                            </md-card-header>
+                            <md-card-content>
+                                <p class="description">You can write here details about one of your team members.</p>
+                            </md-card-content>
+                            <md-card-actions>
+                                <button md-icon-button><i class="fa fa-linkedin-square fa-2x"></i></button>
+                                <button md-icon-button><i class="fa fa-github fa-2x"></i></button>
+                                <button md-icon-button><i class="fa fa-facebook-square fa-2x"></i></button>
+                            </md-card-actions>
+                        </md-card>
+                    </div>
+                    <div fxFlex class="block">
+                        <md-card class="nothing">
+                            <md-card-header>
+                                <img src="/img/jobs.jpg" alt="Thumbnail Image" md-card-avatar class="img-raised img-avatar" fxShow.xs="false">
+                                <img src="/img/jobs.jpg" alt="Thumbnail Image" md-card-avatar class="img-raised" fxShow.xs="true" fxHide.gt-xs="true">
+                                <md-card-title class="title" style="font-size:2em;">Damian Anchidin</md-card-title>
+                                <md-card-subtitle class="description">Full Stack Developer</md-card-subtitle>
+                            </md-card-header>
+                            <md-card-content>
+                                <p class="description">You can write here details about one of your team members.</p>
+                            </md-card-content>
+                            <md-card-actions>
+                                <button md-icon-button><i class="fa fa-linkedin-square fa-2x"></i></button>
+                                <button md-icon-button><i class="fa fa-github fa-2x"></i></button>
+                                <button md-icon-button><i class="fa fa-facebook-square fa-2x"></i></button>
+                            </md-card-actions>
+                        </md-card>
+                    </div>
+            </div>
+        </div>
+
+            <div id="contact" class="block">
+                <br>
+                <hr>
+                <h2 class="title" style="font-size:2em;">Contact Us</h2>
+                <h5 class="description" style="font-size:1em;">Divide details about your inquiry. We will responde back to you in a couple of hours.</h5>
+                <div fxLayout>
+                    <div fxFlex class="block">
+                        <md-card class="nothing">
+                            <md-card-content>
+                                <div fxLayout fxLayout.xs="column" fxLayoutWrap fxLayoutGap="25px">
+                                    <md-input-container fxFlex="calc(50% - 25px)" class="block">
+                                        <md-icon mdPrefix>email</md-icon>
+                                        <input mdInput placeholder="Email" type="email">
+                                    </md-input-container>
+                                    <md-input-container fxFlex="calc(50% - 25px)" class="block">
+                                        <md-icon mdPrefix>subject</md-icon>
+                                        <input mdInput placeholder="Subject" type="text">
+                                    </md-input-container>
+                                    <md-input-container fxFlex="calc(50% - 25px)" class="block">
+                                        <md-icon mdPrefix>short_text</md-icon>
+                                        <textarea mdInput placeholder="Message" cols="10" rows="2"></textarea>
+                                    </md-input-container>
+                                </div>
+                            </md-card-content>
+
+                            <md-card-actions class="block">
+                                <button md-raised-button color="primary">Send</button>
+                            </md-card-actions>
+                        </md-card>
+                    </div>
+                </div>
+                <br>
+
+            </div>
+        </div>
+
+
+
+
+
+   <!-- <div id="wallpaper" class="header header-filter">
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
@@ -73,7 +249,7 @@
                 </div>
             </div>
 
-            <div id="auth" class="section text-center section-landing">
+            <div id="authenticate" class="section text-center section-landing">
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2">
                         <h2 class="title">What are you waiting for ?</h2>
@@ -175,5 +351,4 @@
     </div>
 
         </div>
-    </div>
-</div>
+    </div>-->

@@ -1,6 +1,12 @@
 var MongoClient = require('mongodb').MongoClient;
 var assert = require('assert');
+/* For local
 var url = 'mongodb://localhost:27017/project';
+ */
+var url = 'mongodb://localhost:27017/project';
+/* For mLab
+var url = 'mongodb://admin:admin@ds135820.mlab.com:35820/pmthesis';
+ */
 var db;
 
 // Use connect method to connect to the server

@@ -2,10 +2,13 @@
     <md-icon class="md-24">save</md-icon>
 </button>
 
-<div class="row">
-
-    <div class="col-md-6">
-
+<div
+        fxLayout
+        fxLayout.xs="column"
+        fxLayoutAlign="center"
+        fxLayoutGap="10px"
+        fxLayoutGap.xs="0">
+    <div fxFlex="auto">
         <md-card class="card">
             <md-card-title>Project Options</md-card-title>
             <md-card-subtitle>Change info and setting of {{ project?.name }}</md-card-subtitle>
@@ -53,19 +56,15 @@
 
             </md-card-content>
         </md-card>
-
-
-
     </div>
-
-    <div class="col-md-6">
-
+    <div fxFlex="auto">
         <md-card style="background-color: #ad1457 " class="card">
-            <md-card-title>Danger Zone</md-card-title>
-            <md-card-subtitle>These settings are dangerous</md-card-subtitle>
-            <md-card-content >
+            <md-card-header>
+                <md-card-title>Danger Zone</md-card-title>
+                <md-card-subtitle>These settings are dangerous</md-card-subtitle>
+            </md-card-header>
+            <md-card-content>
 
-                <div class="row">
                     <md-card class="nothing">
                         <md-card-title>Make this project private</md-card-title>
                         <md-card-content>
@@ -75,9 +74,8 @@
                             </md-slide-toggle>
                         </md-card-content>
                     </md-card>
-                </div>
 
-                <div class="row nothing2">
+
                     <md-card class="nothing">
                         <md-card-title>Transfer ownership</md-card-title>
                         <md-card-subtitle>Transfer ownership of this project to someone else's account</md-card-subtitle>
@@ -85,9 +83,9 @@
                             <md-slide-toggle>Transfer</md-slide-toggle>
                         </md-card-content>
                     </md-card>
-                </div>
 
-                <div class="row nothing2">
+
+
                     <md-card class="nothing">
                         <md-card-title>Lock Project</md-card-title>
                         <md-card-subtitle>Lock this project temporary</md-card-subtitle>
@@ -98,8 +96,8 @@
                             </md-slide-toggle>
                         </md-card-content>
                     </md-card>
-                </div>
-                <div class="row nothing2">
+
+
                     <md-card class="nothing">
                         <md-card-title>Delete this Project</md-card-title>
                         <md-card-subtitle>Delete this project! WARNING ! This is not reversible!!</md-card-subtitle>
@@ -109,13 +107,12 @@
                             </button>
                         </md-card-content>
                     </md-card>
-                </div>
+
 
             </md-card-content>
         </md-card>
 
     </div>
-
 </div>
 
 

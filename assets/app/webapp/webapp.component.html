@@ -1,6 +1,72 @@
+<md-sidenav-container fullscreen>
+    <md-sidenav #sidenav mode="side" opened="true" style="width:15%;border-radius: 6px!important;box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2)!important;">
+        <md-toolbar class="profile-menu">
+            <span>Project Management</span>
+
+            <md-toolbar-row>
+                <div md-card-avatar class="header-image"></div>
+                <div style="flex:0.5 0.5 auto;"></div>
+                <a  [routerLink]="['profile']"><span>{{profile.email}}</span></a>
+            </md-toolbar-row>
+
+        </md-toolbar>
+        <md-divider></md-divider>
+        <router-outlet name="sidebar"></router-outlet>
+        <router-outlet name="projectsidebar"></router-outlet>
+
+    </md-sidenav>
+
+    <md-sidenav #notificationsSidenav mode="over" align="end" style="width:25%;box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2)!important;">
+        <md-list>
+            <h3 md-subheader>New Notifications</h3>
+            <md-list-item *ngFor="let notification of notifications">
+                <md-icon md-list-icon style="color:darkred">notifications</md-icon>
+                <h4 md-line>{{notification.name}}</h4>
+                <p md-line> {{notification.date}} </p> <!-- TODO:datepipe to add -->
+            </md-list-item>
+            <md-divider></md-divider>
+            <h3 md-subheader>Seen Notifications</h3>
+            <md-list-item *ngFor="let notification of notifications">
+                <md-icon md-list-icon style="color:lightgray">notifications</md-icon>
+                <h4 md-line>{{notification.name}}</h4>
+                <p md-line> {{notification.date}} </p> <!-- TODO:datepipe to add -->
+            </md-list-item>
+        </md-list>
+    </md-sidenav>
+
+    <md-toolbar style="position:relative;z-index:1000">
+        <button mdTooltip="Toggle Sidenav!" md-icon-button (click)="sidenav.toggle()" aria-label="Toggle Sidenav">
+            <md-icon aria-hidden="true">menu</md-icon>
+        </button>
+        <a md-icon-button [routerLink]="['/app']" aria-label="User's Dashboard">
+            <md-icon aria-hidden="true">home</md-icon>
+        </a>
+        <button mdTooltip="6 new notifications !" md-icon-button class="badge" data-badge="6" (click)="notificationsSidenav.toggle()" aria-label="View Notifications">
+            <md-icon aria-hidden="true">notifications</md-icon>
+        </button>
+        <div style="flex:1 1 auto"></div>
+        <button mdTooltip="Settings" md-icon-button [mdMenuTriggerFor]="settingsMenu" aria-label="Account Settings">
+            <md-icon aria-hidden="true">settings</md-icon>
+        </button>
+        <md-menu #settingsMenu="mdMenu"  [overlapTrigger]="false">
+            <button md-menu-item>Item 1</button>
+            <button md-menu-item>Item 2</button>
+        </md-menu>
+        <button mdTooltip="Logout" md-icon-button (click)="onLogout()" aria-label="Logout">
+            <md-icon aria-hidden="true">power_settings_new</md-icon>
+        </button>
+    </md-toolbar>
+
+
+    <div class="margin-left-right-50">
+        <particles [style]="myStyle" [params]="myParams" [width]="width" [height]="height"></particles>
+        <router-outlet ></router-outlet>
+    </div>
+</md-sidenav-container>
+<!--
 <div class="wrapper">
 
-    <div #sidebar [className]="menuColor"  data-image="">
+    <div [className]="menuColor"  data-image="">
         <div class="sidebar-wrapper">
             <div class="logo">
                 <a [routerLink]="['/app']" class="simple-text">
@@ -10,7 +76,7 @@
                     Project Management
                 </a>
             </div>
-        <router-outlet  name="sidebar"></router-outlet>
+        <router-outlet name="sidebar"></router-outlet>
         <router-outlet name="projectsidebar"></router-outlet>
             <div style="position:fixed;bottom: 2%;left:1%;">
                 <md-button-toggle-group #group="mdButtonToggleGroup" [vertical]="false" [ngModel]="groupColor" (ngModelChange)="changeMenuColour(group.value)">
@@ -22,7 +88,7 @@
                     </md-button-toggle>
                     <md-button-toggle value="green">
                         <md-icon style="color:green;">format_paint</md-icon>
-                    </md-button-toggle>-->
+                    </md-button-toggle>
                     <md-button-toggle value="orange">
                         <md-icon style="color:orange;">format_paint</md-icon>
                     </md-button-toggle>
@@ -34,7 +100,7 @@
                     </md-button-toggle>
                     <!--<md-button-toggle value="gray">
                         <md-icon style="color:gray;">format_paint</md-icon>
-                    </md-button-toggle>-->
+                    </md-button-toggle>
                 </md-button-toggle-group>
             </div>
 
@@ -52,17 +118,16 @@
 
         <div class="main-content">
             <div class="container-fluid">
+                <particles [style]="myStyle" [params]="myParams" [width]="width" [height]="height"></particles>
                 <router-outlet></router-outlet>
             </div>
         </div>
-
-
 
         <div>
             <webapp-footer></webapp-footer>
         </div>
 
     </div>
-</div>
+</div>-->
 
 

@@ -7,47 +7,29 @@ import {ProfileService} from "../../_services/profile.service";
 @Component({
     selector:'profile-dialog',
     template: `
-        <div class="card card-user" style="overflow:auto;">
-            <div class="image">
-                <img src="/img/skyline.jpg" alt="h:300&w:400"/>
-            </div>
-            <div class="content">
-                <div class="author">
-                    <a (click)="openProfile()"><img class="avatar border-gray" src="/img/avatar.jpg" alt="..."/></a>
-                        <h4 class="title">
-                            {{ profile?.firstName }}&nbsp;{{ profile?.lastName }}<br />
-                            <a href="mailto:{{profile?.email}}"><small>{{ profile?.email}}</small></a><br />
-                            <small *ngIf="profile?.username">({{ profile?.username }})</small>
-                        </h4>
-                </div>
-                <br>
-                <p class="description text-center">Here goes about me</p>
-            </div>
-            <hr>
-
-            <div class="text-center">
-                <button href="#" class="btn btn-simple"><i class="fa fa-facebook-square"></i></button>
-                <button href="#" class="btn btn-simple"><i class="fa fa-twitter"></i></button>
-                <button href="#" class="btn btn-simple"><i class="fa fa-github"></i></button>
-            </div>
-        </div>
-        <!--<md-card >
-            <md-card-header style="background-image: url('/img/skyline.jpg');background-size:cover;">
-                <div md-card-avatar style="background-image:url('/img/avatar.jpg');background-size:cover;"></div>
-                <md-card-title>{{profile?.firstName}}&nbsp;{{ profile?.lastName}}</md-card-title>
-                <md-card-subtitle>{{profile?.email}}</md-card-subtitle>
-            </md-card-header>
-            <md-card-content>
-                <p>
-                    This is the about me section
-                </p>
-            </md-card-content>
-            <md-card-actions>
-                <button href="#" class="btn btn-simple"><i class="fa fa-facebook-square"></i></button>
-                <button href="#" class="btn btn-simple"><i class="fa fa-twitter"></i></button>
-                <button href="#" class="btn btn-simple"><i class="fa fa-github"></i></button>
-            </md-card-actions>
-        </md-card>-->
+        <h2 md-dialog-title>Quick View</h2>
+        <md-dialog-content>
+            <md-card class="card" style="height: 100%;width:100%">
+                <md-card-header>
+                    <div md-card-avatar class="header-image" ></div>
+                    <md-card-title mdTooltip="{{profile?.username}}">{{ profile?.firstName }} {{ profile?.lastName }}</md-card-title>
+                    <md-card-subtitle><a href="mailto:{{profile.email}}"><small>{{ profile.email}}</small></a></md-card-subtitle>
+                </md-card-header>
+                <img md-card-image src="/img/city.jpg">
+                <md-card-content>
+                    <p>
+                        A little about myself:
+                    </p><br>
+                    <p>{{profile.description}}</p>
+                    <p>Active projects: 26</p>
+                </md-card-content>
+            </md-card>
+        </md-dialog-content>
+        <md-dialog-actions>
+            <button md-button md-dialog-close>No</button>
+            <!-- Can optionally provide a result for the closing dialog. -->
+            <button md-button [md-dialog-close]="true">Yes</button>
+        </md-dialog-actions>
     `,
     providers:[ProfileService]
 })

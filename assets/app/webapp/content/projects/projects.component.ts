@@ -6,17 +6,68 @@ import {Router} from "@angular/router";
 import {Subscription} from "rxjs";
 import {Profile} from "../../../models/profile";
 import {ProfileService} from "../../_services/profile.service";
-import {MdSnackBar} from "@angular/material";
+import {MdPaginator, MdSnackBar} from "@angular/material";
 import {Title} from "@angular/platform-browser";
 import {TaskService} from "../../_services/task.service";
 
+import { DataSource} from "@angular/cdk"
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/operator/startWith';
+import 'rxjs/add/observable/merge';
+import 'rxjs/add/operator/map';
+import {trigger, stagger, animate, style, group, query, transition, keyframes} from '@angular/animations';
+
+
+class ExampleDataSource extends DataSource<any> {
+    constructor( private projectService: ProjectService, private _paginator: MdPaginator) {
+        super();
+        this.projectService.projects$.subscribe(projects=>this.projects=projects);
+    }
+    projects : Project[];
+
+    /** Connect function called by the table to retrieve one stream containing the data to render. */
+    connect(): Observable<Project[]> {
+        const displayDataChanges = [
+            this.projectService.projects$,
+            this._paginator.page
+        ];
+
+        return Observable.merge(...displayDataChanges).map(() => {
+            const cdata = this.projects.slice();
+            const startIndex = this._paginator.pageIndex * this._paginator.pageSize;
+            return cdata.splice(startIndex, this._paginator.pageSize);
+        });
+    }
+
+    disconnect() { }
+}
 
 @Component({
     selector: 'webapp-projects',
     templateUrl: './projects.component.html',
     styleUrls: ['./projects.component.css'],
+    animations: [ trigger('homeTransition', [
+        transition(':enter', [
+            query('.card', style({ opacity: 0 })),
+            query('.card', stagger(300, [
+                style({ transform: 'translateY(100px)' }),
+                animate('1s cubic-bezier(.75,-0.48,.26,1.52)', style({transform: 'translateY(0px)', opacity: 1})),
+            ])),
+        ]),
+        transition(':leave', [
+            query('.card', stagger(300, [
+                style({ transform: 'translateY(0px)', opacity: 1 }),
+                animate('1s cubic-bezier(.75,-0.48,.26,1.52)', style({transform: 'translateY(100px)', opacity: 0})),
+            ])),
+        ])
+    ]) ],
+    host: {
+        '[@homeTransition]': ''
+    }
 })
 export class ProjectsComponent implements OnInit,OnDestroy{
+
     @ViewChild('tab') tabGroup;
     user:Profile;
     project:Project;
@@ -28,8 +79,15 @@ export class ProjectsComponent implements OnInit,OnDestroy{
         'manager','member'
     ];
 
+    displayedColumns = ['Name','Budget','Description','Members'];
+    dataSource: ExampleDataSource | null;
+
+    @ViewChild(MdPaginator) paginator: MdPaginator;
+
     projectsSubscription:Subscription = this.projectService.projects$.subscribe(
-        projects => this.projects = projects);
+        projects => {
+            this.projects = projects;
+        });
     projectSubscription:Subscription = this.projectService.project$.subscribe(
         project=>{
             this.project = project;
@@ -49,8 +107,6 @@ export class ProjectsComponent implements OnInit,OnDestroy{
                 private taskService : TaskService) {
     }
 
-
-
     positionSearch(team){
         for(let member of team){
             if(member.email==this.user.email && member.position==this.position){
@@ -60,11 +116,14 @@ export class ProjectsComponent implements OnInit,OnDestroy{
         return false;
     }
 
-    openProjectDashboard(index){
+    openProjectDashboard(id){
+        let index = this.projects.findIndex(project => project._id == id);
         this.projectService.giveProject(this.projects[index]);
         this.router.navigate(['app','project','dashboard']);
     }
-    openProjectTeam(index){
+
+    openProjectTeam(id){
+        let index = this.projects.findIndex(project => project._id == id);
         this.projectService.giveProject(this.projects[index]);
         this.router.navigate(['app','project','team']);
     }
@@ -85,6 +144,9 @@ export class ProjectsComponent implements OnInit,OnDestroy{
 
     ngOnInit(){
         this.titleService.setTitle("My Projects");
+
+        this.dataSource = new ExampleDataSource(this.projectService,this.paginator);
+
         for(let project of this.projects){
             this.taskService.getTasksOfProject(project._id).subscribe(
                 tasks => {
@@ -119,4 +181,5 @@ export class ProjectsComponent implements OnInit,OnDestroy{
         this.projectsSubscription.unsubscribe();
         this.titleService.setTitle("Project Management");
     }
+
 }

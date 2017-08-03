@@ -1,5 +1,4 @@
 import {Component, OnInit} from "@angular/core";
-import {ActivatedRoute} from "@angular/router";
 import {SidebarService} from "./sidebar.service";
 
 @Component({
@@ -8,20 +7,14 @@ import {SidebarService} from "./sidebar.service";
     styleUrls: ['./sidebar.component.css']
 })
 export class ProjectSidebarComponent implements OnInit{
-    id:any;
-    private sub: any;
 
-    constructor(private route:ActivatedRoute,private sidebarService: SidebarService){}
+    constructor(private sidebarService: SidebarService){}
 
     ngOnInit(){
-        this.sub = this.route.params.subscribe(params => {
-            this.id = params['id'];
-        });
-        this.sidebarService.newEvent('projectOpened');
+        this.sidebarService.changeStatus();
     }
     ngOnDestroy(){
-        this.sub.unsubscribe();
-        this.sidebarService.newEvent('projectClosed');
+        this.sidebarService.changeStatus();
     }
 
 }

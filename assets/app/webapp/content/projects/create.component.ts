@@ -94,7 +94,7 @@ export class CreateProjectComponent implements OnInit{
             .subscribe(res => {
                     this.inviteMembers(res.project._id);
                     this.projectCreated.emit(res.project);
-                    this.notificationService.create(res.project.name,"Project has been successfully created!","success");
+                    this.notificationService.toast(res.project.name,"Project has been successfully created!","success");
                 },
                 error => {
                     this.notificationService.create(this.project.name,"Error! Project was not created!","error");

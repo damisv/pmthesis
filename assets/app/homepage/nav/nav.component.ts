@@ -1,5 +1,4 @@
-import {Component} from "@angular/core";
-import {ActivatedRoute} from "@angular/router";
+import {Component, HostListener} from "@angular/core";
 
 @Component({
     selector: 'my-nav',
@@ -7,12 +6,21 @@ import {ActivatedRoute} from "@angular/router";
     styleUrls: ['./nav.component.css']
 })
 export class NavComponent {
-    constructor(private route: ActivatedRoute){}
+    isTop:string = '';
+    isTransparent:string = '';
 
-    onAnchorClick(){
-        this.route.fragment.subscribe ( f => {
-         const element = document.querySelector( "#" + f )
-            if( element ) element.scrollIntoView(element)
-        });
+    @HostListener('window:scroll', ['$event']) onScrollEvent($event){
+        let scrollHeight = window.pageYOffset;
+        let height = window.innerHeight;
+        let desiredHeight = 0.2*height;
+        if(scrollHeight <= desiredHeight){
+            this.isTop = '';
+            this.isTransparent = '';
+        }else{
+            this.isTop = 'transparent';
+            this.isTransparent = 'black';
+        }
     }
+
+    constructor(){}
 }

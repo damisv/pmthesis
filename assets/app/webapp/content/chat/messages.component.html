@@ -1,0 +1,10 @@
+<br>
+<div class="bubble-container">
+    <ng-template ngFor let-message [ngForOf]="messages">
+        <div class="bubble">{{message}}</div>
+    </ng-template>
+</div>
+<md-input-container>
+    <input mdInput placeholder="Enter a message" #textArea >
+</md-input-container>
+<button md-button (click)="sendMessage(textArea.value)">Send</button>
