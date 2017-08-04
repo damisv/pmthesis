@@ -41,6 +41,7 @@ export class ProjectTasksComponent implements OnInit{
     user:Profile;
     project:Project;
     tasks:Task[] = [];
+    task:Task;
     projectSubscriptions:Subscription = this.projectService.project$.subscribe(
         project=>{
             this.project = project;
@@ -50,6 +51,16 @@ export class ProjectTasksComponent implements OnInit{
     );
     profileSubscriptions:Subscription  =  this.profileService.profile$.subscribe(
         profile=>this.user = profile
+    );
+    taskSubscriptions:Subscription  =  this.taskService.taskArrived$.subscribe(
+        task=>{
+            console.log(task.project_id);
+            console.log(this.project._id);
+            if(task.project_id===this.project._id){
+                this.task = task;
+                this.tasks.push(task);
+            }
+        }
     );
 
     selectedOption;
@@ -122,7 +133,7 @@ export class ProjectTasksComponent implements OnInit{
     }
 
     ngOnInit(){
-
+        this.getTasksOfProject()
     }
 
     ngOnDestroy(){
@@ -130,6 +141,8 @@ export class ProjectTasksComponent implements OnInit{
         this.projectSubscriptions.unsubscribe();
         if(this.profileSubscriptions!==undefined)
         this.profileSubscriptions.unsubscribe();
+        if(this.taskSubscriptions!==undefined)
+            this.taskSubscriptions.unsubscribe();
         this.titleService.setTitle("Project Management");
     }
 

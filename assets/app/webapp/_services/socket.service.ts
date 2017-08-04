@@ -1,16 +1,17 @@
 import { Injectable } from "@angular/core";
 import * as io from "socket.io-client";
 import {NotificationService} from "./notification.service";
+import {TaskService} from "./task.service";
 @Injectable()
 export class SocketService {
     socket = null;
-    constructor(private notificationService:NotificationService) {
-        this.socket = io('https://pmthesis.herokuapp.com');
+    constructor(private notificationService:NotificationService,private taskService:TaskService) {
+        this.socket = io('localhost:3000');
+        //this.socket = io('https://pmthesis.herokuapp.com');
         /*this.socket.on('invite', function(data){
             this.onInvite(data);
         }.bind(this));*/
         this.socket.on('projectCreated', function(data){
-            console.log(data);
             notificationService.toast("title","content");
         }.bind(this));
         this.socket.on('loginSuccessful', function(){
@@ -32,8 +33,9 @@ export class SocketService {
         this.socket.on('reconnecting', function(){
             notificationService.create("Reconnecting...","Connection with server has been lost!","error",{timeOut:3000});
         }.bind(this));
-        this.socket.on('taskAssigned', function(projectName,taskName){
-            notificationService.create("You have a new task.",taskName+" has been assigned to you!");//todo click -> taskView
+        this.socket.on('taskAssigned', function(projectName,task){
+            notificationService.create("You have a new task.",task.name+" has been assigned to you!","info",{timeOut:3000},['app','project','tasks']);//todo click -> taskView
+            taskService.giveTaskArrived(task);
         }.bind(this))
     }
 
@@ -41,6 +43,11 @@ export class SocketService {
         this.socket.emit('register',localStorage.getItem("token"))
     }
 
+    ngOnDestroy(){
+        if(this.socket!==null){
+            this.socket.close();
+        }
+    }
     /*
     onInvite(data){
         //getProjectInvites}

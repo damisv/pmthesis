@@ -11,7 +11,6 @@ import {Title} from "@angular/platform-browser";
 import {TaskService} from "../../_services/task.service";
 
 import { DataSource} from "@angular/cdk"
-import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/observable/merge';
@@ -130,6 +129,7 @@ export class ProjectsComponent implements OnInit,OnDestroy{
 
     addProject(project:Project){
         this.projects.push(project);
+        this.projectService.giveProjects(this.projects);
         this.tabGroup.selectedIndex=0;
     }
 

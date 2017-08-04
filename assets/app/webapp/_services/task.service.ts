@@ -6,13 +6,23 @@ import { Observable } from 'rxjs/Observable';
 import {Task} from "../../models/task";
 import {BehaviorSubject} from "rxjs";
 import {ProgressBarService} from "./progressbar.service";
+import {Subject} from "rxjs/Subject";
 
 @Injectable()
 export class TaskService {
 
 
-    private task = new BehaviorSubject<Task>(new Task('projectid','assigner','name'));
+    private task = new BehaviorSubject<Task>(new Task('projectid','project_name','assigner','name'));
     task$ = this.task.asObservable();
+
+    private taskArrived = new Subject<Task>();
+    taskArrived$ = this.taskArrived.asObservable();
+
+    giveTaskArrived(task: Task){
+        this.progressBarService.availableProgress();
+        this.task.next(task);
+        this.progressBarService.availableProgress();
+    }
 
     getTasksOfProject(projectID){
         this.progressBarService.availableProgress();

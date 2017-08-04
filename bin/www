@@ -124,11 +124,11 @@ var ioCustom = {
         //add user in room/project
         io.connected[id].join(roomID);
     },
-    taskAssignedToMembers:function(members,projectID,taskName){
+    taskAssignedToMembers:function(members,projectID,task){
         var projectName = require('./socket').getProjectName(projectID);
         members.forEach(function(email){
             var id = require('./socket').getClient(email);
-            io.to(id).emit("taskAssigned",projectName,taskName);
+            io.to(id).emit("taskAssigned",projectName,task);
         });
 
     }

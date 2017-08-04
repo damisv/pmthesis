@@ -7,7 +7,7 @@ import {Profile} from "../../../models/profile";
 import {ProfileService} from "../../_services/profile.service";
 import { FormControl} from '@angular/forms';
 import 'rxjs/add/operator/startWith';
-import {MdDialog, MdDialogConfig, MdGridList, MdSnackBar} from "@angular/material";
+import {MdDialog, MdGridList, MdSnackBar} from "@angular/material";
 import {animate, keyframes, state, style, transition, trigger} from "@angular/animations";
 import {TaskService} from "../../_services/task.service";
 import { ObservableMedia } from "@angular/flex-layout";
@@ -105,6 +105,7 @@ export class CreateTaskComponent implements OnInit{
             .map(name => this.filterTeam(name));
         this.task = new Task(
             this.project._id,
+            this.project.name,
             this.user.email,'')
     }
 
@@ -126,6 +127,7 @@ export class CreateTaskComponent implements OnInit{
         }
         this.task.dependencies = this.dependencies;
         this.task.assignee_email = this.assigned;
+        this.task.project_name = this.project.name;
         this.task.completed = false;
         this.taskService.create(this.task)
             .subscribe(res => {

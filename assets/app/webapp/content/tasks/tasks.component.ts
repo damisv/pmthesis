@@ -1,7 +1,11 @@
-import {Component, OnInit} from "@angular/core";
+import {Component} from "@angular/core";
 import { GoogleChartComponent} from '../../_services/googlechart.component';
 import {Title} from "@angular/platform-browser";
-import {trigger, stagger, animate, style, group, query, transition, keyframes} from '@angular/animations';
+import {trigger, stagger, animate, style, query, transition} from '@angular/animations';
+import {Subscription} from "rxjs/Subscription";
+import {TaskService} from "../../_services/task.service";
+import {Project} from "../../../models/project";
+import {ProjectService} from "../../_services/projects.service";
 
 @Component({
     selector: 'webapp-tasks',
@@ -31,19 +35,62 @@ export class TasksComponent extends GoogleChartComponent {
     private options;
     private data;
     private chart;
+    projects:Project[];
+    tasks = [];
+    projectsSubscription:Subscription = this.projectService.projects$.subscribe(
+        projects => {
+            this.projects = projects;
+            this.initTasks();
+        });
+    constructor(private taskService: TaskService, private projectService:ProjectService){
+        super();
+    }
+
+    initTasks(){
+        this.projects.forEach(function(project,index){
+            this.taskService.getTasksOfProject(project._id).subscribe(
+                tasks => {
+                    this.tasks.push([]);
+                    for (let task of tasks) {
+                        this.tasks[index].push(task);
+                    }
+                },
+                error => console.error(error)
+            );
+        },this);
+    }
 
     titleService = new Title("");
 
     drawGraph(){
-        this.data = this.createDataTable([
+
+        let data = [];
+        data.push(['Task ID', 'Task Name', 'Start Date','End Date','Duration','Percent Complete','Dependencies']);
+        if(this.tasks.length>0){
+            this.tasks[0].forEach(function(task){
+                let dependency;
+                if(task.dependencies.length>0){
+                    dependency = task.dependencies[0].taskID;
+                }else{
+                    dependency = null;
+                }
+                data.push([task._id, task.name, new Date(2015, 0, 1), new Date(2015, 0, 5), this.daysToMilliseconds(1),  100,  dependency]);
+            },this);
+        }
+
+
+        this.data = this.createDataTable(data);
+
+        /*
+        [
             ['Task ID', 'Task Name', 'Start Date','End Date','Duration','Percent Complete','Dependencies'],
-            ['Research', 'Find sources', new Date(2015, 0, 1), new Date(2015, 0, 5), null,  100,  null],
+            ['Research', this.tasks[0].name, new Date(2015, 0, 1), new Date(2015, 0, 5), null,  100,  this.tasks[0].dependencies.join()],
             ['Write', 'Write paper', null, new Date(2015, 0, 9), this.daysToMilliseconds(3), 25, 'Research,Outline'],
             ['Cite', 'Create bibliography', null, new Date(2015, 0, 7), this.daysToMilliseconds(1), 20, 'Research'],
             ['Complete', 'Hand in paper', null, new Date(2015, 0, 10), this.daysToMilliseconds(1), 0, 'Cite,Write'],
             ['Outline', 'Outline paper', null, new Date(2015, 0, 6), this.daysToMilliseconds(1), 100, 'Research']
-        ]);
-
+        ]
+         */
         this.options = {
             height: 275,
             gantt: {
@@ -70,6 +117,8 @@ export class TasksComponent extends GoogleChartComponent {
     }
 
     ngOnDestroy(){
+        if(this.projectsSubscription!==undefined)
+            this.projectsSubscription.unsubscribe();
         this.titleService.setTitle("Project Management");
     }
 }
