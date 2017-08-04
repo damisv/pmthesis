@@ -85,6 +85,7 @@ import {CalendarComponent} from "./content/calendar/calendar.component";
 import {CalendarEventViewDialogComponent} from "./content/calendar/calendarEventViewDialog.component";
 import {ContextMenuModule} from "ngx-contextmenu";
 import {CalendarEventCreateDialogComponent} from "./content/calendar/calendarEventCreateDialog.component";
+import {ChatService} from "./_services/chat.service";
 
 
 declare var require: any;
@@ -184,6 +185,7 @@ export function highchartsFactory() {
         NotificationsService,
         PushNotificationsService,
         SocketService,
+        ChatService,
         {
             provide: HighchartsStatic,
             useFactory: highchartsFactory

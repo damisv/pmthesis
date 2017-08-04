@@ -37,11 +37,13 @@ var profileRoutes = require('../routes/profile');
 var projectRoutes = require('../routes/project');
 var inviteRoutes = require('../routes/invite');
 var taskRoutes = require('../routes/task');
+var chatRoutes = require('../routes/chat');
 app.use('/project',projectRoutes);
 app.use('/profile',profileRoutes);
 app.use('/auth',authRoutes);
 app.use('/invite',inviteRoutes);
 app.use('/task',taskRoutes);
+app.use('/chat',chatRoutes);
 app.use('/', appRoutes);
 
 

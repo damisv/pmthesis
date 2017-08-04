@@ -20,7 +20,7 @@ export class TaskService {
 
     giveTaskArrived(task: Task){
         this.progressBarService.availableProgress();
-        this.task.next(task);
+        this.taskArrived.next(task);
         this.progressBarService.availableProgress();
     }
 

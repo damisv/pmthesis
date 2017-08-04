@@ -2,10 +2,11 @@ import { Injectable } from "@angular/core";
 import * as io from "socket.io-client";
 import {NotificationService} from "./notification.service";
 import {TaskService} from "./task.service";
+import {ChatService} from "./chat.service";
 @Injectable()
 export class SocketService {
     socket = null;
-    constructor(private notificationService:NotificationService,private taskService:TaskService) {
+    constructor(private notificationService:NotificationService,private taskService:TaskService,private chatService:ChatService) {
         this.socket = io('localhost:3000');
         //this.socket = io('https://pmthesis.herokuapp.com');
         /*this.socket.on('invite', function(data){
@@ -34,8 +35,18 @@ export class SocketService {
             notificationService.create("Reconnecting...","Connection with server has been lost!","error",{timeOut:3000});
         }.bind(this));
         this.socket.on('taskAssigned', function(projectName,task){
-            notificationService.create("You have a new task.",task.name+" has been assigned to you!","info",{timeOut:3000},['app','project','tasks']);//todo click -> taskView
+            let email = localStorage.getItem('lastLogged');
+            if(task.assignee_email.indexOf(email)>-1){
+                notificationService.create("You have a new task.",task.name+" has been assigned to you!","info",{timeOut:3000},['app','project','tasks']);//todo click -> taskView
+            }
+            if(email!==task.assigner_email)
             taskService.giveTaskArrived(task);
+        }.bind(this));
+        this.socket.on('message', function(id){
+            notificationService.create("You have a new message.","Read here!","info",{timeOut:3000},['app','project','chat']);//todo click -> taskView
+            chatService.getMessageById(id).subscribe(res=>{
+                chatService.addMessages(res.messages);
+            });
         }.bind(this))
     }
 

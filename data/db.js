@@ -96,6 +96,16 @@ function initializeDatabase(databaseConnection){
             ]
         }
         } ).catch(error);
+    db.createCollection( "chat",
+        { validator: { $and:
+            [
+                { sender: { $exists:true }},
+                { receiver: {$exists:true }},
+                { date_sent: {$exists:true }},
+                { message: {$exists:true }},
+            ]
+        }
+        } ).catch(error);
 }
 
 function error(err){

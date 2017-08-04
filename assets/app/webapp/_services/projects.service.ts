@@ -7,6 +7,7 @@ import {Project} from "../../models/project";
 import {BehaviorSubject} from "rxjs";
 import {Task} from "../../models/task";
 import {ProgressBarService} from "./progressbar.service";
+import {ChatService} from "./chat.service";
 
 @Injectable()
 export class ProjectService {
@@ -24,6 +25,9 @@ export class ProjectService {
 
     initProject(projects){
         for (let project of projects) {
+            this.chatService.getProjectMessages(project._id).subscribe(res=>{
+                this.chatService.addMessages(res.messages);
+            });
             if(localStorage.hasOwnProperty('projectID')){
                 if(project._id===localStorage.getItem('projectID')){
                     this.giveProject(project);
@@ -74,7 +78,7 @@ export class ProjectService {
             .map(response => response.json()).finally(()=> this.progressBarService.availableProgress());
     }
 
-    constructor(private http: Http,private progressBarService: ProgressBarService) {
+    constructor(private http: Http,private progressBarService: ProgressBarService,private chatService:ChatService) {
 
     }
 

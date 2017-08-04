@@ -5,6 +5,7 @@ import {ProfileService} from "./_services/profile.service";
 import {Subscription} from "rxjs/Subscription";
 import {SocketService} from "./_services/socket.service";
 import {ProjectService} from "./_services/projects.service";
+import {ChatService} from "./_services/chat.service";
 
 @Component({
     selector: 'my-webapp',
@@ -42,6 +43,7 @@ export class WebappComponent implements OnDestroy,OnInit{
     constructor(private profileService:ProfileService,
                 private socketService:SocketService, //don't delete
                 private projectService:ProjectService,
+                private chatService:ChatService,
                 private router:Router){
     }
 
@@ -59,6 +61,9 @@ export class WebappComponent implements OnDestroy,OnInit{
         );
         this.profileService.getProfile();
         this.projectService.getProjects();
+        this.chatService.getMessages().subscribe(res=>{
+            this.chatService.addMessages(res.messages);
+        });
         //this.socketService.register(); not needed anymore
         this.groupColor = 'blue';
 

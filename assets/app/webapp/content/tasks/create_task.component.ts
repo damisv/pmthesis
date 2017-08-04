@@ -126,8 +126,10 @@ export class CreateTaskComponent implements OnInit{
             return;
         }
         this.task.dependencies = this.dependencies;
+        this.task.assigner_email = this.user.email;
         this.task.assignee_email = this.assigned;
         this.task.project_name = this.project.name;
+        this.task.project_id = this.project._id;
         this.task.completed = false;
         this.taskService.create(this.task)
             .subscribe(res => {

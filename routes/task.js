@@ -101,7 +101,7 @@ router.post('/create',function(req, res){
         function(result) {
             assert.notEqual(null, result);
             res.status(200).send({task:result.ops[0]});
-            require('../bin/www').io.taskAssignedToMembers(req.body.task.assignee_email,req.body.task.project_id,req.body.task);
+            require('../bin/www').io.taskAssignedToMembers(req.body.task.project_id,req.body.task);
         }
     ).catch(
         function(err){
