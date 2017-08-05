@@ -6,6 +6,7 @@ import {Subscription} from "rxjs";
 import {Title} from "@angular/platform-browser";
 import {NotificationService} from "../../_services/notification.service";
 import {trigger, stagger, animate, style, group, query, transition, keyframes} from '@angular/animations';
+import {ProjectService} from "../../_services/projects.service";
 
 @Component({
     selector: 'webapp-profile',
@@ -38,10 +39,18 @@ export class ProfileComponent implements OnInit,OnDestroy{
             this.profile = profile;
             //this.titleService.setTitle(this.profile.firstName+"'s profile");
         });
+    projectsSubscription: Subscription = this.projectService.projects$.subscribe(
+        project => {
+            this.activeProjects = project.length;
+            //this.titleService.setTitle(this.profile.firstName+"'s profile");
+        });
+    activeProjects;
 
     constructor (private profileService: ProfileService,
                  private titleService: Title,
-                 private notificationService:NotificationService) {
+                 private notificationService:NotificationService,
+                 private projectService:ProjectService) {
+
     }
 
     onSubmit() {
@@ -80,6 +89,7 @@ export class ProfileComponent implements OnInit,OnDestroy{
     ngOnDestroy() {
         if(this.subscription!==undefined)
         this.subscription.unsubscribe();
+        this.projectsSubscription.unsubscribe();
         this.titleService.setTitle("Project Management");
     }
 }
