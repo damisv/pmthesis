@@ -5,7 +5,6 @@ import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
 import {Project} from "../../models/project";
 import {BehaviorSubject} from "rxjs";
-import {Task} from "../../models/task";
 import {ProgressBarService} from "./progressbar.service";
 import {ChatService} from "./chat.service";
 

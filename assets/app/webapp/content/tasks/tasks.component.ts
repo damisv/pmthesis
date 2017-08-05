@@ -5,6 +5,7 @@ import {trigger, stagger, animate, style, query, transition} from '@angular/anim
 import {Subscription} from "rxjs/Subscription";
 import {TaskService} from "../../_services/task.service";
 import {Project} from "../../../models/project";
+import {Task} from "../../../models/task";
 import {ProjectService} from "../../_services/projects.service";
 
 @Component({
@@ -36,41 +37,41 @@ export class TasksComponent extends GoogleChartComponent {
     private data;
     private chart;
     projects:Project[];
-    tasks = [];
+    tasks:Task[] = [];
     projectsSubscription:Subscription = this.projectService.projects$.subscribe(
         projects => {
             this.projects = projects;
             this.initTasks();
         });
+    tasksSubscription:Subscription = this.taskService.tasks$.subscribe(
+        tasks => {
+            this.tasks = tasks;
+        });
+
     constructor(private taskService: TaskService, private projectService:ProjectService){
         super();
     }
 
     initTasks(){
-        this.projects.forEach(function(project,index){
-            this.taskService.getTasksOfProject(project._id).subscribe(
-                tasks => {
-                    this.tasks.push([]);
-                    for (let task of tasks) {
-                        this.tasks[index].push(task);
-                    }
-                },
-                error => console.error(error)
-            );
-        },this);
+        this.taskService.getTasksOfProjects().subscribe(
+            res => {
+                this.taskService.giveTasks(res.tasks);
+            },
+            error => console.error(error)
+        );
+
     }
 
     titleService = new Title("");
 
     drawGraph(){
-
         let data = [];
         data.push(['Task ID', 'Task Name', 'Start Date','End Date','Duration','Percent Complete','Dependencies']);
         if(this.tasks.length>0){
-            this.tasks[0].forEach(function(task){
+            this.tasks.forEach(function(task){
                 let dependency;
                 if(task.dependencies.length>0){
-                    dependency = task.dependencies[0].taskID;
+                    dependency = task.dependencies.map(function(dependency){ return dependency.taskID}).join();
                 }else{
                     dependency = null;
                 }
@@ -126,6 +127,8 @@ export class TasksComponent extends GoogleChartComponent {
     ngOnDestroy(){
         if(this.projectsSubscription!==undefined)
             this.projectsSubscription.unsubscribe();
+        if(this.tasksSubscription!==undefined)
+            this.tasksSubscription.unsubscribe();
         this.titleService.setTitle("Project Management");
     }
 }

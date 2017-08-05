@@ -35,6 +35,24 @@ router.post('/search/projectID',function(req, res){
     );
 });
 
+router.post('/get/all',function(req, res){
+    var decoded = jwt.decode(req.body.token);
+    var email = decoded.info.email;
+    db.find(
+        { $or: [ { assigner_email:email }, {assignee_email:{$in:[email]}} ] },
+        "tasks"
+    ).then(
+        function(result) {
+            assert.notEqual(null, result);
+            res.status(200).send({tasks:result});
+        }
+    ).catch(
+        function(err){
+            res.status(500).send();
+            console.log(err);
+        });
+});
+
 router.post('/get',function(req, res){
     var decoded = jwt.decode(req.body.token);
     var email = decoded.info.email;
@@ -56,7 +74,7 @@ router.post('/get',function(req, res){
 router.post('/complete',function(req, res){
     var decoded = jwt.decode(req.body.token);
     var email = decoded.info.email;
-    if(req.body.task.assignee_email.indexOf(email)>-1){
+    if(req.body.task.assignee_email.indexOf(email)>-1 || req.body.task.assigner_email === email ){
         db.updateOne(
             {_id:ObjectID(req.body.task._id)},
             {$set:{

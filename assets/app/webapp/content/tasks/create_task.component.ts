@@ -138,7 +138,7 @@ export class CreateTaskComponent implements OnInit{
                     this.assigned=[];
                     this.dependencies = [];
                     this.taskCreated.emit(res.task);
-                    this.notificationService.create(res.task.name,"Task has been successfully created!","success");
+                    //this.notificationService.create(res.task.name,"Task has been successfully created!","success");
                 },
                 error =>{
                     this.notificationService.create(this.task.name,"Error! Task was not created!","error");

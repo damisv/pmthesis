@@ -39,7 +39,6 @@ export class SocketService {
             if(task.assignee_email.indexOf(email)>-1){
                 notificationService.create("You have a new task.",task.name+" has been assigned to you!","info",{timeOut:3000},['app','project','tasks']);//todo click -> taskView
             }
-            if(email!==task.assigner_email)
             taskService.giveTaskArrived(task);
         }.bind(this));
         this.socket.on('message', function(id){

@@ -18,10 +18,26 @@ export class TaskService {
     private taskArrived = new Subject<Task>();
     taskArrived$ = this.taskArrived.asObservable();
 
+    private tasks = new BehaviorSubject<Task[]>([]);
+    tasks$ = this.tasks.asObservable();
+
+
+    giveTasks(tasks: Task[]){
+        this.progressBarService.availableProgress();
+        this.tasks.next(tasks);
+        this.progressBarService.availableProgress();
+    }
+
     giveTaskArrived(task: Task){
         this.progressBarService.availableProgress();
         this.taskArrived.next(task);
         this.progressBarService.availableProgress();
+    }
+
+    getTasksOfProjects(){
+        this.progressBarService.availableProgress();
+        const body = {};
+        return this.post("get/all",body);
     }
 
     getTasksOfProject(projectID){

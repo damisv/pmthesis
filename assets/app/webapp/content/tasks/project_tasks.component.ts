@@ -54,8 +54,6 @@ export class ProjectTasksComponent implements OnInit{
     );
     taskSubscriptions:Subscription  =  this.taskService.taskArrived$.subscribe(
         task=>{
-            console.log(task.project_id);
-            console.log(this.project._id);
             if(task.project_id===this.project._id){
                 this.task = task;
                 this.tasks.push(task);
@@ -110,7 +108,7 @@ export class ProjectTasksComponent implements OnInit{
     }
 
     addTask(task:Task){
-        this.tasks.push(task);
+        //this.tasks.push(task);
         this.tabGroup.selectedIndex='1';
     }
 
