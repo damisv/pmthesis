@@ -1,6 +1,6 @@
 import {Component} from "@angular/core";
 import {Title} from "@angular/platform-browser";
-import {homeTransition} from "../content/home.animations";
+import {trigger, stagger, animate, style, group, query, transition, keyframes} from '@angular/animations';
 
 @Component({
     selector: 'app-404-error',
@@ -53,12 +53,22 @@ import {homeTransition} from "../content/home.animations";
             word-wrap:break-word;
         }*/
 
-        .listItem:hover{
-            background-color: gray;
-            cursor : hand;
-        }
     `],
-    animations: [homeTransition],
+    animations: [ trigger('homeTransition', [
+        transition(':enter', [
+            query('.card', style({ opacity: 0 })),
+            query('.card', stagger(300, [
+                style({ transform: 'translateY(100px)' }),
+                animate('1s cubic-bezier(.75,-0.48,.26,1.52)', style({transform: 'translateY(0px)', opacity: 1})),
+            ])),
+        ]),
+        transition(':leave', [
+            query('.card', stagger(300, [
+                style({ transform: 'translateY(0px)', opacity: 1 }),
+                animate('1s cubic-bezier(.75,-0.48,.26,1.52)', style({transform: 'translateY(100px)', opacity: 0})),
+            ])),
+        ])
+    ]) ],
     host:{'[@homeTransition]':''}
 })
 export class NotFoundErrorComponent{
