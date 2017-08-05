@@ -92,8 +92,8 @@ router.post('/create',function(req, res){
             assignee_email:req.body.task.assignee_email,
             dependencies:req.body.task.dependencies,
             date_created: new Date(),
-            date_start:req.body.task.date_start,
-            date_end:req.body.task.date_end,
+            date_start: req.body.task.date_start,
+            date_end: req.body.task.date_end,
             completed:false
         },
         "tasks"
@@ -109,6 +109,7 @@ router.post('/create',function(req, res){
             console.log(err);
         }
     );
+
 });
 
 module.exports = router;

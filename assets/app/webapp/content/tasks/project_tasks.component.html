@@ -53,7 +53,8 @@
                                         <ng-template ngFor let-task [ngForOf]="tasks" let-i="index">
                                             <tr *ngIf="checkStatus(i)" [ngClass]="{'taskCompleted': task.completed}" >
                                                 <td>
-                                                    <md-checkbox (change)="completeTask($event.checked,i)" [checked]="task.completed"></md-checkbox>
+                                                    <md-checkbox *ngIf="hasRightToCompleteTask(task.assigner_email,task.assignee_email)" (change)="completeTask($event.checked,i)" [checked]="task.completed" ></md-checkbox>
+                                                    <md-checkbox *ngIf="!hasRightToCompleteTask(task.assigner_email,task.assignee_email)" [checked]="task.completed" disabled></md-checkbox>
                                                 </td>
                                                 <td (click)="openTaskView(i)">{{ task?.name }}</td>
                                                 <td (click)="onEmailClicked(task?.assigner_email)" >{{ task?.assigner_email }}</td>

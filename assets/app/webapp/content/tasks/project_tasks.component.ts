@@ -80,12 +80,23 @@ export class ProjectTasksComponent implements OnInit{
         this.tabGroup.selectedIndex='2';
     }
 
+    hasRightToCompleteTask(assigner,assignee){
+        if(assigner.match(this.user.email)){
+            return true;
+        }else if(assignee.indexOf(this.user.email)>-1){
+            return true;
+        }
+        return false;
+    }
+
     completeTask(state:boolean,index:number){
-        this.taskService.complete(this.tasks[index]).subscribe(
-            res => {
-                this.tasks[index].completed= !this.tasks[index].completed;
-            }
-        );
+        if(this.hasRightToCompleteTask(this.tasks[index].assigner_email,this.tasks[index].assignee_email)){
+            this.taskService.complete(this.tasks[index]).subscribe(
+                res => {
+                    this.tasks[index].completed= !this.tasks[index].completed;
+                }
+            );
+        }
     }
 
     checkStatus(index:number):boolean{

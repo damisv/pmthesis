@@ -74,7 +74,7 @@ export class TasksComponent extends GoogleChartComponent {
                 }else{
                     dependency = null;
                 }
-                data.push([task._id, task.name, new Date(2015, 0, 1), new Date(2015, 0, 5), this.daysToMilliseconds(1),  100,  dependency]);
+                data.push([task._id, task.name, new Date(task.date_start),new Date(task.date_end), this.daysToMilliseconds(1),  100,  dependency]);
             },this);
         }
 
@@ -94,11 +94,18 @@ export class TasksComponent extends GoogleChartComponent {
         this.options = {
             height: 275,
             gantt: {
-                criticalPathEnabled: false,
+                criticalPathEnabled: true,
                 criticalPathStyle: {
                     stroke: '#e64a19',
                     strokeWidth: 5
+                },
+                arrow: {
+                    angle: 1,
+                    width: 5,
+                    color: 'green',
+                    radius: 0
                 }
+
             }
         };
 

@@ -131,6 +131,7 @@ export class CreateTaskComponent implements OnInit{
         this.task.project_name = this.project.name;
         this.task.project_id = this.project._id;
         this.task.completed = false;
+
         this.taskService.create(this.task)
             .subscribe(res => {
                     this.createTaskForm.reset();

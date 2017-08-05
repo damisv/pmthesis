@@ -32,6 +32,8 @@ export class TaskService {
 
     create(task){
         this.progressBarService.availableProgress();
+        if(typeof task.date_start!=="undefined")task.date_start = task.date_start.toISOString();
+        if(typeof task.date_end!=="undefined")task.date_end = task.date_end.toISOString();
         const body = {task:task};
         return this.post("create",body);
     }
