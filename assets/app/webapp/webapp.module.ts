@@ -76,27 +76,13 @@ import {FlexLayoutModule} from "@angular/flex-layout";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {BrowserModule} from "@angular/platform-browser";
 
-import { ChartModule } from 'angular2-highcharts';
-import * as highcharts from 'highcharts';
-import { HighchartsStatic } from 'angular2-highcharts/dist/HighchartsService';
 import {CalendarModule} from "angular-calendar";
 import {CalendarComponent} from "./content/calendar/calendar.component";
 import {CalendarEventViewDialogComponent} from "./content/calendar/calendarEventViewDialog.component";
 import {ContextMenuModule} from "ngx-contextmenu";
 import {CalendarEventCreateDialogComponent} from "./content/calendar/calendarEventCreateDialog.component";
 import {ChatService} from "./_services/chat.service";
-
-
-declare var require: any;
-
-export function highchartsFactory() {
-    const hc = require('highcharts');
-    const dd = require('highcharts/modules/drilldown');
-    dd(hc);
-
-    return hc;
-}
-
+import {GanttComponent} from "./content/tasks/gantt.component";
 
 @NgModule({
     declarations: [
@@ -129,7 +115,8 @@ export function highchartsFactory() {
         MessagesComponent,
         CalendarComponent,
         CalendarEventViewDialogComponent,
-        CalendarEventCreateDialogComponent
+        CalendarEventCreateDialogComponent,
+        GanttComponent
     ],
     imports: [
         CommonModule,
@@ -137,7 +124,6 @@ export function highchartsFactory() {
         FormsModule,
         RouterModule,
         DragulaModule,
-        ChartModule,
         ParticlesModule,
         MdButtonModule,
         MdCheckboxModule,
@@ -184,11 +170,6 @@ export function highchartsFactory() {
         PushNotificationsService,
         SocketService,
         ChatService,
-        {
-            provide: HighchartsStatic,
-            useFactory: highchartsFactory
-        },
-
     ],
     entryComponents:[
         ProfileDialogComponent,

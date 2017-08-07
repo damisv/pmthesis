@@ -18,6 +18,7 @@ import {ProjectGuard} from "../_guards/projectguard";
 import {ViewTaskComponent} from "./content/tasks/viewtask.component";
 import {ChatComponent} from "./content/chat/chat.component";
 import {CalendarComponent} from "./content/calendar/calendar.component";
+import {GanttComponent} from "./content/tasks/gantt.component";
 
 export const WEBAPP_ROUTES: Routes = [
     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -36,6 +37,7 @@ export const WEBAPP_ROUTES: Routes = [
         { path: '', component: ProjectSidebarComponent, outlet: 'projectsidebar'},
         { path: 'dashboard', component: ProjectDashboardComponent},
         { path: 'tasks', component: ProjectTasksComponent},
+        { path: 'gantt', component: GanttComponent},
         { path: 'taskview',component: ViewTaskComponent},
         { path: 'settings', component: ProjectSettingsComponent,canActivate: [ProjectGuard]},
         { path: 'team', component: TeamProjectComponent},
