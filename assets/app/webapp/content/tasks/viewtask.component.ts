@@ -62,7 +62,7 @@ export class ViewTaskComponent {
     );
 
     constructor(private taskService: TaskService,private titleService: Title,private media: ObservableMedia,private profileService:ProfileService){
-        (this.task.assigner_email==this.profile.email)? this.canEdit = true : this.canEdit=false ;
+        (this.task.assigner_email.match(this.profile.email))? this.canEdit = true : this.canEdit=false ;
         (this.task.assignee_email.find(x => x == this.profile.email))? this.canComplete=true:this.canComplete=false;
         let temp = new Date().getTime() - new Date(this.task.date_created).getTime();
         this.lastUpdated = new Date(temp).getMinutes();

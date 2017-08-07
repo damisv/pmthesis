@@ -1,126 +1,32 @@
-<div class="row">
-
-    <div class="col-md-12">
-        <div class="card" >
-            <div class="header">
-                <h4 class="title">Tasks</h4>
-                <p class="category">Backend development</p>
-            </div>
-            <div class="content">
-                <div class="table-full-width">
-                    <!--<table class="table">
-                        <tbody>
-                        <tr>
-                            <td>
-                                <label class="checkbox">
-                                    <input type="checkbox" value="" >
-                                </label>
-                            </td>
-                            <td>Sign contract for "What are conference organizers afraid of?"</td>
-                            <td class="td-actions text-right">
-                                <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
-                                    <i class="fa fa-edit"></i>
-                                </button>
-                                <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-                                    <i class="fa fa-times"></i>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label class="checkbox">
-                                    <input type="checkbox" value="" checked="">
-                                </label>
-                            </td>
-                            <td>Lines From Great Russian Literature? Or E-mails From My Boss?</td>
-                            <td class="td-actions text-right">
-                                <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
-                                    <i class="fa fa-edit"></i>
-                                </button>
-                                <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-                                    <i class="fa fa-times"></i>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label class="checkbox">
-                                    <input type="checkbox" value="" checked="">
-                                </label>
-                            </td>
-                            <td>Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
-                            </td>
-                            <td class="td-actions text-right">
-                                <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
-                                    <i class="fa fa-edit"></i>
-                                </button>
-                                <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-                                    <i class="fa fa-times"></i>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label class="checkbox">
-                                    <input type="checkbox" value="">
-                                </label>
-                            </td>
-                            <td>Create 4 Invisible User Experiences you Never Knew About</td>
-                            <td class="td-actions text-right">
-                                <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
-                                    <i class="fa fa-edit"></i>
-                                </button>
-                                <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-                                    <i class="fa fa-times"></i>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label class="checkbox">
-                                    <input type="checkbox" value="">
-                                </label>
-                            </td>
-                            <td>Read "Following makes Medium better"</td>
-                            <td class="td-actions text-right">
-                                <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
-                                    <i class="fa fa-edit"></i>
-                                </button>
-                                <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-                                    <i class="fa fa-times"></i>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label class="checkbox">
-                                    <input type="checkbox" value="">
-                                </label>
-                            </td>
-                            <td>Unfollow 5 enemies from twitter</td>
-                            <td class="td-actions text-right">
-                                <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
-                                    <i class="fa fa-edit"></i>
-                                </button>
-                                <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-                                    <i class="fa fa-times"></i>
-                                </button>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>-->
-                    <div (window:resize)="onResize($event)" style="padding-left:0.5%;padding-right:0.5%">
-                        <div id="chart_div" style="width: 100%; height: 100%"></div>
-                    </div>
+<div    fxLayout="column"
+        fxLayoutAlign="center"
+        fxLayoutGap="10px">
+    <div fxFlex>
+        <md-card class="card">
+            <md-card-header>
+                <md-card-title>Gantt</md-card-title>
+                <md-card-subtitle>trastat</md-card-subtitle>
+            </md-card-header>
+            <md-card-content>
+                <div (window:resize)="onResize($event)" style="padding-left:0.5%;padding-right:0.5%">
+                    <div id="chart_div" style="width: 100%; height: 100%"></div>
                 </div>
-                <div class="footer">
-                    <hr>
-                    <div class="stats">
-                        <i class="fa fa-history"></i> Updated 3 minutes ago
-                    </div>
-                </div>
-            </div>
-        </div>
+            </md-card-content>
+            <md-card-footer>
+                <md-divider></md-divider>
+                <md-icon>history</md-icon>Just Updated
+            </md-card-footer>
+        </md-card>
     </div>
-
+    <div fxFlex>
+        <md-card class="card">
+            <md-card-content>
+                <div id="container"></div>
+            </md-card-content>
+            <md-card-footer>
+                <md-divider></md-divider>
+                <md-icon>history</md-icon> Updated 3 minutes ago
+            </md-card-footer>
+        </md-card>
+    </div>
 </div>

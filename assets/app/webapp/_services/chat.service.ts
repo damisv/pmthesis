@@ -36,12 +36,12 @@ export class ChatService {
         return this.post("get/project",body);
     }
 
-    sent(receiver,message){
+    send(receiver,message){
         const body = {receiver:receiver,message:message};
         return this.post("sent",body);
     }
 
-    sentToProject(project_id,message){
+    sendToProject(project_id,message){
         const body = {project_id:project_id,message:message};
         return this.post("sent/project",body);
     }

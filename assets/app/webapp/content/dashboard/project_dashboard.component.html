@@ -15,10 +15,10 @@
                 </md-card-subtitle>
             </md-card-header>
             <md-card-content>
-                    <chart *ngIf="taskAvailable;else task_not_available" [options]="pieOptions"></chart>
+                <div id="taskChartContainer" *ngIf="taskAvailable;else task_not_available"></div>
                 <ng-template #task_not_available>
                     <h4>There are no tasks on this project</h4>
-                    <button md-raised-button (click)="openTasks()" >Create a new Task</button>
+                    <a md-raised-button [routerLink]="['tasks']" >Create a new Task</a>
                 </ng-template>
             </md-card-content>
             <md-card-footer>

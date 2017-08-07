@@ -1,4 +1,4 @@
-import {Component, ViewChild,ElementRef,OnInit} from "@angular/core";
+import {Component} from "@angular/core";
 import {Project} from "../../../models/project";
 import {ProjectService} from "../../_services/projects.service";
 import {Subscription} from "rxjs";
@@ -6,6 +6,8 @@ import {Title} from "@angular/platform-browser";
 import {TaskService} from "../../_services/task.service";
 import {Router} from "@angular/router";
 import {trigger, stagger, animate, style, group, query, transition, keyframes} from '@angular/animations';
+
+declare var Highcharts:any;
 
 @Component({
     selector: 'webapp-project-dashboard',
@@ -64,31 +66,30 @@ export class ProjectDashboardComponent{
 
 
     initPieOptions(completed,inProgress,taskTotal){
-       this.pieOptions =  {
+        Highcharts.chart('taskChartContainer', {
             chart: {
-                type: 'pie',
-                options3d: {
-                    enabled: true,
-                    alpha: 45,
-                    beta: 0
-                }
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie'
             },
             title: {
                 text: 'Tasks Statistics'+taskTotal
             },
             tooltip: {
-                pointFormat: '{series.name}: <b>{point.y}</b>'
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
             },
             plotOptions: {
                 pie: {
                     allowPointSelect: true,
                     cursor: 'pointer',
-                    depth: 35,
                     dataLabels: {
                         enabled: true,
-                        format: '{point.name}'
-                    },
-                    showInLegend:true
+                        format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                        style: {
+                            color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                        }
+                    }
                 }
             },
             series: [{
@@ -112,7 +113,7 @@ export class ProjectDashboardComponent{
                     }
                 }]
             }
-        }
+        });
     }
 
     openTasks(){

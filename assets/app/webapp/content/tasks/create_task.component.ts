@@ -46,7 +46,7 @@ import {DependenciesDialogComponent} from "./dependenciesdialog.component";
 })
 export class CreateTaskComponent implements OnInit{
     @Input() email:String;
-    @Output() taskCreated = new EventEmitter<Task>();
+    @Output() taskCreated = new EventEmitter<any>();
 
     state: string = 'inactive';
 
@@ -137,8 +137,8 @@ export class CreateTaskComponent implements OnInit{
                     this.createTaskForm.reset();
                     this.assigned=[];
                     this.dependencies = [];
-                    this.taskCreated.emit(res.task);
-                    //this.notificationService.create(res.task.name,"Task has been successfully created!","success");
+                    this.taskCreated.emit();
+                    this.notificationService.toast(res.task.name,"Task has been successfully created!","success");
                 },
                 error =>{
                     this.notificationService.create(this.task.name,"Error! Task was not created!","error");

@@ -67,7 +67,6 @@ import {SocketService} from "./_services/socket.service";
 import {NotificationsService, PushNotificationsService} from "angular2-notifications/dist";
 
 import {DependenciesDialogComponent} from "./content/tasks/dependenciesdialog.component";
-import {GanttComponent} from "./content/tasks/gantt.component";
 import {ParticlesModule} from "angular-particle";
 import {CdkTableModule} from "@angular/cdk";
 import {ChatComponent} from "./content/chat/chat.component";
@@ -125,7 +124,6 @@ export function highchartsFactory() {
         ProfileDialogComponent,
         NotFoundErrorComponent,
         DependenciesDialogComponent,
-        GanttComponent,
         ChatComponent,
         UserListComponent,
         MessagesComponent,

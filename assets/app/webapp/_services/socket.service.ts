@@ -29,7 +29,7 @@ export class SocketService {
             this.register();
         }.bind(this));
         this.socket.on('memberJoined', function(projectName,email){
-            notificationService.toast(email+" joined project "+projectName,"A new member joined "+projectName,"info");
+            notificationService.create(email+" joined project "+projectName,"A new member joined "+projectName,"info");
         }.bind(this));
         this.socket.on('reconnecting', function(){
             notificationService.create("Reconnecting...","Connection with server has been lost!","error",{timeOut:3000});
@@ -42,7 +42,7 @@ export class SocketService {
             taskService.giveTaskArrived(task);
         }.bind(this));
         this.socket.on('message', function(id){
-            notificationService.create("You have a new message.","Read here!","info",{timeOut:3000},['app','project','chat']);//todo click -> taskView
+            notificationService.create("You have a new message.","Read here!","info",{timeOut:3000},['app','project','chat']);//todo click -> chat
             chatService.getMessageById(id).subscribe(res=>{
                 chatService.addMessages(res.messages);
             });

@@ -1,4 +1,4 @@
-import {Component} from "@angular/core";
+import {AfterViewInit, Component} from "@angular/core";
 import { GoogleChartComponent} from '../../_services/googlechart.component';
 import {Title} from "@angular/platform-browser";
 import {trigger, stagger, animate, style, query, transition} from '@angular/animations';
@@ -7,6 +7,10 @@ import {TaskService} from "../../_services/task.service";
 import {Project} from "../../../models/project";
 import {Task} from "../../../models/task";
 import {ProjectService} from "../../_services/projects.service";
+import {ProfileService} from "../../_services/profile.service";
+import {Profile} from "../../../models/profile";
+
+declare var Highcharts:any;
 
 @Component({
     selector: 'webapp-tasks',
@@ -31,43 +35,110 @@ import {ProjectService} from "../../_services/projects.service";
         '[@homeTransition]': ''
     }
 })
-export class TasksComponent extends GoogleChartComponent {
+export class TasksComponent extends GoogleChartComponent implements AfterViewInit{
 
     private options;
     private data;
     private chart;
+    private dataH = [];
+    private profile:Profile;
+    profileSubscription:Subscription;
+    projectsSubscription:Subscription;
+
     projects:Project[];
     tasks:Task[] = [];
-    projectsSubscription:Subscription = this.projectService.projects$.subscribe(
-        projects => {
-            this.projects = projects;
-            this.initTasks();
-        });
-    tasksSubscription:Subscription = this.taskService.tasks$.subscribe(
-        tasks => {
-            this.tasks = tasks;
-        });
+    tasksSubscription:Subscription;
 
-    constructor(private taskService: TaskService, private projectService:ProjectService){
+    titleService = new Title("");
+    constructor(private taskService: TaskService, private projectService:ProjectService,private profileService:ProfileService){
         super();
     }
 
+    ngAfterViewInit(){
+        this.tasksSubscription = this.taskService.tasks$.subscribe(
+            tasks => {
+                this.tasks = tasks;
+            });
+
+        this.profileSubscription = this.profileService.profile$.subscribe(
+            profile => this.profile = profile
+        );
+        /*
+        Populate Highcharts Series and initiate
+         */
+        this.projectsSubscription = this.projectService.projects$.subscribe(
+            projects => {
+                this.projects = projects;
+                for(let project of this.projects){
+                    this.taskService.getTasksOfProject(project._id).subscribe((tasks)=> {
+                        this.dataH.push({
+                            name: project.name,
+                            data : [{
+                                taskName: project.name,
+                                id: project._id
+                            }]
+                        });
+                        let index = this.dataH.findIndex( x => x.name == project.name);
+                        for(let task of tasks){
+                            if(task.assignee_email.find(x => x == this.profile.email)){
+                                this.dataH[index].data.push({
+                                    taskName:task.name,
+                                    id: task._id,
+                                    parent: project._id,
+                                    start: new Date(task.date_start).getTime(),
+                                    end: new Date(task.date_end).getTime()
+                                });
+                            }
+                        }
+                        this.initHighGantt();
+                    });
+                }
+                this.initTasks();
+            });
+        this.titleService.setTitle("My Tasks");
+    }
+
+
     initTasks(){
-        this.taskService.getTasksOfProjects().subscribe(
+        /*this.taskService.getTasksOfProjects().subscribe(
             res => {
                 this.taskService.giveTasks(res.tasks);
             },
             error => console.error(error)
-        );
+        );*/
 
     }
 
-    titleService = new Title("");
+    /*
+    Highcharts Gantt
+     */
+    initHighGantt(){
+        let todayTemp = new Date();
+        todayTemp.setUTCMinutes(0);
+        todayTemp.setUTCSeconds(0);
+        todayTemp.setUTCMilliseconds(0);
+
+        let day = 1000 * 60 * 60 * 24;
+        let today = todayTemp.getTime();
+
+        Highcharts.ganttChart('container', {
+            title: {
+                text: this.profile.email+'\'s Upcoming Tasks'
+            },
+            xAxis: {
+                currentDateIndicator: true,
+                min: today - 3 * day,
+                max: today + 18 * day
+            },
+            series: this.dataH
+
+        })
+    }
 
     drawGraph(){
         let data = [];
         data.push(['Task ID', 'Task Name', 'Start Date','End Date','Duration','Percent Complete','Dependencies']);
-        if(this.tasks.length>0){
+        /*if(this.tasks.length>0){
             this.tasks.forEach(function(task){
                 let dependency;
                 if(task.dependencies.length>0){
@@ -77,8 +148,7 @@ export class TasksComponent extends GoogleChartComponent {
                 }
                 data.push([task._id, task.name, new Date(task.date_start),new Date(task.date_end), this.daysToMilliseconds(1),  100,  dependency]);
             },this);
-        }
-
+        }*/
 
         this.data = this.createDataTable(data);
 
@@ -112,8 +182,6 @@ export class TasksComponent extends GoogleChartComponent {
 
         this.chart = this.createGanttChart(document.getElementById('chart_div'));
         this.chart.draw(this.data, this.options);
-
-        this.titleService.setTitle("My Tasks");
     }
 
     daysToMilliseconds(days) {

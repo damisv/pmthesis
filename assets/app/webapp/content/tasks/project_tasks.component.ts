@@ -107,8 +107,7 @@ export class ProjectTasksComponent implements OnInit{
         }
     }
 
-    addTask(task:Task){
-        //this.tasks.push(task);
+    addTask(){
         this.tabGroup.selectedIndex='1';
     }
 
