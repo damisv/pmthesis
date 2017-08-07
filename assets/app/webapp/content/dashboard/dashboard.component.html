@@ -29,14 +29,23 @@
         <md-card class="card" >
             <md-card-header>
                 <md-card-title>
-                    Second Card
+                    Overdue Tasks Deadlines
                 </md-card-title>
                 <md-card-subtitle>
-                    Second card
+                    This really really need your attention (for now just simple tasks available)
                 </md-card-subtitle>
             </md-card-header>
             <md-card-content>
-                Second Card
+                <md-list>
+                    <ng-template ngFor let-task [ngForOf]="tasks" let-i="index">
+                        <md-list-item (click)="openTaskView(i)" class="listItem">
+                            <md-icon md-list-icon>note</md-icon>
+                            <h4 md-line>{{task.name}}</h4>
+                            <p md-line>{{task.description}}</p>
+                            <p md-line>Early Start:&nbsp;{{ task?.date_end | date}}</p>
+                        </md-list-item>
+                    </ng-template>
+                </md-list>
             </md-card-content>
             <md-card-footer>
                 <md-divider></md-divider>
