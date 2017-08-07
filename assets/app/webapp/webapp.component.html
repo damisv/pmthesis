@@ -16,7 +16,7 @@
 
     </md-sidenav>
 
-    <md-sidenav #notificationsSidenav mode="over" align="end" style="width:25%;box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2)!important;">
+    <md-sidenav #notificationsSidenav mode="over" align="end" style="width:35%;box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2)!important;">
         <md-list>
             <h3 md-subheader>New Notifications</h3>
             <md-list-item *ngFor="let notification of notifications">
@@ -35,9 +35,29 @@
     </md-sidenav>
 
     <md-toolbar style="position:relative;z-index:1000">
-        <button mdTooltip="Toggle Sidenav!" md-icon-button (click)="sidenav.toggle()" aria-label="Toggle Sidenav">
+        <button mdTooltip="Toggle Sidenav!" md-icon-button *ngIf="!isMobile" (click)="sidenav.toggle()" aria-label="Toggle Sidenav">
             <md-icon aria-hidden="true">menu</md-icon>
         </button>
+        <button mdTooltip="Menu" md-icon-button *ngIf="isMobile" [mdMenuTriggerFor]="mobileMenu" aria-label="Menu">
+            <md-icon aria-hidden="true">menu</md-icon>
+        </button>
+        <md-menu #mobileMenu="mdMenu"  [overlapTrigger]="false">
+                <a md-menu-item [routerLink]="['dashboard']" *ngIf="userMenuAvailable">Dashboard</a>
+                <a md-menu-item [routerLink]="['myprojects']" *ngIf="userMenuAvailable">My Projects</a>
+                <a md-menu-item [routerLink]="['mytasks']" *ngIf="userMenuAvailable">My Tasks</a>
+                <a md-menu-item [routerLink]="['myissues']" *ngIf="userMenuAvailable" >My Issues</a>
+                <a md-menu-item [routerLink]="['profile']" *ngIf="userMenuAvailable">Profile</a>
+                <a md-menu-item [routerLink]="['calendar']" *ngIf="userMenuAvailable">Calendar</a>
+                <a md-menu-item [routerLink]="['chat']" *ngIf="userMenuAvailable">Chat</a>
+                <a md-menu-item [routerLink]="['invites']" *ngIf="userMenuAvailable">Invites</a>
+
+                <a md-menu-item [routerLink]="['project/dashboard']" *ngIf="!userMenuAvailable">Dashboard</a>
+                <a md-menu-item [routerLink]="['project/tasks']" *ngIf="!userMenuAvailable">Tasks</a>
+                <a md-menu-item [routerLink]="['project/issues']" *ngIf="!userMenuAvailable">Issues</a>
+                <a md-menu-item [routerLink]="['project/team']" *ngIf="!userMenuAvailable">Team</a>
+                <a md-menu-item [routerLink]="['project/chat']" *ngIf="!userMenuAvailable">Chat</a>
+                <a md-menu-item [routerLink]="['project/settings']" *ngIf="!userMenuAvailable">Settings</a>
+        </md-menu>
         <a md-icon-button [routerLink]="['/app']" aria-label="User's Dashboard">
             <md-icon aria-hidden="true">home</md-icon>
         </a>

@@ -1,4 +1,4 @@
-import {Component} from "@angular/core";
+import {AfterViewInit, Component} from "@angular/core";
 import {Project} from "../../../models/project";
 import {ProjectService} from "../../_services/projects.service";
 import {Subscription} from "rxjs";
@@ -32,17 +32,21 @@ declare var Highcharts:any;
         '[@homeTransition]': ''
     }
 })
-export class ProjectDashboardComponent{
-
-    pieOptions:Object;
-
+export class ProjectDashboardComponent implements AfterViewInit{
     taskSubscription:Subscription ;
     project:Project;
 
     taskAvailable=true;
 
-    subscription:Subscription = this.projectService.project$.subscribe(
-        project => {
+    subscription:Subscription;
+
+    constructor(private projectService:ProjectService,private titleService:Title,private taskService:TaskService,private router:Router){
+    }
+
+
+    ngAfterViewInit(){
+        this.subscription = this.projectService.project$.subscribe(
+            project => {
                 this.project = project;
                 this.titleService.setTitle(this.project.name+" Project Dashboard");
                 this.taskSubscription = this.taskService.getTasksOfProject(this.project._id).subscribe(
@@ -51,22 +55,23 @@ export class ProjectDashboardComponent{
                         let completed:number=0;
                         let inProgress:number=0;
                         for(let task of tasks){
-                           taskTotal++;
-                           (task.completed)? completed++ : inProgress++;
+                            taskTotal++;
+                            (task.completed)? completed++ : inProgress++;
                         }
                         (taskTotal>0)? this.taskAvailable=true:this.taskAvailable=false;
-                        this.initPieOptions(completed,inProgress,taskTotal);
+                        if(this.taskAvailable){
+                            this.initPieOptions(completed,inProgress,taskTotal);
+                        }
+                        this.initIssuesChart();
+                        this.initMilestonesMock();
                     }
                 );
-        }
-    );
+            }
+        );
+    }
 
-
-    constructor(private projectService:ProjectService,private titleService:Title,private taskService:TaskService,private router:Router){}
-
-
-    initPieOptions(completed,inProgress,taskTotal){
-        Highcharts.chart('taskChartContainer', {
+    initMilestonesMock(){
+        Highcharts.chart('milestonesChartContainer', {
             chart: {
                 plotBackgroundColor: null,
                 plotBorderWidth: null,
@@ -74,7 +79,7 @@ export class ProjectDashboardComponent{
                 type: 'pie'
             },
             title: {
-                text: 'Tasks Statistics'+taskTotal
+                text: 'Milestones - 15'
             },
             tooltip: {
                 pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -89,7 +94,133 @@ export class ProjectDashboardComponent{
                         style: {
                             color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
                         }
+                    },
+                    showInLegend: true
+                }
+            },
+            series: [{
+                name: 'Milestones ',
+                colorByPoint:true,
+                data: [
+                    {
+                        name: 'Open',
+                        y: 56.33,
+                        color: '#DC7633'
+                    },
+                    {
+                        name: 'Closed',
+                        y: 24.03,
+                        sliced: true,
+                        selected: true,
+                        color: '#85929E'
                     }
+                ]
+            }],
+            responsive:{
+                rules:[{
+                    condition: {
+                        maxWidth: 200,
+                        maxHeight: 250
+                    },
+                    chartOptions:{
+                        legend:{
+                            enabled:false
+                        }
+                    }
+                }]
+            }
+        });
+    }
+
+    initIssuesChart(){
+        Highcharts.chart('issuesChartContainer', {
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie'
+            },
+            title: {
+                text: 'Issues Statistics - 15'
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                        style: {
+                            color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                        }
+                    },
+                    showInLegend: true
+                }
+            },
+            series: [{
+                name: 'Issues Statistics ',
+                colorByPoint:true,
+                data: [
+                    {
+                        name: 'Open',
+                        y: 56.33,
+                        color: '#DC7633'
+                    },
+                    {
+                        name: 'Closed',
+                        y: 24.03,
+                        sliced: true,
+                        selected: true,
+                        color: '#85929E'
+                    }
+                ]
+            }],
+            responsive:{
+                rules:[{
+                    condition: {
+                        maxWidth: 200,
+                        maxHeight: 250
+                    },
+                    chartOptions:{
+                        legend:{
+                            enabled:false
+                        }
+                    }
+                }]
+            }
+        });
+    }
+
+
+    initPieOptions(completed,inProgress,taskTotal){
+        Highcharts.chart('taskChartContainer', {
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie'
+            },
+            title: {
+                text: 'Tasks Statistics - '+taskTotal
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                        style: {
+                            color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                        }
+                    },
+                    showInLegend: true
                 }
             },
             series: [{

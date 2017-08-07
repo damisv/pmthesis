@@ -1,4 +1,4 @@
-import {Component, HostListener, OnDestroy, OnInit, ViewChild} from "@angular/core";
+import {AfterViewInit, Component, HostListener, OnDestroy, OnInit, ViewChild} from "@angular/core";
 import {Router} from "@angular/router";
 import {Profile} from "../models/profile";
 import {ProfileService} from "./_services/profile.service";
@@ -6,6 +6,9 @@ import {Subscription} from "rxjs/Subscription";
 import {SocketService} from "./_services/socket.service";
 import {ProjectService} from "./_services/projects.service";
 import {ChatService} from "./_services/chat.service";
+import {ObservableMedia} from "@angular/flex-layout";
+import {MdSidenav} from "@angular/material";
+import {SidebarService} from "./sidebar/sidebar.service";
 
 @Component({
     selector: 'my-webapp',
@@ -13,10 +16,12 @@ import {ChatService} from "./_services/chat.service";
     styleUrls: ['./webapp.component.css'],
     providers:[ProfileService,SocketService,ProjectService]
 })
-export class WebappComponent implements OnDestroy,OnInit{
+export class WebappComponent implements OnDestroy,OnInit,AfterViewInit{
     profile:Profile;
     subscription:Subscription;
     userMenuAvailable=true;
+    @ViewChild('sidenav') sidenav:MdSidenav;
+    isMobile:boolean=false;
 
     notifications = [
         {name:'A new task has been assigned to you!',date:'24/7/2017'},
@@ -40,11 +45,17 @@ export class WebappComponent implements OnDestroy,OnInit{
     groupColor;
     menuColor = 'sidebar blue';
 
+    sidebarSubscription:Subscription = this.sidebarService.status$.subscribe(
+        status => this.userMenuAvailable = status);
+
+
     constructor(private profileService:ProfileService,
                 private socketService:SocketService, //don't delete
                 private projectService:ProjectService,
                 private chatService:ChatService,
-                private router:Router){
+                private router:Router,
+                private media: ObservableMedia,
+                private sidebarService:SidebarService){
     }
 
     changeMenuColour(color){
@@ -145,9 +156,31 @@ export class WebappComponent implements OnDestroy,OnInit{
             },
             retina_detect: true
         };
+
     }
 
+    ngAfterViewInit(){
+        this.media.subscribe(change => { this.menuCollapse(); });
+    }
 
+    menuCollapse() {
+        if (this.media.isActive('md')) {
+            this.sidenav.close();
+            this.isMobile = true;
+        }
+        else if (this.media.isActive('sm')) {
+            this.sidenav.close();
+            this.isMobile = true;
+        }
+        else if (this.media.isActive('xs')) {
+            this.sidenav.close();
+            this.isMobile=true;
+        }
+        else{
+            this.sidenav.open();
+            this.isMobile=false;
+        }
+    }
 
     onLogout(){
         localStorage.removeItem('token');

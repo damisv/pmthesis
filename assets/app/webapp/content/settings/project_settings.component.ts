@@ -76,7 +76,6 @@ export class ProjectSettingsComponent implements OnInit{
     }
 
     ngOnInit(){
-
     }
 
     ngOnDestroy(){

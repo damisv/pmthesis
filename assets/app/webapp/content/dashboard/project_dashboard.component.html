@@ -1,22 +1,20 @@
 <div
         fxLayout
-        fxLayout.xs="column"
+        fxLayout.lt-md="column"
         fxLayoutAlign="center"
         fxLayoutGap="10px"
-        fxLayoutGap.xs="0" [dragula]='"first-bag"'>
+        fxLayoutGap.lt-md="0" [dragula]='"first-bag"'>
     <div fxFlex="auto">
         <md-card class="card" >
             <md-card-header>
                 <md-card-title>
-                    Project Task Statistics
+                    Tasks Statistics
                 </md-card-title>
-                <md-card-subtitle>
-                    Tasks
-                </md-card-subtitle>
             </md-card-header>
             <md-card-content>
-                <div id="taskChartContainer" *ngIf="taskAvailable;else task_not_available"></div>
-                <ng-template #task_not_available>
+                <div id="taskChartContainer"></div>
+                <br>
+                <ng-template *ngIf="!taskAvailable" >
                     <h4>There are no tasks on this project</h4>
                     <a md-raised-button [routerLink]="['tasks']" >Create a new Task</a>
                 </ng-template>
@@ -31,13 +29,11 @@
         <md-card class="card" >
             <md-card-header>
                 <md-card-title>
-                    Second Card
+                    Issues Statistics
                 </md-card-title>
-                <md-card-subtitle>
-                    Second card
-                </md-card-subtitle>
             </md-card-header>
             <md-card-content>
+                <div id="issuesChartContainer"></div>
             </md-card-content>
             <md-card-footer>
                 <md-divider></md-divider>
@@ -45,15 +41,31 @@
             </md-card-footer>
         </md-card>
     </div>
+
 </div>
-<div
-        fxLayout
-        fxLayout.xs="column"
+<div    fxLayout
+        fxLayout.lt-md="column"
         fxLayoutAlign="center"
         fxLayoutGap="10px"
-        fxLayoutGap.xs="0"
+        fxLayoutGap.lt-md="0"
         fxLayoutWrap="wrap"
         [dragula]='"first-bag"'>
+    <div fxFlex="auto">
+        <md-card class="card" >
+            <md-card-header>
+                <md-card-title>
+                    Issues Statistics
+                </md-card-title>
+            </md-card-header>
+            <md-card-content>
+                <div id="milestonesChartContainer" style="width:100%;height:100%;"></div>
+            </md-card-content>
+            <md-card-footer>
+                <md-divider></md-divider>
+                <md-icon>history</md-icon> Just updated
+            </md-card-footer>
+        </md-card>
+    </div>
     <div fxFlex="auto">
         <md-card class="card" >
             <md-card-header>
