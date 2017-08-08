@@ -7,7 +7,7 @@ import {Component, Input} from "@angular/core";
 })
 export class MessagesComponent {
 
-    @Input() user;
+    @Input() project;
     messages = ['How are you man','Tralalalalal','Tralalalalal','adfknajdgnjasg'];
 
     constructor(){}

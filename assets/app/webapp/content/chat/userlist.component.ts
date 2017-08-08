@@ -8,13 +8,13 @@ import {Component, EventEmitter, Input, Output} from "@angular/core";
 export class UserListComponent {
 
     @Input()
-    userlist;
+    projects;
     @Output()
-    onUserSelected = new EventEmitter <String>();
+    onConversationSelected = new EventEmitter <String>();
 
     constructor(){}
 
-    selectUser(user){
-        this.onUserSelected.emit(user);
+    selectConversation(project){
+        this.onConversationSelected.emit(project);
     }
 }

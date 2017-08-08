@@ -7,44 +7,7 @@
     <div fxFlex="auto">
         <md-card class="card" >
             <md-card-content style="height:45em">
-                <!--<md-sidenav-container>
-                    <md-sidenav #sidenav mode="side" opened="true">
-
-                    </md-sidenav>
-
-                    <div>
-                        <md-toolbar color="primary">
-                            <button type="button" md-button (click)="sidenav.open()">
-                                <md-icon>short_text</md-icon>
-                            </button>
-                            <h4>{{userSelected}}</h4>
-                            <span class="spacer"></span>
-                            <md-icon>verfied_user</md-icon>
-                            <button md-icon-button [mdMenuTriggerFor]="user_menu">
-                                <md-icon>more_vert</md-icon>
-                            </button>
-                            <md-menu #user_menu="mdMenu">
-                                <button md-menu-item>
-                                    <md-icon>dialpad</md-icon>
-                                    <span>Call {{ userSelected }}</span>
-                                </button>
-                                <button md-menu-item disabled>
-                                    <md-icon>voicemail</md-icon>
-                                    <span>Check voicemail</span>
-                                </button>
-                                <button md-menu-item>
-                                    <md-icon>notifications_off</md-icon>
-                                    <span>Disable alerts for this user</span>
-                                </button>
-                            </md-menu>
-                        </md-toolbar>
-                        <webapp-chat-messages [user]="userSelected"></webapp-chat-messages>
-                    </div>
-
-
-
-                </md-sidenav-container>-->
-                <md-sidenav-container >
+            <md-sidenav-container >
                     <md-sidenav #sidenav mode="side" opened="true">
                         <md-toolbar color="primary">
                             <h4>My email</h4>
@@ -68,43 +31,43 @@
                                 </button>
                             </md-menu>
                         </md-toolbar>
-                        <webapp-chat-userlist (onUserSelected)="onUserSelected($event)" [userlist]="users"></webapp-chat-userlist>
+                        <webapp-chat-userlist (onConversationSelected)="onConversationSelected($event)" [projects]="projects"></webapp-chat-userlist>
                     </md-sidenav>
-                        <div>
-                            <md-toolbar color="primary" style="border-left:solid 1px gray">
-                                <button type="button" md-button (click)="sidenav.toggle()">
-                                <md-icon>short_text</md-icon>
-                                </button>
-                                <h4>{{userSelected}}</h4>
-                                <span class="spacer"></span>
-                                <md-icon>verfied_user</md-icon>
-                                <button md-icon-button [mdMenuTriggerFor]="user_menu">
-                                    <md-icon>more_vert</md-icon>
-                                </button>
-                                <md-menu #user_menu="mdMenu">
-                                    <button md-menu-item>
-                                        <md-icon>dialpad</md-icon>
-                                        <span>Call {{ userSelected }}</span>
-                                    </button>
-                                    <button md-menu-item disabled>
-                                        <md-icon>voicemail</md-icon>
-                                        <span>Check voicemail</span>
-                                    </button>
-                                    <button md-menu-item>
-                                        <md-icon>notifications_off</md-icon>
-                                        <span>Disable alerts for this user</span>
-                                    </button>
-                                </md-menu>
-                            </md-toolbar>
-                            <webapp-chat-messages [user]="userSelected"></webapp-chat-messages>
-                    </div>
+                 <div>
+                     <md-toolbar color="primary" style="border-left:solid 1px gray">
+                         <button type="button" md-button (click)="sidenav.toggle()">
+                         <md-icon>short_text</md-icon>
+                         </button>
+                         <h4>{{conversationSelected?.name}}</h4>
+                         <span class="spacer"></span>
+                         <md-icon>verfied_user</md-icon>
+                         <button md-icon-button [mdMenuTriggerFor]="user_menu">
+                             <md-icon>more_vert</md-icon>
+                         </button>
+                         <md-menu #user_menu="mdMenu">
+                             <button md-menu-item>
+                                 <md-icon>dialpad</md-icon>
+                                 <span>Call {{ conversationSelected?.name }}</span>
+                             </button>
+                             <button md-menu-item disabled>
+                                 <md-icon>voicemail</md-icon>
+                                 <span>Check voicemail</span>
+                             </button>
+                             <button md-menu-item>
+                                 <md-icon>notifications_off</md-icon>
+                                 <span>Disable alerts for this user</span>
+                             </button>
+                         </md-menu>
+                     </md-toolbar>
+                     <webapp-chat-messages [project]="conversationSelected"></webapp-chat-messages>
+             </div>
 
-                </md-sidenav-container>
-            </md-card-content>
-            <md-card-footer>
-                <md-divider></md-divider>
-                <md-icon>history</md-icon> Just updated
-            </md-card-footer>
-        </md-card>
-    </div>
+         </md-sidenav-container>
+     </md-card-content>
+     <md-card-footer>
+         <md-divider></md-divider>
+         <md-icon>history</md-icon> Just updated
+     </md-card-footer>
+ </md-card>
+</div>
 </div>

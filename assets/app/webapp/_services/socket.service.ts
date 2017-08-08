@@ -46,7 +46,7 @@ export class SocketService {
             chatService.getMessageById(id).subscribe(res=>{
                 chatService.addMessages(res.messages);
             });
-        }.bind(this))
+        }.bind(this));
     }
 
     register(){

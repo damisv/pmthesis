@@ -48,6 +48,10 @@ export class WebappComponent implements OnDestroy,OnInit,AfterViewInit{
     sidebarSubscription:Subscription = this.sidebarService.status$.subscribe(
         status => this.userMenuAvailable = status);
 
+    //Search
+    result:Array<string> = [];
+    resultProfile:Array<any> = [];
+    resultProject:Array<any> = [];
 
     constructor(private profileService:ProfileService,
                 private socketService:SocketService, //don't delete
@@ -60,6 +64,17 @@ export class WebappComponent implements OnDestroy,OnInit,AfterViewInit{
 
     changeMenuColour(color){
         this.menuColor = 'sidebar '+color;
+    }
+
+    search(e:any){
+        this.profileService.filterEmails(e.target.value).subscribe(res=>{
+            this.resultProfile = res.map(function(profile){return profile.email});
+            this.result = this.resultProfile.concat(this.resultProject);
+        });
+        this.projectService.filterName(e.target.value).subscribe(res=>{
+            this.resultProject = res.map(function(project){return project.name});
+            this.result = this.resultProfile.concat(this.resultProject);
+        });
     }
 
 

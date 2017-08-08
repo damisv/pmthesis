@@ -66,6 +66,16 @@
             <md-icon aria-hidden="true">notifications</md-icon>
         </button>
         <div style="flex:1 1 auto"></div>
+        <md-input-container>
+            <md-icon mdPrefix>search</md-icon>
+            <input (keyup)="search($event)" mdInput placeholder="Search" [mdAutocomplete]="auto">
+            <md-autocomplete #auto="mdAutocomplete">
+                <md-option  *ngFor="let value of result">
+                    {{ value }}
+                </md-option>
+            </md-autocomplete>
+        </md-input-container>
+        <div style="flex:1 1 auto"></div>
         <button mdTooltip="Settings" md-icon-button [mdMenuTriggerFor]="settingsMenu" aria-label="Account Settings">
             <md-icon aria-hidden="true">settings</md-icon>
         </button>

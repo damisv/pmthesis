@@ -1,5 +1,12 @@
 import {Component} from "@angular/core";
 import {trigger, stagger, animate, style, group, query, transition, keyframes} from '@angular/animations';
+import {ChatService} from "../../_services/chat.service";
+import {Subscription} from "rxjs/Subscription";
+import {ProjectService} from "../../_services/projects.service";
+import {Project} from "../../../models/project";
+import {forEach} from "@angular/router/src/utils/collection";
+import {ProfileService} from "../../_services/profile.service";
+import {Profile} from "../../../models/profile";
 
 @Component({
     selector: 'webapp-chat',
@@ -25,16 +32,32 @@ import {trigger, stagger, animate, style, group, query, transition, keyframes} f
     }
 })
 export class ChatComponent {
-    users = [
+    /*users = [
         'Danny','Gabriel','Alex','Michael','Jian Yang','George'
-    ];
+    ];*/
+    profile:Profile;
+    projects:Project[];
 
-    userSelected = this.users[0];
+    conversationSelected;
 
-    constructor(){}
+    profileSubscription:Subscription = this.profileService.profile$.subscribe((profile)=>{
+        this.profile = profile;
+    });
+    projectsSubscription:Subscription = this.projectService.projects$.subscribe((projects)=>{
+        this.projects=projects;
+        this.conversationSelected = this.projects[0];
+    });
 
-    onUserSelected(user){
-        this.userSelected = user;
+    constructor(private chatService:ChatService,
+                private projectService:ProjectService,
+                private profileService:ProfileService){}
+
+    onConversationSelected(project){
+        this.conversationSelected = project;
+    }
+
+    ngOnDestroy(){
+        this.projectsSubscription.unsubscribe();
     }
 
 }

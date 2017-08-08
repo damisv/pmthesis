@@ -4,16 +4,6 @@
         fxLayoutGap="10px"
         fxLayoutGap.xs="0" [dragula]='"first-bag"'>
     <div fxFlex="auto">
-
-        <md-input-container>
-            <input (keyup)="search($event)" mdInput placeholder="Search" [mdAutocomplete]="auto">
-        </md-input-container>
-        <md-autocomplete #auto="mdAutocomplete">
-            <md-option  *ngFor="let value of result">
-                {{ value }}
-            </md-option>
-        </md-autocomplete>
-
         <md-card class="card" >
             <md-card-header>
                 <md-card-title>

@@ -60,10 +60,6 @@ export class DashboardComponent implements OnInit{
 
     tasks:Task[];
 
-    result:Array<string> = [];
-    resultProfile:Array<any> = [];
-    resultProject:Array<any> = [];
-
     constructor(private profileService: ProfileService,
                 private titleService: Title,
                 private projectService:ProjectService,
@@ -81,16 +77,6 @@ export class DashboardComponent implements OnInit{
         );
     }
 
-    search(e:any){
-        this.profileService.filterEmails(e.target.value).subscribe(res=>{
-            this.resultProfile = res.map(function(profile){return profile.email});
-            this.result = this.resultProfile.concat(this.resultProject);
-        });
-        this.projectService.filterName(e.target.value).subscribe(res=>{
-            this.resultProject = res.map(function(project){return project.name});
-            this.result = this.resultProfile.concat(this.resultProject);
-        });
-    }
 
     openProjectDashboard(index){
         this.projectService.giveProject(this.projects[index]);
