@@ -4,13 +4,33 @@ import {Subscription} from "rxjs/Subscription";
 import {ProjectService} from "../../_services/projects.service";
 import {Project} from "../../../models/project";
 
+import {trigger, stagger, animate, style, query, transition} from '@angular/animations';
+
 
 declare var Highcharts:any;
 
 @Component({
     selector: 'webapp-project-gantt',
     templateUrl: './gantt.component.html',
-    styleUrls: ['./gantt.component.css']
+    styleUrls: ['./gantt.component.css'],
+    animations: [ trigger('homeTransition', [
+        transition(':enter', [
+            query('.card', style({ opacity: 0 })),
+            query('.card', stagger(300, [
+                style({ transform: 'translateY(100px)' }),
+                animate('1s cubic-bezier(.75,-0.48,.26,1.52)', style({transform: 'translateY(0px)', opacity: 1})),
+            ])),
+        ]),
+        transition(':leave', [
+            query('.card', stagger(300, [
+                style({ transform: 'translateY(0px)', opacity: 1 }),
+                animate('1s cubic-bezier(.75,-0.48,.26,1.52)', style({transform: 'translateY(100px)', opacity: 0})),
+            ])),
+        ])
+    ])],
+    host: {
+        '[@homeTransition]': ''
+    }
 })
 export class GanttComponent implements OnInit,AfterViewInit,OnDestroy{
 
@@ -69,7 +89,6 @@ export class GanttComponent implements OnInit,AfterViewInit,OnDestroy{
                              name: this.project.name,
                              data: tempData
                          });
-                         console.log('max = ',new Date(max));
                          let day = 1000 * 60 * 60 * 24;
                          this.initHighGantt(min,max+2*day);
                          this.timeUpdated = new Date();
@@ -107,11 +126,6 @@ export class GanttComponent implements OnInit,AfterViewInit,OnDestroy{
         if(max<1){
             max=today+15*day;
         }
-
-        console.log(min,' == ',new Date(min));
-        console.log('today ',today);
-        console.log(max, ' == ', new Date(max));
-        console.log('second ',today + 15*day);
 
         Highcharts.ganttChart('ganttChartContainer', {
             title: {

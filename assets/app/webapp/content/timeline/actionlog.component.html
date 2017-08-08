@@ -1,0 +1,28 @@
+<div fxLayout
+     fxLayout.xs="column"
+     fxLayoutAlign="center"
+     fxLayoutGap="10px"
+     fxLayoutGap.xs="0">
+    <div fxFlex>
+        <md-card class="card">
+            <md-card-header>
+                <md-card-title>Action Log</md-card-title>
+                <md-card-subtitle>With dates</md-card-subtitle>
+            </md-card-header>
+            <md-card-content>
+                <section class="timeline" style="height:50em;overflow-y:auto;overflow-x:hidden">
+                    <ul>
+                        <li *ngFor="let log of logs"
+                            in-viewport
+                            (inViewportAction)="action($event)">
+                            <div>
+                                <time>{{log.name}}</time>{{log.date | timeAgo}}
+                            </div>
+                        </li>
+                    </ul>
+                </section>
+            </md-card-content>
+            <md-card-footer><md-icon>history</md-icon>Updated now</md-card-footer>
+        </md-card>
+    </div>
+</div>

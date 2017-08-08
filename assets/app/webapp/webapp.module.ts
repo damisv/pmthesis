@@ -86,6 +86,9 @@ import {GanttComponent} from "./content/tasks/gantt.component";
 import {TeamService} from "./_services/team.service";
 
 import {TimeAgoPipe} from "time-ago-pipe";
+import {ActionLogComponent} from "./content/timeline/actionlog.component";
+
+import {InViewportModule} from "ng-in-viewport";
 
 @NgModule({
     declarations: [
@@ -120,6 +123,7 @@ import {TimeAgoPipe} from "time-ago-pipe";
         CalendarEventViewDialogComponent,
         CalendarEventCreateDialogComponent,
         GanttComponent,
+        ActionLogComponent,
         TimeAgoPipe
     ],
     imports: [
@@ -160,7 +164,8 @@ import {TimeAgoPipe} from "time-ago-pipe";
         BrowserModule,
         BrowserAnimationsModule,
         CalendarModule.forRoot(),
-        ContextMenuModule
+        ContextMenuModule,
+        InViewportModule.forRoot()
     ],
     providers: [
         SidebarService,

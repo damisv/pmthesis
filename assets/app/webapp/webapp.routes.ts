@@ -19,6 +19,7 @@ import {ViewTaskComponent} from "./content/tasks/viewtask.component";
 import {ChatComponent} from "./content/chat/chat.component";
 import {CalendarComponent} from "./content/calendar/calendar.component";
 import {GanttComponent} from "./content/tasks/gantt.component";
+import {ActionLogComponent} from "./content/timeline/actionlog.component";
 
 export const WEBAPP_ROUTES: Routes = [
     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -41,6 +42,7 @@ export const WEBAPP_ROUTES: Routes = [
         { path: 'taskview',component: ViewTaskComponent},
         { path: 'settings', component: ProjectSettingsComponent,canActivate: [ProjectGuard]},
         { path: 'team', component: TeamProjectComponent},
+        { path: 'timeline', component: ActionLogComponent},
         { path: '**', redirectTo: '404', pathMatch: 'full'},
         { path: '404', component: NotFoundErrorComponent}
     ]},
