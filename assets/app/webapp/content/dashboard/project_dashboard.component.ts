@@ -33,14 +33,22 @@ declare var Highcharts:any;
     }
 })
 export class ProjectDashboardComponent implements AfterViewInit{
+    // Time Ago Variables
+    projectUpdated:Date;
+    tasksUpdated:Date;
+    issuesUpdated:Date;
+    milestonesUpdated:Date;
+
     taskSubscription:Subscription ;
     project:Project;
 
-    taskAvailable=true;
+    taskAvailable:boolean=true;
 
     subscription:Subscription;
 
     constructor(private projectService:ProjectService,private titleService:Title,private taskService:TaskService,private router:Router){
+        this.issuesUpdated = new Date();
+        this.milestonesUpdated = new Date();
     }
 
 
@@ -48,9 +56,11 @@ export class ProjectDashboardComponent implements AfterViewInit{
         this.subscription = this.projectService.project$.subscribe(
             project => {
                 this.project = project;
+                this.projectUpdated = new Date();
                 this.titleService.setTitle(this.project.name+" Project Dashboard");
                 this.taskSubscription = this.taskService.getTasksOfProject(this.project._id).subscribe(
                     tasks => {
+                        this.tasksUpdated = new Date();
                         let taskTotal:number = 0;
                         let completed:number=0;
                         let inProgress:number=0;

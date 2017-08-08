@@ -65,6 +65,7 @@
     "serve-favicon": "~2.3.2",
     "socket.io": "^1.7.3",
     "socket.io-client": "^1.7.3",
+    "time-ago-pipe": "^1.2.1",
     "web-animations-js": "^2.3.1",
     "zone.js": "0.8.12"
   },

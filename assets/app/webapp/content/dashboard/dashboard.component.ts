@@ -36,6 +36,13 @@ import {trigger, stagger, animate, style, group, query, transition, keyframes} f
 })
 export class DashboardComponent implements OnInit{
 
+    /*
+    Time Ago variables
+     */
+    projectUpdated:Date;
+    tasksUpdated:Date;
+
+
     profile:Profile;
     subscription:Subscription  = this.profileService.profile$.subscribe(
         profile => {
@@ -48,6 +55,7 @@ export class DashboardComponent implements OnInit{
     projectSubscription:Subscription = this.projectService.projects$.subscribe(
         projects =>{
             this.projects = projects;
+            this.projectUpdated = new Date();
         }
     );
 
@@ -65,6 +73,7 @@ export class DashboardComponent implements OnInit{
         this.taskService.get().subscribe(
             res => {
                 this.tasks = res.tasks;
+                this.tasksUpdated = new Date();
             }
         );
     }

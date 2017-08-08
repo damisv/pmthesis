@@ -84,6 +84,8 @@ import {CalendarEventCreateDialogComponent} from "./content/calendar/calendarEve
 import {ChatService} from "./_services/chat.service";
 import {GanttComponent} from "./content/tasks/gantt.component";
 
+import {TimeAgoPipe} from "time-ago-pipe";
+
 @NgModule({
     declarations: [
         WebappComponent,
@@ -116,7 +118,8 @@ import {GanttComponent} from "./content/tasks/gantt.component";
         CalendarComponent,
         CalendarEventViewDialogComponent,
         CalendarEventCreateDialogComponent,
-        GanttComponent
+        GanttComponent,
+        TimeAgoPipe
     ],
     imports: [
         CommonModule,

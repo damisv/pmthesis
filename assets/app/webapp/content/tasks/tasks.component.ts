@@ -37,6 +37,10 @@ declare var Highcharts:any;
 })
 export class TasksComponent extends GoogleChartComponent implements AfterViewInit{
 
+    //Time Ago Variables
+    ganttUpdated:Date;
+
+
     private options;
     private data;
     private chart;
@@ -69,6 +73,7 @@ export class TasksComponent extends GoogleChartComponent implements AfterViewIni
         this.projectsSubscription = this.projectService.projects$.subscribe(
             projects => {
                 this.projects = projects;
+                this.ganttUpdated = new Date();
                 for(let project of this.projects){
                     this.taskService.getTasksOfProject(project._id).subscribe((tasks)=> {
                         this.dataH.push({
