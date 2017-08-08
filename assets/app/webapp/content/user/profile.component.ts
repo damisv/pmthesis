@@ -64,11 +64,10 @@ export class ProfileComponent implements OnInit,OnDestroy{
             .subscribe(
                 data => {
                     this.profileService.giveProfile(data);
-                    this.notificationService.create("Profile Changes Saved","Profile changes have been successfully saved!","success");
                 },
                 error => {
                     console.error(error);
-                    this.notificationService.create("Error!","An error occured while saving profile changes","error");
+                    this.notificationService.create("error","Error!","An error occured while saving profile changes","error");
                 }
             );
         this.myForm.reset();

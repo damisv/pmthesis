@@ -16,28 +16,28 @@ export class SocketService {
             notificationService.toast("title","content");
         }.bind(this));
         this.socket.on('loginSuccessful', function(){
-            notificationService.toast("Success Login","Welcome back! Have a nice day");
+            //notificationService.toast("Success Login","Welcome back! Have a nice day");
             //let arg = Array.from(arguments);
         }.bind(this));
         this.socket.on('loginError', function(){
-            notificationService.toast("Error Login","There was an error! sorry for the inconvenience!","error");
+            notificationService.create( "error","Error Login","There was an error! sorry for the inconvenience!","error");
         }.bind(this));
         this.socket.on('Invitation', function(projectName){
-            notificationService.toast("Congratulations!","You have a new invite for "+projectName,"info",undefined,['app','invites']);
+            notificationService.create("invite","Congratulations!","You have a new invite for "+projectName,"info",undefined,['app','invites']);
         }.bind(this));
         this.socket.on('connected', function(){
             this.register();
         }.bind(this));
         this.socket.on('memberJoined', function(projectName,email){
-            notificationService.create(email+" joined project "+projectName,"A new member joined "+projectName,"info");
+            notificationService.create("memberJoined",email+" joined project "+projectName,"A new member joined "+projectName,"info");
         }.bind(this));
         this.socket.on('reconnecting', function(){
-            notificationService.create("Reconnecting...","Connection with server has been lost!","error",{timeOut:3000});
+            //notificationService.create("error","Reconnecting...","Connection with server has been lost!","error",{timeOut:3000});
         }.bind(this));
         this.socket.on('taskAssigned', function(projectName,task){
             let email = localStorage.getItem('lastLogged');
             if(task.assignee_email.indexOf(email)>-1){
-                notificationService.create("You have a new task.",task.name+" has been assigned to you!","info",{timeOut:3000},['app','project','tasks']);//todo click -> taskView
+                notificationService.create("myTask","You have a new task.",task.name+" has been assigned to you!","info",{timeOut:3000},['app','project','tasks']);//todo click -> taskView
             }
             taskService.giveTaskArrived(task);
         }.bind(this));

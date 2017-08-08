@@ -6,6 +6,11 @@ import {Router} from "@angular/router";
 export class NotificationService {
 
     types = ["error","success","info","alert","warn"];
+    settings = {
+        "myTask":"push",
+        "memberJoined":"none",
+        "invite":"toast",
+        "error":"push"};
 
     constructor(private toastService:NotificationsService,
                 private pushService:PushNotificationsService,
@@ -58,30 +63,31 @@ export class NotificationService {
         )
     }
 
-    create(title?,content?,type?,options?,route?) {
-        if(content===undefined){
-            content = "";
-        }
-        if(title===undefined){
-            title = "";
-        }
-
-        if (this.pushService.permission === "granted") {
-            this.pushService.create(
-                title,
-                {
-                    body:content,
-                    //icon:"url",
-                    icon:"https://docs.nativescript.org/img/cli-getting-started/angular/chapter0/Angular_logo.png"
-                }
-            ).subscribe(
-                res => {},
-                err => {
-                    console.log(err);
-                }
-            )
-        } else {
+    create(setting?,title?,content?,type?,options?,route?) {
+        if(this.settings[setting]==="push"){
+            if(content===undefined){
+                content = "";
+            }
+            if(title===undefined){
+                title = "";
+            }
             if(this.pushService.permission === "default")this.pushService.requestPermission();
+            if (this.pushService.permission === "granted") {
+                this.pushService.create(
+                    title,
+                    {
+                        body:content,
+                        //icon:"url",
+                        icon:"https://docs.nativescript.org/img/cli-getting-started/angular/chapter0/Angular_logo.png"
+                    }
+                ).subscribe(
+                    res => {},
+                    err => {
+                        console.log(err);
+                    }
+                )
+            }
+        }else if(this.settings[setting]==="toast"){
             this.toast(title, content,type,options,route);
         }
     }

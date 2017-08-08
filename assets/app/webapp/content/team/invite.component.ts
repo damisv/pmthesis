@@ -19,9 +19,8 @@ export class InviteProjectComponent{
             .subscribe(
                 res=>{
                     this.addInvite.emit(email);
-                    this.notificationService.toast("Invite send "+email,"An invite has been send to "+email,"success");
                 },error=>{
-                    this.notificationService.create(" Error Invite failed","Error! Unable to send invite to "+email,"error");
+                    this.notificationService.create("error"," Error Invite failed","Error! Unable to send invite to "+email,"error");
                 }
             );
     }

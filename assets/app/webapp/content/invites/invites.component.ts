@@ -65,7 +65,7 @@ export class InvitesComponent implements OnInit,OnDestroy{
                     this.addProjectToProjects(res.id);
                     this.removeProject(res.id);
                 },error =>{
-                    this.notificationService.create("Error","Error! Unable to join project!","error");
+                    this.notificationService.create("error","Error","Error! Unable to join project!","error");
                 }
             )
     }
@@ -75,7 +75,6 @@ export class InvitesComponent implements OnInit,OnDestroy{
             res=>{
                 this.projects.push(res.project);
                 this.projectService.giveProjects(this.projects);
-                this.notificationService.create(res.project.name,"You have successfully joined " + res.project.name,"success");
             },error=>{
                 console.log(error);
             }

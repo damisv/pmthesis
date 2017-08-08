@@ -66,11 +66,10 @@ export class ProjectSettingsComponent implements OnInit{
             .subscribe(
                 data => {
                     this.projectService.giveProject(data.project);
-                    this.notificationService.toast(data.project.name,"Project settings have been successfully saved!","success");
                 },
                 error => {
                     console.error(error);
-                    this.notificationService.create(this.project.name,"Error! Project was not created!","error");
+                    this.notificationService.create("error",this.project.name,"Error! Project settings not saved!","error");
                 }
             );
     }

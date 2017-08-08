@@ -102,7 +102,15 @@ function initializeDatabase(databaseConnection){
                 { sender: { $exists:true }},
                 { receiver: {$exists:true }},
                 { date_sent: {$exists:true }},
-                { message: {$exists:true }},
+                { message: {$exists:true }}
+            ]
+        }
+        } ).catch(error);
+    db.createCollection( "team",
+        { validator: { $and:
+            [
+                { name: { $exists:true }},
+                { members: {$exists:true }}
             ]
         }
         } ).catch(error);

@@ -83,6 +83,7 @@ import {ContextMenuModule} from "ngx-contextmenu";
 import {CalendarEventCreateDialogComponent} from "./content/calendar/calendarEventCreateDialog.component";
 import {ChatService} from "./_services/chat.service";
 import {GanttComponent} from "./content/tasks/gantt.component";
+import {TeamService} from "./_services/team.service";
 
 @NgModule({
     declarations: [
@@ -170,6 +171,7 @@ import {GanttComponent} from "./content/tasks/gantt.component";
         PushNotificationsService,
         SocketService,
         ChatService,
+        TeamService
     ],
     entryComponents:[
         ProfileDialogComponent,
