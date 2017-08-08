@@ -32,30 +32,44 @@ export class GanttComponent implements OnInit,AfterViewInit,OnDestroy{
              if(project._id!== 'test'){
                  this.taskSubscription = this.taskService.getTasksOfProject(this.project._id).subscribe(tasks =>{
                      let tempData = [];
+                     let todayTemp = new Date();
+                     todayTemp.setUTCMinutes(0);
+                     todayTemp.setUTCSeconds(0);
+                     todayTemp.setUTCMilliseconds(0);
+                     let min = todayTemp.getTime();
+                     let max = 0;
                      if(tasks.length>0) {
                          for(let task of tasks){
+                             try{
+                                 let tempMin = this.getCorrectDays(task.date_start);
+                                 if(tempMin<min) min = tempMin;
+                                 let tempMax = this.getCorrectDays(task.date_end);
+                                 if(tempMax>max) max = tempMax;
+                             }catch (e){
+                                 console.log(e);
+                             }
+                             let dependency;
+                             if(task.dependencies.length>0){
+                                 dependency = task.dependencies.map(function(dependency){ return [dependency.taskID]}).join();
+                             }else{
+                                 dependency = null;
+                             }
                              tempData.push({
                                  taskName: task.name,
                                  id: task._id,
-                                 start: new Date(task.date_start).getTime(),
-                                 end: new Date(task.date_end).getTime()
+                                 start: this.getCorrectDays(task.date_start),
+                                 end: this.getCorrectDays(task.date_end),
+                                 dependency: dependency
                              });
                          }
-                         let min = 0;
-                         let max = 0;
-                         try{
-                             min = new Date(tasks[0].date_start).getTime();
-                             tasks.forEach(function(task){
-                                if(new Date(task.date_end).getTime()>max) max = new Date(task.date_end).getTime();
-                             },this);
-                         }catch (e){
-                             console.log(e);
-                         }
+
                          this.dataSeries.push({
                              name: this.project.name,
                              data: tempData
                          });
-                         this.initHighGantt(min,max);
+                         console.log('max = ',new Date(max));
+                         let day = 1000 * 60 * 60 * 24;
+                         this.initHighGantt(min,max+2*day);
                      }
                  });
              }
@@ -64,9 +78,17 @@ export class GanttComponent implements OnInit,AfterViewInit,OnDestroy{
     }
 
     ngAfterViewInit(){
-
     }
 
+
+    getCorrectDays(date){
+        let dateTemp = new Date(date);
+        dateTemp.setUTCHours(0);
+        dateTemp.setUTCMinutes(0);
+        dateTemp.setUTCSeconds(0);
+        dateTemp.setUTCMilliseconds(0);
+        return dateTemp.getTime();
+    }
 
     initHighGantt(min,max){
         let todayTemp = new Date();
@@ -83,16 +105,34 @@ export class GanttComponent implements OnInit,AfterViewInit,OnDestroy{
             max=today+15*day;
         }
 
+        console.log(min,' == ',new Date(min));
+        console.log('today ',today);
+        console.log(max, ' == ', new Date(max));
+        console.log('second ',today + 15*day);
+
         Highcharts.ganttChart('ganttChartContainer', {
             title: {
                 text: this.project.name+'\'s Tasks'
             },
             xAxis: {
-                currentDateIndicator: false,
+                currentDateIndicator: true,
                 min: min,
                 max: max
             },
-            series: this.dataSeries
+            series: this.dataSeries,
+            responsive:{
+                rules:[{
+                    condition: {
+                        maxWidth: 200,
+                        maxHeight: 250
+                    },
+                    chartOptions:{
+                        legend:{
+                            enabled:false
+                        }
+                    }
+                }]
+            }
         });
     }
 

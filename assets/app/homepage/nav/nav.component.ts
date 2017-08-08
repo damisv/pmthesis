@@ -1,13 +1,16 @@
-import {Component, HostListener} from "@angular/core";
+import {AfterViewInit, Component, HostListener} from "@angular/core";
+import {ObservableMedia} from "@angular/flex-layout";
+import {runInThisContext} from "vm";
 
 @Component({
     selector: 'my-nav',
     templateUrl: './nav.component.html',
     styleUrls: ['./nav.component.css']
 })
-export class NavComponent {
+export class NavComponent implements AfterViewInit{
     isTop:string = '';
     isTransparent:string = '';
+    isMobile:boolean;
 
     @HostListener('window:scroll', ['$event']) onScrollEvent($event){
         let scrollHeight = window.pageYOffset;
@@ -20,7 +23,26 @@ export class NavComponent {
             this.isTop = 'transparent';
             this.isTransparent = 'black';
         }
+    };
+
+    constructor(private media:ObservableMedia){}
+
+    ngAfterViewInit(){
+        this.menuMobile();
+        this.media.subscribe((change) => {
+            this.menuMobile();
+        });
     }
 
-    constructor(){}
+    menuMobile(){
+         if (this.media.isActive('sm')) {
+            this.isMobile = true;
+        }
+        else if (this.media.isActive('xs')) {
+            this.isMobile=true;
+        }
+        else{
+            this.isMobile=false;
+        }
+    }
 }

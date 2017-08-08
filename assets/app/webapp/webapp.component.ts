@@ -160,6 +160,7 @@ export class WebappComponent implements OnDestroy,OnInit,AfterViewInit{
     }
 
     ngAfterViewInit(){
+        this.menuCollapse();
         this.media.subscribe(change => { this.menuCollapse(); });
     }
 

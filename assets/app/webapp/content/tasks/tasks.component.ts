@@ -130,7 +130,20 @@ export class TasksComponent extends GoogleChartComponent implements AfterViewIni
                 min: today - 3 * day,
                 max: today + 18 * day
             },
-            series: this.dataH
+            series: this.dataH,
+            responsive:{
+                rules:[{
+                    condition: {
+                        maxWidth: 200,
+                        maxHeight: 250
+                    },
+                    chartOptions:{
+                        legend:{
+                            enabled:false
+                        }
+                    }
+                }]
+            }
 
         })
     }
