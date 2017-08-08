@@ -19,6 +19,8 @@ import {trigger, stagger, animate, style, group, query, transition, keyframes} f
 
 
 class ExampleDataSource extends DataSource<any> {
+
+
     constructor( private projectService: ProjectService, private _paginator: MdPaginator) {
         super();
         this.projectService.projects$.subscribe(projects=>this.projects=projects);
@@ -66,6 +68,9 @@ class ExampleDataSource extends DataSource<any> {
     }
 })
 export class ProjectsComponent implements OnInit,OnDestroy{
+    // Time Ago variables
+    projectUpdated:Date;
+
 
     @ViewChild('tab') tabGroup;
     user:Profile;
@@ -86,6 +91,7 @@ export class ProjectsComponent implements OnInit,OnDestroy{
     projectsSubscription:Subscription = this.projectService.projects$.subscribe(
         projects => {
             this.projects = projects;
+            this.projectUpdated = new Date();
         });
     projectSubscription:Subscription = this.projectService.project$.subscribe(
         project=>{
@@ -130,11 +136,13 @@ export class ProjectsComponent implements OnInit,OnDestroy{
     addProject(project:Project){
         this.projects.push(project);
         this.projectService.giveProjects(this.projects);
+        this.projectUpdated = new Date();
         this.tabGroup.selectedIndex=0;
     }
 
     editProject(index,name){
         this.projects[index].name = name;
+        this.projectUpdated = new Date();
     }
 
     openSnackBar(message,action,duration){

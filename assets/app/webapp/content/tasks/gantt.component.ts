@@ -21,6 +21,8 @@ export class GanttComponent implements OnInit,AfterViewInit,OnDestroy{
     project:Project;
     dataSeries=[];
 
+    timeUpdated;
+
 
     constructor(private projectService:ProjectService,
                 private taskService:TaskService){
@@ -70,6 +72,7 @@ export class GanttComponent implements OnInit,AfterViewInit,OnDestroy{
                          console.log('max = ',new Date(max));
                          let day = 1000 * 60 * 60 * 24;
                          this.initHighGantt(min,max+2*day);
+                         this.timeUpdated = new Date();
                      }
                  });
              }
