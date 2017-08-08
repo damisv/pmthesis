@@ -12,6 +12,7 @@ import {MD_DIALOG_DATA} from "@angular/material";
             <br>
             End Date : {{ event.end | date:'d MMMM of y H:m' }}
             <br>
+            {{event?.meta}}
         </md-dialog-content>
     `,
     styles: []

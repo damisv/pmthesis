@@ -7,6 +7,8 @@ import {Project} from "../../../models/project";
 import {forEach} from "@angular/router/src/utils/collection";
 import {ProfileService} from "../../_services/profile.service";
 import {Profile} from "../../../models/profile";
+import {EventCreateDialogComponent} from "./eventCreateDialog.component";
+import {MdDialog} from "@angular/material";
 
 @Component({
     selector: 'webapp-chat',
@@ -38,7 +40,7 @@ export class ChatComponent {
     profile:Profile;
     projects:Project[];
 
-    conversationSelected;
+    conversationSelected:Project;
 
     profileSubscription:Subscription = this.profileService.profile$.subscribe((profile)=>{
         this.profile = profile;
@@ -50,10 +52,31 @@ export class ChatComponent {
 
     constructor(private chatService:ChatService,
                 private projectService:ProjectService,
-                private profileService:ProfileService){}
+                private profileService:ProfileService,
+                private dialog:MdDialog){}
 
     onConversationSelected(project){
         this.conversationSelected = project;
+    }
+
+    setMeeting(){
+        let dialogRef = this.dialog.open(EventCreateDialogComponent,{
+            data: this.conversationSelected
+        });
+        dialogRef.afterClosed().subscribe(result => {
+            let tempEvent = this.correctEndDate(result.event);
+            console.log(tempEvent,result.project);
+            //TODO: send event to db
+        });
+    }
+
+    correctEndDate(event){
+        let startTemp = event.start.getTime();
+        let endTemp = event.end.getTime();
+        if(startTemp<endTemp || startTemp==endTemp ) return event;
+        event.end=new Date(startTemp+(1000 * 60 * 60));
+        return event;
+
     }
 
     ngOnDestroy(){

@@ -94,12 +94,14 @@ export class CalendarComponent implements OnInit {
             title: 'Hackathon',
             color: colors.yellow,
             start: new Date(),
-            draggable: true
+            draggable: true,
+            meta:'This is Hackathon Description'
         },
         {
             title: 'Lantzos pitogyra',
             color: colors.blue,
-            start: new Date()
+            start: new Date(),
+            meta:'Pitogyra Description'
         }
     ];
 
@@ -141,10 +143,19 @@ export class CalendarComponent implements OnInit {
             data : date
         });
         dialogRef.afterClosed().subscribe(result => {
-            console.log(result);
-            this.events.push(result);
+            let tempEvent = this.correctEndDate(result);
+            this.events.push(tempEvent);
             this.refresh.next();
         });
+    }
+
+    //Check if end Date is later than start,otherwise end is start+1 hour
+    correctEndDate(event){
+        let startTemp = event.start.getTime();
+        let endTemp = event.end.getTime();
+        if(startTemp<endTemp || startTemp==endTemp ) return event;
+        event.end=new Date(startTemp+(1000 * 60 * 60));
+        return event;
 
     }
 

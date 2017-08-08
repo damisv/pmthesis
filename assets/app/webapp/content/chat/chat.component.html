@@ -49,9 +49,9 @@
                                  <md-icon>dialpad</md-icon>
                                  <span>Call {{ conversationSelected?.name }}</span>
                              </button>
-                             <button md-menu-item disabled>
-                                 <md-icon>voicemail</md-icon>
-                                 <span>Check voicemail</span>
+                             <button md-menu-item (click)="setMeeting()">
+                                 <md-icon>schedule</md-icon>
+                                 <span>Set up a meeting</span>
                              </button>
                              <button md-menu-item>
                                  <md-icon>notifications_off</md-icon>
