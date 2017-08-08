@@ -58,6 +58,12 @@ export class ProjectService {
         return this.post("create",body);
     }
 
+    filterName(name){
+        this.progressBarService.availableProgress();
+        const body = {name:name};
+        return this.post("filter/name",body);
+    }
+
     getProjects(){
         this.post("get",{}).subscribe(
             res=>{

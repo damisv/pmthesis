@@ -8,7 +8,6 @@ import {Router} from "@angular/router";
 import {ProjectService} from "../../_services/projects.service";
 import {Project} from "../../../models/project";
 import {Task} from "../../../models/task";
-import {NotificationService} from "../../_services/notification.service";
 import {trigger, stagger, animate, style, group, query, transition, keyframes} from '@angular/animations';
 
 @Component({
@@ -61,6 +60,10 @@ export class DashboardComponent implements OnInit{
 
     tasks:Task[];
 
+    result:Array<string> = [];
+    resultProfile:Array<any> = [];
+    resultProject:Array<any> = [];
+
     constructor(private profileService: ProfileService,
                 private titleService: Title,
                 private projectService:ProjectService,
@@ -76,6 +79,17 @@ export class DashboardComponent implements OnInit{
                 this.tasksUpdated = new Date();
             }
         );
+    }
+
+    search(e:any){
+        this.profileService.filterEmails(e.target.value).subscribe(res=>{
+            this.resultProfile = res.map(function(profile){return profile.email});
+            this.result = this.resultProfile.concat(this.resultProject);
+        });
+        this.projectService.filterName(e.target.value).subscribe(res=>{
+            this.resultProject = res.map(function(project){return project.name});
+            this.result = this.resultProfile.concat(this.resultProject);
+        });
     }
 
     openProjectDashboard(index){

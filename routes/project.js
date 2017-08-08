@@ -75,6 +75,23 @@ router.post('/search/id',function(req, res){
     );
 });
 
+router.post('/filter/name',function(req, res){
+    db.find(
+        { name: { $regex: new RegExp("^"+req.body.name,"i") }},
+        "projects",
+        { name:1,_id:0}
+    ).then(
+        function(result) {
+            assert.notEqual(null, result);
+            res.status(200).send(result);
+        }).catch(
+        function(err){
+            res.status(500).send();
+            console.log(err);
+        }
+    );
+});
+
 router.post('/get',function(req, res){
     var decoded = jwt.decode(req.body.token);
     var email = decoded.info.email;
