@@ -26,8 +26,10 @@ export class MessagesComponent{
             date: new Date()
         },
         {
-            type:'sent',
-            message: 'How are you?',
+            type:'received',
+            message: 'adfgadfgadfgjandfgnadjfngkjadnkgjnadfgnkjadnfgjandfnakjdfngjadnf  akdjfnkajdnfg adkajdnga dfgkjandfg adfgadf' +
+            'akdfjnadjfngkadjfngkajdnfgajdnfgkajdnfg adfgnadgnakdjfng adfgandfgkjandfkgjandf gkadfnana dfkgjadnfg agnadkgjnadf gkajdfg' +
+            'kjandfgjadnf gkajdnfg akjdfn kadjfn akgn afgn adjf',
             date: new Date()
         },
         {

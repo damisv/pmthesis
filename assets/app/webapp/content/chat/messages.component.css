@@ -42,6 +42,7 @@ section div {
     border-radius: 25px;
     float: right;
     transition: all 0.5s ease;
+    max-width:80%;
 }
 .from-me:before {
     content: "";
@@ -77,6 +78,7 @@ section div {
     color: black;
     float: left;
     transition: all 0.5s ease;
+    max-width:80%;
 }
 .from-them:before {
     content: "";
