@@ -1,11 +1,22 @@
 .userlist{
-    overflow-y: scroll;height:40em
+    overflow-y: auto;
+    height:100%;
 }
 .userlist .user:hover{
     background: lightgray;
 }
+.userlist .projectDiscussion{
+    border-radius: 50% 50% 50% 50%;
+}
+
 .userlist .projectDiscussion:hover{
-    background: green;
+    transition: all 0.35s ease;
+    border-radius: 0;
+    background: #eeeeee;
+    background: -moz-linear-gradient(top, #eeeeee 0%, #cccccc 100%);
+    background: -webkit-linear-gradient(top, #eeeeee 0%,#cccccc 100%);
+    background: linear-gradient(to bottom, #eeeeee 0%,#cccccc 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=0 );
 }
 .spacer{
     flex:1 1 auto;

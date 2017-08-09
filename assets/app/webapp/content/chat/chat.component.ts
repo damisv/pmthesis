@@ -1,4 +1,4 @@
-import {Component} from "@angular/core";
+import {AfterViewInit, Component, OnDestroy, ViewChild} from "@angular/core";
 import {trigger, stagger, animate, style, group, query, transition, keyframes} from '@angular/animations';
 import {ChatService} from "../../_services/chat.service";
 import {Subscription} from "rxjs/Subscription";
@@ -9,6 +9,7 @@ import {ProfileService} from "../../_services/profile.service";
 import {Profile} from "../../../models/profile";
 import {EventCreateDialogComponent} from "./eventCreateDialog.component";
 import {MdDialog} from "@angular/material";
+import {ObservableMedia} from "@angular/flex-layout";
 
 @Component({
     selector: 'webapp-chat',
@@ -33,10 +34,8 @@ import {MdDialog} from "@angular/material";
         '[@homeTransition]':''
     }
 })
-export class ChatComponent {
-    /*users = [
-        'Danny','Gabriel','Alex','Michael','Jian Yang','George'
-    ];*/
+export class ChatComponent implements AfterViewInit,OnDestroy{
+    @ViewChild('sidenav') sidenav;
     profile:Profile;
     projects:Project[];
 
@@ -53,7 +52,8 @@ export class ChatComponent {
     constructor(private chatService:ChatService,
                 private projectService:ProjectService,
                 private profileService:ProfileService,
-                private dialog:MdDialog){}
+                private dialog:MdDialog,
+                private media:ObservableMedia){}
 
     onConversationSelected(project){
         this.conversationSelected = project;
@@ -64,9 +64,13 @@ export class ChatComponent {
             data: this.conversationSelected
         });
         dialogRef.afterClosed().subscribe(result => {
-            let tempEvent = this.correctEndDate(result.event);
-            console.log(tempEvent,result.project);
-            //TODO: send event to db
+            try{
+                let tempEvent = this.correctEndDate(result.event);
+                console.log(tempEvent,result.project);
+                //TODO: send event to db
+            }catch(e){
+                console.error(e);
+            }
         });
     }
 
@@ -76,7 +80,26 @@ export class ChatComponent {
         if(startTemp<endTemp || startTemp==endTemp ) return event;
         event.end=new Date(startTemp+(1000 * 60 * 60));
         return event;
+    }
 
+    ngAfterViewInit(){
+        this.menuCollapse();
+        this.media.subscribe(change => { this.menuCollapse(); });
+    }
+
+    menuCollapse() {
+        if (this.media.isActive('md')) {
+            this.sidenav.close();
+        }
+        else if (this.media.isActive('sm')) {
+            this.sidenav.close();
+        }
+        else if (this.media.isActive('xs')) {
+            this.sidenav.close();
+        }
+        else{
+            this.sidenav.open();
+        }
     }
 
     ngOnDestroy(){

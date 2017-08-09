@@ -6,17 +6,17 @@
         fxLayoutGap.xs="0">
     <div fxFlex="auto">
         <md-card class="card" >
-            <md-card-content style="height:45em">
-            <md-sidenav-container >
-                    <md-sidenav #sidenav mode="side" opened="true">
-                        <md-toolbar color="primary">
+            <md-card-content style="height:50em">
+
+                <md-sidenav-container #sidenav style="height:100%;width:100%;background-color:white!important;">
+                    <md-sidenav #sidenav mode="side" opened="true" style="overflow:hidden">
+                        <md-toolbar color="primary" style="box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2)!important">
                             <h4>My email</h4>
-                            <span class="spacer"></span>
-                            <md-icon>email</md-icon>
-                            <button md-icon-button [mdMenuTriggerFor]="my_menu">
+                            <div style="flex: 1 1 auto"></div>
+                            <button md-icon-button [mdMenuTriggerFor]="my_menu" >
                                 <md-icon>more_vert</md-icon>
                             </button>
-                            <md-menu #my_menu="mdMenu">
+                            <md-menu #my_menu="mdMenu" [overlapTrigger]="false">
                                 <button md-menu-item>
                                     <md-icon>dialpad</md-icon>
                                     <span>Redial</span>
@@ -33,36 +33,36 @@
                         </md-toolbar>
                         <webapp-chat-userlist (onConversationSelected)="onConversationSelected($event)" [projects]="projects"></webapp-chat-userlist>
                     </md-sidenav>
-                 <div>
-                     <md-toolbar color="primary" style="border-left:solid 1px gray">
-                         <button type="button" md-button (click)="sidenav.toggle()">
-                         <md-icon>short_text</md-icon>
-                         </button>
-                         <h4>{{conversationSelected?.name}}</h4>
-                         <span class="spacer"></span>
-                         <md-icon>verfied_user</md-icon>
-                         <button md-icon-button [mdMenuTriggerFor]="user_menu">
-                             <md-icon>more_vert</md-icon>
-                         </button>
-                         <md-menu #user_menu="mdMenu">
-                             <button md-menu-item>
-                                 <md-icon>dialpad</md-icon>
-                                 <span>Call {{ conversationSelected?.name }}</span>
-                             </button>
-                             <button md-menu-item (click)="setMeeting()">
-                                 <md-icon>schedule</md-icon>
-                                 <span>Set up a meeting</span>
-                             </button>
-                             <button md-menu-item>
-                                 <md-icon>notifications_off</md-icon>
-                                 <span>Disable alerts for this user</span>
-                             </button>
-                         </md-menu>
-                     </md-toolbar>
-                     <webapp-chat-messages [project]="conversationSelected"></webapp-chat-messages>
-             </div>
 
-         </md-sidenav-container>
+                    <md-toolbar color="primary" style="border-left:solid 1px gray;box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2)!important">
+                        <button type="button" md-button (click)="sidenav.toggle()">
+                            <md-icon>short_text</md-icon>
+                        </button>
+                        <div style="flex:1 1 auto"></div>
+                        <h4>{{conversationSelected?.name}}</h4>
+                        <div style="flex:1 1 auto"></div>
+                        <button md-icon-button [mdMenuTriggerFor]="user_menu">
+                            <md-icon>more_vert</md-icon>
+                        </button>
+                        <md-menu #user_menu="mdMenu" [overlapTrigger]="false">
+                            <button md-menu-item>
+                                <md-icon>dialpad</md-icon>
+                                <span>Call {{ conversationSelected?.name }}</span>
+                            </button>
+                            <button md-menu-item (click)="setMeeting()">
+                                <md-icon>schedule</md-icon>
+                                <span>Set up a meeting</span>
+                            </button>
+                            <button md-menu-item>
+                                <md-icon>notifications_off</md-icon>
+                                <span>Disable alerts for this user</span>
+                            </button>
+                        </md-menu>
+                    </md-toolbar>
+
+                    <webapp-chat-messages [project]="conversationSelected"></webapp-chat-messages>
+
+                </md-sidenav-container>
      </md-card-content>
      <md-card-footer>
          <md-divider></md-divider>
