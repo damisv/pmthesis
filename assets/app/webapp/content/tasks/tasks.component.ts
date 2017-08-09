@@ -76,23 +76,25 @@ export class TasksComponent extends GoogleChartComponent implements AfterViewIni
                 this.ganttUpdated = new Date();
                 for(let project of this.projects){
                     this.taskService.getTasksOfProject(project._id).subscribe((tasks)=> {
-                        this.dataH.push({
-                            name: project.name,
-                            data : [{
-                                taskName: project.name,
-                                id: project._id
-                            }]
-                        });
-                        let index = this.dataH.findIndex( x => x.name == project.name);
-                        for(let task of tasks){
-                            if(task.assignee_email.find(x => x == this.profile.email)){
-                                this.dataH[index].data.push({
-                                    taskName:task.name,
-                                    id: task._id,
-                                    parent: project._id,
-                                    start: new Date(task.date_start).getTime(),
-                                    end: new Date(task.date_end).getTime()
-                                });
+                        if(tasks.length>1){
+                            this.dataH.push({
+                                name: project.name,
+                                data : [{
+                                    taskName: project.name,
+                                    id: project._id
+                                }]
+                            });
+                            let index = this.dataH.findIndex( x => x.name == project.name);
+                            for(let task of tasks){
+                                if(task.assignee_email.find(x => x == this.profile.email)){
+                                    this.dataH[index].data.push({
+                                        taskName:task.name,
+                                        id: task._id,
+                                        parent: project._id,
+                                        start: new Date(task.date_start).getTime(),
+                                        end: new Date(task.date_end).getTime()
+                                    });
+                                }
                             }
                         }
                         this.initHighGantt();

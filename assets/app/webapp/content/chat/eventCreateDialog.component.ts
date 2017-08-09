@@ -91,7 +91,9 @@ export class EventCreateDialogComponent {
             primary: '#ad2121',
             secondary: '#FAE3E3'
         },
-        meta: null
+        meta: null,
+        draggable: true,
+        actions:[]
     };
 
     constructor(@Inject(MD_DIALOG_DATA) public data: any){

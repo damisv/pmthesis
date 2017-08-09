@@ -90,6 +90,7 @@ import {ActionLogComponent} from "./content/timeline/actionlog.component";
 
 import {InViewportModule} from "ng-in-viewport";
 import {EventCreateDialogComponent} from "./content/chat/eventCreateDialog.component";
+import {CalendarEventEditDialogComponent} from "./content/calendar/calendarEventEditDialog.component";
 
 @NgModule({
     declarations: [
@@ -124,6 +125,7 @@ import {EventCreateDialogComponent} from "./content/chat/eventCreateDialog.compo
         CalendarEventViewDialogComponent,
         CalendarEventCreateDialogComponent,
         EventCreateDialogComponent,
+        CalendarEventEditDialogComponent,
         GanttComponent,
         ActionLogComponent,
         TimeAgoPipe
@@ -188,7 +190,8 @@ import {EventCreateDialogComponent} from "./content/chat/eventCreateDialog.compo
         DependenciesDialogComponent,
         CalendarEventViewDialogComponent,
         CalendarEventCreateDialogComponent,
-        EventCreateDialogComponent
+        EventCreateDialogComponent,
+        CalendarEventEditDialogComponent
     ]
 })
 export class WebappModule {

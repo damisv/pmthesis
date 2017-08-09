@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, OnInit, ViewChild} from "@angular/core";
-import {MdDialog, MdMenu, MdMenuTrigger, MdTabGroup} from "@angular/material";
+import {MdDialog, MdTabGroup} from "@angular/material";
 import {CalendarEvent, CalendarEventTimesChangedEvent} from 'angular-calendar';
 import {
     startOfDay,
@@ -11,10 +11,11 @@ import {
     isSameMonth,
     addHours
 } from 'date-fns';
-import {CalendarEventViewDialogComponent} from "./calendarEventViewDialog.component";
 import {Subject} from "rxjs/Subject";
 import {trigger, stagger, animate, style, group, query, transition, keyframes} from '@angular/animations';
+import {CalendarEventViewDialogComponent} from "./calendarEventViewDialog.component";
 import {CalendarEventCreateDialogComponent} from "./calendarEventCreateDialog.component";
+import {CalendarEventEditDialogComponent} from "./calendarEventEditDialog.component";
 
 export const colors: any = {
     red: {
@@ -94,14 +95,53 @@ export class CalendarComponent implements OnInit {
             title: 'Hackathon',
             color: colors.yellow,
             start: new Date(),
+            end: new Date(),
             draggable: true,
-            meta:'This is Hackathon Description'
+            meta:'This is Hackathon Description',
+            actions: [
+                {
+                    label: '<i class="fa fa-fw fa-pencil"></i>',
+                    onClick: ({ event }: { event: CalendarEvent }): void => {
+                        let editDialog = this.dialog.open(CalendarEventEditDialogComponent,{
+                            data: event
+                        });
+                        editDialog.afterClosed().subscribe((result)=>{
+                            if(result) console.log(result);
+                            this.refresh.next();
+                        });
+                    }
+                }
+            ]
         },
         {
             title: 'Lantzos pitogyra',
             color: colors.blue,
             start: new Date(),
-            meta:'Pitogyra Description'
+            end: new Date(),
+            draggable: true,
+            meta:'Pitogyra Description',
+            actions: [
+                {
+                    label: '<i class="fa fa-fw fa-pencil"></i>',
+                    onClick: ({ event }: { event: CalendarEvent }): void => {
+                        let editDialog = this.dialog.open(CalendarEventEditDialogComponent,{
+                            data: event
+                        });
+                        editDialog.afterClosed().subscribe((result)=>{
+                            if(result) console.log(result);
+                            this.refresh.next();
+                        });
+                    }
+                },
+                {
+                    label: '<i class="fa fa-fw fa-times"></i>',
+                    onClick: ({ event }: { event: CalendarEvent }): void => {
+                        this.events = this.events.filter(iEvent => iEvent !== event);
+                        console.log('Event deleted', event);
+                        this.refresh.next();
+                    }
+                }
+            ]
         }
     ];
 
@@ -144,6 +184,26 @@ export class CalendarComponent implements OnInit {
         });
         dialogRef.afterClosed().subscribe(result => {
             let tempEvent = this.correctEndDate(result);
+            tempEvent.actions.push({
+                    label: '<i class="fa fa-fw fa-pencil"></i>',
+                    onClick: ({ event }: { event: CalendarEvent }): void => {
+                        let editDialog = this.dialog.open(CalendarEventEditDialogComponent,{
+                            data: event
+                        });
+                        editDialog.afterClosed().subscribe((result)=>{
+                            if(result) console.log(result);
+                            this.refresh.next();
+                        });
+                    }
+                },
+                {
+                    label: '<i class="fa fa-fw fa-times"></i>',
+                    onClick: ({ event }: { event: CalendarEvent }): void => {
+                        this.events = this.events.filter(iEvent => iEvent !== event);
+                        console.log('Event deleted', event);
+                        this.refresh.next();
+                    }
+                });
             this.events.push(tempEvent);
             this.refresh.next();
         });
@@ -156,7 +216,6 @@ export class CalendarComponent implements OnInit {
         if(startTemp<endTemp || startTemp==endTemp ) return event;
         event.end=new Date(startTemp+(1000 * 60 * 60));
         return event;
-
     }
 
     seeDay(date){

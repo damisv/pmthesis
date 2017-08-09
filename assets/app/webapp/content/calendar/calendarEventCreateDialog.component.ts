@@ -79,11 +79,13 @@ export class CalendarEventCreateDialogComponent {
         start: this.startDate,
         end: this.endDate,
         title: '',
+        draggable: true,
         color: {
             primary: '#ad2121',
             secondary: '#FAE3E3'
         },
-        meta:null
+        meta:null,
+        actions:[]
     };
 
     constructor(@Inject(MD_DIALOG_DATA) public data: any){
