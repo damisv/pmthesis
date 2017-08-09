@@ -73,8 +73,6 @@ export class CalendarEventEditDialogComponent {
         if(endMinutesTemp<10){
             this.endTime = this.event.end.getHours()+':0'+endMinutesTemp;
         }
-        console.log(this.startTime);
-        console.log(this.endTime);
     }
 
     setStartDate(event):void{

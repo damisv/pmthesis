@@ -38,8 +38,8 @@
                                 </md-card-subtitle>
                             </md-card-header>
                             <md-card-content>
-                                <div class="table-full-width" style="height: 100%;overflow:auto;display:block;">
-                                    <table class="table">
+                                <div  style="height: 100%;width:100%;overflow:auto;display:table;">
+                                    <table style="height: 100%;width:100%;">
                                         <thead>
                                         <tr>
                                             <th>Status</th>
@@ -51,7 +51,7 @@
                                         </thead>
                                         <tbody>
                                         <ng-template ngFor let-task [ngForOf]="tasks" let-i="index">
-                                            <tr *ngIf="checkStatus(i)" [ngClass]="{'taskCompleted': task.completed}" >
+                                            <tr *ngIf="checkStatus(i)" [ngClass]="{'taskCompleted': task.completed}" style="text-align: center">
                                                 <td>
                                                     <md-checkbox *ngIf="hasRightToCompleteTask(task.assigner_email,task.assignee_email)" (change)="completeTask($event.checked,i)" [checked]="task.completed" ></md-checkbox>
                                                     <md-checkbox *ngIf="!hasRightToCompleteTask(task.assigner_email,task.assignee_email)" [checked]="task.completed" disabled></md-checkbox>
