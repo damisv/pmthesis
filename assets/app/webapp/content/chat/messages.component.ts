@@ -1,4 +1,9 @@
 import {Component, Input} from "@angular/core";
+import {Message} from "../../../models/message";
+import {ActivatedRoute} from "@angular/router";
+import {ChatService} from "../../_services/chat.service";
+import {Subscription} from "rxjs/Subscription";
+import {ProfileService} from "../../_services/profile.service";
 
 @Component({
     selector: 'webapp-chat-messages',
@@ -6,61 +11,36 @@ import {Component, Input} from "@angular/core";
     styleUrls: ['./messages.component.css']
 })
 export class MessagesComponent{
-    @Input() project;
     messageInput;
+    projectID;
+    profile;
+    messages:Message[] = [];
 
-    messages = [
-        {
-            type:'sent',
-            message: 'How are you?',
-            date: new Date()
-        },
-        {
-            type: 'received',
-            message: 'Im fine you ?',
-            date: new Date()
-        },
-        {
-            type:'sent',
-            message: 'How are you?',
-            date: new Date()
-        },
-        {
-            type:'received',
-            message: 'adfgadfgadfgjandfgnadjfngkjadnkgjnadfgnkjadnfgjandfnakjdfngjadnf  akdjfnkajdnfg adkajdnga dfgkjandfg adfgadf' +
-            'akdfjnadjfngkadjfngkajdnfgajdnfgkajdnfg adfgnadgnakdjfng adfgandfgkjandfkgjandf gkadfnana dfkgjadnfg agnadkgjnadf gkajdfg' +
-            'kjandfgjadnf gkajdnfg akjdfn kadjfn akgn afgn adjf',
-            date: new Date()
-        },
-        {
-            type:'sent',
-            message: 'How are you?',
-            date: new Date()
-        },
-        {
-            type:'sent',
-            message: 'How are you?',
-            date: new Date()
-        },
-        {
-            type:'received',
-            message: 'How are you?',
-            date: new Date()
-        },
-        {
-            type:'received',
-            message: 'How are you?',
-            date: new Date()
-        },
-        {
-            type:'received',
-            message: 'How are you?',
-            date: new Date()
-        }];
+    /*messageSubscription:Subscription = this.chatService.messages$.subscribe((messages)=>{
+       this.messages = messages;
+    });*/
+    profileSubscription:Subscription = this.profileService.profile$.subscribe((profile)=>{
+        this.profile = profile;
+    });
 
-    constructor(){}
+    constructor(
+        private route: ActivatedRoute,
+        private chatService:ChatService,
+        private profileService:ProfileService){}
 
     ngOnInit(){
+        this.route.params.subscribe((params: {id: string}) => {
+            this.projectID = params.id;
+            console.log(params.id);
+            if(params.id!=='none'){
+                /*this.chatService.getProjectMessages(params.id).subscribe(messages=>{
+                    console.log(messages);
+                    this.messages = messages;
+                });*/
+                console.log('it is different');
+            }
+
+        });
     }
 
     sendMessage(){
@@ -68,13 +48,10 @@ export class MessagesComponent{
             this.messageInput=null;
             return false;
         }
-        let messageTemp={
-            type:'sent',
-            message:this.messageInput,
-            date:new Date()
-        };
-        this.messages.push(messageTemp);
-        this.messageInput=null;
+        let messageTemp= new Message('',this.profile.email,this.projectID,this.messageInput,new Date());
+        this.chatService.sendToProject(this.projectID,messageTemp).subscribe((result)=>{
+            this.messageInput=null;
+        });
     }
 
 }

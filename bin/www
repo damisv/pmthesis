@@ -133,7 +133,7 @@ var ioCustom = {
         io.to(id).emit("message",message_id);
     },
     sentMessageProject:function(receiver,message_id){
-        io.to(receiver).emit("message",message_id);
+        io.to(receiver).emit("projectMessage",message_id);
     }
 };
 

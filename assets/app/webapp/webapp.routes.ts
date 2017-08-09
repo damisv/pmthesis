@@ -20,6 +20,7 @@ import {ChatComponent} from "./content/chat/chat.component";
 import {CalendarComponent} from "./content/calendar/calendar.component";
 import {GanttComponent} from "./content/tasks/gantt.component";
 import {ActionLogComponent} from "./content/timeline/actionlog.component";
+import {MessagesComponent} from "./content/chat/messages.component";
 
 export const WEBAPP_ROUTES: Routes = [
     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -31,7 +32,9 @@ export const WEBAPP_ROUTES: Routes = [
     { path: 'myissues', component: IssuesComponent},
     { path: 'myprojects', component: ProjectsComponent },
     { path: 'invites', component: InvitesComponent},
-    { path: 'chat', component: ChatComponent},
+    { path: 'chat', component: ChatComponent,children:[
+        {path: ':id',component:MessagesComponent,outlet:'messages'}
+    ]},
     { path: 'calendar', component: CalendarComponent},
     { path: 'project',children:[
         { path: '',redirectTo: 'dashboard',pathMatch:'full'},

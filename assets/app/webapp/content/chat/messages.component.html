@@ -3,7 +3,7 @@
         <div style="padding-top:2em;padding-bottom:2em;">
             <section>
                 <div *ngFor="let message of messages">
-                    <div [ngClass]="{'from-me': message.type=='sent','from-them':message.type=='received'}" mdTooltip="{{message.date | timeAgo}}"><p>{{message.message}}</p></div>
+                    <div [ngClass]="{'from-me': message.sender==tempEmail,'from-them':message.sender!==tempEmail}" mdTooltip="{{message.date_sent | timeAgo}}"><p>{{message.message}}</p></div>
                     <div class="clear"></div>
                 </div>
             </section>

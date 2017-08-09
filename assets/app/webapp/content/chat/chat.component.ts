@@ -1,15 +1,14 @@
-import {AfterViewInit, Component, OnDestroy, ViewChild} from "@angular/core";
+import {AfterViewInit, Component, OnDestroy, ViewChild, OnInit} from "@angular/core";
 import {trigger, stagger, animate, style, group, query, transition, keyframes} from '@angular/animations';
-import {ChatService} from "../../_services/chat.service";
 import {Subscription} from "rxjs/Subscription";
 import {ProjectService} from "../../_services/projects.service";
 import {Project} from "../../../models/project";
-import {forEach} from "@angular/router/src/utils/collection";
 import {ProfileService} from "../../_services/profile.service";
 import {Profile} from "../../../models/profile";
 import {EventCreateDialogComponent} from "./eventCreateDialog.component";
 import {MdDialog} from "@angular/material";
 import {ObservableMedia} from "@angular/flex-layout";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
     selector: 'webapp-chat',
@@ -34,29 +33,32 @@ import {ObservableMedia} from "@angular/flex-layout";
         '[@homeTransition]':''
     }
 })
-export class ChatComponent implements AfterViewInit,OnDestroy{
+export class ChatComponent implements OnInit,AfterViewInit,OnDestroy{
     @ViewChild('sidenav') sidenav;
-    profile:Profile;
-    projects:Project[];
+    profile:Profile=null;
+    projects:Project[]=null;
 
-    conversationSelected:Project;
+    conversationSelected:Project=null;
 
     profileSubscription:Subscription = this.profileService.profile$.subscribe((profile)=>{
         this.profile = profile;
     });
     projectsSubscription:Subscription = this.projectService.projects$.subscribe((projects)=>{
         this.projects=projects;
-        this.conversationSelected = this.projects[0];
     });
 
-    constructor(private chatService:ChatService,
+    constructor(
                 private projectService:ProjectService,
                 private profileService:ProfileService,
                 private dialog:MdDialog,
-                private media:ObservableMedia){}
+                private media:ObservableMedia,
+                private router:Router,
+                private route:ActivatedRoute){}
+
 
     onConversationSelected(project){
         this.conversationSelected = project;
+        this.router.navigate(['app/chat', {outlets: {'messages': [project._id]}}]);
     }
 
     setMeeting(){
@@ -64,12 +66,10 @@ export class ChatComponent implements AfterViewInit,OnDestroy{
             data: this.conversationSelected
         });
         dialogRef.afterClosed().subscribe(result => {
-            try{
+            if(result!=null){
                 let tempEvent = this.correctEndDate(result.event);
                 console.log(tempEvent,result.project);
                 //TODO: send event to db
-            }catch(e){
-                console.error(e);
             }
         });
     }
@@ -80,6 +80,9 @@ export class ChatComponent implements AfterViewInit,OnDestroy{
         if(startTemp<endTemp || startTemp==endTemp ) return event;
         event.end=new Date(startTemp+(1000 * 60 * 60));
         return event;
+    }
+
+    ngOnInit(){
     }
 
     ngAfterViewInit(){
@@ -105,5 +108,6 @@ export class ChatComponent implements AfterViewInit,OnDestroy{
     ngOnDestroy(){
         this.projectsSubscription.unsubscribe();
     }
+
 
 }

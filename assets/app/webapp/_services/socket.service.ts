@@ -41,11 +41,11 @@ export class SocketService {
             }
             taskService.giveTaskArrived(task);
         }.bind(this));
-        this.socket.on('message', function(id){
+        this.socket.on('projectMessage', function(id){
             notificationService.create("You have a new message.","Read here!","info",{timeOut:3000},['app','project','chat']);//todo click -> chat
-            chatService.getMessageById(id).subscribe(res=>{
+            /*chatService.getMessageById(id).subscribe(res=>{
                 chatService.addMessages(res.messages);
-            });
+            });*/
         }.bind(this));
     }
 

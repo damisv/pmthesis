@@ -41,7 +41,7 @@
                         <div style="flex:1 1 auto"></div>
                         <h4>{{conversationSelected?.name}}</h4>
                         <div style="flex:1 1 auto"></div>
-                        <button md-icon-button [mdMenuTriggerFor]="user_menu">
+                        <button *ngIf="conversationSelected!==null" md-icon-button [mdMenuTriggerFor]="user_menu">
                             <md-icon>more_vert</md-icon>
                         </button>
                         <md-menu #user_menu="mdMenu" [overlapTrigger]="false">
@@ -60,7 +60,7 @@
                         </md-menu>
                     </md-toolbar>
 
-                    <webapp-chat-messages [project]="conversationSelected"></webapp-chat-messages>
+                    <router-outlet name="messages"></router-outlet>
 
                 </md-sidenav-container>
      </md-card-content>

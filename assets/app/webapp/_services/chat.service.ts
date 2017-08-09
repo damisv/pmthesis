@@ -15,9 +15,9 @@ export class ChatService {
     messages$ = this.messages.asObservable();
 
     addMessages(messages: Message[]){
-        messages.forEach(function(message){
+        /*messages.forEach(function(message){
             this.messages.value.push(message);
-        });
+        });*/
         this.messages.next(messages);
     }
 
@@ -43,7 +43,7 @@ export class ChatService {
 
     sendToProject(project_id,message){
         const body = {project_id:project_id,message:message};
-        return this.post("sent/project",body);
+        return this.post("send/project",body);
     }
 
 

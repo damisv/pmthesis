@@ -3,6 +3,7 @@ var router = express.Router();
 var jwt = require('jsonwebtoken');
 var db = require('../data/db');
 var assert = require('assert');
+var ObjectID = require('mongodb').ObjectID;
 
 router.use('/',function(req,res,next){
     jwt.verify(req.body.token,'secret',function(err,decoded){
@@ -16,11 +17,12 @@ router.use('/',function(req,res,next){
 
 router.post('/get/message',function(req, res){
     db.find(
-        {_id:req.body.message_id},
+        {_id: new ObjectID(req.body.message_id)},
         "chat"
     ).then(
         function(result) {
             assert.notEqual(null, result);
+            console.log(result);
             res.status(200).send({messages:result});
         }
     ).catch(
@@ -51,7 +53,7 @@ router.post('/get',function(req, res){
     var email = decoded.info.email;
     db.find(
         { $or: [ {receiver:email}, {sender:email} ] },
-        "tasks"
+        "chat"
     ).then(
         function(result) {
             assert.notEqual(null, result);
@@ -64,22 +66,22 @@ router.post('/get',function(req, res){
         });
 });
 
-router.post('/sent/project',function(req, res){
+router.post('/send/project',function(req, res){
     var decoded = jwt.decode(req.body.token);
     var email = decoded.info.email;
     db.insertOne(
         {
             sender: email,
-            receiver:req.body.receiver,
-            message:req.body.message,
-            date_created: new Date()
+            receiver:req.body.project_id,
+            message:req.body.message.message,
+            date_sent: new Date()
         },
         "chat"
     ).then(
         function(result) {
             assert.notEqual(null, result);
             res.status(200).send({message:result.ops[0]});
-            require('../bin/www').io.sentMessageProject(req.body.receiver,result.ops[0]._id);
+            require('../bin/www').io.sentMessageProject(req.body.project_id,result.ops[0]._id);
         }
     ).catch(
         function(err){
@@ -89,22 +91,22 @@ router.post('/sent/project',function(req, res){
     );
 });
 
-router.post('/sent',function(req, res){
+router.post('/send',function(req, res){
     var decoded = jwt.decode(req.body.token);
     var email = decoded.info.email;
     db.insertOne(
         {
             sender_email: email,
-            receiver:req.body.receiver,
-            message:req.body.message,
-            date_created: new Date()
+            receiver:req.body.message.receiver,
+            message:req.body.message.message,
+            date_sent: new Date()
         },
         "chat"
     ).then(
         function(result) {
             assert.notEqual(null, result);
             res.status(200).send({message:result.ops[0]});
-            require('../bin/www').io.sentMessage(req.body.receiver,result.ops[0]._id);
+            require('../bin/www').io.sentMessage(req.body.message.receiver,result.ops[0]._id);
         }
     ).catch(
         function(err){
