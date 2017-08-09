@@ -43,9 +43,11 @@ export class SocketService {
         }.bind(this));
         this.socket.on('projectMessage', function(id){
             notificationService.create("You have a new message.","Read here!","info",{timeOut:3000},['app','project','chat']);//todo click -> chat
-            /*chatService.getMessageById(id).subscribe(res=>{
-                chatService.addMessages(res.messages);
-            });*/
+            chatService.getMessageById(id).subscribe(res=>{
+                if(res.messages.length>0){
+                    chatService.addMessages(res.messages);
+                }
+            });
         }.bind(this));
     }
 

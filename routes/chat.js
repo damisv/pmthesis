@@ -33,11 +33,14 @@ router.post('/get/message',function(req, res){
 });
 
 router.post('/get/project',function(req, res){
+    console.log('projectid',req.body.project_id);
     db.find(
         {receiver:req.body.project_id},
-        "chat"
+        "chat",
+        {}
     ).then(
         function(result) {
+            console.log(result);
             assert.notEqual(null, result);
             res.status(200).send({messages:result});
         }

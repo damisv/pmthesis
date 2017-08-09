@@ -31,15 +31,18 @@ export class MessagesComponent{
     ngOnInit(){
         this.route.params.subscribe((params: {id: string}) => {
             this.projectID = params.id;
-            console.log(params.id);
-            if(params.id!=='none'){
-                /*this.chatService.getProjectMessages(params.id).subscribe(messages=>{
-                    console.log(messages);
-                    this.messages = messages;
-                });*/
-                console.log('it is different');
-            }
-
+            this.chatService.getProjectMessages(params.id).subscribe(messages=>{
+                this.messages = [];
+                console.log(params.id);
+                console.log(messages.messages.length);
+                if(messages.messages.length>0){
+                    console.log('messages available');
+                    for(let message of messages.messages){
+                        this.messages.push(message);
+                    }
+                }
+                //this.messages = messages;
+            });
         });
     }
 

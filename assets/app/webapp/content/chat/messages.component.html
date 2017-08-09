@@ -6,6 +6,7 @@
                     <div [ngClass]="{'from-me': message.sender==tempEmail,'from-them':message.sender!==tempEmail}" mdTooltip="{{message.date_sent | timeAgo}}"><p>{{message.message}}</p></div>
                     <div class="clear"></div>
                 </div>
+                <div *ngIf="messages.length<1">No messages on this conversation</div>
             </section>
         </div>
     </div>
