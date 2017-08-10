@@ -16,34 +16,13 @@ router.use('/',function(req,res,next){
 
 router.post('/create',function(req, res){
     db.insertOne(
-        req.body.team,
-        "team"
+        req.body.notification,
+        "notification"
     ).then(
         function(result) {
             assert.notEqual(null, result);
             res.status(200).send({
-                team: result.ops[0]
-            });
-        }
-    ).catch(
-        function(err){
-            res.status(500).send({
-                title: 'Create team Failed',
-                error : err
-            });
-        }
-    );
-});
-
-router.post('/get',function(req, res){
-    db.findOne(
-        {name:req.body.name},
-        "team"
-    ).then(
-        function(result) {
-            assert.notEqual(null, result);
-            res.status(200).send({
-                team: result
+                notification: result.ops[0]
             });
         }
     ).catch(
@@ -52,26 +31,34 @@ router.post('/get',function(req, res){
                 title: 'An error occurred',
                 error : err
             });
-        }
-    );
-});
-
-router.post('/update',function(req, res){
-    db.updateOne(
-        { _id : req.body.team._id },
-        { $set: req.body.team },
-        "team"
-    ).then(
-        function(result) {
-            assert.equal(1, result.result.ok);
-            res.status(200).send(req.body.team);
-        }
-    ).catch(
-        function(err){
-            res.status(500).send();
             console.log(err);
         }
     );
 });
+
+router.post('/get',function(req, res){
+    var decoded = jwt.decode(req.body.token);
+    var email = decoded.info.email;
+    db.find(
+        {email: email},
+        "notification"
+    ).then(
+        function(result) {
+            assert.notEqual(null, result);
+            res.status(200).send({
+                notifications: result
+            });
+        }
+    ).catch(
+        function(err){
+            res.status(500).send({
+                title: 'get notifications failed',
+                error : err
+            });
+            console.log(err);
+        }
+    );
+});
+
 
 module.exports = router;

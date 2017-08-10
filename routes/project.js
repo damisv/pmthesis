@@ -35,6 +35,10 @@ router.post('/create',function(req, res){
             res.status(200).send({project:result.ops[0]});
             addProject(result.ops[0]._id,result.ops[0].name);
             require('../bin/www').io.joinRoom(result.ops[0]._id,email);
+            db.insertOne(
+                {name:result.ops[0].name,date:new Date(Date.now()),description:"Project created",project:result.ops[0]._id},
+                "action"
+            ).then(function(result) {});
         }else{
             res.status(204).send();
         }
@@ -77,7 +81,7 @@ router.post('/search/id',function(req, res){
 
 router.post('/filter/name',function(req, res){
     db.find(
-        { name: { $regex: new RegExp("^"+req.body.name,"i") }},
+        { name: { $regex: new RegExp("^"+req.body.name,"i") } , typeOf:"public"},
         "projects",
         { name:1,_id:0}
     ).then(

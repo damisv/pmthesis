@@ -67,14 +67,18 @@ export class WebappComponent implements OnDestroy,OnInit,AfterViewInit{
     }
 
     search(e:any){
-        this.profileService.filterEmails(e.target.value).subscribe(res=>{
-            this.resultProfile = res.map(function(profile){return profile.email});
-            this.result = this.resultProfile.concat(this.resultProject);
-        });
-        this.projectService.filterName(e.target.value).subscribe(res=>{
-            this.resultProject = res.map(function(project){return project.name});
-            this.result = this.resultProfile.concat(this.resultProject);
-        });
+        if(e.target.value.length<1){
+            this.result = [];
+        }else{
+            this.profileService.filterEmails(e.target.value).subscribe(res=>{
+                this.resultProfile = res.map(function(profile){return profile.email});
+                this.result = this.resultProfile.concat(this.resultProject);
+            });
+            this.projectService.filterName(e.target.value).subscribe(res=>{
+                this.resultProject = res.map(function(project){return project.name});
+                this.result = this.resultProfile.concat(this.resultProject);
+            });
+        }
     }
 
 

@@ -91,6 +91,7 @@ import {ActionLogComponent} from "./content/timeline/actionlog.component";
 import {InViewportModule} from "ng-in-viewport";
 import {EventCreateDialogComponent} from "./content/chat/eventCreateDialog.component";
 import {CalendarEventEditDialogComponent} from "./content/calendar/calendarEventEditDialog.component";
+import {ActionService} from "./_services/action.service";
 
 @NgModule({
     declarations: [
@@ -183,7 +184,8 @@ import {CalendarEventEditDialogComponent} from "./content/calendar/calendarEvent
         PushNotificationsService,
         SocketService,
         ChatService,
-        TeamService
+        TeamService,
+        ActionService
     ],
     entryComponents:[
         ProfileDialogComponent,

@@ -114,6 +114,18 @@ function initializeDatabase(databaseConnection){
             ]
         }
         } ).catch(error);
+    db.createCollection( "action").catch(error);
+    db.createCollection( "notification",
+        { validator: { $and:
+            [
+                { email: { $exists:true }},
+                { type: { $exists:true }},
+                { link: {$exists:true }},
+                { date: {$exists:true }},
+                { status: {$exists:true }}
+            ]
+        }
+        } ).catch(error);
 }
 
 function error(err){

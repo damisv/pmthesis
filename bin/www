@@ -103,15 +103,25 @@ function onListening() {
   debug('Listening on ' + bind);
 }
 
-var ioCustom = {
-  inviteMemberToProject:function(projectID,invites){
+/*inviteMembersToProject:function(projectID,invites){
       var projectName = require('./socket').getProjectName(projectID);
       invites.forEach(function(email) {
           var id = require('./socket').getClient(email);
-          io.to(id).emit("Invitation",projectName);
+          io.to(id).emit("Invitation",projectName,projectID);
       });
-  },
-    memberJoinedProject:function(projectID,email){
+  },*/
+//
+var ioCustom = {
+    inviteMemberToProject: function(projectID,notification){
+        var projectName = require('./socket').getProjectName(projectID);
+        var id = require('./socket').getClient(notification.email);
+        io.to(id).emit("Invitation",projectName,notification);
+    },
+    taskAssignedToMembers: function(projectID,task){
+        var projectName = require('./socket').getProjectName(projectID);
+        io.to(projectID).emit("taskAssigned",projectName,task);
+    },
+    memberJoinedProject: function(projectID,email){
         var projectName = require('./socket').getProjectName(projectID);
         var id = require('./socket').getClient(email);
         io.to(projectID).emit("memberJoined",projectName,email);
@@ -119,20 +129,16 @@ var ioCustom = {
         io.connected[id].join(projectID);
         console.log(email+" joined room/projectID "+projectID);
     },
-    joinRoom:function(roomID,email){
+    joinRoom: function(roomID,email) {
         var id = require('./socket').getClient(email);
         //add user in room/project
         io.connected[id].join(roomID);
     },
-    taskAssignedToMembers:function(projectID,task){
-        var projectName = require('./socket').getProjectName(projectID);
-        io.to(projectID).emit("taskAssigned",projectName,task);
-    },
-    sentMessage:function(receiver,message_id){
+    sentMessage: function(receiver,message_id){
         var id = require('./socket').getClient(receiver);
         io.to(id).emit("message",message_id);
     },
-    sentMessageProject:function(receiver,message_id){
+    sentMessageProject: function(receiver,message_id){
         io.to(receiver).emit("projectMessage",message_id);
     }
 };

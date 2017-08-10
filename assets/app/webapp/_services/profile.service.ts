@@ -4,9 +4,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
 import {Profile} from "../../models/profile";
-import {BehaviorSubject, Subject} from "rxjs";
-import {toArray} from "rxjs/operator/toArray";
-import {error} from "util";
+import {BehaviorSubject} from "rxjs";
 import {ProgressBarService} from "./progressbar.service";
 import {Router} from "@angular/router";
 

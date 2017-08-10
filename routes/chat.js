@@ -6,7 +6,7 @@ var assert = require('assert');
 var ObjectID = require('mongodb').ObjectID;
 
 router.use('/',function(req,res,next){
-    jwt.verify(req.body.token,'secret',function(err,decoded){
+    jwt.verify(req.body.token,'secret',function(err){
         if(err){
             res.status(500).send();
         }else{
@@ -22,7 +22,6 @@ router.post('/get/message',function(req, res){
     ).then(
         function(result) {
             assert.notEqual(null, result);
-            console.log(result);
             res.status(200).send({messages:result});
         }
     ).catch(
@@ -40,7 +39,6 @@ router.post('/get/project',function(req, res){
         {}
     ).then(
         function(result) {
-            console.log(result);
             assert.notEqual(null, result);
             res.status(200).send({messages:result});
         }

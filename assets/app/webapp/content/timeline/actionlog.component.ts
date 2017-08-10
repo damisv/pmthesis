@@ -1,6 +1,7 @@
 import {Component, Renderer2} from "@angular/core";
 
 import {trigger, stagger, animate, style, group, query, transition, keyframes} from '@angular/animations';
+import {ActionService} from "../../_services/action.service";
 
 @Component({
     selector: 'webapp-project-actionlog',
@@ -40,7 +41,13 @@ export class ActionLogComponent {
         {name: 'Clara joined this project as a Product Owner',date:new Date()}
     ];
 
-    constructor(private renderer: Renderer2) {
+    constructor(private renderer: Renderer2,private actionLogService: ActionService) {
+        let projectID = localStorage.getItem('projectID');
+        actionLogService.getProject(projectID).subscribe(res=>{
+            this.logs = res.actions.map(function (action) {
+                return {name:action.description+" "+action.name,date:action.date};
+            });
+        });
     }
 
     action(event){

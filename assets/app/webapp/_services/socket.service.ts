@@ -22,7 +22,8 @@ export class SocketService {
         this.socket.on('loginError', function(){
             notificationService.create( "error","Error Login","There was an error! sorry for the inconvenience!","error");
         }.bind(this));
-        this.socket.on('Invitation', function(projectName){
+        this.socket.on('Invitation', function(projectName,notification){
+            notificationService.add(notification);
             notificationService.create("invite","Congratulations!","You have a new invite for "+projectName,"info",undefined,['app','invites']);
         }.bind(this));
         this.socket.on('connected', function(){

@@ -76,7 +76,7 @@
 
                                 <ng-container cdkColumnDef="Members">
                                     <md-header-cell *cdkHeaderCellDef> Team Members </md-header-cell>
-                                    <md-cell *cdkCellDef="let row"> {{row?.team.length}} </md-cell>
+                                    <md-cell *cdkCellDef="let row" (click)="openProjectTeam(row._id)" > {{row?.team.length}} </md-cell>
                                 </ng-container>
 
                                 <md-header-row *cdkHeaderRowDef="displayedColumns"></md-header-row>

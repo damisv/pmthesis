@@ -66,7 +66,28 @@ router.post('/members',function(req, res){
             assert.equal(1,result.result.ok);
             res.status(200).send({ok:"ok"});
             if(req.body.invites.invites.length > 0){
-                require('../bin/www').io.inviteMemberToProject(req.body.invites.project,req.body.invites.invites);
+                req.body.invites.invites.forEach(function(email){
+                    var notification = {
+                        email:email,
+                        type:"invite",
+                        link:['app','invites'],
+                        date:new Date(Date.now()),
+                        status:"unseen"
+                    };
+                    db.insertOne(
+                        notification,
+                        "notification"
+                    ).then(
+                        function(result) {
+                            assert.notEqual(null, result);
+                            require('../bin/www').io.inviteMemberToProject(req.body.invites.project,result.ops[0]);
+                        }
+                    ).catch(
+                        function(err){
+                            console.log(err);
+                        }
+                    );
+                });
             }
         }
     ).catch(

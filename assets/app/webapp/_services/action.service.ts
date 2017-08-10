@@ -3,47 +3,18 @@ import { Http, Headers, Response } from "@angular/http";
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
-import {Profile} from "../../models/profile";
-import {BehaviorSubject} from "rxjs";
-import {Message} from "../../models/message";
 
 @Injectable()
-export class ChatService {
+export class ActionService {
 
-    private messages = new BehaviorSubject<Message[]>([]);
-
-    messages$ = this.messages.asObservable();
-
-    addMessages(messages: Message[]){
-        /*messages.forEach(function(message){
-            this.messages.value.push(message);
-        });*/
-        this.messages.next(messages);
-    }
-
-    getMessages(){
-        const body = {};
-        return this.post("get",body);
-    }
-
-    getMessageById(id){
-        const body = {message_id:id};
-        return this.post("get/message",body);
-    }
-
-    getProjectMessages(project_id){
-        const body = {project_id:project_id};
+    getProject(projectID){
+        const body = {projectID:projectID};
         return this.post("get/project",body);
     }
 
-    send(receiver,message){
-        const body = {receiver:receiver,message:message};
-        return this.post("send",body);
-    }
-
-    sendToProject(project_id,message){
-        const body = {project_id:project_id,message:message};
-        return this.post("send/project",body);
+    create(action){
+        const body = {action:action};
+        return this.post("create",body);
     }
 
 
@@ -51,7 +22,7 @@ export class ChatService {
         body.token = localStorage.getItem("token");
         body = JSON.stringify(body);
         const headers = new Headers({'Content-Type': 'application/json'});
-        return this.http.post("chat/"+url, body, {headers: headers})
+        return this.http.post("action/"+url, body, {headers: headers})
             .map(response => response.json())
             .catch(this.handleError);
     }
