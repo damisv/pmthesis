@@ -9,6 +9,8 @@ import {ChatService} from "./_services/chat.service";
 import {ObservableMedia} from "@angular/flex-layout";
 import {MdSidenav} from "@angular/material";
 import {SidebarService} from "./sidebar/sidebar.service";
+import {NotificationService} from "./_services/notification.service";
+import {Notification} from "../models/notification";
 
 @Component({
     selector: 'my-webapp',
@@ -22,16 +24,12 @@ export class WebappComponent implements OnDestroy,OnInit,AfterViewInit{
     userMenuAvailable=true;
     @ViewChild('sidenav') sidenav:MdSidenav;
     isMobile:boolean=false;
-
-    notifications = [
-        {name:'A new task has been assigned to you!',date:'24/7/2017'},
-        {name: 'Bill Gates has invited you to a new project! ', date:'24/7/2017'},
-        {name:'A new task has been assigned to you!',date:'24/7/2017'},
-        {name: 'Bill Gates has invited you to a new project! ', date:'24/7/2017'},
-        {name:'A new task has been assigned to you!',date:'24/7/2017'},
-        {name: 'Bill Gates has invited you to a new project! ', date:'24/7/2017'}
-    ];
-
+    notifications:Notification[] = [];
+    //notifications:Notification[];
+    notificationsSubscription:Subscription = this.notificationService.notifications$.subscribe(
+        notifications=>{
+            this.notifications = notifications;
+        });
 
     @HostListener('document:hover',['$event']) particleHover;
 
@@ -59,7 +57,8 @@ export class WebappComponent implements OnDestroy,OnInit,AfterViewInit{
                 private chatService:ChatService,
                 private router:Router,
                 private media: ObservableMedia,
-                private sidebarService:SidebarService){
+                private sidebarService:SidebarService,
+                private notificationService:NotificationService){
     }
 
     changeMenuColour(color){
@@ -87,6 +86,7 @@ export class WebappComponent implements OnDestroy,OnInit,AfterViewInit{
             profile=>{
                 this.profile = profile;
                 localStorage.setItem('lastLogged',profile.email);
+                this.notificationService.get();
             }
         );
         this.profileService.getProfile();
@@ -209,6 +209,8 @@ export class WebappComponent implements OnDestroy,OnInit,AfterViewInit{
 
     ngOnDestroy() {
         if(this.subscription!==undefined)
-        this.subscription.unsubscribe();
+            this.subscription.unsubscribe();
+        if(this.notificationsSubscription!==undefined)
+            this.notificationsSubscription.unsubscribe();
     }
 }

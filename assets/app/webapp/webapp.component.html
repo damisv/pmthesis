@@ -17,19 +17,19 @@
     </md-sidenav>
 
     <md-sidenav #notificationsSidenav mode="over" align="end" style="width:45%;box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2)!important;">
-        <md-list>
+        <md-list *ngIf="notifications.length>0">
             <h3 md-subheader>New Notifications</h3>
             <md-list-item *ngFor="let notification of notifications">
-                <md-icon md-list-icon style="color:darkred">notifications</md-icon>
-                <h4 md-line>{{notification.name}}</h4>
-                <p md-line> {{notification.date}} </p> <!-- TODO:datepipe to add -->
+                <md-icon md-list-icon style="color:darkred"  >notifications</md-icon>
+                <h4 md-line >{{notification.type}}</h4>
+                <p md-line > {{notification.date}} </p> <!-- TODO:datepipe to add -->
             </md-list-item>
             <md-divider></md-divider>
             <h3 md-subheader>Seen Notifications</h3>
-            <md-list-item *ngFor="let notification of notifications">
-                <md-icon md-list-icon style="color:lightgray">notifications</md-icon>
-                <h4 md-line>{{notification.name}}</h4>
-                <p md-line> {{notification.date}} </p> <!-- TODO:datepipe to add -->
+            <md-list-item *ngFor="let notification of notifications ">
+                    <md-icon md-list-icon style="color:lightgray">notifications</md-icon>
+                    <h4 md-line>{{notification.type}}</h4>
+                    <p md-line> {{notification.date}} </p> <!-- TODO:datepipe to add -->
             </md-list-item>
         </md-list>
     </md-sidenav>

@@ -1,7 +1,6 @@
-import {Component, Input, ViewChild} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {Router} from "@angular/router";
 import {Profile} from "../../models/profile";
-import {MdMenu, MdMenuTrigger} from "@angular/material";
 
 @Component({
     selector: 'webapp-navbar',

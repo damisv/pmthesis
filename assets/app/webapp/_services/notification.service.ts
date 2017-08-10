@@ -16,7 +16,9 @@ export class NotificationService {
 
     get(){
         this.progressBarService.availableProgress();
-        this.post("get",{}).subscribe(notifications=>this.notifications.next(notifications));
+        this.post("get",{}).subscribe(res=>{
+            this.notifications.next(res.notifications);
+        });
     }
 
     save(notification:Notification){
