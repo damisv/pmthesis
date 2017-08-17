@@ -79,10 +79,9 @@ export class TasksComponent implements AfterViewInit{
                 for(let project of this.projects){
                     this.taskService.getTasksOfProject(project._id).subscribe((tasks)=> {
                         if(tasks.length>0){
-                            let color=this.getRandomColor();
                             this.dataH.push({
                                 name: project.name,
-                                color: color,
+                                color: this.getRandomColor(),
                                 data : [{
                                     taskName: project.name,
                                     id: project._id,
