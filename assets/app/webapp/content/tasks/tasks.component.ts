@@ -72,7 +72,7 @@ export class TasksComponent implements AfterViewInit{
                 this.ganttUpdated = new Date();
                 for(let project of this.projects){
                     this.taskService.getTasksOfProject(project._id).subscribe((tasks)=> {
-                        if(tasks.length>1){
+                        if(tasks.length>0){
                             this.dataH.push({
                                 name: project.name,
                                 data : [{
