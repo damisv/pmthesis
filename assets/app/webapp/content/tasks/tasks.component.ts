@@ -70,19 +70,35 @@ export class TasksComponent implements AfterViewInit{
             projects => {
                 this.projects = projects;
                 this.ganttUpdated = new Date();
+                let todayTemp = new Date();
+                todayTemp.setUTCMinutes(0);
+                todayTemp.setUTCSeconds(0);
+                todayTemp.setUTCMilliseconds(0);
+                let min = todayTemp.getTime();
+                let max = 0;
                 for(let project of this.projects){
                     this.taskService.getTasksOfProject(project._id).subscribe((tasks)=> {
                         if(tasks.length>0){
+                            let color=this.getRandomColor();
                             this.dataH.push({
                                 name: project.name,
+                                color: color,
                                 data : [{
                                     taskName: project.name,
-                                    id: project._id
+                                    id: project._id,
                                 }]
                             });
                             let index = this.dataH.findIndex( x => x.name == project.name);
                             for(let task of tasks){
                                 if(task.assignee_email.find(x => x == this.profile.email)){
+                                    try{
+                                        let tempMin = this.getCorrectDays(task.date_start);
+                                        if(tempMin<min) min = tempMin;
+                                        let tempMax = this.getCorrectDays(task.date_end);
+                                        if(tempMax>max) max = tempMax;
+                                    }catch (e){
+                                        console.log(e);
+                                    }
                                     this.dataH[index].data.push({
                                         taskName:task.name,
                                         id: task._id,
@@ -93,29 +109,37 @@ export class TasksComponent implements AfterViewInit{
                                 }
                             }
                         }
-                        this.initHighGantt();
+                        let day = 1000 * 60 * 60 * 24;
+                        this.initHighGantt(min,max+2*day);
                     });
                 }
-                this.initTasks();
             });
         this.titleService.setTitle("My Tasks");
     }
 
 
-    initTasks(){
-        /*this.taskService.getTasksOfProjects().subscribe(
-            res => {
-                this.taskService.giveTasks(res.tasks);
-            },
-            error => console.error(error)
-        );*/
+    getRandomColor() {
+        let letters = '0123456789ABCDEF';
+        let color = '#';
+        for (let i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    }
 
+    getCorrectDays(date){
+        let dateTemp = new Date(date);
+        dateTemp.setUTCHours(0);
+        dateTemp.setUTCMinutes(0);
+        dateTemp.setUTCSeconds(0);
+        dateTemp.setUTCMilliseconds(0);
+        return dateTemp.getTime();
     }
 
     /*
     Highcharts Gantt
      */
-    initHighGantt(){
+    initHighGantt(min,max){
         let todayTemp = new Date();
         todayTemp.setUTCMinutes(0);
         todayTemp.setUTCSeconds(0);
@@ -124,14 +148,21 @@ export class TasksComponent implements AfterViewInit{
         let day = 1000 * 60 * 60 * 24;
         let today = todayTemp.getTime();
 
+        if(min<1){
+            min = today - 5*day;
+        }
+        if(max<1){
+            max=today+15*day;
+        }
+
         Highcharts.ganttChart('container', {
             title: {
                 text: this.profile.email+'\'s Upcoming Tasks'
             },
             xAxis: {
                 currentDateIndicator: true,
-                min: today - 3 * day,
-                max: today + 18 * day
+                min: min,
+                max: max
             },
             series: this.dataH,
             responsive:{
