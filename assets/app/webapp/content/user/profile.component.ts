@@ -32,7 +32,6 @@ import {ProjectService} from "../../_services/projects.service";
     }
 })
 export class ProfileComponent implements OnInit,OnDestroy{
-    myForm: FormGroup;
     profile:Profile;
     subscription: Subscription = this.profileService.profile$.subscribe(
         profile => {
@@ -54,35 +53,21 @@ export class ProfileComponent implements OnInit,OnDestroy{
     }
 
     onSubmit() {
-        const profile = new Profile(
-            this.myForm.value.email,
-            this.myForm.value.username,
-            this.myForm.value.firstName,
-            this.myForm.value.lastName
-        );
-        this.profileService.edit(profile)
-            .subscribe(
-                data => {
-                    this.profileService.giveProfile(data);
-                },
-                error => {
-                    console.error(error);
-                    this.notificationService.create("error","Error!","An error occured while saving profile changes","error");
-                }
-            );
-        this.myForm.reset();
+        if(this.profile.email){
+            this.profileService.edit(this.profile)
+                .subscribe(
+                    data => {
+                        this.profileService.giveProfile(data);
+                    },
+                    error => {
+                        console.error(error);
+                        this.notificationService.create("error","Error!","An error occured while saving profile changes","error");
+                    }
+                );
+        }
     }
 
     ngOnInit(){
-        this.myForm = new FormGroup({
-            email: new FormControl(null, [
-                Validators.required,
-                Validators.pattern("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
-            ]),
-            lastName: new FormControl(null, Validators.required),
-            firstName: new FormControl(null, Validators.required),
-            username: new FormControl(null, Validators.required)
-        });
         this.titleService.setTitle("My Profile");
     }
     ngOnDestroy() {

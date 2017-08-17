@@ -27,7 +27,14 @@ router.post('/edit',function(req, res){
     var email = decoded.info.email;
     db.updateOne(
         { email : email },
-        { $set: req.body.profile },
+        { $set: {   username: req.body.profile.username,
+                    firstName:req.body.profile.firstName,
+                    lastName:req.body.profile.lastName,
+                    address:req.body.profile.address,
+                    city:req.body.profile.city,
+                    country:req.body.profile.country,
+                    description:req.body.profile.description
+        } },
         "profiles"
     ).then(
         function(result) {

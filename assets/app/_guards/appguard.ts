@@ -14,11 +14,11 @@ export class AppGuard implements CanActivateChild {
             if(localStorage.getItem('lastLogged')){
                 this.router.navigate(['/auth/lock'], {queryParams: { returnUrl: state.url }});
                 return false;
+            }else{
+                // not logged in so redirect to login page with the return url
+                this.router.navigate(['/auth/signin'], { queryParams: { returnUrl: state.url }});
+                return false;
             }
         }
-
-        // not logged in so redirect to login page with the return url
-        this.router.navigate(['/auth/signin'], { queryParams: { returnUrl: state.url }});
-        return false;
     }
 }
