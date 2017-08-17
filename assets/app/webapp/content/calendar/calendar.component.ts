@@ -16,6 +16,7 @@ import {trigger, stagger, animate, style, group, query, transition, keyframes} f
 import {CalendarEventViewDialogComponent} from "./calendarEventViewDialog.component";
 import {CalendarEventCreateDialogComponent} from "./calendarEventCreateDialog.component";
 import {CalendarEventEditDialogComponent} from "./calendarEventEditDialog.component";
+import {CalendarService} from "../../_services/calendar.service";
 
 export const colors: any = {
     red: {
@@ -82,8 +83,10 @@ export class CalendarComponent implements OnInit {
 
     @ViewChild('calendarView') calendarView:MdTabGroup;
 
-    constructor(private dialog:MdDialog){
-
+    constructor(private dialog:MdDialog,private calendarService:CalendarService){
+        calendarService.getMyEvents().subscribe();
+        calendarService.getProjectEvents('123456').subscribe();
+        calendarService.getTeamEvents('team').subscribe();
     }
 
     onSelectChange(event:any):void{
@@ -191,6 +194,7 @@ export class CalendarComponent implements OnInit {
                             data: event
                         });
                         editDialog.afterClosed().subscribe((result)=>{
+                            //TODO: Switch for what type of Event and update DB
                             if(result) console.log(result);
                             this.refresh.next();
                         });
@@ -200,10 +204,12 @@ export class CalendarComponent implements OnInit {
                     label: '<i class="fa fa-fw fa-times"></i>',
                     onClick: ({ event }: { event: CalendarEvent }): void => {
                         this.events = this.events.filter(iEvent => iEvent !== event);
+                        //TODO: Switch for what type of Event and delete the right one from DB
                         console.log('Event deleted', event);
                         this.refresh.next();
                     }
                 });
+            //TODO: Switch for what type of Event and add to DB
             this.events.push(tempEvent);
             this.refresh.next();
         });

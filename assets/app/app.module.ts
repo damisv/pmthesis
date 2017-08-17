@@ -28,7 +28,6 @@ import { FlexLayoutModule } from "@angular/flex-layout";
 import {ProgressBarService} from "./webapp/_services/progressbar.service";
 import { ErrorDialogComponent} from "./errors/error.component";
 import {PushNotificationsModule,SimpleNotificationsModule} from "angular2-notifications";
-import {GoogleChartComponent} from "./webapp/_services/googlechart.component";
 
 
 
@@ -42,8 +41,7 @@ import {GoogleChartComponent} from "./webapp/_services/googlechart.component";
         AuthfooterComponent,
         AuthnavComponent,
         NotFoundRedirectComponent,
-        ErrorDialogComponent,
-        GoogleChartComponent
+        ErrorDialogComponent
     ],
     imports: [
         BrowserModule,

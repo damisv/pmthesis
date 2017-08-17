@@ -40,6 +40,7 @@ var taskRoutes = require('../routes/task');
 var chatRoutes = require('../routes/chat');
 var actionRoutes = require('../routes/action');
 var notificationRoutes = require('../routes/notification');
+var calendarRoutes = require('../routes/calendar');
 app.use('/project',projectRoutes);
 app.use('/profile',profileRoutes);
 app.use('/auth',authRoutes);
@@ -48,6 +49,7 @@ app.use('/task',taskRoutes);
 app.use('/chat',chatRoutes);
 app.use('/action',actionRoutes);
 app.use('/notification',notificationRoutes);
+app.use('/calendar',calendarRoutes);
 app.use('/', appRoutes);
 
 

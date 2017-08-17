@@ -21,13 +21,17 @@ import {CalendarComponent} from "./content/calendar/calendar.component";
 import {GanttComponent} from "./content/tasks/gantt.component";
 import {ActionLogComponent} from "./content/timeline/actionlog.component";
 import {MessagesComponent} from "./content/chat/messages.component";
+import {UserSettingsComponent} from "./content/settings/user_settings.component";
+import {ViewProjectComponent} from "./content/projects/view_project.component";
 
 export const WEBAPP_ROUTES: Routes = [
     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
     { path: '' , component: SidebarComponent, outlet: 'sidebar'},
     { path: 'dashboard', component: DashboardComponent },
+    { path: 'settings',component:UserSettingsComponent},
     { path: 'profile', component: ProfileComponent },
     { path: 'profile/:id', component: OthersProfileComponent},
+    { path: 'viewproject/:id',component:ViewProjectComponent},
     { path: 'mytasks', component: TasksComponent },
     { path: 'myissues', component: IssuesComponent},
     { path: 'myprojects', component: ProjectsComponent },

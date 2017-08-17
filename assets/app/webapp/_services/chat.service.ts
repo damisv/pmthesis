@@ -3,7 +3,6 @@ import { Http, Headers, Response } from "@angular/http";
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
-import {Profile} from "../../models/profile";
 import {BehaviorSubject} from "rxjs";
 import {Message} from "../../models/message";
 

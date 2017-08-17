@@ -17,20 +17,26 @@
     </md-sidenav>
 
     <md-sidenav #notificationsSidenav mode="over" align="end" style="width:45%;box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2)!important;">
-        <md-list *ngIf="notifications.length>0">
-            <h3 md-subheader>New Notifications</h3>
-            <md-list-item *ngFor="let notification of notifications">
-                <md-icon md-list-icon style="color:darkred"  >notifications</md-icon>
-                <h4 md-line >{{notification.type}}</h4>
-                <p md-line > {{notification.date}} </p> <!-- TODO:datepipe to add -->
-            </md-list-item>
+        <md-list *ngIf="unseenNotifications.length>0">
+                <h3 md-subheader>Unseen Notifications</h3>
+                <ng-template ngFor let-notification [ngForOf]="unseenNotifications">
+                    <md-list-item>
+                        <button md-line md-icon-button (click)="onSeenNotification(notification)"><md-icon style="color:darkred">notifications</md-icon></button>
+                        <h4 md-line>{{notification.type}}</h4>
+                        <p md-line> {{notification.date | timeAgo}} </p>
+                    </md-list-item>
+                </ng-template>
+        </md-list>
+        <md-list *ngIf="seenNotifications.length>0">
             <md-divider></md-divider>
-            <h3 md-subheader>Seen Notifications</h3>
-            <md-list-item *ngFor="let notification of notifications ">
+            <h3 md-subheader >Seen Notifications</h3>
+            <ng-template ngFor let-notification [ngForOf]="seenNotifications">
+                <md-list-item>
                     <md-icon md-list-icon style="color:lightgray">notifications</md-icon>
                     <h4 md-line>{{notification.type}}</h4>
-                    <p md-line> {{notification.date}} </p> <!-- TODO:datepipe to add -->
-            </md-list-item>
+                    <p md-line> {{notification.date | timeAgo}} </p>
+                </md-list-item>
+            </ng-template>
         </md-list>
     </md-sidenav>
 
@@ -62,16 +68,20 @@
         <a md-icon-button [routerLink]="['/app']" aria-label="User's Dashboard">
             <md-icon aria-hidden="true">home</md-icon>
         </a>
-        <button mdTooltip="6 new notifications !" md-icon-button class="badge" data-badge="6" (click)="notificationsSidenav.toggle()" aria-label="View Notifications">
+        <button mdTooltip="{{unseenNotifications.length}} unseen notifications !"
+                md-icon-button [ngClass]="{'badge': unseenNotifications.length>0}"
+                [attr.data-badge]="unseenNotifications.length"
+                (click)="notificationsSidenav.toggle()"
+                aria-label="View Notifications">
             <md-icon aria-hidden="true">notifications</md-icon>
         </button>
         <div style="flex:1 1 auto"></div>
         <md-input-container>
             <md-icon mdPrefix>search</md-icon>
-            <input (keyup)="search($event)" mdInput placeholder="Search" [mdAutocomplete]="auto">
+            <input #searchInput ngModel (ngModelChange)="search($event)" mdInput placeholder="Search" [mdAutocomplete]="auto">
             <md-autocomplete #auto="mdAutocomplete">
-                <md-option  *ngFor="let value of result">
-                    {{ value }}
+                <md-option  *ngFor="let value of result" (onSelectionChange)="onResultSelected(value)">
+                    {{ value.value }}
                 </md-option>
             </md-autocomplete>
         </md-input-container>
@@ -80,7 +90,7 @@
             <md-icon aria-hidden="true">settings</md-icon>
         </button>
         <md-menu #settingsMenu="mdMenu"  [overlapTrigger]="false">
-            <button md-menu-item>Item 1</button>
+            <a md-menu-item [routerLink]="['settings']"></a>
             <button md-menu-item>Item 2</button>
         </md-menu>
         <button mdTooltip="Logout" md-icon-button (click)="onLogout()" aria-label="Logout">

@@ -8,9 +8,7 @@ export class ProgressBarService {
     progressBarOptions = {
         available : false,
         color : 'primary',
-        mode : 'indeterminate',
-        value : 50,
-        bufferValue : 75
+        mode : 'query'
     };
 
     private progressBar = new BehaviorSubject<any>(this.progressBarOptions);
@@ -25,7 +23,7 @@ export class ProgressBarService {
     }
 
     updateProgress(addNumber:number):void{
-        this.progressBarOptions.value+=addNumber;
+        //this.progressBarOptions.value+=addNumber;
         this.progressBar.next(this.progressBarOptions);
     }
 }

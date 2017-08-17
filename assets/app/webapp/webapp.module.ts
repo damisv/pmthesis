@@ -92,6 +92,9 @@ import {InViewportModule} from "ng-in-viewport";
 import {EventCreateDialogComponent} from "./content/chat/eventCreateDialog.component";
 import {CalendarEventEditDialogComponent} from "./content/calendar/calendarEventEditDialog.component";
 import {ActionService} from "./_services/action.service";
+import {UserSettingsComponent} from "./content/settings/user_settings.component";
+import {CalendarService} from "./_services/calendar.service";
+import {ViewProjectComponent} from "./content/projects/view_project.component";
 
 @NgModule({
     declarations: [
@@ -110,6 +113,7 @@ import {ActionService} from "./_services/action.service";
         ProjectTasksComponent,
         InviteProjectComponent,
         EditProjectComponent,
+        UserSettingsComponent,
         ProjectSettingsComponent,
         TeamProjectComponent,
         InvitesComponent,
@@ -117,6 +121,7 @@ import {ActionService} from "./_services/action.service";
         CreateTaskComponent,
         ViewTaskComponent,
         ProfileDialogComponent,
+        ViewProjectComponent,
         NotFoundErrorComponent,
         DependenciesDialogComponent,
         ChatComponent,
@@ -185,7 +190,8 @@ import {ActionService} from "./_services/action.service";
         SocketService,
         ChatService,
         TeamService,
-        ActionService
+        ActionService,
+        CalendarService
     ],
     entryComponents:[
         ProfileDialogComponent,

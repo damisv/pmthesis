@@ -83,7 +83,7 @@ router.post('/filter/name',function(req, res){
     db.find(
         { name: { $regex: new RegExp("^"+req.body.name,"i") } , typeOf:"public"},
         "projects",
-        { name:1,_id:0}
+        { name:1,_id:1}
     ).then(
         function(result) {
             assert.notEqual(null, result);

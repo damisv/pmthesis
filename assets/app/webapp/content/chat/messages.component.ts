@@ -33,10 +33,7 @@ export class MessagesComponent{
             this.projectID = params.id;
             this.chatService.getProjectMessages(params.id).subscribe(messages=>{
                 this.messages = [];
-                console.log(params.id);
-                console.log(messages.messages.length);
                 if(messages.messages.length>0){
-                    console.log('messages available');
                     for(let message of messages.messages){
                         this.messages.push(message);
                     }

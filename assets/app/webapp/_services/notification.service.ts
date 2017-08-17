@@ -60,6 +60,7 @@ export class NotificationService {
         "myTask":"push",
         "memberJoined":"none",
         "invite":"toast",
+        "message":"push",
         "error":"push"};
 
     constructor(private toastService:NotificationsService,

@@ -44,10 +44,10 @@
                     <md-card-subtitle>Invite users to work on your project</md-card-subtitle>
                     <md-card-content>
                         <md-input-container>
-                            <input (keyup.enter)="onInvite()" mdInput placeholder="Invites" [mdAutocomplete]="auto" [formControl]="inviteCtrl" [(ngModel)]="memberToInvite">
+                            <input (keyup.enter)="onInvite()" mdInput   placeholder="Invites" [mdAutocomplete]="auto" [(ngModel)]="memberToInvite" (ngModelChange)="search($event)">
                         </md-input-container>
                         <md-autocomplete #auto="mdAutocomplete">
-                            <md-option (click)="onInvite()" *ngFor="let member of membersAutocomplete | async" [value]="member.email">
+                            <md-option (click)="onInvite()" *ngFor="let member of membersAutocomplete" [value]="member.email">
                                 {{ member.email }}
                             </md-option>
                         </md-autocomplete>

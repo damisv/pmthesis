@@ -1,5 +1,4 @@
 import {AfterViewInit, Component} from "@angular/core";
-import { GoogleChartComponent} from '../../_services/googlechart.component';
 import {Title} from "@angular/platform-browser";
 import {trigger, stagger, animate, style, query, transition} from '@angular/animations';
 import {Subscription} from "rxjs/Subscription";
@@ -35,15 +34,12 @@ declare var Highcharts:any;
         '[@homeTransition]': ''
     }
 })
-export class TasksComponent extends GoogleChartComponent implements AfterViewInit{
+export class TasksComponent implements AfterViewInit{
 
     //Time Ago Variables
     ganttUpdated:Date;
 
 
-    private options;
-    private data;
-    private chart;
     private dataH = [];
     private profile:Profile;
     profileSubscription:Subscription;
@@ -54,9 +50,9 @@ export class TasksComponent extends GoogleChartComponent implements AfterViewIni
     tasksSubscription:Subscription;
 
     titleService = new Title("");
-    constructor(private taskService: TaskService, private projectService:ProjectService,private profileService:ProfileService){
-        super();
-    }
+    constructor(private taskService: TaskService,
+                private projectService:ProjectService,
+                private profileService:ProfileService){}
 
     ngAfterViewInit(){
         this.tasksSubscription = this.taskService.tasks$.subscribe(
@@ -155,61 +151,8 @@ export class TasksComponent extends GoogleChartComponent implements AfterViewIni
         })
     }
 
-    drawGraph(){
-        let data = [];
-        data.push(['Task ID', 'Task Name', 'Start Date','End Date','Duration','Percent Complete','Dependencies']);
-        /*if(this.tasks.length>0){
-            this.tasks.forEach(function(task){
-                let dependency;
-                if(task.dependencies.length>0){
-                    dependency = task.dependencies.map(function(dependency){ return dependency.taskID}).join();
-                }else{
-                    dependency = null;
-                }
-                data.push([task._id, task.name, new Date(task.date_start),new Date(task.date_end), this.daysToMilliseconds(1),  100,  dependency]);
-            },this);
-        }*/
-
-        this.data = this.createDataTable(data);
-
-        /*
-        [
-            ['Task ID', 'Task Name', 'Start Date','End Date','Duration','Percent Complete','Dependencies'],
-            ['Research', this.tasks[0].name, new Date(2015, 0, 1), new Date(2015, 0, 5), null,  100,  this.tasks[0].dependencies.join()],
-            ['Write', 'Write paper', null, new Date(2015, 0, 9), this.daysToMilliseconds(3), 25, 'Research,Outline'],
-            ['Cite', 'Create bibliography', null, new Date(2015, 0, 7), this.daysToMilliseconds(1), 20, 'Research'],
-            ['Complete', 'Hand in paper', null, new Date(2015, 0, 10), this.daysToMilliseconds(1), 0, 'Cite,Write'],
-            ['Outline', 'Outline paper', null, new Date(2015, 0, 6), this.daysToMilliseconds(1), 100, 'Research']
-        ]
-         */
-        this.options = {
-            height: 275,
-            gantt: {
-                criticalPathEnabled: true,
-                criticalPathStyle: {
-                    stroke: '#e64a19',
-                    strokeWidth: 5
-                },
-                arrow: {
-                    angle: 1,
-                    width: 5,
-                    color: 'green',
-                    radius: 0
-                }
-
-            }
-        };
-
-        this.chart = this.createGanttChart(document.getElementById('chart_div'));
-        this.chart.draw(this.data, this.options);
-    }
-
     daysToMilliseconds(days) {
         return days * 24 * 60 * 60 * 1000;
-    }
-
-    onResize(event){
-        this.drawGraph();
     }
 
     ngOnDestroy(){

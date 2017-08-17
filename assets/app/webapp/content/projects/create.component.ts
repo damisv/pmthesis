@@ -1,8 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from "@angular/core";
 import {ProjectService} from "../../_services/projects.service";
 import {Member, Project} from "../../../models/project";
-import {FormControl} from "@angular/forms";
-import {Observable} from "rxjs/Observable";
 import {MdGridList, MdSnackBar} from "@angular/material";
 import {ProfileService} from "../../_services/profile.service";
 import {InviteService} from "../../_services/invite.service";
@@ -22,8 +20,7 @@ export class CreateProjectComponent implements OnInit{
     membersToInvite = [];
     msg:String="";
 
-    membersAutocomplete:Observable<Array<string>>;
-    inviteCtrl = new FormControl();
+    membersAutocomplete:Array<string>=[];
     memberToInvite:String=null;
 
     @ViewChild('grid')
@@ -41,8 +38,6 @@ export class CreateProjectComponent implements OnInit{
     }
 
     ngOnInit(){
-        this.membersAutocomplete = this.inviteCtrl.valueChanges
-            .switchMap(email => this.profileService.filterEmails(email));
     }
 
     ngAfterViewInit(){
@@ -120,5 +115,15 @@ export class CreateProjectComponent implements OnInit{
 
     openSnackBar(message,action,duration){
         this.snackBar.open(message,action,{duration:duration});//{duration:duration}
+    }
+
+    search(event){
+        if(this.memberToInvite.length<1){
+            this.membersAutocomplete = [];
+        }else{
+            this.profileService.filterEmails(this.memberToInvite).subscribe(res=>{
+                this.membersAutocomplete = res;
+            });
+        }
     }
 }

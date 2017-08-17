@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, HostListener, OnDestroy, OnInit, ViewChild} from "@angular/core";
+import {AfterViewInit, Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild} from "@angular/core";
 import {Router} from "@angular/router";
 import {Profile} from "../models/profile";
 import {ProfileService} from "./_services/profile.service";
@@ -11,6 +11,7 @@ import {MdSidenav} from "@angular/material";
 import {SidebarService} from "./sidebar/sidebar.service";
 import {NotificationService} from "./_services/notification.service";
 import {Notification} from "../models/notification";
+import {forEach} from "@angular/router/src/utils/collection";
 
 @Component({
     selector: 'my-webapp',
@@ -24,11 +25,13 @@ export class WebappComponent implements OnDestroy,OnInit,AfterViewInit{
     userMenuAvailable=true;
     @ViewChild('sidenav') sidenav:MdSidenav;
     isMobile:boolean=false;
-    notifications:Notification[] = [];
+    unseenNotifications:Notification[] = [];
+    seenNotifications:Notification[] = [];
     //notifications:Notification[];
     notificationsSubscription:Subscription = this.notificationService.notifications$.subscribe(
         notifications=>{
-            this.notifications = notifications;
+            this.unseenNotifications = notifications;
+            //TODO: this.seenNotifications = notifications.seen
         });
 
     @HostListener('document:hover',['$event']) particleHover;
@@ -47,9 +50,9 @@ export class WebappComponent implements OnDestroy,OnInit,AfterViewInit{
         status => this.userMenuAvailable = status);
 
     //Search
-    result:Array<string> = [];
-    resultProfile:Array<any> = [];
-    resultProject:Array<any> = [];
+    result:Array<{}> = [];
+    resultProfile:Array<{}> = [];
+    resultProject:Array<{}> = [];
 
     constructor(private profileService:ProfileService,
                 private socketService:SocketService, //don't delete
@@ -61,25 +64,58 @@ export class WebappComponent implements OnDestroy,OnInit,AfterViewInit{
                 private notificationService:NotificationService){
     }
 
+
     changeMenuColour(color){
         this.menuColor = 'sidebar '+color;
     }
 
     search(e:any){
-        if(e.target.value.length<1){
+        if(e.length<1){
             this.result = [];
         }else{
-            this.profileService.filterEmails(e.target.value).subscribe(res=>{
-                this.resultProfile = res.map(function(profile){return profile.email});
+            this.profileService.filterEmails(e).subscribe(res=>{
+                this.resultProfile = res.map(function(profile){return ({value:profile.email,type:'profile',id:profile.email})});
                 this.result = this.resultProfile.concat(this.resultProject);
             });
-            this.projectService.filterName(e.target.value).subscribe(res=>{
-                this.resultProject = res.map(function(project){return project.name});
+            this.projectService.filterName(e).subscribe(res=>{
+                this.resultProject = res.map(function(project){return ({value:project.name,type:'project',id:project._id})});
                 this.result = this.resultProfile.concat(this.resultProject);
             });
         }
     }
 
+    onResultSelected(value){
+        if(value.type.match('profile')){
+            this.router.navigate(['app/profile/',value.id]);
+        }else if(value.type.match('project')) {
+            this.projectService.getProject(value.id).subscribe((project)=>{
+                if(project.project){
+                    if(project.project.team.find(x => x.email == this.profile.email)){
+                        this.projectService.giveProject(project.project);
+                        this.router.navigate(['app','project']);
+                    }else{
+                        this.router.navigate(['app','viewproject', value.id]);
+                    }
+                }
+            });
+        }
+    }
+
+    onSeenNotification(notification):void{
+        let tempIndex = this.unseenNotifications.indexOf(notification);
+        let tempIndex2 = this.seenNotifications.indexOf(notification);
+        if(tempIndex > -1 && tempIndex2 < 0){
+            //TODO: call service and send to db 'seen' status on notification
+            /*
+               this.notificationService.onSeenNotification.subscribe((result)=>{
+                    this.unseenNotifications.splice(tempIndex,1);
+                    this.seenNotifications.push(notification);
+               });
+             */
+            this.unseenNotifications.splice(tempIndex,1);
+            this.seenNotifications.push(notification);
+        }
+    }
 
     ngOnInit(){
         this.subscription = this.profileService.profile$.subscribe(

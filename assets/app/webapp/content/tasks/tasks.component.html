@@ -3,23 +3,6 @@
         fxLayoutGap="10px">
     <div fxFlex>
         <md-card class="card">
-            <md-card-header>
-                <md-card-title>Gantt</md-card-title>
-                <md-card-subtitle>trastat</md-card-subtitle>
-            </md-card-header>
-            <md-card-content>
-                <div (window:resize)="onResize($event)" style="padding-left:0.5%;padding-right:0.5%">
-                    <div id="chart_div" style="width: 100%; height: 100%"></div>
-                </div>
-            </md-card-content>
-            <md-card-footer>
-                <md-divider></md-divider>
-                <md-icon>history</md-icon>Updated {{ganttUpdated | timeAgo}}
-            </md-card-footer>
-        </md-card>
-    </div>
-    <div fxFlex>
-        <md-card class="card">
             <md-card-content>
                 <div id="container"></div>
             </md-card-content>

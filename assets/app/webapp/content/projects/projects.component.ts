@@ -83,7 +83,7 @@ export class ProjectsComponent implements OnInit,OnDestroy{
         'manager','member'
     ];
 
-    displayedColumns = ['Name','Budget','Description','Members'];
+    displayedColumns = ['Name','Budget','Description','Members','Progress'];
     dataSource: ExampleDataSource | null;
 
     @ViewChild(MdPaginator) paginator: MdPaginator;
