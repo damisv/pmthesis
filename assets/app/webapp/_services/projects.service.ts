@@ -24,9 +24,9 @@ export class ProjectService {
 
     initProject(projects){
         for (let project of projects) {
-            this.chatService.getProjectMessages(project._id).subscribe(res=>{
+            /*this.chatService.getProjectMessages(project._id).subscribe(res=>{
                 this.chatService.addMessages(res.messages);
-            });
+            });*/
             if(localStorage.hasOwnProperty('projectID')){
                 if(project._id===localStorage.getItem('projectID')){
                     this.giveProject(project);

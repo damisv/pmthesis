@@ -20,27 +20,37 @@ export class CalendarService{
     getMyEvents(){
         const body = {};
         return this.post("myEvents",body);
-        //TODO: My Events
     }
 
     getProjectEvents(projectID){
         const body = {id: projectID};
         return this.post("projectEvents",body);
-        //TODO: Project Events
     }
 
     getTeamEvents(teamID){
         const body = {id: teamID};
         return this.post("teamEvents",body);
-        //TODO: Team Events
     }
 
     scheduleMyEvent(event){
+        event.actions = [];
         const body = {event:event};
         return this.post("myEvents/schedule",body);
     }
 
-    scheduleProjectEvent(projectID,event){
+    updateMyEvent(event){
+        event.actions = [];
+        const body = {event:event};
+        return this.post("myEvents/update",body);
+    }
+
+    deleteMyEvent(event){
+        event.actions = [];
+        const body = {event:event};
+        return this.post("myEvents/delete",body);
+    }
+
+    scheduleProjectEvent(event,projectID){
         const body = {
             id: projectID,
             event:event

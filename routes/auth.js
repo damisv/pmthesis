@@ -83,9 +83,7 @@ router.post('/signup',function(req, res){
         ).then(
             function(result) {
                 assert.equal(1, result.result.ok);
-                res.status(200).send({
-                    title: 'OK'
-                });
+                createNotificationSettings(profileCreated.email);
             }
         ).catch(
             function(err){
@@ -93,6 +91,33 @@ router.post('/signup',function(req, res){
                 console.log(err);
             }
         )
+    }
+    //Create User settings
+    function createNotificationSettings(email){
+        var settings = {
+            "myTask":"push",
+            "memberJoined":"none",
+            "invite":"toast",
+            "message":"push",
+            "error":"push",
+            "email":email};
+
+        db.insertOne(
+            settings,
+            "settings"
+        ).then(
+            function(result) {
+                assert.notEqual(null, result);
+                res.status(200).send({
+                    title: 'OK'
+                });
+            }
+        ).catch(
+            function(err){
+                res.status(204).send();
+                console.log(err);
+            }
+        );
     }
 });
 

@@ -2,10 +2,12 @@
     <div class="inner-sidenav-content" #list [scrollTop]="list.scrollHeight">
         <div style="padding-top:2em;padding-bottom:2em;">
             <section>
-                <div *ngFor="let message of messages">
-                    <div [ngClass]="{'from-me': message.sender==profile.email,'from-them':message.receiver==profile.email}" mdTooltip="{{message.date_sent | timeAgo}}"><p>{{message.message}}</p></div>
-                    <div class="clear"></div>
-                </div>
+                <ng-template ngFor let-message [ngForOf]="messages">
+                    <div *ngIf="message.receiver==projectID">
+                        <div [ngClass]="{'from-me': message.sender==profile.email,'from-them':message.sender!==profile.email}" mdTooltip="{{message.date_sent | timeAgo}}"><p>{{message.message}}</p></div>
+                        <div class="clear"></div>
+                    </div>
+                </ng-template>
                 <div *ngIf="messages.length<1">No messages on this conversation</div>
             </section>
         </div>

@@ -1,7 +1,6 @@
 <button mdTooltip="Add a new task" class="btn-float" color="primary" md-fab (click)="createNewTask()">
     <md-icon class="md-24">add</md-icon>
 </button>
-
 <div
         fxLayout
         fxLayout.xs="column"
@@ -76,12 +75,10 @@
                         </md-card>
                     </md-tab>
                     <md-tab label="Add new task">
-                        <project-create-task (taskCreated)="addTask($event)" [email]="user.email" ></project-create-task>
-                    </md-tab>
-                </md-tab-group>
-            </md-card-content>
-        </md-card>
-
-
-    </div>
-</div>
+                         <project-create-task (taskCreated)="addTask()" [email]="user.email" ></project-create-task>
+                     </md-tab>
+                 </md-tab-group>
+             </md-card-content>
+         </md-card>
+     </div>
+ </div>

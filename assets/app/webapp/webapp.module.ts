@@ -95,6 +95,7 @@ import {ActionService} from "./_services/action.service";
 import {UserSettingsComponent} from "./content/settings/user_settings.component";
 import {CalendarService} from "./_services/calendar.service";
 import {ViewProjectComponent} from "./content/projects/view_project.component";
+import {TimeAgoPipeModule} from "time-ago-pipe/index";
 
 @NgModule({
     declarations: [

@@ -30,8 +30,22 @@ export class WebappComponent implements OnDestroy,OnInit,AfterViewInit{
     //notifications:Notification[];
     notificationsSubscription:Subscription = this.notificationService.notifications$.subscribe(
         notifications=>{
-            this.unseenNotifications = notifications;
-            //TODO: this.seenNotifications = notifications.seen
+            notifications.forEach(function(notification){
+                if(notification.status=="unseen"){
+                    if(this.unseenNotifications.findIndex(function(value){
+                            return value._id == notification._id;
+                        })>-1){
+                        this.unseenNotifications.push(notification);
+                    }
+                }else{
+                    if(this.seenNotifications.findIndex(function(value){
+                            return value._id == notification._id;
+                        })>-1){
+                        this.seenNotifications.push(notification);
+                    }
+                }
+            },this);
+            //this.unseenNotifications = notifications;
         });
 
     @HostListener('document:hover',['$event']) particleHover;
@@ -103,9 +117,7 @@ export class WebappComponent implements OnDestroy,OnInit,AfterViewInit{
 
     onSeenNotification(notification):void{
         let tempIndex = this.unseenNotifications.indexOf(notification);
-        let tempIndex2 = this.seenNotifications.indexOf(notification);
-        if(tempIndex > -1 && tempIndex2 < 0){
-            //TODO: call service and send to db 'seen' status on notification
+        if(tempIndex > -1){
             /*
                this.notificationService.onSeenNotification.subscribe((result)=>{
                     this.unseenNotifications.splice(tempIndex,1);
@@ -114,6 +126,8 @@ export class WebappComponent implements OnDestroy,OnInit,AfterViewInit{
              */
             this.unseenNotifications.splice(tempIndex,1);
             this.seenNotifications.push(notification);
+            notification.status = "seen";
+            this.notificationService.save(notification).subscribe();
         }
     }
 
@@ -127,9 +141,10 @@ export class WebappComponent implements OnDestroy,OnInit,AfterViewInit{
         );
         this.profileService.getProfile();
         this.projectService.getProjects();
-        this.chatService.getMessages().subscribe(res=>{
+        //TODO Private Messages here. Also team chat?
+        /*this.chatService.getMessages().subscribe(res=>{
             this.chatService.addMessages(res.messages);
-        });
+        });*/
         //this.socketService.register(); not needed anymore
         this.groupColor = 'blue';
 

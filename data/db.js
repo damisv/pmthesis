@@ -42,6 +42,9 @@ module.exports = {
     },
     save: function(data,collection){
         return db.collection(collection).save(data);
+    },
+    deleteOne: function(data,collection){
+        return db.collection(collection).deleteOne(data);
     }
 };
 
@@ -126,6 +129,21 @@ function initializeDatabase(databaseConnection){
             ]
         }
         } ).catch(error);
+    db.createCollection( "events",
+        { validator: { $and:
+            [
+                { title: { $exists:true }}
+            ]
+        }
+        } ).catch(error);
+    db.createCollection( "settings",
+        { validator: { $and:
+            [
+                { email: { $exists:true }}
+            ]
+        }
+        } ).catch(error);
+    db.collection('settings').createIndex({email:1},{unique:true}).catch(error);
 }
 
 function error(err){

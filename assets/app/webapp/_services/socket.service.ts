@@ -38,16 +38,14 @@ export class SocketService {
         this.socket.on('taskAssigned', function(projectName,task){
             let email = localStorage.getItem('lastLogged');
             if(task.assignee_email.indexOf(email)>-1){
-                notificationService.create("myTask","You have a new task.",task.name+" has been assigned to you!","info",{timeOut:3000},['app','project','tasks']);//todo click -> taskView
+                notificationService.create("myTask","You have a new task.",task.name+" has been assigned to you!","info",{timeOut:3000},['app','project','tasks']);
             }
             taskService.giveTaskArrived(task);
         }.bind(this));
         this.socket.on('projectMessage', function(id){
-            notificationService.create("You have a new message.","Read here!","info",{timeOut:3000},['app','project','chat']);//todo click -> chat
+            notificationService.create("You have a new message.","Read here!","info",{timeOut:3000},['app','project','chat']);
             chatService.getMessageById(id).subscribe(res=>{
-                if(res.messages.length>0){
-                    chatService.addMessages(res.messages);
-                }
+                chatService.addMessage(res.message);
             });
         }.bind(this));
     }

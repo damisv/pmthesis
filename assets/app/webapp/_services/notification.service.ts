@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import {Injectable, OnInit} from "@angular/core";
 import {NotificationsService, PushNotificationsService} from "angular2-notifications";
 import {Router} from "@angular/router";
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
@@ -9,10 +9,19 @@ import {ProgressBarService} from "./progressbar.service";
 
 @Injectable()
 export class NotificationService {
+    types = ["error","success","info","alert","warn"];
+    settings = {
+        "myTask":"push",
+        "memberJoined":"none",
+        "invite":"toast",
+        "message":"push",
+        "error":"push"};
+    notificationTypes = ["push","toast","none"];
 
     private notifications = new BehaviorSubject<Notification[]>([]);
-
     notifications$ = this.notifications.asObservable();
+    private notificationSettings = new BehaviorSubject<any>(this.settings);
+    notificationSettings$ = this.notificationSettings.asObservable();
 
     get(){
         this.progressBarService.availableProgress();
@@ -24,7 +33,7 @@ export class NotificationService {
     save(notification:Notification){
         this.progressBarService.availableProgress();
         const body = {notification:notification};
-        this.post("create",body);
+        return this.post("save",body);
     }
 
     add(notification:Notification){
@@ -55,13 +64,6 @@ export class NotificationService {
         return Observable.throw(errMsg);
     }
 
-    types = ["error","success","info","alert","warn"];
-    settings = {
-        "myTask":"push",
-        "memberJoined":"none",
-        "invite":"toast",
-        "message":"push",
-        "error":"push"};
 
     constructor(private toastService:NotificationsService,
                 private pushService:PushNotificationsService,
@@ -69,6 +71,30 @@ export class NotificationService {
                 private http:Http,
                 private progressBarService: ProgressBarService)
     {}
+
+    giveSettings(settings){
+        this.notificationSettings.next(settings);
+    }
+
+    setSettings(settings){
+        this.settings = settings;
+        this.updateNotificationSettings(settings).subscribe();
+    }
+
+    getNotificationTypes(){
+        return this.notificationTypes;
+    }
+
+    getNotificationSettings(){
+        this.progressBarService.availableProgress();
+        return this.post("settings/get",{})
+    }
+
+    updateNotificationSettings(settings){
+        this.progressBarService.availableProgress();
+        const body = {settings:settings};
+        return this.post("settings/update",body);
+    }
 
     toastOptions = {
         timeOut:5000

@@ -66,13 +66,24 @@ export class CalendarEventEditDialogComponent {
         this.startDate = data.start;
         this.endDate = data.end;
         let startMinutesTemp = this.event.start.getMinutes();
+        let startHoursTemp = this.event.start.getHours();
+        if(startHoursTemp<10){
+            startHoursTemp = '0'+startHoursTemp;
+        }
         if(startMinutesTemp<10){
-            this.startTime = this.event.start.getHours()+':0'+startMinutesTemp;
+            startMinutesTemp ='0'+startMinutesTemp;
         }
+        this.startTime = startHoursTemp+':'+startMinutesTemp;
+
+        let endHoursTemp = this.event.end.getHours();
         let endMinutesTemp = this.event.end.getMinutes();
-        if(endMinutesTemp<10){
-            this.endTime = this.event.end.getHours()+':0'+endMinutesTemp;
+        if(endHoursTemp<10){
+            endHoursTemp = '0'+endHoursTemp;
         }
+        if(endMinutesTemp<10){
+            endMinutesTemp = '0'+endMinutesTemp;
+        }
+        this.endTime = endHoursTemp+':'+endMinutesTemp;
     }
 
     setStartDate(event):void{

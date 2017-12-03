@@ -9,6 +9,7 @@ import {EventCreateDialogComponent} from "./eventCreateDialog.component";
 import {MdDialog} from "@angular/material";
 import {ObservableMedia} from "@angular/flex-layout";
 import {ActivatedRoute, Router} from "@angular/router";
+import {CalendarService} from "../../_services/calendar.service";
 
 @Component({
     selector: 'webapp-chat',
@@ -53,14 +54,15 @@ export class ChatComponent implements OnInit,AfterViewInit,OnDestroy{
                 private dialog:MdDialog,
                 private media:ObservableMedia,
                 private router:Router,
-                private route:ActivatedRoute){}
+                private route:ActivatedRoute,
+                private calendarService:CalendarService){}
 
 
     onConversationSelected(project){
         this.conversationSelected = project;
         this.router.navigate(['app/chat', {outlets: {'messages': [project._id]}}]);
     }
-
+    //TODO: add team event
     setMeeting(){
         let dialogRef = this.dialog.open(EventCreateDialogComponent,{
             data: this.conversationSelected
@@ -68,8 +70,7 @@ export class ChatComponent implements OnInit,AfterViewInit,OnDestroy{
         dialogRef.afterClosed().subscribe(result => {
             if(result!=null){
                 let tempEvent = this.correctEndDate(result.event);
-                console.log(tempEvent,result.project);
-                //TODO: send event to db
+                this.calendarService.scheduleProjectEvent(tempEvent,result.project._id).subscribe();
             }
         });
     }
@@ -106,6 +107,7 @@ export class ChatComponent implements OnInit,AfterViewInit,OnDestroy{
     }
 
     ngOnDestroy(){
+        if(this.projectsSubscription!==undefined)
         this.projectsSubscription.unsubscribe();
     }
 

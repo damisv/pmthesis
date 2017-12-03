@@ -12,7 +12,29 @@
             <md-card-content>
                 <md-slide-toggle>Error Notifications</md-slide-toggle>
                 <br>
-                <md-select placeholder="Tasks Notifications">
+                <br>
+                <md-select placeholder="Chat Messages" [(ngModel)]="settings.message" floatPlaceholder="always">
+                    <md-option *ngFor="let type of types" [value]="type">
+                        {{ type }}
+                    </md-option>
+                </md-select>
+                <md-select placeholder="Invite Received" [(ngModel)]="settings.invite" floatPlaceholder="always">
+                    <md-option *ngFor="let type of types" [value]="type">
+                        {{ type }}
+                    </md-option>
+                </md-select>
+                <md-select placeholder="New Member Joined" [(ngModel)]="settings.memberJoined" floatPlaceholder="always">
+                    <md-option *ngFor="let type of types" [value]="type">
+                        {{ type }}
+                    </md-option>
+                </md-select>
+                <md-select placeholder="Task Received" [(ngModel)]="settings.myTask" floatPlaceholder="always">
+                    <md-option *ngFor="let type of types" [value]="type">
+                        {{ type }}
+                    </md-option>
+                </md-select>
+                <button (click)="saveNotificationSettings()">Save</button>
+                <!--<md-select placeholder="Tasks Notifications">
                     <md-option [value]="none">
                         none
                     </md-option>
@@ -45,7 +67,7 @@
                     <md-option [value]="toast">
                         toast
                     </md-option>
-                </md-select>
+                </md-select>-->
             </md-card-content>
             <md-card-footer>
                 <md-divider></md-divider>

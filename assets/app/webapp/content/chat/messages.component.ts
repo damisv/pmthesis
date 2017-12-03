@@ -23,6 +23,10 @@ export class MessagesComponent{
         this.profile = profile;
     });
 
+    messagesSubscription:Subscription = this.chatService.messages$.subscribe((messages)=>{
+        this.messages = messages;
+    });
+
     constructor(
         private route: ActivatedRoute,
         private chatService:ChatService,
@@ -31,14 +35,16 @@ export class MessagesComponent{
     ngOnInit(){
         this.route.params.subscribe((params: {id: string}) => {
             this.projectID = params.id;
-            this.chatService.getProjectMessages(params.id).subscribe(messages=>{
-                this.messages = [];
-                if(messages.messages.length>0){
-                    for(let message of messages.messages){
+            this.chatService.getProjectMessages(params.id).subscribe(res=>{
+                if(res.messages.length>0){
+                    for(let message of res.messages){
+                        if(this.messages.findIndex(
+                            function(my_message){
+                                return my_message._id == message._id;}) <0)
                         this.messages.push(message);
                     }
+                    this.chatService.giveMessages(this.messages);
                 }
-                //this.messages = messages;
             });
         });
     }

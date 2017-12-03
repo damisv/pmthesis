@@ -10,13 +10,16 @@ import {
     isSameDay,
     isSameMonth,
     addHours
-} from 'date-fns';
+} from 'date-fns'
 import {Subject} from "rxjs/Subject";
 import {trigger, stagger, animate, style, group, query, transition, keyframes} from '@angular/animations';
 import {CalendarEventViewDialogComponent} from "./calendarEventViewDialog.component";
 import {CalendarEventCreateDialogComponent} from "./calendarEventCreateDialog.component";
 import {CalendarEventEditDialogComponent} from "./calendarEventEditDialog.component";
 import {CalendarService} from "../../_services/calendar.service";
+import {ProjectService} from "../../_services/projects.service";
+import {Subscription} from "rxjs/Subscription";
+import {Project} from "../../../models/project";
 
 export const colors: any = {
     red: {
@@ -79,76 +82,92 @@ export class CalendarComponent implements OnInit {
     view:string = 'month';
     activeDayIsOpen: boolean = true;
     refresh: Subject<any> = new Subject();
-
+    events;
+    myEvents = [];
+    projectEvents = [];
+    projects:Project[]=null;
 
     @ViewChild('calendarView') calendarView:MdTabGroup;
 
-    constructor(private dialog:MdDialog,private calendarService:CalendarService){
-        calendarService.getMyEvents().subscribe();
-        calendarService.getProjectEvents('123456').subscribe();
-        calendarService.getTeamEvents('team').subscribe();
+    projectsSubscription:Subscription = this.projectService.projects$.subscribe((projects)=>{
+        this.projects=projects;
+        projects.forEach(function(project){
+            this.getProjectEvents(project._id);
+        },this);
+    });
+
+    getProjectEvents(project_id){
+        this.calendarService.getProjectEvents(project_id).subscribe(res=>{
+            res.events.forEach(function(event){
+                if(this.events.findIndex(function(value){
+                        return value._id == event._id;
+                    })<0){
+                    this.makeEvents([event]);
+                }
+            },this);
+        });
+    };
+
+    constructor(private dialog:MdDialog,private calendarService:CalendarService,private projectService:ProjectService){
+        //TODO add Team Events
+        calendarService.getMyEvents().subscribe(res=>{
+            this.events = [];
+            this.makeEvents(res.events);
+        });
+        /*calendarService.getProjectEvents('123456').subscribe(res=>{
+            res.events.forEach(function(event){
+                if(this.projectEvents.findIndex(function(value){
+                        return value._id == event._id;
+                    })>-1){
+                    this.projectEvents.push(event);
+                }
+            },this);
+            this.events = this.myEvents.concat(this.projectEvents);
+        });*/
+        //calendarService.getTeamEvents('team').subscribe();
+    }
+
+    makeEvents(events){
+        events.forEach(function(event){
+            event.start = new Date(event.start);
+            event.end = new Date(event.end);
+            event.actions = this.addActions();
+            this.events.push(event);
+        },this);
+    }
+
+    addActions(){
+        return [{
+            label: '<i class="fa fa-fw fa-pencil"></i>',
+            onClick: ({ event }: { event }): void => {
+                let editDialog = this.dialog.open(CalendarEventEditDialogComponent,{
+                    data: event
+                });
+                editDialog.afterClosed().subscribe((result)=>{
+                    this.calendarService.updateMyEvent(event).subscribe();
+                    event.actions = this.addActions();
+                    if(result) console.log(result);
+                    this.refresh.next();
+                });
+            }
+        },
+            {
+                label: '<i class="fa fa-fw fa-times"></i>',
+                onClick: ({ event }: { event }): void => {
+                    this.events = this.events.filter(iEvent => iEvent !== event);
+                    this.calendarService.deleteMyEvent(event).subscribe();
+                    console.log('Event deleted', event);
+                    this.refresh.next();
+                }
+            }];
     }
 
     onSelectChange(event:any):void{
         this.view = event.tab.textLabel.toLowerCase();
     }
 
-    events: CalendarEvent[] = [
-        {
-            title: 'Hackathon',
-            color: colors.yellow,
-            start: new Date(),
-            end: new Date(),
-            draggable: true,
-            meta:'This is Hackathon Description',
-            actions: [
-                {
-                    label: '<i class="fa fa-fw fa-pencil"></i>',
-                    onClick: ({ event }: { event: CalendarEvent }): void => {
-                        let editDialog = this.dialog.open(CalendarEventEditDialogComponent,{
-                            data: event
-                        });
-                        editDialog.afterClosed().subscribe((result)=>{
-                            if(result) console.log(result);
-                            this.refresh.next();
-                        });
-                    }
-                }
-            ]
-        },
-        {
-            title: 'Lantzos pitogyra',
-            color: colors.blue,
-            start: new Date(),
-            end: new Date(),
-            draggable: true,
-            meta:'Pitogyra Description',
-            actions: [
-                {
-                    label: '<i class="fa fa-fw fa-pencil"></i>',
-                    onClick: ({ event }: { event: CalendarEvent }): void => {
-                        let editDialog = this.dialog.open(CalendarEventEditDialogComponent,{
-                            data: event
-                        });
-                        editDialog.afterClosed().subscribe((result)=>{
-                            if(result) console.log(result);
-                            this.refresh.next();
-                        });
-                    }
-                },
-                {
-                    label: '<i class="fa fa-fw fa-times"></i>',
-                    onClick: ({ event }: { event: CalendarEvent }): void => {
-                        this.events = this.events.filter(iEvent => iEvent !== event);
-                        console.log('Event deleted', event);
-                        this.refresh.next();
-                    }
-                }
-            ]
-        }
-    ];
-
-    eventClicked({ event }: { event: CalendarEvent }): void {
+    //eventClicked({ event }: { event: CalendarEvent }): void {
+    eventClicked({ event }: { event }): void {
         let dialogRef = this.dialog.open(CalendarEventViewDialogComponent, {
             data: {
                 event: event,
@@ -156,8 +175,7 @@ export class CalendarComponent implements OnInit {
             }
         });
     }
-
-    dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
+    dayClicked({ date, events }: { date: Date; events }): void {
         if (isSameMonth(date, this.viewDate)) {
             if ((isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) || events.length === 0)
             {
@@ -172,46 +190,24 @@ export class CalendarComponent implements OnInit {
     eventTimesChanged({event, newStart, newEnd}: CalendarEventTimesChangedEvent): void {
         event.start = newStart;
         event.end = newEnd;
-        this.refresh.next();
+        this.calendarService.updateMyEvent(event).subscribe(()=>{
+            event.actions = this.addActions();
+            this.refresh.next();
+        });
+
     }
 
     addEvent(date: Date): void {
-        /*this.events.push({
-            start: date,
-            title: 'New event',
-            color: colors.red
-        });
-        this.refresh.next();*/
         let dialogRef = this.dialog.open(CalendarEventCreateDialogComponent,{
             data : date
         });
         dialogRef.afterClosed().subscribe(result => {
             let tempEvent = this.correctEndDate(result);
-            tempEvent.actions.push({
-                    label: '<i class="fa fa-fw fa-pencil"></i>',
-                    onClick: ({ event }: { event: CalendarEvent }): void => {
-                        let editDialog = this.dialog.open(CalendarEventEditDialogComponent,{
-                            data: event
-                        });
-                        editDialog.afterClosed().subscribe((result)=>{
-                            //TODO: Switch for what type of Event and update DB
-                            if(result) console.log(result);
-                            this.refresh.next();
-                        });
-                    }
-                },
-                {
-                    label: '<i class="fa fa-fw fa-times"></i>',
-                    onClick: ({ event }: { event: CalendarEvent }): void => {
-                        this.events = this.events.filter(iEvent => iEvent !== event);
-                        //TODO: Switch for what type of Event and delete the right one from DB
-                        console.log('Event deleted', event);
-                        this.refresh.next();
-                    }
-                });
-            //TODO: Switch for what type of Event and add to DB
-            this.events.push(tempEvent);
-            this.refresh.next();
+            this.calendarService.scheduleMyEvent(tempEvent).subscribe(res=>{
+                this.makeEvents([res.event]);
+                this.refresh.next();
+            });
+
         });
     }
 
@@ -231,5 +227,10 @@ export class CalendarComponent implements OnInit {
     }
 
     ngOnInit(){
+    }
+
+    ngOnDestroy(){
+        if(this.projectsSubscription!==undefined)
+        this.projectsSubscription.unsubscribe();
     }
 }

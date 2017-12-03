@@ -16,13 +16,13 @@ router.use('/',function(req,res,next){
 });
 
 router.post('/get/message',function(req, res){
-    db.find(
+    db.findOne(
         {_id: new ObjectID(req.body.message_id)},
         "chat"
     ).then(
         function(result) {
             assert.notEqual(null, result);
-            res.status(200).send({messages:result});
+            res.status(200).send({message:result});
         }
     ).catch(
         function(err){
@@ -32,11 +32,10 @@ router.post('/get/message',function(req, res){
 });
 
 router.post('/get/project',function(req, res){
-    console.log('projectid',req.body.project_id);
+    console.log('project_id',req.body.project_id);
     db.find(
         {receiver:req.body.project_id},
-        "chat",
-        {}
+        "chat"
     ).then(
         function(result) {
             assert.notEqual(null, result);

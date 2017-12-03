@@ -10,13 +10,13 @@ import {Message} from "../../models/message";
 export class ChatService {
 
     private messages = new BehaviorSubject<Message[]>([]);
-
     messages$ = this.messages.asObservable();
 
-    addMessages(messages: Message[]){
-        /*messages.forEach(function(message){
-            this.messages.value.push(message);
-        });*/
+    addMessage(message){
+        this.messages.getValue().push(message);
+    }
+
+    giveMessages(messages: Message[]){
         this.messages.next(messages);
     }
 

@@ -60,5 +60,60 @@ router.post('/get',function(req, res){
     );
 });
 
+router.post('/save',function(req, res){
+    //var decoded = jwt.decode(req.body.token);
+    db.save(
+        req.body.notification,
+        "notification"
+    ).then(
+        function(result) {
+            assert.equal(1, result.result.ok);
+            res.status(200).send({event:req.body.event});
+        }).catch(
+        function(err){
+            res.status(500).send();
+            console.log(err);
+        })
+});
+
+router.post('/settings/get',function(req, res){
+    var decoded = jwt.decode(req.body.token);
+    var email = decoded.info.email;
+    db.findOne(
+        {email:email},
+        "settings"
+    ).then(
+        function(result) {
+            assert.notEqual(null, result);
+            res.status(200).send({settings:result});
+        }
+    ).catch(
+        function(err){
+            res.status(500).send();
+            console.log(err);
+        }
+    )
+});
+
+router.post('/settings/update',function(req, res){
+    var decoded = jwt.decode(req.body.token);
+    var email = decoded.info.email;
+    req.body.settings.email = decoded.info.email;
+    db.updateOne(
+        { email : email },
+        { $set: req.body.settings },
+        "settings"
+    ).then(
+        function(result) {
+            assert.equal(1, result.result.ok);
+            res.status(200).send(req.body.settings);
+        }
+    ).catch(
+        function(err){
+            res.status(500).send();
+            console.log(err);
+        }
+    );
+});
 
 module.exports = router;
