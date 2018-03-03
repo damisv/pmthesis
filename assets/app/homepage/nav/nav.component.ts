@@ -37,11 +37,9 @@ export class NavComponent implements AfterViewInit{
     menuMobile(){
          if (this.media.isActive('sm')) {
             this.isMobile = true;
-        }
-        else if (this.media.isActive('xs')) {
+        } else if (this.media.isActive('xs')) {
             this.isMobile=true;
-        }
-        else{
+        } else {
             this.isMobile=false;
         }
     }

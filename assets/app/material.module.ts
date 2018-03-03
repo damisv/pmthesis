@@ -1,0 +1,68 @@
+import {NgModule} from "@angular/core";
+import {
+    MatButtonModule,
+    MatCheckboxModule,
+    MatDatepickerModule,
+    MatTableModule,
+    MatTabsModule,
+    MatAutocompleteModule,
+    MatChipsModule,
+    MatProgressBarModule,
+    MatDialogModule,
+    MatMenuModule,
+    MatSliderModule,
+    MatSelectModule,
+    MatInputModule,
+    MatRadioModule,
+    MatTooltipModule,
+    MatSnackBarModule,
+    MatButtonToggleModule,
+    MatSlideToggleModule,
+    MatGridListModule,
+    MatCardModule,
+    MatIconModule,
+    MatListModule,
+    MatNativeDateModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatPaginatorModule
+} from "@angular/material";
+import {CdkTableModule} from "@angular/cdk/table";
+
+@NgModule({
+    declarations: [],
+    imports: [
+        MatButtonModule,
+        MatCheckboxModule,
+        MatDatepickerModule,
+        MatTableModule,
+        MatTabsModule,
+        MatAutocompleteModule,
+        MatChipsModule,
+        MatProgressBarModule,
+        MatDialogModule,
+        MatMenuModule,
+        MatSliderModule,
+        MatSelectModule,
+        MatInputModule,
+        MatRadioModule,
+        MatTooltipModule,
+        MatSnackBarModule,
+        MatButtonToggleModule,
+        MatSlideToggleModule,
+        MatGridListModule,
+        MatCardModule,
+        MatIconModule,
+        MatListModule,
+        CdkTableModule,
+        MatNativeDateModule,
+        MatToolbarModule,
+        MatSidenavModule,
+        MatPaginatorModule,
+    ],
+    providers: [],
+    bootstrap: [],
+    entryComponents:[]
+})
+export class MaterialModule {}
+

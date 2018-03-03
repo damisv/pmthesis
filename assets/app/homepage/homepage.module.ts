@@ -1,7 +1,6 @@
 import {NgModule} from "@angular/core";
 import {CommonModule} from "@angular/common";
 import {RouterModule} from "@angular/router";
-import {MaterialModule} from "@angular/material";
 
 import {HomepageComponent} from "./homepage.component";
 import {NavComponent} from "./nav/nav.component";
@@ -12,8 +11,7 @@ import {FlexLayoutModule} from "@angular/flex-layout";
 import {BrowserModule} from "@angular/platform-browser";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {VideotourComponent} from "./about/videotour.component";
-
-
+import {MaterialModule} from "../material.module";
 
 @NgModule({
     declarations: [
@@ -35,6 +33,4 @@ import {VideotourComponent} from "./about/videotour.component";
     entryComponents:[VideotourComponent],
     providers: []
 })
-export class HomepageModule {
-
-}
+export class HomepageModule {}

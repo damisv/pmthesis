@@ -1,6 +1,6 @@
 import {Component} from "@angular/core";
 import {trigger, stagger, animate, style, group, query, transition, keyframes} from '@angular/animations';
-import {MdDialog} from "@angular/material";
+import {MatDialog} from "@angular/material";
 import {VideotourComponent} from "./videotour.component";
 
 

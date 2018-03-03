@@ -1,9 +1,9 @@
 <context-menu #basicMenu class="ngx-contextmenu">
     <ng-template contextMenuItem (execute)="addEvent($event.item.date)">
-       <button md-raised-button>Add Event</button>
+       <button mat-raised-button>Add Event</button>
     </ng-template>
     <ng-template contextMenuItem (execute)="seeDay($event.item.date)">
-        <button md-raised-button>Day View</button>
+        <button mat-raised-button>Day View</button>
     </ng-template>
 </context-menu>
 <ng-template
@@ -41,29 +41,29 @@
         fxLayoutGap="10px"
         fxLayoutGap.xs="0">
     <div fxFlex="auto">
-        <md-card class="card block" >
-            <md-card-header style="text-align: center;justify-content: center;">
-                <md-card-title class="block">
+        <mat-card class="card block" >
+            <mat-card-header style="text-align: center;justify-content: center;">
+                <mat-card-title class="block">
                     <h1 *ngIf="!view.match('day') ">{{ viewDate | date:'MMMM y' }}</h1>
                     <h1 *ngIf="view.match('day') && calendarView.selectedIndex==2" > {{ viewDate | date: 'd MMMM of y'}} </h1>
-                </md-card-title>
-                <md-card-subtitle>
-                    <button md-raised-button
+                </mat-card-title>
+                <mat-card-subtitle>
+                    <button mat-raised-button
                             mwlCalendarPreviousView
                             [view]="view"
                             [(viewDate)]="viewDate" (click)="activeDayIsOpen=false" class="block">Previous</button>
-                    <button md-raised-button
+                    <button mat-raised-button
                             mwlCalendarToday
                             [(viewDate)]="viewDate" (click)="activeDayIsOpen=true" class="block">Current</button>
-                    <button md-raised-button
+                    <button mat-raised-button
                             mwlCalendarNextView
                             [view]="view"
                             [(viewDate)]="viewDate" (click)="activeDayIsOpen=false" class="block">Next</button>
-                </md-card-subtitle>
-            </md-card-header>
-            <md-card-content class="block">
-                <md-tab-group #calendarView (selectChange)="onSelectChange($event)">
-                    <md-tab label="Month" >
+                </mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content class="block">
+                <mat-tab-group #calendarView (selectChange)="onSelectChange($event)">
+                    <mat-tab label="Month" >
                         <mwl-calendar-month-view
                                 [viewDate]="viewDate"
                                 [events]="events"
@@ -74,8 +74,8 @@
                                 [activeDayIsOpen]="activeDayIsOpen"
                                 [cellTemplate]="monthCellTemplate">
                         </mwl-calendar-month-view>
-                    </md-tab>
-                    <md-tab label="Week">
+                    </mat-tab>
+                    <mat-tab label="Week">
                         <mwl-calendar-week-view
                                 [viewDate]="viewDate"
                                 [events]="events"
@@ -85,8 +85,8 @@
                                 (eventTimesChanged)="eventTimesChanged($event)"
                                 (dayHeaderClicked)="viewDate = $event.day.date; view = 'day'">
                         </mwl-calendar-week-view>
-                    </md-tab>
-                    <md-tab label="Day">
+                    </mat-tab>
+                    <mat-tab label="Day">
                         <mwl-calendar-day-view
                                 [viewDate]="viewDate"
                                 [events]="events"
@@ -95,13 +95,13 @@
                                 (dayClicked)="dayClicked($event.day)"
                                 (eventTimesChanged)="eventTimesChanged($event)">
                         </mwl-calendar-day-view>
-                    </md-tab>
-                </md-tab-group>
-            </md-card-content>
-            <md-card-footer>
-                <md-divider></md-divider>
-                <md-icon>history</md-icon> Just updated
-            </md-card-footer>
-        </md-card>
+                    </mat-tab>
+                </mat-tab-group>
+            </mat-card-content>
+            <mat-card-footer>
+                <mat-divider></mat-divider>
+                <mat-icon>history</mat-icon> Just updated
+            </mat-card-footer>
+        </mat-card>
     </div>
 </div>

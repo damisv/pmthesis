@@ -1,7 +1,7 @@
         <div id="wallpaper" class="header">
             <h1 class="title block" style="font-size:5em;">Project Management Web App.</h1>
             <h4 class="description" style="color:beige;font-size:1.5em;font-family: Josefin Sans, sans-serif;">Give it a 5 minutes tour and you'll find out why is one of the best.</h4>
-            <button md-fab color="primary" style="margin-left:4em;" (click)="playVideoTour()"><md-icon>play_arrow</md-icon></button>
+            <button mat-fab color="primary" style="margin-left:4em;" (click)="playVideoTour()"><mat-icon>play_arrow</mat-icon></button>
             <br>
         </div>
         <div class="main main-raised">
@@ -32,31 +32,31 @@
                      fxLayoutGap="1em"
                      fxLayoutGap.xs="0.1em">
                     <div fxFlex class="block">
-                        <md-card class="nothing">
-                            <md-card-title class="title">Project & Private discussions</md-card-title>
-                            <md-card-subtitle><md-icon style="font-size: 4.4em;;color:purple">chat</md-icon></md-card-subtitle>
-                            <md-card-content>
+                        <mat-card class="nothing">
+                            <mat-card-title class="title">Project & Private discussions</mat-card-title>
+                            <mat-card-subtitle><mat-icon style="font-size: 4.4em;;color:purple">chat</mat-icon></mat-card-subtitle>
+                            <mat-card-content>
                                 <p class="description">You can discuss important matters about your project, tasks, issues with the other member of your team entirely privately and secure. The chat is based on Socket.io.</p>
-                            </md-card-content>
-                        </md-card>
+                            </mat-card-content>
+                        </mat-card>
                     </div>
                     <div fxFlex class="block">
-                        <md-card class="nothing">
-                            <md-card-title class="title">Quick & easy</md-card-title>
-                            <md-card-subtitle><md-icon style="font-size: 4.4em;;color:green">verified_user</md-icon></md-card-subtitle>
-                            <md-card-content>
+                        <mat-card class="nothing">
+                            <mat-card-title class="title">Quick & easy</mat-card-title>
+                            <mat-card-subtitle><mat-icon style="font-size: 4.4em;;color:green">verified_user</mat-icon></mat-card-subtitle>
+                            <mat-card-content>
                                 <p class="description">Keep up with your tasks, issues as well as your teammates one's, through the Dashboard.</p>
-                            </md-card-content>
-                        </md-card>
+                            </mat-card-content>
+                        </mat-card>
                     </div>
                     <div fxFlex class="block">
-                        <md-card class="nothing">
-                            <md-card-title class="title">Gantt Charts</md-card-title>
-                            <md-card-subtitle><md-icon style="font-size: 4.4em;;color:blue">insert_chart</md-icon></md-card-subtitle>
-                            <md-card-content>
+                        <mat-card class="nothing">
+                            <mat-card-title class="title">Gantt Charts</mat-card-title>
+                            <mat-card-subtitle><mat-icon style="font-size: 4.4em;;color:blue">insert_chart</mat-icon></mat-card-subtitle>
+                            <mat-card-content>
                                 <p class="description">Don't lose track of time using the Gantt charts provided by our app.</p>
-                            </md-card-content>
-                        </md-card>
+                            </mat-card-content>
+                        </mat-card>
                     </div>
                 </div>
 
@@ -70,22 +70,22 @@
                      fxLayoutGap="1em"
                      fxLayoutGap.xs="0">
                     <div fxFlex class="block">
-                        <md-card class="nothing">
-                            <md-card-title class="title">What are you waiting for?</md-card-title>
-                            <md-card-subtitle>Register for free here , and start using this awesome app!</md-card-subtitle>
-                            <md-card-content>
-                                <a md-raised-button color="accent" [routerLink]="['/auth/signup']">Register</a>
-                            </md-card-content>
-                        </md-card>
+                        <mat-card class="nothing">
+                            <mat-card-title class="title">What are you waiting for?</mat-card-title>
+                            <mat-card-subtitle>Register for free here , and start using this awesome app!</mat-card-subtitle>
+                            <mat-card-content>
+                                <a mat-raised-button color="accent" [routerLink]="['/auth/signup']">Register</a>
+                            </mat-card-content>
+                        </mat-card>
                     </div>
                     <div fxFlex class="block">
-                        <md-card class="nothing">
-                            <md-card-title class="title">Or if you already have an account:</md-card-title>
-                            <md-card-subtitle></md-card-subtitle>
-                            <md-card-content>
-                                <a md-raised-button  color="primary" [routerLink]="['/auth/signin']">Login</a>
-                            </md-card-content>
-                        </md-card>
+                        <mat-card class="nothing">
+                            <mat-card-title class="title">Or if you already have an account:</mat-card-title>
+                            <mat-card-subtitle></mat-card-subtitle>
+                            <mat-card-content>
+                                <a mat-raised-button  color="primary" [routerLink]="['/auth/signin']">Login</a>
+                            </mat-card-content>
+                        </mat-card>
                     </div>
                 </div>
             </div>
@@ -98,40 +98,40 @@
                      fxLayoutGap="1em"
                      fxLayoutGap.xs="0">
                     <div fxFlex style="margin-left:4em" class="block">
-                        <md-card class="nothing">
-                            <md-card-header>
-                                <img src="/img/gates.jpg" alt="Thumbnail Image" md-card-avatar class="img-raised img-avatar" fxShow.xs="false">
-                                <img src="/img/gates.jpg" alt="Thumbnail Image" md-card-avatar class="img-raised" fxShow.xs="true" fxHide.gt-xs="true">
-                                <md-card-title class="title" style="font-size:2em;">Anastasios Gymnopoylos</md-card-title>
-                                <md-card-subtitle class="description">Full Stack Developer</md-card-subtitle>
-                            </md-card-header>
-                            <md-card-content>
+                        <mat-card class="nothing">
+                            <mat-card-header>
+                                <img src="/img/gates.jpg" alt="Thumbnail Image" mat-card-avatar class="img-raised img-avatar" fxShow.xs="false">
+                                <img src="/img/gates.jpg" alt="Thumbnail Image" mat-card-avatar class="img-raised" fxShow.xs="true" fxHide.gt-xs="true">
+                                <mat-card-title class="title" style="font-size:2em;">Anastasios Gymnopoylos</mat-card-title>
+                                <mat-card-subtitle class="description">Full Stack Developer</mat-card-subtitle>
+                            </mat-card-header>
+                            <mat-card-content>
                                 <p class="description">You can write here details about one of your team members.</p>
-                            </md-card-content>
-                            <md-card-actions>
-                                <button md-icon-button><i class="fa fa-linkedin-square fa-2x"></i></button>
-                                <button md-icon-button><i class="fa fa-github fa-2x"></i></button>
-                                <button md-icon-button><i class="fa fa-facebook-square fa-2x"></i></button>
-                            </md-card-actions>
-                        </md-card>
+                            </mat-card-content>
+                            <mat-card-actions>
+                                <button mat-icon-button><i class="fa fa-linkedin-square fa-2x"></i></button>
+                                <button mat-icon-button><i class="fa fa-github fa-2x"></i></button>
+                                <button mat-icon-button><i class="fa fa-facebook-square fa-2x"></i></button>
+                            </mat-card-actions>
+                        </mat-card>
                     </div>
                     <div fxFlex class="block">
-                        <md-card class="nothing">
-                            <md-card-header>
-                                <img src="/img/jobs.jpg" alt="Thumbnail Image" md-card-avatar class="img-raised img-avatar" fxShow.xs="false">
-                                <img src="/img/jobs.jpg" alt="Thumbnail Image" md-card-avatar class="img-raised" fxShow.xs="true" fxHide.gt-xs="true">
-                                <md-card-title class="title" style="font-size:2em;">Damian Anchidin</md-card-title>
-                                <md-card-subtitle class="description">Full Stack Developer</md-card-subtitle>
-                            </md-card-header>
-                            <md-card-content>
+                        <mat-card class="nothing">
+                            <mat-card-header>
+                                <img src="/img/jobs.jpg" alt="Thumbnail Image" mat-card-avatar class="img-raised img-avatar" fxShow.xs="false">
+                                <img src="/img/jobs.jpg" alt="Thumbnail Image" mat-card-avatar class="img-raised" fxShow.xs="true" fxHide.gt-xs="true">
+                                <mat-card-title class="title" style="font-size:2em;">Damian Anchidin</mat-card-title>
+                                <mat-card-subtitle class="description">Full Stack Developer</mat-card-subtitle>
+                            </mat-card-header>
+                            <mat-card-content>
                                 <p class="description">You can write here details about one of your team members.</p>
-                            </md-card-content>
-                            <md-card-actions>
-                                <button md-icon-button><i class="fa fa-linkedin-square fa-2x"></i></button>
-                                <button md-icon-button><i class="fa fa-github fa-2x"></i></button>
-                                <button md-icon-button><i class="fa fa-facebook-square fa-2x"></i></button>
-                            </md-card-actions>
-                        </md-card>
+                            </mat-card-content>
+                            <mat-card-actions>
+                                <button mat-icon-button><i class="fa fa-linkedin-square fa-2x"></i></button>
+                                <button mat-icon-button><i class="fa fa-github fa-2x"></i></button>
+                                <button mat-icon-button><i class="fa fa-facebook-square fa-2x"></i></button>
+                            </mat-card-actions>
+                        </mat-card>
                     </div>
             </div>
         </div>
@@ -143,28 +143,28 @@
                 <h5 class="description" style="font-size:1em;">Divide details about your inquiry. We will responde back to you in a couple of hours.</h5>
                 <div fxLayout>
                     <div fxFlex class="block">
-                        <md-card class="nothing">
-                            <md-card-content>
+                        <mat-card class="nothing">
+                            <mat-card-content>
                                 <div fxLayout fxLayout.xs="column" fxLayoutWrap fxLayoutGap="25px">
-                                    <md-input-container fxFlex="calc(50% - 25px)" class="block">
-                                        <md-icon mdPrefix>email</md-icon>
-                                        <input mdInput placeholder="Email" type="email">
-                                    </md-input-container>
-                                    <md-input-container fxFlex="calc(50% - 25px)" class="block">
-                                        <md-icon mdPrefix>subject</md-icon>
-                                        <input mdInput placeholder="Subject" type="text">
-                                    </md-input-container>
-                                    <md-input-container fxFlex="calc(50% - 25px)" class="block">
-                                        <md-icon mdPrefix>short_text</md-icon>
-                                        <textarea mdInput placeholder="Message" cols="10" rows="2"></textarea>
-                                    </md-input-container>
+                                    <mat-input-container fxFlex="calc(50% - 25px)" class="block">
+                                        <mat-icon matPrefix>email</mat-icon>
+                                        <input matInput placeholder="Email" type="email">
+                                    </mat-input-container>
+                                    <mat-input-container fxFlex="calc(50% - 25px)" class="block">
+                                        <mat-icon matPrefix>subject</mat-icon>
+                                        <input matInput placeholder="Subject" type="text">
+                                    </mat-input-container>
+                                    <mat-input-container fxFlex="calc(50% - 25px)" class="block">
+                                        <mat-icon matPrefix>short_text</mat-icon>
+                                        <textarea matInput placeholder="Message" cols="10" rows="2"></textarea>
+                                    </mat-input-container>
                                 </div>
-                            </md-card-content>
+                            </mat-card-content>
 
-                            <md-card-actions class="block">
-                                <button md-raised-button color="primary">Send</button>
-                            </md-card-actions>
-                        </md-card>
+                            <mat-card-actions class="block">
+                                <button mat-raised-button color="primary">Send</button>
+                            </mat-card-actions>
+                        </mat-card>
                     </div>
                 </div>
                 <br>
@@ -179,7 +179,7 @@
    <!-- <div id="wallpaper" class="header header-filter">
         <div class="container">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-mat-6">
                     <h1 class="title">Project Management Web App.</h1>
                     <h4>Give it a 5 minutes tour and you'll find out why is one of the best.</h4>
                     <br />
@@ -195,7 +195,7 @@
         <div class="container">
             <div class="section text-center section-landing">
                 <div class="row">
-                    <div class="col-md-8 col-md-offset-2">
+                    <div class="col-mat-8 col-mat-offset-2">
                         <h2 class="title">About this application</h2>
                         <h5 class="description">
                             This application is the subject of a Bachelor's Degree Thesis at the University of Applied Sciences of Central Macedonia.
@@ -206,7 +206,7 @@
                 <br><br><br>
             <div id="product" class="section text-center section-landing">
                 <div class="row">
-                    <div class="col-md-8 col-md-offset-2">
+                    <div class="col-mat-8 col-mat-offset-2">
                         <h2 class="title">Let's talk product</h2>
                         <h5 class="description">
                             If you're looking for a quick and easy way of directing a project, you've come to the right place.
@@ -218,7 +218,7 @@
 
                 <div class="features">
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-mat-4">
                             <div class="info">
                                 <div class="icon ">
                                     <i class="material-icons icon-primary">chat</i>
@@ -227,7 +227,7 @@
                                 <p>You can discuss important matters about your project, tasks, issues with the other member of your team entirely privately and secure. The chat is based on Socket.io.</p>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-mat-4">
                             <div class="info">
                                 <div class="icon ">
                                     <i class="material-icons icon-success">verified_user</i>
@@ -236,7 +236,7 @@
                                 <p>Keep up with your tasks, issues as well as your teammates one's, through the Dashboard.</p>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-mat-4">
                             <div class="info">
                                 <div class="icon ">
                                     <i class="material-icons icon-danger">insert_chart</i>
@@ -251,7 +251,7 @@
 
             <div id="authenticate" class="section text-center section-landing">
                 <div class="row">
-                    <div class="col-md-8 col-md-offset-2">
+                    <div class="col-mat-8 col-mat-offset-2">
                         <h2 class="title">What are you waiting for ?</h2>
 
                             <h4 class="description">
@@ -281,7 +281,7 @@
 
                 <div class="team">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-mat-6">
                             <div class="team-player">
                                 <img src="/img/gates.jpg" alt="Thumbnail Image" class="img-raised img-circle">
                                 <h4 class="title">Anastasios Gymnopoylos <br />
@@ -293,7 +293,7 @@
                                 <a href="#pablo" class="btn btn-simple btn-just-icon"><i class="fa fa-facebook-square fa-2x"></i></a>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-mat-6">
                             <div class="team-player">
                                 <img src="/img/jobs.jpg" alt="Thumbnail Image" class="img-raised img-circle">
                                 <h4 class="title">Damian Anchidin<br />
@@ -313,18 +313,18 @@
 
             <div id="contact" class="section landing-section">
                 <div class="row">
-                    <div class="col-md-8 col-md-offset-2">
+                    <div class="col-mat-8 col-mat-offset-2">
                         <h2 class="text-center title">Contact us</h2>
                         <h4 class="text-center description">Divide details about your inquiry. We will responde back to you in a couple of hours.</h4>
                         <form class="contact-form">
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-mat-6">
                                     <div class="form-group label-floating">
                                         <label class="control-label">Your Name</label>
                                         <input type="email" class="form-control">
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-mat-6">
                                     <div class="form-group label-floating">
                                         <label class="control-label">Your Email</label>
                                         <input type="email" class="form-control">

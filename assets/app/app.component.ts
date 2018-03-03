@@ -12,8 +12,5 @@ export class AppComponent {
 
     private subscription:Subscription = this.progressBarService.progressBar$.subscribe((pbOptions) => this.progressBar = pbOptions);
 
-    constructor(private progressBarService: ProgressBarService){
-    }
-
-
+    constructor(private progressBarService: ProgressBarService){}
 }

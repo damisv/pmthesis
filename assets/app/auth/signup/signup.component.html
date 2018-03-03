@@ -1,47 +1,49 @@
 <div id="wallpaper" class="header block">
-    <md-card class="card block" style="max-width:30em;margin:auto;">
+    <mat-card class="card block" style="max-width:30em;margin:auto;">
         <form class="form" [formGroup]="myForm" (ngSubmit)="onSubmit()">
-            <md-card-header>
-                <md-card class="card block" style="background: rebeccapurple;width:100%;margin-left:auto;margin-right:auto;margin-top:-10%;">
-                    <md-card-header style="justify-content: center">
-                        <md-card-title style="font-size: 1.5em">Sign Up</md-card-title>
-                    </md-card-header>
-                    <md-card-content style="text-align: center;font-size: 1em">
-                        <button md-icon-button><i class="fa fa-facebook-square fa-2x"></i></button>
-                        <button md-icon-button><i class="fa fa-twitter fa-2x"></i></button>
-                        <button md-icon-button><i class="fa fa-google-plus fa-2x"></i></button>
-                    </md-card-content>
-                </md-card>
-                <md-card-subtitle class="block">
+            <mat-card-header>
+                <mat-card class="card block"
+                         style="background: rebeccapurple;width:100%;margin-left:auto;margin-right:auto;margin-top:-10%;">
+                    <mat-card-header style="justify-content: center">
+                        <mat-card-title style="font-size: 1.5em">Sign Up</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content style="text-align: center;font-size: 1em">
+                        <button mat-icon-button><i class="fa fa-facebook-square fa-2x"></i></button>
+                        <button mat-icon-button><i class="fa fa-twitter fa-2x"></i></button>
+                        <button mat-icon-button><i class="fa fa-google-plus fa-2x"></i></button>
+                    </mat-card-content>
+                </mat-card>
+                <mat-card-subtitle class="block">
                     OR BE CLASSICAL
-                </md-card-subtitle>
-            </md-card-header>
-            <md-card-content>
+                </mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
                 <div fxLayout="column" fxLayoutWrap>
-                    <md-input-container fxFlex class="block">
-                        <md-icon mdPrefix>account_circle</md-icon>
-                        <input mdInput placeholder="Desired Email" type="email" formControlName="email">
-                    </md-input-container>
-                    <md-input-container fxFlex class="block">
-                        <md-icon mdPrefix>fingerprint</md-icon>
-                        <input mdInput placeholder="Password" type="password" formControlName="password">
-                    </md-input-container>
-                    <md-input-container fxFlex class="block">
-                        <md-icon mdPrefix>fingerprint</md-icon>
-                        <input mdInput placeholder="Retype Password" type="password" formControlName="repassword">
-                    </md-input-container>
+                    <mat-input-container fxFlex class="block">
+                        <mat-icon matPrefix>account_circle</mat-icon>
+                        <input matInput placeholder="Desired Email" type="email" formControlName="email">
+                    </mat-input-container>
+                    <mat-input-container fxFlex class="block">
+                        <mat-icon matPrefix>fingerprint</mat-icon>
+                        <input matInput placeholder="Password" type="password" formControlName="password">
+                    </mat-input-container>
+                    <mat-input-container fxFlex class="block">
+                        <mat-icon matPrefix>fingerprint</mat-icon>
+                        <input matInput placeholder="Retype Password" type="password" formControlName="repassword">
+                    </mat-input-container>
                 </div>
-            </md-card-content>
-            <md-card-actions style="text-align: center">
-                <button md-raised-button type="submit" [disabled]="!myForm.valid" color="warn" class="block">Register</button>
-            </md-card-actions>
+            </mat-card-content>
+            <mat-card-actions style="text-align: center">
+                <button mat-raised-button type="submit" [disabled]="!myForm.valid" color="warn" class="block">Register
+                </button>
+            </mat-card-actions>
         </form>
-    </md-card>
+    </mat-card>
 </div>
 
 <!--<div class="container">
     <div class="row">
-        <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
+        <div class="col-mat-4 col-mat-offset-4 col-sm-6 col-sm-offset-3">
             <div class="card card-signup">
                 <form class="form" [formGroup]="myForm" (ngSubmit)="onSubmit()">
                     <div class="header header-primary text-center">

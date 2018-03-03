@@ -1,6 +1,5 @@
 import {NgModule} from "@angular/core";
 import {BrowserModule} from "@angular/platform-browser";
-import {MaterialModule} from "@angular/material";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpModule} from "@angular/http";
 
@@ -28,6 +27,7 @@ import { FlexLayoutModule } from "@angular/flex-layout";
 import {ProgressBarService} from "./webapp/_services/progressbar.service";
 import { ErrorDialogComponent} from "./errors/error.component";
 import {PushNotificationsModule,SimpleNotificationsModule} from "angular2-notifications";
+import {MaterialModule} from "./material.module";
 
 
 

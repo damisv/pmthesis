@@ -1,23 +1,23 @@
-<md-toolbar class="block" color="primary" style="transition: all 1.5s ease;position: fixed;z-index:999;border-radius: 6px;" [style.background-color]="isTop"  >
+<mat-toolbar class="block" color="primary" style="transition: all 1.5s ease;position: fixed;z-index:999;border-radius: 6px;" [style.background-color]="isTop"  >
     <p style="transition: all 1.5s ease;" [style.color]="isTop">Project Management Web App</p>
     <div style="flex:1 1 auto;"></div>
     <div style="transition: all 1.5s ease;" [style.color]="isTransparent">
-        <button md-icon-button *ngIf="!isMobile" [ngx-scroll-to]="'#wallpaper'" mdTooltip="Top Section"><md-icon>home</md-icon></button>
-        <button md-icon-button *ngIf="!isMobile" [ngx-scroll-to]="'#about'" mdTooltip="About"><md-icon>info</md-icon></button>
-        <button md-icon-button *ngIf="!isMobile" [ngx-scroll-to]="'#product'" mdTooltip="Product"><md-icon>business_center</md-icon></button>
-        <button md-icon-button *ngIf="!isMobile" [ngx-scroll-to]="'#authenticate'" mdTooltip="Authenticate"><md-icon>card_membership</md-icon></button>
-        <button md-icon-button *ngIf="!isMobile" [ngx-scroll-to]="'#team'" mdTooltip="Our Team"><md-icon>group</md-icon></button>
-        <button md-icon-button *ngIf="!isMobile" [ngx-scroll-to]="'#contact'" mdTooltip="Contact Us"><md-icon>contact_mail</md-icon></button>
-        <button md-icon-button *ngIf="isMobile" [mdMenuTriggerFor]="mobilemenu">
-            <md-icon>more_vert</md-icon>
+        <button mat-icon-button *ngIf="!isMobile" [ngx-scroll-to]="'#wallpaper'" matTooltip="Top Section"><mat-icon>home</mat-icon></button>
+        <button mat-icon-button *ngIf="!isMobile" [ngx-scroll-to]="'#about'" matTooltip="About"><mat-icon>info</mat-icon></button>
+        <button mat-icon-button *ngIf="!isMobile" [ngx-scroll-to]="'#product'" matTooltip="Product"><mat-icon>business_center</mat-icon></button>
+        <button mat-icon-button *ngIf="!isMobile" [ngx-scroll-to]="'#authenticate'" matTooltip="Authenticate"><mat-icon>card_membership</mat-icon></button>
+        <button mat-icon-button *ngIf="!isMobile" [ngx-scroll-to]="'#team'" matTooltip="Our Team"><mat-icon>group</mat-icon></button>
+        <button mat-icon-button *ngIf="!isMobile" [ngx-scroll-to]="'#contact'" matTooltip="Contact Us"><mat-icon>contact_mail</mat-icon></button>
+        <button mat-icon-button *ngIf="isMobile" [matMenuTriggerFor]="mobilemenu">
+            <mat-icon>more_vert</mat-icon>
         </button>
-        <md-menu #mobilemenu="mdMenu">
-            <a md-menu-item [ngx-scroll-to]="'#wallpaper'" mdTooltip="Top Section"><md-icon>home</md-icon><span>Home</span></a>
-            <a md-menu-item  [ngx-scroll-to]="'#about'" mdTooltip="About"><md-icon>info</md-icon><span>About</span></a>
-            <a md-menu-item [ngx-scroll-to]="'#product'" mdTooltip="Product"><md-icon>business_center</md-icon><span>Product</span></a>
-            <a md-menu-item [ngx-scroll-to]="'#authenticate'" mdTooltip="Authenticate"><md-icon>card_membership</md-icon><span>Authenticate</span></a>
-            <a md-menu-item [ngx-scroll-to]="'#team'" mdTooltip="Our Team"><md-icon>group</md-icon><span>Our Team</span></a>
-            <a md-menu-item [ngx-scroll-to]="'#contact'" mdTooltip="Contact Us"><md-icon>contact_mail</md-icon><span>Contact</span></a>
-        </md-menu>
+        <mat-menu #mobilemenu="matMenu">
+            <a mat-menu-item [ngx-scroll-to]="'#wallpaper'" matTooltip="Top Section"><mat-icon>home</mat-icon><span>Home</span></a>
+            <a mat-menu-item  [ngx-scroll-to]="'#about'" matTooltip="About"><mat-icon>info</mat-icon><span>About</span></a>
+            <a mat-menu-item [ngx-scroll-to]="'#product'" matTooltip="Product"><mat-icon>business_center</mat-icon><span>Product</span></a>
+            <a mat-menu-item [ngx-scroll-to]="'#authenticate'" matTooltip="Authenticate"><mat-icon>card_membership</mat-icon><span>Authenticate</span></a>
+            <a mat-menu-item [ngx-scroll-to]="'#team'" matTooltip="Our Team"><mat-icon>group</mat-icon><span>Our Team</span></a>
+            <a mat-menu-item [ngx-scroll-to]="'#contact'" matTooltip="Contact Us"><mat-icon>contact_mail</mat-icon><span>Contact</span></a>
+        </mat-menu>
     </div>
-</md-toolbar>
+</mat-toolbar>

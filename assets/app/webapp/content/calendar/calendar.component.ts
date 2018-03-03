@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, OnInit, ViewChild} from "@angular/core";
-import {MdDialog, MdTabGroup} from "@angular/material";
+import {MatDialog, MatTabGroup} from "@angular/material";
 import {CalendarEvent, CalendarEventTimesChangedEvent} from 'angular-calendar';
 import {
     startOfDay,
@@ -87,7 +87,7 @@ export class CalendarComponent implements OnInit {
     projectEvents = [];
     projects:Project[]=null;
 
-    @ViewChild('calendarView') calendarView:MdTabGroup;
+    @ViewChild('calendarView') calendarView: MatTabGroup;
 
     projectsSubscription:Subscription = this.projectService.projects$.subscribe((projects)=>{
         this.projects=projects;
@@ -108,7 +108,7 @@ export class CalendarComponent implements OnInit {
         });
     };
 
-    constructor(private dialog:MdDialog,private calendarService:CalendarService,private projectService:ProjectService){
+    constructor(private dialog: MatDialog, private calendarService: CalendarService, private projectService: ProjectService){
         //TODO add Team Events
         calendarService.getMyEvents().subscribe(res=>{
             this.events = [];

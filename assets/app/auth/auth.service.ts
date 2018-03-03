@@ -6,13 +6,12 @@ import { Observable } from 'rxjs/Observable';
 import { Account } from '../models/account';
 import { Error } from "../models/error";
 import {ProgressBarService} from "../webapp/_services/progressbar.service";
-import {MdDialog, MdDialogConfig} from "@angular/material";
+import {MatDialog, MatDialogConfig} from "@angular/material";
 import {ErrorDialogComponent} from "../errors/error.component";
 
 @Injectable()
 export class AuthService {
-    constructor(private http: Http,private progressBarService:ProgressBarService,private dialog: MdDialog) {
-    }
+    constructor(private http: Http,private progressBarService:ProgressBarService,private dialog: MatDialog) {}
     signInUrl = 'signin';
     signUpUrl = 'signup';
     error:Error;
@@ -48,7 +47,7 @@ export class AuthService {
 
     private throwError(error){
         const errorData = new Error(error.title, error.error.message);
-        const dialogConfig = new MdDialogConfig();
+        const dialogConfig = new MatDialogConfig();
         dialogConfig.data = errorData;
         let dialogError = this.dialog.open(ErrorDialogComponent,dialogConfig);
         dialogError.afterClosed().subscribe(result => {

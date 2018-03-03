@@ -11,34 +11,6 @@ import {ProfileComponent} from "./content/user/profile.component";
 import {TasksComponent} from "./content/tasks/tasks.component";
 import {ProjectsComponent} from "./content/projects/projects.component";
 import {DragulaModule} from "ng2-dragula";
-import {
-    MdButtonModule,
-    MdCheckboxModule,
-    MdDatepickerModule,
-    MdTableModule,
-    MdTabsModule,
-    MdAutocompleteModule,
-    MdChipsModule,
-    MdProgressBarModule,
-    MdDialogModule,
-    MdMenuModule,
-    MdSliderModule,
-    MdSelectModule,
-    MdInputModule,
-    MdRadioModule,
-    MdTooltipModule,
-    MdSnackBarModule,
-    MdButtonToggleModule,
-    MdSlideToggleModule,
-    MdGridListModule,
-    MdCardModule,
-    MdIconModule,
-    MdListModule,
-    MdNativeDateModule,
-    MdToolbarModule,
-    MdSidenavModule,
-    MdPaginatorModule,
-} from "@angular/material";
 
 import {ProjectTasksComponent} from "./content/tasks/project_tasks.component";
 import {IssuesComponent} from "./content/issues/issues.component";
@@ -144,33 +116,6 @@ import {TimeAgoPipeModule} from "time-ago-pipe/index";
         RouterModule,
         DragulaModule,
         ParticlesModule,
-        MdButtonModule,
-        MdCheckboxModule,
-        MdDatepickerModule,
-        MdTableModule,
-        MdTabsModule,
-        MdAutocompleteModule,
-        MdChipsModule,
-        MdProgressBarModule,
-        MdDialogModule,
-        MdMenuModule,
-        MdSliderModule,
-        MdSelectModule,
-        MdInputModule,
-        MdRadioModule,
-        MdTooltipModule,
-        MdSnackBarModule,
-        MdButtonToggleModule,
-        MdSlideToggleModule,
-        MdGridListModule,
-        MdCardModule,
-        MdIconModule,
-        MdListModule,
-        CdkTableModule,
-        MdNativeDateModule,
-        MdToolbarModule,
-        MdSidenavModule,
-        MdPaginatorModule,
         FlexLayoutModule,
         BrowserModule,
         BrowserAnimationsModule,
@@ -203,6 +148,4 @@ import {TimeAgoPipeModule} from "time-ago-pipe/index";
         CalendarEventEditDialogComponent
     ]
 })
-export class WebappModule {
-
-}
+export class WebappModule {}

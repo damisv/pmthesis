@@ -6,7 +6,7 @@ import {Project} from "../../../models/project";
 import {ProfileService} from "../../_services/profile.service";
 import {Profile} from "../../../models/profile";
 import {EventCreateDialogComponent} from "./eventCreateDialog.component";
-import {MdDialog} from "@angular/material";
+import {MatDialog} from "@angular/material";
 import {ObservableMedia} from "@angular/flex-layout";
 import {ActivatedRoute, Router} from "@angular/router";
 import {CalendarService} from "../../_services/calendar.service";
@@ -51,7 +51,7 @@ export class ChatComponent implements OnInit,AfterViewInit,OnDestroy{
     constructor(
                 private projectService:ProjectService,
                 private profileService:ProfileService,
-                private dialog:MdDialog,
+                private dialog:MatDialog,
                 private media:ObservableMedia,
                 private router:Router,
                 private route:ActivatedRoute,

@@ -5,69 +5,69 @@
         fxLayoutGap="10px"
         fxLayoutGap.xs="0">
     <div fxFlex="auto">
-        <md-card class="card" >
-            <md-card-content style="height:50em">
+        <mat-card class="card" >
+            <mat-card-content style="height:50em">
 
-                <md-sidenav-container #sidenav style="height:100%;width:100%;background-color:white!important;">
-                    <md-sidenav #sidenav mode="side" opened="true" style="overflow:hidden">
-                        <md-toolbar color="primary" style="box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2)!important">
+                <mat-sidenav-container #sidenav style="height:100%;width:100%;background-color:white!important;">
+                    <mat-sidenav #sidenav mode="side" opened="true" style="overflow:hidden">
+                        <mat-toolbar color="primary" style="box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2)!important">
                             <h4>My email</h4>
                             <div style="flex: 1 1 auto"></div>
-                            <button md-icon-button [mdMenuTriggerFor]="my_menu" >
-                                <md-icon>more_vert</md-icon>
+                            <button mat-icon-button [matMenuTriggerFor]="my_menu" >
+                                <mat-icon>more_vert</mat-icon>
                             </button>
-                            <md-menu #my_menu="mdMenu" [overlapTrigger]="false">
-                                <button md-menu-item>
-                                    <md-icon>dialpad</md-icon>
+                            <mat-menu #my_menu="matMenu" [overlapTrigger]="false">
+                                <button mat-menu-item>
+                                    <mat-icon>dialpad</mat-icon>
                                     <span>Redial</span>
                                 </button>
-                                <button md-menu-item disabled>
-                                    <md-icon>voicemail</md-icon>
+                                <button mat-menu-item disabled>
+                                    <mat-icon>voicemail</mat-icon>
                                     <span>Check voicemail</span>
                                 </button>
-                                <button md-menu-item>
-                                    <md-icon>notifications_off</md-icon>
+                                <button mat-menu-item>
+                                    <mat-icon>notifications_off</mat-icon>
                                     <span>Disable alerts</span>
                                 </button>
-                            </md-menu>
-                        </md-toolbar>
+                            </mat-menu>
+                        </mat-toolbar>
                         <webapp-chat-userlist (onConversationSelected)="onConversationSelected($event)" [projects]="projects"></webapp-chat-userlist>
-                    </md-sidenav>
+                    </mat-sidenav>
 
-                    <md-toolbar color="primary" style="border-left:solid 1px gray;box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2)!important">
-                        <button type="button" md-button (click)="sidenav.toggle()">
-                            <md-icon>short_text</md-icon>
+                    <mat-toolbar color="primary" style="border-left:solid 1px gray;box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2)!important">
+                        <button type="button" mat-button (click)="sidenav.toggle()">
+                            <mat-icon>short_text</mat-icon>
                         </button>
                         <div style="flex:1 1 auto"></div>
                         <h4>{{conversationSelected?.name}}</h4>
                         <div style="flex:1 1 auto"></div>
-                        <button *ngIf="conversationSelected!==null" md-icon-button [mdMenuTriggerFor]="user_menu">
-                            <md-icon>more_vert</md-icon>
+                        <button *ngIf="conversationSelected!==null" mat-icon-button [matMenuTriggerFor]="user_menu">
+                            <mat-icon>more_vert</mat-icon>
                         </button>
-                        <md-menu #user_menu="mdMenu" [overlapTrigger]="false">
-                            <button md-menu-item>
-                                <md-icon>dialpad</md-icon>
+                        <mat-menu #user_menu="matMenu" [overlapTrigger]="false">
+                            <button mat-menu-item>
+                                <mat-icon>dialpad</mat-icon>
                                 <span>Call {{ conversationSelected?.name }}</span>
                             </button>
-                            <button md-menu-item (click)="setMeeting()">
-                                <md-icon>schedule</md-icon>
+                            <button mat-menu-item (click)="setMeeting()">
+                                <mat-icon>schedule</mat-icon>
                                 <span>Set up a meeting</span>
                             </button>
-                            <button md-menu-item>
-                                <md-icon>notifications_off</md-icon>
+                            <button mat-menu-item>
+                                <mat-icon>notifications_off</mat-icon>
                                 <span>Disable alerts for this user</span>
                             </button>
-                        </md-menu>
-                    </md-toolbar>
+                        </mat-menu>
+                    </mat-toolbar>
 
                     <router-outlet name="messages"></router-outlet>
 
-                </md-sidenav-container>
-     </md-card-content>
-     <md-card-footer>
-         <md-divider></md-divider>
-         <md-icon>history</md-icon> Just updated
-     </md-card-footer>
- </md-card>
+                </mat-sidenav-container>
+     </mat-card-content>
+     <mat-card-footer>
+         <mat-divider></mat-divider>
+         <mat-icon>history</mat-icon> Just updated
+     </mat-card-footer>
+ </mat-card>
 </div>
 </div>
