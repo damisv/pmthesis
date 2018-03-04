@@ -4,23 +4,23 @@
      fxLayoutGap="10px"
      fxLayoutGap.xs="0">
     <div fxFlex>
-        <md-card class="card">
-            <md-card-header>
-                <div md-card-avatar class="header-image" ></div>
-                <md-card-title mdTooltip="{{profile?.username}}">{{ profile?.firstName }} {{ profile?.lastName }}</md-card-title>
-                <md-card-subtitle><a href="mailto:{{profile.email}}"><small>{{ profile.email}}</small></a></md-card-subtitle>
+        <mat-card class="card">
+            <mat-card-header>
+                <div mat-card-avatar class="header-image" ></div>
+                <mat-card-title matTooltip="{{profile?.username}}">{{ profile?.firstName }} {{ profile?.lastName }}</mat-card-title>
+                <mat-card-subtitle><a href="mailto:{{profile.email}}"><small>{{ profile.email}}</small></a></mat-card-subtitle>
 
-            </md-card-header>
-            <img md-card-image src="/img/city.jpg">
-            <md-card-content>
+            </mat-card-header>
+            <img mat-card-image src="/img/city.jpg">
+            <mat-card-content>
                 <p>From {{profile?.city}},{{profile?.country}}</p>
                 <p>
                     A little about myself:
                 </p><br>
                 <p>{{profile.description}}</p>
 
-            </md-card-content>
-        </md-card>
+            </mat-card-content>
+        </mat-card>
     </div>
 </div>
 

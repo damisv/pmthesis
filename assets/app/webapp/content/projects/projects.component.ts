@@ -6,11 +6,11 @@ import {Router} from "@angular/router";
 import {Subscription} from "rxjs";
 import {Profile} from "../../../models/profile";
 import {ProfileService} from "../../_services/profile.service";
-import {MdPaginator, MdSnackBar} from "@angular/material";
+import {MatPaginator, MatSnackBar} from "@angular/material";
 import {Title} from "@angular/platform-browser";
 import {TaskService} from "../../_services/task.service";
 
-import { DataSource} from "@angular/cdk"
+import { DataSource} from "@angular/cdk/table"
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/observable/merge';
@@ -20,8 +20,7 @@ import {trigger, stagger, animate, style, group, query, transition, keyframes} f
 
 class ExampleDataSource extends DataSource<any> {
 
-
-    constructor( private projectService: ProjectService, private _paginator: MdPaginator) {
+    constructor( private projectService: ProjectService, private _paginator: MatPaginator) {
         super();
         this.projectService.projects$.subscribe(projects=>this.projects=projects);
     }
@@ -86,7 +85,7 @@ export class ProjectsComponent implements OnInit,OnDestroy{
     displayedColumns = ['Name','Budget','Description','Members','Progress'];
     dataSource: ExampleDataSource | null;
 
-    @ViewChild(MdPaginator) paginator: MdPaginator;
+    @ViewChild(MatPaginator) paginator: MatPaginator;
 
     projectsSubscription:Subscription = this.projectService.projects$.subscribe(
         projects => {
@@ -107,7 +106,7 @@ export class ProjectsComponent implements OnInit,OnDestroy{
     constructor(private projectService: ProjectService,
                 private profileService:ProfileService ,
                 private router:Router,
-                public snackBar: MdSnackBar,
+                public snackBar: MatSnackBar,
                 private titleService: Title,
                 private taskService : TaskService) {
     }

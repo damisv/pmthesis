@@ -1,5 +1,4 @@
 import {Component, Renderer2} from "@angular/core";
-
 import {trigger, stagger, animate, style, group, query, transition, keyframes} from '@angular/animations';
 import {ActionService} from "../../_services/action.service";
 

@@ -3,7 +3,7 @@ import {Subscription} from "rxjs/Subscription";
 import {TaskService} from "../../_services/task.service";
 import {Title} from "@angular/platform-browser";
 import {Task} from "../../../models/task";
-import {MdGridList} from "@angular/material";
+import {MatGridList} from "@angular/material";
 import { ObservableMedia } from "@angular/flex-layout";
 import {Profile} from "../../../models/profile";
 import {ProfileService} from "../../_services/profile.service";
@@ -35,7 +35,7 @@ import {trigger, stagger, animate, style, group, query, transition, keyframes} f
 export class ViewTaskComponent {
 
     @ViewChild('grid')
-    private grid: MdGridList;
+    private grid: MatGridList;
     @ViewChild('description') descriptionTile;
     @ViewChild('taskName') taskName;
 

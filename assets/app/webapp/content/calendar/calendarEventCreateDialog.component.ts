@@ -23,11 +23,11 @@ import {MAT_DIALOG_DATA} from "@angular/material";
                     </mat-input-container>
                 </div>
                 <div fxFlex>
-                    <mat-input-container>
+                    <mat-form-field>
                         <input matInput [matDatepicker]="picker" placeholder="Choose a date to end this event" [(ngModel)]="endDate" (ngModelChange)="setEndDate($event)">
-                        <button matSuffix [matDatepickerToggle]="picker"></button>
-                    </mat-input-container>
-                    <mat-datepicker #picker></mat-datepicker>
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
                 </div>
                 <div fxFlex>
                     <mat-input-container>

@@ -1,10 +1,10 @@
-<md-list class="userlist" >
-        <h3 md-subheader>Projects Discussions</h3>
+<mat-list class="userlist" >
+        <h3 mat-subheader>Projects Discussions</h3>
        <ng-template ngFor let-project [ngForOf]="projects">
-        <md-list-item (click)="selectConversation(project)" class="projectDiscussion">
-            <md-icon md-list-icon>note</md-icon>
-            <h4 md-line>{{project.name}}</h4>
-            <p md-line> {{project.team.length}} members  </p>
-        </md-list-item>
+        <mat-list-item (click)="selectConversation(project)" class="projectDiscussion">
+            <mat-icon mat-list-icon>note</mat-icon>
+            <h4 mat-line>{{project.name}}</h4>
+            <p mat-line> {{project.team.length}} members  </p>
+        </mat-list-item>
     </ng-template>
-</md-list>
+</mat-list>

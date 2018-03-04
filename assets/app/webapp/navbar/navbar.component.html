@@ -1,21 +1,21 @@
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <div class="navbar-header">
-            <button type="button" [mdMenuTriggerFor]="mobileMenu" class="navbar-toggle" >
+            <button type="button" [matMenuTriggerFor]="mobileMenu" class="navbar-toggle" >
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <md-menu #mobileMenu="mdMenu">
-                <a md-menu-item [routerLink]="['dashboard']">Dashboard</a>
-                <a md-menu-item [routerLink]="['myprojects']">My Projects</a>
-                <a md-menu-item [routerLink]="['mytasks']">My Tasks</a>
-                <a md-menu-item [routerLink]="['myissues']">My Issues</a>
-                <a md-menu-item [routerLink]="['']">Chat</a>
-                <a md-menu-item [routerLink]="['profile']">Profile</a>
-                <a md-menu-item [routerLink]="['invites']">Invites</a>
-            </md-menu>
+            <mat-menu #mobileMenu="matMenu">
+                <a mat-menu-item [routerLink]="['dashboard']">Dashboard</a>
+                <a mat-menu-item [routerLink]="['myprojects']">My Projects</a>
+                <a mat-menu-item [routerLink]="['mytasks']">My Tasks</a>
+                <a mat-menu-item [routerLink]="['myissues']">My Issues</a>
+                <a mat-menu-item [routerLink]="['']">Chat</a>
+                <a mat-menu-item [routerLink]="['profile']">Profile</a>
+                <a mat-menu-item [routerLink]="['invites']">Invites</a>
+            </mat-menu>
             <a class="navbar-brand" href="#pablo" >{{ profile?.email }}</a>
         </div>
         <div class="collapse navbar-collapse">
@@ -27,7 +27,7 @@
                     </a>
                 </li>
                 <li >
-                    <a  [mdMenuTriggerFor]="notifications">
+                    <a  [matMenuTriggerFor]="notifications">
                         <i class="fa fa-globe"></i>
                         <b class="caret"></b>
                         <span class="notification hidden-sm hidden-xs">15</span>
@@ -36,14 +36,14 @@
                             <b class="caret"></b>
                         </p>
                     </a>
-                    <md-menu #notifications="mdMenu" [overlapTrigger]="false">
-                        <button md-menu-item>Notification 1</button>
-                        <button md-menu-item>Notification 2</button>
-                        <button md-menu-item>Notification 3</button>
-                        <button md-menu-item>Notification 4</button>
-                        <button md-menu-item>Notification 5</button>
-                        <button md-menu-item>Another Notification</button>
-                    </md-menu>
+                    <mat-menu #notifications="matMenu" [overlapTrigger]="false">
+                        <button mat-menu-item>Notification 1</button>
+                        <button mat-menu-item>Notification 2</button>
+                        <button mat-menu-item>Notification 3</button>
+                        <button mat-menu-item>Notification 4</button>
+                        <button mat-menu-item>Notification 5</button>
+                        <button mat-menu-item>Another Notification</button>
+                    </mat-menu>
 
                 </li>
                 <li>
@@ -61,11 +61,11 @@
                     </a>
                 </li>
                 <li class="dropdown">
-                        <a [mdMenuTriggerFor]="settings">Settings</a>
-                        <md-menu #settings="mdMenu">
-                            <button md-menu-item>Item 1</button>
-                            <button md-menu-item>Item 2</button>
-                        </md-menu>
+                        <a [matMenuTriggerFor]="settings">Settings</a>
+                        <mat-menu #settings="matMenu">
+                            <button mat-menu-item>Item 1</button>
+                            <button mat-menu-item>Item 2</button>
+                        </mat-menu>
                 </li>
                 <li>
                     <a (click)="onLogout()">

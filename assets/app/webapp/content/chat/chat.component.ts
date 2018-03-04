@@ -94,14 +94,11 @@ export class ChatComponent implements OnInit,AfterViewInit,OnDestroy{
     menuCollapse() {
         if (this.media.isActive('md')) {
             this.sidenav.close();
-        }
-        else if (this.media.isActive('sm')) {
+        } else if (this.media.isActive('sm')) {
             this.sidenav.close();
-        }
-        else if (this.media.isActive('xs')) {
+        } else if (this.media.isActive('xs')) {
             this.sidenav.close();
-        }
-        else{
+        } else {
             this.sidenav.open();
         }
     }
@@ -110,6 +107,4 @@ export class ChatComponent implements OnInit,AfterViewInit,OnDestroy{
         if(this.projectsSubscription!==undefined)
         this.projectsSubscription.unsubscribe();
     }
-
-
 }

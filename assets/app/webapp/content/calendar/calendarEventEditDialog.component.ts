@@ -16,11 +16,11 @@ import {MAT_DIALOG_DATA} from "@angular/material";
                   </mat-input-container>
               </div>
               <div fxFlex>
-                  <md-input-container>
-                      <input matInput [mdDatepicker]="startPicker" placeholder="Choose a date to start this event" [(ngModel)]="startDate" (ngModelChange)="setStartDate($event)">
-                      <button matSuffix [mdDatepickerToggle]="startPicker"></button>
-                  </md-input-container>
-                  <mat-datepicker #startPicker></mat-datepicker>
+                  <mat-form-field>
+                      <input matInput [matDatepicker]="startPicker" placeholder="Choose a date to start this event" [(ngModel)]="startDate" (ngModelChange)="setStartDate($event)">
+                      <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+                      <mat-datepicker #startPicker></mat-datepicker>
+                  </mat-form-field>
               </div>
               <div fxFlex>
                   <mat-input-container>
@@ -28,11 +28,11 @@ import {MAT_DIALOG_DATA} from "@angular/material";
                   </mat-input-container>
               </div>
               <div fxFlex>
-                  <mat-input-container>
-                      <input matInput [mdDatepicker]="picker" placeholder="Choose a date to end this event" [(ngModel)]="endDate" (ngModelChange)="setEndDate($event)">
-                      <button matSuffix [mdDatepickerToggle]="picker"></button>
-                  </mat-input-container>
-                  <mat-datepicker #picker></mat-datepicker>
+                  <mat-form-field>
+                      <input matInput [matDatepicker]="endPicker" placeholder="Choose a date to end this event" [(ngModel)]="endDate" (ngModelChange)="setEndDate($event)">
+                      <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+                      <mat-datepicker #endPicker></mat-datepicker>
+                  </mat-form-field>
               </div>
               <div fxFlex>
                   <mat-input-container>

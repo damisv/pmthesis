@@ -4,7 +4,7 @@
             <section>
                 <ng-template ngFor let-message [ngForOf]="messages">
                     <div *ngIf="message.receiver==projectID">
-                        <div [ngClass]="{'from-me': message.sender==profile.email,'from-them':message.sender!==profile.email}" mdTooltip="{{message.date_sent | timeAgo}}"><p>{{message.message}}</p></div>
+                        <div [ngClass]="{'from-me': message.sender==profile.email,'from-them':message.sender!==profile.email}" matTooltip="{{message.date_sent | timeAgo}}"><p>{{message.message}}</p></div>
                         <div class="clear"></div>
                     </div>
                 </ng-template>
@@ -12,9 +12,9 @@
             </section>
         </div>
     </div>
-    <md-toolbar style="position:fixed;bottom:0;box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2)!important">
-            <md-input-container >
-                <textarea mdInput #message placeholder="Enter a message" [(ngModel)]="messageInput" (keyup.enter)="sendMessage()" cols="80" rows="2"></textarea>
-            </md-input-container>
-            <button md-icon-button (click)="sendMessage()" [disabled]="messageInput==' ' || messageInput==null"><md-icon>send</md-icon></button>
-    </md-toolbar>
+    <mat-toolbar style="position:fixed;bottom:0;box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2)!important">
+            <mat-form-field >
+                <textarea matInput #message placeholder="Enter a message" [(ngModel)]="messageInput" (keyup.enter)="sendMessage()" matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="5"></textarea>
+            </mat-form-field>
+            <button mat-icon-button (click)="sendMessage()" [disabled]="messageInput==' ' || messageInput==null"><mat-icon>send</mat-icon></button>
+    </mat-toolbar>

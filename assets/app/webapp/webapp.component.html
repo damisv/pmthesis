@@ -1,109 +1,109 @@
-<md-sidenav-container fullscreen>
-    <md-sidenav #sidenav mode="side" opened="true" style="width:15%;border-radius: 6px!important;box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2)!important;">
-        <md-toolbar class="profile-menu">
+<mat-sidenav-container fullscreen>
+    <mat-sidenav #sidenav mode="side" opened="true" style="width:15%;border-radius: 6px!important;box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2)!important;">
+        <mat-toolbar class="profile-menu">
             <span>Project Management</span>
 
-            <md-toolbar-row>
-                <div md-card-avatar class="header-image"></div>
+            <mat-toolbar-row>
+                <div mat-card-avatar class="header-image"></div>
                 <div style="flex:0.5 0.5 auto;"></div>
                 <a  [routerLink]="['profile']"><span>{{profile.email}}</span></a>
-            </md-toolbar-row>
+            </mat-toolbar-row>
 
-        </md-toolbar>
-        <md-divider></md-divider>
+        </mat-toolbar>
+        <mat-divider></mat-divider>
         <router-outlet name="sidebar"></router-outlet>
         <router-outlet name="projectsidebar"></router-outlet>
 
-    </md-sidenav>
+    </mat-sidenav>
 
-    <md-sidenav #notificationsSidenav mode="over" align="end" style="width:45%;box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2)!important;">
-        <md-list *ngIf="unseenNotifications.length>0">
-                <h3 md-subheader>Unseen Notifications</h3>
+    <mat-sidenav #notificationsSidenav mode="over" align="end" style="width:45%;box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2)!important;">
+        <mat-list *ngIf="unseenNotifications.length>0">
+                <h3 mat-subheader>Unseen Notifications</h3>
                 <ng-template ngFor let-notification [ngForOf]="unseenNotifications">
-                    <md-list-item>
-                        <button md-line md-icon-button (click)="onSeenNotification(notification)"><md-icon style="color:darkred">notifications</md-icon></button>
-                        <h4 md-line>{{notification.type}}</h4>
-                        <p md-line> {{notification.date | timeAgo}} </p>
-                    </md-list-item>
+                    <mat-list-item>
+                        <button mat-line mat-icon-button (click)="onSeenNotification(notification)"><mat-icon style="color:darkred">notifications</mat-icon></button>
+                        <h4 mat-line>{{notification.type}}</h4>
+                        <p mat-line> {{notification.date | timeAgo}} </p>
+                    </mat-list-item>
                 </ng-template>
-        </md-list>
-        <md-list *ngIf="seenNotifications.length>0">
-            <md-divider></md-divider>
-            <h3 md-subheader >Seen Notifications</h3>
+        </mat-list>
+        <mat-list *ngIf="seenNotifications.length>0">
+            <mat-divider></mat-divider>
+            <h3 mat-subheader >Seen Notifications</h3>
             <ng-template ngFor let-notification [ngForOf]="seenNotifications">
-                <md-list-item>
-                    <md-icon md-list-icon style="color:lightgray">notifications</md-icon>
-                    <h4 md-line>{{notification.type}}</h4>
-                    <p md-line> {{notification.date | timeAgo}} </p>
-                </md-list-item>
+                <mat-list-item>
+                    <mat-icon mat-list-icon style="color:lightgray">notifications</mat-icon>
+                    <h4 mat-line>{{notification.type}}</h4>
+                    <p mat-line> {{notification.date | timeAgo}} </p>
+                </mat-list-item>
             </ng-template>
-        </md-list>
-    </md-sidenav>
+        </mat-list>
+    </mat-sidenav>
 
-    <md-toolbar style="position:relative;z-index:1000">
-        <button mdTooltip="Toggle Sidenav!" md-icon-button *ngIf="!isMobile" (click)="sidenav.toggle()" aria-label="Toggle Sidenav">
-            <md-icon aria-hidden="true">menu</md-icon>
+    <mat-toolbar style="position:relative;z-index:1000">
+        <button matTooltip="Toggle Sidenav!" mat-icon-button *ngIf="!isMobile" (click)="sidenav.toggle()" aria-label="Toggle Sidenav">
+            <mat-icon aria-hidden="true">menu</mat-icon>
         </button>
-        <button mdTooltip="Menu" md-icon-button *ngIf="isMobile" [mdMenuTriggerFor]="mobileMenu" aria-label="Menu">
-            <md-icon aria-hidden="true">menu</md-icon>
+        <button matTooltip="Menu" mat-icon-button *ngIf="isMobile" [matMenuTriggerFor]="mobileMenu" aria-label="Menu">
+            <mat-icon aria-hidden="true">menu</mat-icon>
         </button>
-        <md-menu #mobileMenu="mdMenu"  [overlapTrigger]="false">
-                <a md-menu-item [routerLink]="['dashboard']" *ngIf="userMenuAvailable"><md-icon>dashboard</md-icon>Dashboard</a>
-                <a md-menu-item [routerLink]="['myprojects']" *ngIf="userMenuAvailable"><md-icon>business_center</md-icon>My Projects</a>
-                <a md-menu-item [routerLink]="['mytasks']" *ngIf="userMenuAvailable"><md-icon>list</md-icon>My Tasks</a>
-                <a md-menu-item [routerLink]="['myissues']" *ngIf="userMenuAvailable" ><md-icon>warning</md-icon>My Issues</a>
-                <a md-menu-item [routerLink]="['profile']" *ngIf="userMenuAvailable"><md-icon>account_circle</md-icon>Profile</a>
-                <a md-menu-item [routerLink]="['calendar']" *ngIf="userMenuAvailable"><md-icon>schedule</md-icon>Calendar</a>
-                <a md-menu-item [routerLink]="['chat']" *ngIf="userMenuAvailable"><md-icon>chat</md-icon>Chat</a>
-                <a md-menu-item [routerLink]="['invites']" *ngIf="userMenuAvailable"><md-icon>group_add</md-icon>Invites</a>
+        <mat-menu #mobileMenu="matMenu"  [overlapTrigger]="false">
+                <a mat-menu-item [routerLink]="['dashboard']" *ngIf="userMenuAvailable"><mat-icon>dashboard</mat-icon>Dashboard</a>
+                <a mat-menu-item [routerLink]="['myprojects']" *ngIf="userMenuAvailable"><mat-icon>business_center</mat-icon>My Projects</a>
+                <a mat-menu-item [routerLink]="['mytasks']" *ngIf="userMenuAvailable"><mat-icon>list</mat-icon>My Tasks</a>
+                <a mat-menu-item [routerLink]="['myissues']" *ngIf="userMenuAvailable" ><mat-icon>warning</mat-icon>My Issues</a>
+                <a mat-menu-item [routerLink]="['profile']" *ngIf="userMenuAvailable"><mat-icon>account_circle</mat-icon>Profile</a>
+                <a mat-menu-item [routerLink]="['calendar']" *ngIf="userMenuAvailable"><mat-icon>schedule</mat-icon>Calendar</a>
+                <a mat-menu-item [routerLink]="['chat']" *ngIf="userMenuAvailable"><mat-icon>chat</mat-icon>Chat</a>
+                <a mat-menu-item [routerLink]="['invites']" *ngIf="userMenuAvailable"><mat-icon>group_add</mat-icon>Invites</a>
 
-                <a md-menu-item [routerLink]="['project/dashboard']" *ngIf="!userMenuAvailable"><md-icon>dashboard</md-icon>Dashboard</a>
-                <a md-menu-item [routerLink]="['project/tasks']" *ngIf="!userMenuAvailable"><md-icon>format_list_bulleted</md-icon>Tasks</a>
-                <a md-menu-item [routerLink]="['project/gantt']" *ngIf="!userMenuAvailable"><md-icon>show_chart</md-icon>Gantt</a>
-                <a md-menu-item [routerLink]="['project/issues']" *ngIf="!userMenuAvailable"><md-icon>warning</md-icon>Issues</a>
-                <a md-menu-item [routerLink]="['project/team']" *ngIf="!userMenuAvailable"><md-icon>group</md-icon>Team</a>
-                <a md-menu-item [routerLink]="['/chat']" *ngIf="!userMenuAvailable"><md-icon>chat</md-icon>Chat</a>
-                <a md-menu-item [routerLink]="['project/settings']" *ngIf="!userMenuAvailable"><md-icon>settings</md-icon>Settings</a>
-        </md-menu>
-        <a md-icon-button [routerLink]="['/app']" aria-label="User's Dashboard">
-            <md-icon aria-hidden="true">home</md-icon>
+                <a mat-menu-item [routerLink]="['project/dashboard']" *ngIf="!userMenuAvailable"><mat-icon>dashboard</mat-icon>Dashboard</a>
+                <a mat-menu-item [routerLink]="['project/tasks']" *ngIf="!userMenuAvailable"><mat-icon>format_list_bulleted</mat-icon>Tasks</a>
+                <a mat-menu-item [routerLink]="['project/gantt']" *ngIf="!userMenuAvailable"><mat-icon>show_chart</mat-icon>Gantt</a>
+                <a mat-menu-item [routerLink]="['project/issues']" *ngIf="!userMenuAvailable"><mat-icon>warning</mat-icon>Issues</a>
+                <a mat-menu-item [routerLink]="['project/team']" *ngIf="!userMenuAvailable"><mat-icon>group</mat-icon>Team</a>
+                <a mat-menu-item [routerLink]="['/chat']" *ngIf="!userMenuAvailable"><mat-icon>chat</mat-icon>Chat</a>
+                <a mat-menu-item [routerLink]="['project/settings']" *ngIf="!userMenuAvailable"><mat-icon>settings</mat-icon>Settings</a>
+        </mat-menu>
+        <a mat-icon-button [routerLink]="['/app']" aria-label="User's Dashboard">
+            <mat-icon aria-hidden="true">home</mat-icon>
         </a>
-        <button mdTooltip="{{unseenNotifications.length}} unseen notifications !"
-                md-icon-button [ngClass]="{'badge': unseenNotifications.length>0}"
+        <button matTooltip="{{unseenNotifications.length}} unseen notifications !"
+                mat-icon-button [ngClass]="{'badge': unseenNotifications.length>0}"
                 [attr.data-badge]="unseenNotifications.length"
                 (click)="notificationsSidenav.toggle()"
                 aria-label="View Notifications">
-            <md-icon aria-hidden="true">notifications</md-icon>
+            <mat-icon aria-hidden="true">notifications</mat-icon>
         </button>
         <div style="flex:1 1 auto"></div>
-        <md-input-container>
-            <md-icon mdPrefix>search</md-icon>
-            <input #searchInput ngModel (ngModelChange)="search($event)" mdInput placeholder="Search" [mdAutocomplete]="auto">
-            <md-autocomplete #auto="mdAutocomplete">
-                <md-option  *ngFor="let value of result" (onSelectionChange)="onResultSelected(value)">
+        <mat-form-field>
+            <mat-icon matPrefix>search</mat-icon>
+            <input #searchInput ngModel (ngModelChange)="search($event)" matInput placeholder="Search" [matAutocomplete]="auto">
+            <mat-autocomplete #auto="matAutocomplete">
+                <mat-option  *ngFor="let value of result" (onSelectionChange)="onResultSelected(value)">
                     {{ value.value }}
-                </md-option>
-            </md-autocomplete>
-        </md-input-container>
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
         <div style="flex:1 1 auto"></div>
-        <button mdTooltip="Settings" md-icon-button [mdMenuTriggerFor]="settingsMenu" aria-label="Account Settings">
-            <md-icon aria-hidden="true">settings</md-icon>
+        <button matTooltip="Settings" mat-icon-button [matMenuTriggerFor]="settingsMenu" aria-label="Account Settings">
+            <mat-icon aria-hidden="true">settings</mat-icon>
         </button>
-        <md-menu #settingsMenu="mdMenu"  [overlapTrigger]="false">
-            <a md-menu-item [routerLink]="['settings']"></a>
-            <button md-menu-item>Item 2</button>
-        </md-menu>
-        <button mdTooltip="Logout" md-icon-button (click)="onLogout()" aria-label="Logout">
-            <md-icon aria-hidden="true">power_settings_new</md-icon>
+        <mat-menu #settingsMenu="matMenu"  [overlapTrigger]="false">
+            <a mat-menu-item [routerLink]="['settings']"></a>
+            <button mat-menu-item>Item 2</button>
+        </mat-menu>
+        <button matTooltip="Logout" mat-icon-button (click)="onLogout()" aria-label="Logout">
+            <mat-icon aria-hidden="true">power_settings_new</mat-icon>
         </button>
-    </md-toolbar>
+    </mat-toolbar>
 
 
     <div class="margin-left-right-50">
         <particles [style]="myStyle" [params]="myParams" [width]="width" [height]="height"></particles>
         <router-outlet ></router-outlet>
     </div>
-</md-sidenav-container>
+</mat-sidenav-container>
 <!--
 <div class="wrapper">
 
@@ -120,29 +120,29 @@
         <router-outlet name="sidebar"></router-outlet>
         <router-outlet name="projectsidebar"></router-outlet>
             <div style="position:fixed;bottom: 2%;left:1%;">
-                <md-button-toggle-group #group="mdButtonToggleGroup" [vertical]="false" [ngModel]="groupColor" (ngModelChange)="changeMenuColour(group.value)">
-                    <md-button-toggle value="blue">
-                        <md-icon style="color:blue;">format_paint</md-icon>
-                    </md-button-toggle>
-                <!--<md-button-toggle value="azure">
-                        <md-icon style="color:azure;">format_paint</md-icon>
-                    </md-button-toggle>
-                    <md-button-toggle value="green">
-                        <md-icon style="color:green;">format_paint</md-icon>
-                    </md-button-toggle>
-                    <md-button-toggle value="orange">
-                        <md-icon style="color:orange;">format_paint</md-icon>
-                    </md-button-toggle>
-                    <md-button-toggle value="red">
-                        <md-icon style="color:red;">format_paint</md-icon>
-                    </md-button-toggle>
-                    <md-button-toggle value="purple">
-                        <md-icon style="color:purple;">format_paint</md-icon>
-                    </md-button-toggle>
-                    <!--<md-button-toggle value="gray">
-                        <md-icon style="color:gray;">format_paint</md-icon>
-                    </md-button-toggle>
-                </md-button-toggle-group>
+                <mat-button-toggle-group #group="matButtonToggleGroup" [vertical]="false" [ngModel]="groupColor" (ngModelChange)="changeMenuColour(group.value)">
+                    <mat-button-toggle value="blue">
+                        <mat-icon style="color:blue;">format_paint</mat-icon>
+                    </mat-button-toggle>
+                <!--<mat-button-toggle value="azure">
+                        <mat-icon style="color:azure;">format_paint</mat-icon>
+                    </mat-button-toggle>
+                    <mat-button-toggle value="green">
+                        <mat-icon style="color:green;">format_paint</mat-icon>
+                    </mat-button-toggle>
+                    <mat-button-toggle value="orange">
+                        <mat-icon style="color:orange;">format_paint</mat-icon>
+                    </mat-button-toggle>
+                    <mat-button-toggle value="red">
+                        <mat-icon style="color:red;">format_paint</mat-icon>
+                    </mat-button-toggle>
+                    <mat-button-toggle value="purple">
+                        <mat-icon style="color:purple;">format_paint</mat-icon>
+                    </mat-button-toggle>
+                    <!--<mat-button-toggle value="gray">
+                        <mat-icon style="color:gray;">format_paint</mat-icon>
+                    </mat-button-toggle>
+                </mat-button-toggle-group>
             </div>
 
     </div>

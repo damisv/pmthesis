@@ -9,7 +9,7 @@ import {ProjectService} from "../../_services/projects.service";
 import {ProfileService} from "../../_services/profile.service";
 import {Profile} from "../../../models/profile";
 
-declare var Highcharts:any;
+declare let Highcharts:any;
 
 @Component({
     selector: 'webapp-tasks',

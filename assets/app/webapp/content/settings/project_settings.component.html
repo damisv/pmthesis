@@ -1,5 +1,5 @@
-<button mdTooltip="Save settings" class="btn-float" color="primary" md-fab (click)="saveSettings()">
-    <md-icon class="md-24">save</md-icon>
+<button matTooltip="Save settings" class="btn-float" color="primary" mat-fab (click)="saveSettings()">
+    <mat-icon class="mat-24">save</mat-icon>
 </button>
 
 <div
@@ -9,108 +9,108 @@
         fxLayoutGap="10px"
         fxLayoutGap.xs="0">
     <div fxFlex="auto">
-        <md-card class="card">
-            <md-card-title>Project Options</md-card-title>
-            <md-card-subtitle>Change info and setting of {{ project?.name }}</md-card-subtitle>
-            <md-card-content >
+        <mat-card class="card">
+            <mat-card-title>Project Options</mat-card-title>
+            <mat-card-subtitle>Change info and setting of {{ project?.name }}</mat-card-subtitle>
+            <mat-card-content >
 
-                <md-card class="nothing">
-                    <md-card-title>Company</md-card-title>
-                    <md-card-subtitle>Name of product's company or employer</md-card-subtitle>
-                    <md-card-content>
-                        <md-input-container>
-                            <input mdInput [(ngModel)]="project.company" type="text" placeholder="Company">
-                        </md-input-container>
-                    </md-card-content>
-                </md-card>
+                <mat-card class="nothing">
+                    <mat-card-title>Company</mat-card-title>
+                    <mat-card-subtitle>Name of product's company or employer</mat-card-subtitle>
+                    <mat-card-content>
+                        <mat-form-field>
+                            <input matInput [(ngModel)]="project.company" type="text" placeholder="Company">
+                        </mat-form-field>
+                    </mat-card-content>
+                </mat-card>
 
-                <md-card class="nothing">
-                    <md-card-title>Project Name</md-card-title>
-                    <md-card-subtitle>Select your project name , so it represents your work and team</md-card-subtitle>
-                    <md-card-content>
-                        <md-input-container>
-                            <input mdInput [(ngModel)]="project.name" type="text" placeholder="Project Name">
-                        </md-input-container>
-                    </md-card-content>
-                </md-card>
+                <mat-card class="nothing">
+                    <mat-card-title>Project Name</mat-card-title>
+                    <mat-card-subtitle>Select your project name , so it represents your work and team</mat-card-subtitle>
+                    <mat-card-content>
+                        <mat-form-field>
+                            <input matInput [(ngModel)]="project.name" type="text" placeholder="Project Name">
+                        </mat-form-field>
+                    </mat-card-content>
+                </mat-card>
 
-                <md-card class="nothing">
-                    <md-card-title>Project Budget</md-card-title>
-                    <md-card-subtitle>Budget available for your project</md-card-subtitle>
-                    <md-card-content>
-                        <md-slider #slider style="position:relative;width:100%" [(ngModel)]="project.budget" [thumb-label]="true" id="mdSlider" min="0" max="50000" tick-interval="auto" ></md-slider>
+                <mat-card class="nothing">
+                    <mat-card-title>Project Budget</mat-card-title>
+                    <mat-card-subtitle>Budget available for your project</mat-card-subtitle>
+                    <mat-card-content>
+                        <mat-slider #slider style="position:relative;width:100%" [(ngModel)]="project.budget" [thumb-label]="true" id="matSlider" min="0" max="50000" tick-interval="auto" ></mat-slider>
                         <p>$ {{ slider.value }} </p>
-                    </md-card-content>
-                </md-card>
+                    </mat-card-content>
+                </mat-card>
 
 
-                <md-card class="nothing">
-                    <md-card-title>Project Description</md-card-title>
-                    <md-card-content>
-                        <md-input-container>
-                            <textarea mdInput [(ngModel)]="project.description" cols="100" rows="5" placeholder="This text should be concise and readable"></textarea>
-                        </md-input-container>
-                    </md-card-content>
-                </md-card>
+                <mat-card class="nothing">
+                    <mat-card-title>Project Description</mat-card-title>
+                    <mat-card-content>
+                        <mat-form-field>
+                            <textarea matInput [(ngModel)]="project.description" cols="100" rows="5" placeholder="This text should be concise and readable"></textarea>
+                        </mat-form-field>
+                    </mat-card-content>
+                </mat-card>
 
 
-            </md-card-content>
-        </md-card>
+            </mat-card-content>
+        </mat-card>
     </div>
     <div fxFlex="auto">
-        <md-card style="background-color: #ad1457 " class="card">
-            <md-card-header>
-                <md-card-title>Danger Zone</md-card-title>
-                <md-card-subtitle>These settings are dangerous</md-card-subtitle>
-            </md-card-header>
-            <md-card-content>
+        <mat-card style="background-color: #ad1457 " class="card">
+            <mat-card-header>
+                <mat-card-title>Danger Zone</mat-card-title>
+                <mat-card-subtitle>These settings are dangerous</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
 
-                    <md-card class="nothing">
-                        <md-card-title>Make this project private</md-card-title>
-                        <md-card-content>
-                            <md-slide-toggle [(ngModel)]="private">
+                    <mat-card class="nothing">
+                        <mat-card-title>Make this project private</mat-card-title>
+                        <mat-card-content>
+                            <mat-slide-toggle [(ngModel)]="private">
                                 <span *ngIf="!private">Make Private</span>
                                 <span *ngIf="private">Make Public</span>
-                            </md-slide-toggle>
-                        </md-card-content>
-                    </md-card>
+                            </mat-slide-toggle>
+                        </mat-card-content>
+                    </mat-card>
 
 
-                    <md-card class="nothing">
-                        <md-card-title>Transfer ownership</md-card-title>
-                        <md-card-subtitle>Transfer ownership of this project to someone else's account</md-card-subtitle>
-                        <md-card-content>
-                            <md-slide-toggle>Transfer</md-slide-toggle>
-                        </md-card-content>
-                    </md-card>
+                    <mat-card class="nothing">
+                        <mat-card-title>Transfer ownership</mat-card-title>
+                        <mat-card-subtitle>Transfer ownership of this project to someone else's account</mat-card-subtitle>
+                        <mat-card-content>
+                            <mat-slide-toggle>Transfer</mat-slide-toggle>
+                        </mat-card-content>
+                    </mat-card>
 
 
 
-                    <md-card class="nothing">
-                        <md-card-title>Lock Project</md-card-title>
-                        <md-card-subtitle>Lock this project temporary</md-card-subtitle>
-                        <md-card-content>
-                            <md-slide-toggle [(ngModel)]="locked">
+                    <mat-card class="nothing">
+                        <mat-card-title>Lock Project</mat-card-title>
+                        <mat-card-subtitle>Lock this project temporary</mat-card-subtitle>
+                        <mat-card-content>
+                            <mat-slide-toggle [(ngModel)]="locked">
                                 <span *ngIf="!locked">Lock It !</span>
                                 <span *ngIf="locked">Unlock It !</span>
-                            </md-slide-toggle>
-                        </md-card-content>
-                    </md-card>
+                            </mat-slide-toggle>
+                        </mat-card-content>
+                    </mat-card>
 
 
-                    <md-card class="nothing">
-                        <md-card-title>Delete this Project</md-card-title>
-                        <md-card-subtitle>Delete this project! WARNING ! This is not reversible!!</md-card-subtitle>
-                        <md-card-content>
-                            <button style="background-color:red" md-fab>
-                                <md-icon class="md-24">delete-forever</md-icon>
+                    <mat-card class="nothing">
+                        <mat-card-title>Delete this Project</mat-card-title>
+                        <mat-card-subtitle>Delete this project! WARNING ! This is not reversible!!</mat-card-subtitle>
+                        <mat-card-content>
+                            <button style="background-color:red" mat-fab>
+                                <mat-icon class="mat-24">delete-forever</mat-icon>
                             </button>
-                        </md-card-content>
-                    </md-card>
+                        </mat-card-content>
+                    </mat-card>
 
 
-            </md-card-content>
-        </md-card>
+            </mat-card-content>
+        </mat-card>
 
     </div>
 </div>

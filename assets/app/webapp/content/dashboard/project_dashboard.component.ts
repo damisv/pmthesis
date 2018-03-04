@@ -7,7 +7,7 @@ import {TaskService} from "../../_services/task.service";
 import {Router} from "@angular/router";
 import {trigger, stagger, animate, style, group, query, transition, keyframes} from '@angular/animations';
 
-declare var Highcharts:any;
+declare let Highcharts:any;
 
 @Component({
     selector: 'webapp-project-dashboard',
@@ -34,15 +34,15 @@ declare var Highcharts:any;
 })
 export class ProjectDashboardComponent implements AfterViewInit{
     // Time Ago Variables
-    projectUpdated:Date;
-    tasksUpdated:Date;
-    issuesUpdated:Date;
-    milestonesUpdated:Date;
+    projectUpdated: Date;
+    tasksUpdated: Date;
+    issuesUpdated: Date;
+    milestonesUpdated: Date;
 
-    taskSubscription:Subscription ;
-    project:Project;
+    taskSubscription: Subscription ;
+    project: Project;
 
-    taskAvailable:boolean=true;
+    taskAvailable:boolean = true;
 
     subscription:Subscription;
 

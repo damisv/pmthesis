@@ -4,12 +4,12 @@
      fxLayoutGap="10px"
      fxLayoutGap.xs="0">
     <div fxFlex>
-        <md-card class="card">
-            <md-card-header>
-                <md-card-title>Action Log</md-card-title>
-                <md-card-subtitle>With dates</md-card-subtitle>
-            </md-card-header>
-            <md-card-content>
+        <mat-card class="card">
+            <mat-card-header>
+                <mat-card-title>Action Log</mat-card-title>
+                <mat-card-subtitle>With dates</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
                 <section class="timeline" style="height:50em;overflow-y:auto;overflow-x:hidden">
                     <ul>
                         <li *ngFor="let log of logs"
@@ -21,8 +21,8 @@
                         </li>
                     </ul>
                 </section>
-            </md-card-content>
-            <md-card-footer><md-icon>history</md-icon>Updated now</md-card-footer>
-        </md-card>
+            </mat-card-content>
+            <mat-card-footer><mat-icon>history</mat-icon>Updated now</mat-card-footer>
+        </mat-card>
     </div>
 </div>

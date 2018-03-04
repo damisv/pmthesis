@@ -1,107 +1,107 @@
-<md-card class="nothing">
-    <md-card-title>Create a new project</md-card-title>
-    <md-card-subtitle>You can change most of these settings later, from the project settings menu option</md-card-subtitle>
-    <md-card-content>
+<mat-card class="nothing">
+    <mat-card-title>Create a new project</mat-card-title>
+    <mat-card-subtitle>You can change most of these settings later, from the project settings menu option</mat-card-subtitle>
+    <mat-card-content>
 
-        <md-grid-list #grid cols="4" rowHeight="15em">
-            <md-grid-tile [colspan]="maxColumns" [rowspan]="1">
-                <md-card class="nothing">
-                    <md-card-title>Company</md-card-title>
-                    <md-card-subtitle>Name of product's company or employer</md-card-subtitle>
-                    <md-card-content>
-                        <md-input-container>
-                            <input mdInput placeholder="Project Company" [(ngModel)]="project.company" >
-                        </md-input-container>
-                    </md-card-content>
-                </md-card>
-            </md-grid-tile>
-            <md-grid-tile [colspan]="maxColumns" [rowspan]="1">
-                <md-card class="nothing">
-                    <md-card-title>Project Type</md-card-title>
-                    <md-card-subtitle>If you're developing for a Company , you could set that here</md-card-subtitle>
-                    <md-card-content>
-                        <md-radio-group [(ngModel)]="project.typeOf">
-                            <md-radio-button value="public"><md-chip-list><md-chip color="primary" selected="true">Public</md-chip></md-chip-list></md-radio-button>
-                            <md-radio-button value="private"><md-chip-list><md-chip color="primary" >Private</md-chip></md-chip-list></md-radio-button>
-                        </md-radio-group>
-                    </md-card-content>
-                </md-card>
-            </md-grid-tile>
-            <md-grid-tile [colspan]="maxColumns" [rowspan]="1">
-                <md-card class="nothing">
-                    <md-card-title>Project Name</md-card-title>
-                    <md-card-subtitle>Select your project name , so it represents your work and team</md-card-subtitle>
-                    <md-card-content>
-                        <md-input-container>
-                            <input mdInput  required placeholder="Project Name" [(ngModel)]="project.name" >
-                        </md-input-container>
-                    </md-card-content>
-                </md-card>
-            </md-grid-tile>
-            <md-grid-tile [colspan]="1" [rowspan]="1">
-                <md-card class="nothing">
-                    <md-card-title>Invite members</md-card-title>
-                    <md-card-subtitle>Invite users to work on your project</md-card-subtitle>
-                    <md-card-content>
-                        <md-input-container>
-                            <input (keyup.enter)="onInvite()" mdInput   placeholder="Invites" [mdAutocomplete]="auto" [(ngModel)]="memberToInvite" (ngModelChange)="search($event)">
-                        </md-input-container>
-                        <md-autocomplete #auto="mdAutocomplete">
-                            <md-option (click)="onInvite()" *ngFor="let member of membersAutocomplete" [value]="member.email">
+        <mat-grid-list #grid cols="4" rowHeight="15em">
+            <mat-grid-tile [colspan]="maxColumns" [rowspan]="1">
+                <mat-card class="nothing">
+                    <mat-card-title>Company</mat-card-title>
+                    <mat-card-subtitle>Name of product's company or employer</mat-card-subtitle>
+                    <mat-card-content>
+                        <mat-form-field>
+                            <input matInput placeholder="Project Company" [(ngModel)]="project.company" >
+                        </mat-form-field>
+                    </mat-card-content>
+                </mat-card>
+            </mat-grid-tile>
+            <mat-grid-tile [colspan]="maxColumns" [rowspan]="1">
+                <mat-card class="nothing">
+                    <mat-card-title>Project Type</mat-card-title>
+                    <mat-card-subtitle>If you're developing for a Company , you could set that here</mat-card-subtitle>
+                    <mat-card-content>
+                        <mat-radio-group [(ngModel)]="project.typeOf">
+                            <mat-radio-button value="public"><mat-chip-list><mat-chip color="primary" selected="true">Public</mat-chip></mat-chip-list></mat-radio-button>
+                            <mat-radio-button value="private"><mat-chip-list><mat-chip color="primary" >Private</mat-chip></mat-chip-list></mat-radio-button>
+                        </mat-radio-group>
+                    </mat-card-content>
+                </mat-card>
+            </mat-grid-tile>
+            <mat-grid-tile [colspan]="maxColumns" [rowspan]="1">
+                <mat-card class="nothing">
+                    <mat-card-title>Project Name</mat-card-title>
+                    <mat-card-subtitle>Select your project name , so it represents your work and team</mat-card-subtitle>
+                    <mat-card-content>
+                        <mat-form-field>
+                            <input matInput  required placeholder="Project Name" [(ngModel)]="project.name" >
+                        </mat-form-field>
+                    </mat-card-content>
+                </mat-card>
+            </mat-grid-tile>
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-card class="nothing">
+                    <mat-card-title>Invite members</mat-card-title>
+                    <mat-card-subtitle>Invite users to work on your project</mat-card-subtitle>
+                    <mat-card-content>
+                        <mat-form-field>
+                            <input (keyup.enter)="onInvite()" matInput   placeholder="Invites" [matAutocomplete]="auto" [(ngModel)]="memberToInvite" (ngModelChange)="search($event)">
+                        </mat-form-field>
+                        <mat-autocomplete #auto="matAutocomplete">
+                            <mat-option (click)="onInvite()" *ngFor="let member of membersAutocomplete" [value]="member.email">
                                 {{ member.email }}
-                            </md-option>
-                        </md-autocomplete>
+                            </mat-option>
+                        </mat-autocomplete>
                         {{msg}}
-                    </md-card-content>
-                </md-card>
-            </md-grid-tile>
+                    </mat-card-content>
+                </mat-card>
+            </mat-grid-tile>
 
-            <md-grid-tile [colspan]="1" [rowspan]="1">
-                <md-card class="nothing">
-                    <md-card-title>Members invited</md-card-title>
-                    <md-card-content>
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-card class="nothing">
+                    <mat-card-title>Members invited</mat-card-title>
+                    <mat-card-content>
                         <div class="scroll">
                             <p *ngIf="membersToInvite.length < 1">You have not invited yet someone to this project</p>
-                            <md-chip-list *ngFor="let member of membersToInvite">
-                                <md-chip mdTooltip="Remove" (click)="removeInvite(member.email)" color="primary" selected="true">{{ member?.email }}</md-chip>
-                            </md-chip-list>
+                            <mat-chip-list *ngFor="let member of membersToInvite">
+                                <mat-chip matTooltip="Remove" (click)="removeInvite(member.email)" color="primary" selected="true">{{ member?.email }}</mat-chip>
+                            </mat-chip-list>
                         </div>
-                    </md-card-content>
-                </md-card>
-            </md-grid-tile>
+                    </mat-card-content>
+                </mat-card>
+            </mat-grid-tile>
 
-            <md-grid-tile [colspan]="maxColumns" [rowspan]="1">
-                <md-card class="nothing">
-                    <md-card-title>Project Budget</md-card-title>
-                    <md-card-subtitle>Budget available for your project</md-card-subtitle>
-                    <md-card-content>
-                        <md-slider #slider style="position:relative;width:100%" [(ngModel)]="project.budget" [thumb-label]="true" min="0" max="50000" tick-interval="auto" ></md-slider>
+            <mat-grid-tile [colspan]="maxColumns" [rowspan]="1">
+                <mat-card class="nothing">
+                    <mat-card-title>Project Budget</mat-card-title>
+                    <mat-card-subtitle>Budget available for your project</mat-card-subtitle>
+                    <mat-card-content>
+                        <mat-slider #slider style="position:relative;width:100%" [(ngModel)]="project.budget" [thumb-label]="true" min="0" max="50000" tick-interval="auto" ></mat-slider>
                         <p>$ {{ slider.value }} </p>
-                    </md-card-content>
-                </md-card>
-            </md-grid-tile>
+                    </mat-card-content>
+                </mat-card>
+            </mat-grid-tile>
 
 
 
-            <md-grid-tile [colspan]="maxColumns" [rowspan]="1">
-                <md-card class="nothing">
-                    <md-card-title>Project Description</md-card-title>
-                    <md-card-content>
-                        <md-input-container>
-                            <textarea mdInput  [(ngModel)]="project.description" cols="100" rows="5" placeholder="This text should be concise and readable"></textarea>
-                        </md-input-container>
-                    </md-card-content>
-                </md-card>
-            </md-grid-tile>
+            <mat-grid-tile [colspan]="maxColumns" [rowspan]="1">
+                <mat-card class="nothing">
+                    <mat-card-title>Project Description</mat-card-title>
+                    <mat-card-content>
+                        <mat-form-field>
+                            <textarea matInput  [(ngModel)]="project.description" cols="100" rows="5" placeholder="This text should be concise and readable"></textarea>
+                        </mat-form-field>
+                    </mat-card-content>
+                </mat-card>
+            </mat-grid-tile>
 
-        </md-grid-list>
+        </mat-grid-list>
 
-    </md-card-content>
-    <md-card-actions>
-        <button color="primary" style="text-align:center;width:30%" md-raised-button (click)="onSubmit()">Create {{ project?.name}}</button>
-    </md-card-actions>
-    <md-card-footer>
+    </mat-card-content>
+    <mat-card-actions>
+        <button color="primary" style="text-align:center;width:30%" mat-raised-button (click)="onSubmit()">Create {{ project?.name}}</button>
+    </mat-card-actions>
+    <mat-card-footer>
         <hr>
         &nbsp;Fields with * (asterisks) are required!
-    </md-card-footer>
-</md-card>
+    </mat-card-footer>
+</mat-card>

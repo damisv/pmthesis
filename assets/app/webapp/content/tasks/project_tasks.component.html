@@ -1,5 +1,5 @@
-<button mdTooltip="Add a new task" class="btn-float" color="primary" md-fab (click)="createNewTask()">
-    <md-icon class="md-24">add</md-icon>
+<button matTooltip="Add a new task" class="btn-float" color="primary" mat-fab (click)="createNewTask()">
+    <mat-icon class="mat-24">add</mat-icon>
 </button>
 <div
         fxLayout
@@ -8,10 +8,10 @@
         fxLayoutGap="10px"
         fxLayoutGap.xs="0">
     <div fxFlex="auto">
-        <md-card class="card">
-            <md-card-content>
-                <md-tab-group #tab style="height:100%">
-                    <md-tab label="Agile View">
+        <mat-card class="card">
+            <mat-card-content>
+                <mat-tab-group #tab style="height:100%">
+                    <mat-tab label="Agile View">
                         <div
                                 fxLayout
                                 fxLayout.xs="column"
@@ -22,21 +22,21 @@
                                 here goes the agile cards
                             </div>
                         </div>
-                    </md-tab>
-                    <md-tab label="Classic View">
-                        <md-card class="card" style="height: 70vh">
-                            <md-card-header>
-                                <md-card-title>Tasks</md-card-title>
-                                <md-card-subtitle>
+                    </mat-tab>
+                    <mat-tab label="Classic View">
+                        <mat-card class="card" style="height: 70vh">
+                            <mat-card-header>
+                                <mat-card-title>Tasks</mat-card-title>
+                                <mat-card-subtitle>
                                     <p class="category">Show :</p>
-                                    <md-radio-group [(ngModel)]="filterStatus">
-                                        <md-radio-button value="all">All</md-radio-button>
-                                        <md-radio-button value="closed">Completed</md-radio-button>
-                                        <md-radio-button value="open">Open</md-radio-button>
-                                    </md-radio-group>
-                                </md-card-subtitle>
-                            </md-card-header>
-                            <md-card-content>
+                                    <mat-radio-group [(ngModel)]="filterStatus">
+                                        <mat-radio-button value="all">All</mat-radio-button>
+                                        <mat-radio-button value="closed">Completed</mat-radio-button>
+                                        <mat-radio-button value="open">Open</mat-radio-button>
+                                    </mat-radio-group>
+                                </mat-card-subtitle>
+                            </mat-card-header>
+                            <mat-card-content>
                                 <div  style="height: 100%;width:100%;overflow:auto;display:table;">
                                     <table style="height: 100%;width:100%;">
                                         <thead>
@@ -52,33 +52,33 @@
                                         <ng-template ngFor let-task [ngForOf]="tasks" let-i="index">
                                             <tr *ngIf="checkStatus(i)" [ngClass]="{'taskCompleted': task.completed}" style="text-align: center">
                                                 <td>
-                                                    <md-checkbox *ngIf="hasRightToCompleteTask(task.assigner_email,task.assignee_email)" (change)="completeTask($event.checked,i)" [checked]="task.completed" ></md-checkbox>
-                                                    <md-checkbox *ngIf="!hasRightToCompleteTask(task.assigner_email,task.assignee_email)" [checked]="task.completed" disabled></md-checkbox>
+                                                    <mat-checkbox *ngIf="hasRightToCompleteTask(task.assigner_email,task.assignee_email)" (change)="completeTask($event.checked,i)" [checked]="task.completed" ></mat-checkbox>
+                                                    <mat-checkbox *ngIf="!hasRightToCompleteTask(task.assigner_email,task.assignee_email)" [checked]="task.completed" disabled></mat-checkbox>
                                                 </td>
                                                 <td (click)="openTaskView(i)">{{ task?.name }}</td>
                                                 <td (click)="onEmailClicked(task?.assigner_email)" >{{ task?.assigner_email }}</td>
-                                                <td mdTooltip="{{task?.assignee_email}}" >{{ task.assignee_email?.length }}</td>
+                                                <td matTooltip="{{task?.assignee_email}}" >{{ task.assignee_email?.length }}</td>
                                                 <td >
-                                                    <button md-mini-fab color="primary"><md-icon>edit</md-icon></button>
-                                                    <button md-mini-fab color="accent"><md-icon>delete</md-icon></button>
+                                                    <button mat-mini-fab color="primary"><mat-icon>edit</mat-icon></button>
+                                                    <button mat-mini-fab color="accent"><mat-icon>delete</mat-icon></button>
                                                 </td>
                                             </tr>
                                         </ng-template>
                                         </tbody>
                                     </table>
                                 </div>
-                            </md-card-content>
-                            <md-card-footer>
-                                <md-divider></md-divider>
-                                <md-icon>history</md-icon> Updated 3 minutes ago
-                            </md-card-footer>
-                        </md-card>
-                    </md-tab>
-                    <md-tab label="Add new task">
+                            </mat-card-content>
+                            <mat-card-footer>
+                                <mat-divider></mat-divider>
+                                <mat-icon>history</mat-icon> Updated 3 minutes ago
+                            </mat-card-footer>
+                        </mat-card>
+                    </mat-tab>
+                    <mat-tab label="Add new task">
                          <project-create-task (taskCreated)="addTask()" [email]="user.email" ></project-create-task>
-                     </md-tab>
-                 </md-tab-group>
-             </md-card-content>
-         </md-card>
+                     </mat-tab>
+                 </mat-tab-group>
+             </mat-card-content>
+         </mat-card>
      </div>
  </div>

@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from "@angular/core";
 import {ProjectService} from "../../_services/projects.service";
 import {Member, Project} from "../../../models/project";
-import {MdGridList, MdSnackBar} from "@angular/material";
+import {MatGridList, MatSnackBar} from "@angular/material";
 import {ProfileService} from "../../_services/profile.service";
 import {InviteService} from "../../_services/invite.service";
 import { ObservableMedia } from "@angular/flex-layout";
@@ -24,12 +24,12 @@ export class CreateProjectComponent implements OnInit{
     memberToInvite:String=null;
 
     @ViewChild('grid')
-    private grid: MdGridList;
+    private grid: MatGridList;
     maxColumns: number = 2;
 
     constructor (private projectService: ProjectService,
                  private profileService:ProfileService,
-                 public snackBar: MdSnackBar,
+                 public snackBar: MatSnackBar,
                  private inviteService:InviteService,
                  private media: ObservableMedia,
                  private notificationService:NotificationService

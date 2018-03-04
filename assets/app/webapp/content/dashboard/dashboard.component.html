@@ -4,91 +4,91 @@
         fxLayoutGap="10px"
         fxLayoutGap.xs="0" [dragula]='"first-bag"'>
     <div fxFlex="auto">
-        <md-card class="card" >
-            <md-card-header>
-                <md-card-title>
+        <mat-card class="card" >
+            <mat-card-header>
+                <mat-card-title>
                     Change Widgets Size
-                </md-card-title>
-                <md-card-subtitle>
+                </mat-card-title>
+                <mat-card-subtitle>
                     View your colleagues statuses
-                </md-card-subtitle>
-            </md-card-header>
-            <md-card-content>
+                </mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
                 Choose size of widget:
-                <md-input-container>
-                    <input mdInput type="number" min="70" max="90">
-                </md-input-container>
-            </md-card-content>
-            <md-card-footer>
-                <md-divider></md-divider>
-                <md-icon>history</md-icon> Updated {{ tasksUpdated | timeAgo}}
-            </md-card-footer>
-        </md-card>
+                <mat-form-field>
+                    <input matInput type="number" min="70" max="90">
+                </mat-form-field>
+            </mat-card-content>
+            <mat-card-footer>
+                <mat-divider></mat-divider>
+                <mat-icon>history</mat-icon> Updated {{ tasksUpdated | timeAgo}}
+            </mat-card-footer>
+        </mat-card>
     </div>
     <div fxFlex="auto">
-        <md-card class="card" >
-            <md-card-header>
-                <md-card-title>
+        <mat-card class="card" >
+            <mat-card-header>
+                <mat-card-title>
                     Overdue Tasks Deadlines
-                </md-card-title>
-                <md-card-subtitle>
+                </mat-card-title>
+                <mat-card-subtitle>
                     This really really need your attention (for now just simple tasks available)
-                </md-card-subtitle>
-            </md-card-header>
-            <md-card-content>
-                <md-list>
+                </mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <mat-list>
                     <ng-template ngFor let-task [ngForOf]="tasks" let-i="index">
-                        <md-list-item (click)="openTaskView(i)" class="listItem">
-                            <md-icon md-list-icon>note</md-icon>
-                            <h4 md-line>{{task.name}}</h4>
-                            <p md-line>{{task.description}}</p>
-                            <p md-line>Early Start:&nbsp;{{ task?.date_end | date}}</p>
-                        </md-list-item>
+                        <mat-list-item (click)="openTaskView(i)" class="listItem">
+                            <mat-icon mat-list-icon>note</mat-icon>
+                            <h4 mat-line>{{task.name}}</h4>
+                            <p mat-line>{{task.description}}</p>
+                            <p mat-line>Early Start:&nbsp;{{ task?.date_end | date}}</p>
+                        </mat-list-item>
                     </ng-template>
-                </md-list>
-            </md-card-content>
-            <md-card-footer>
-                <md-divider></md-divider>
-                <md-icon>history</md-icon> Updated {{ tasksUpdated | timeAgo}}
-            </md-card-footer>
-        </md-card>
+                </mat-list>
+            </mat-card-content>
+            <mat-card-footer>
+                <mat-divider></mat-divider>
+                <mat-icon>history</mat-icon> Updated {{ tasksUpdated | timeAgo}}
+            </mat-card-footer>
+        </mat-card>
     </div>
     <div fxFlex="auto">
-        <md-card class="card" >
-            <md-card-header>
-                <md-card-title>
+        <mat-card class="card" >
+            <mat-card-header>
+                <mat-card-title>
                     Latest Changes
-                </md-card-title>
-                <md-card-subtitle>
+                </mat-card-title>
+                <mat-card-subtitle>
                     Projects
-                </md-card-subtitle>
-            </md-card-header>
-            <md-card-content>
+                </mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
                 <div style="white-space: nowrap;overflow-y: auto;text-overflow: ellipsis;max-height:10em">
-                    <md-list>
-                        <h3 md-subheader>My Projects</h3>
+                    <mat-list>
+                        <h3 mat-subheader>My Projects</h3>
                             <ng-template ngFor let-project [ngForOf]="projects" let-i="index" >
-                                <md-list-item *ngIf="isManager(project.team)" (click)="openProjectDashboard(i)" class="listItem">
-                                    <md-icon md-list-icon>work</md-icon>
-                                    <h4 md-line>{{project.name}}</h4>
-                                </md-list-item>
+                                <mat-list-item *ngIf="isManager(project.team)" (click)="openProjectDashboard(i)" class="listItem">
+                                    <mat-icon mat-list-icon>work</mat-icon>
+                                    <h4 mat-line>{{project.name}}</h4>
+                                </mat-list-item>
                             </ng-template>
-                        <md-divider></md-divider>
-                        <h3 md-subheader>Member Projects</h3>
+                        <mat-divider></mat-divider>
+                        <h3 mat-subheader>Member Projects</h3>
                         <ng-template ngFor let-project [ngForOf]="projects" let-i="index" >
-                            <md-list-item *ngIf="isMember(project.team)" (click)="openProjectDashboard(i)" class="listItem">
-                                <md-icon md-list-icon style="color:darkgrey">work</md-icon>
-                                <h4 md-line>{{project.name}}</h4>
-                            </md-list-item>
+                            <mat-list-item *ngIf="isMember(project.team)" (click)="openProjectDashboard(i)" class="listItem">
+                                <mat-icon mat-list-icon style="color:darkgrey">work</mat-icon>
+                                <h4 mat-line>{{project.name}}</h4>
+                            </mat-list-item>
                         </ng-template>
-                    </md-list>
+                    </mat-list>
                 </div>
-            </md-card-content>
-            <md-card-footer>
-                <md-divider></md-divider>
-                 <md-icon>history</md-icon>Updated {{ projectUpdated | timeAgo}}
-            </md-card-footer>
-        </md-card>
+            </mat-card-content>
+            <mat-card-footer>
+                <mat-divider></mat-divider>
+                 <mat-icon>history</mat-icon>Updated {{ projectUpdated | timeAgo}}
+            </mat-card-footer>
+        </mat-card>
     </div>
 </div>
 
@@ -101,52 +101,52 @@
         fxLayoutWrap="wrap"
         [dragula]='"first-bag"'>
     <div fxFlex="auto">
-        <md-card class="card" >
-            <md-card-header>
-                <md-card-title>
+        <mat-card class="card" >
+            <mat-card-header>
+                <mat-card-title>
                     Tasks
-                </md-card-title>
-                <md-card-subtitle>
+                </mat-card-title>
+                <mat-card-subtitle>
                     Latest tasks assigned to you
-                </md-card-subtitle>
-            </md-card-header>
-            <md-card-content >
+                </mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content >
                 <div style="white-space: nowrap;overflow-y: auto;text-overflow: ellipsis;max-height:10em">
-                    <md-list>
+                    <mat-list>
                         <ng-template ngFor let-task [ngForOf]="tasks" let-i="index">
-                            <md-list-item (click)="openTaskView(i)" class="listItem">
-                                <md-icon md-list-icon>note</md-icon>
-                                <h4 md-line>{{task.name}}</h4>
-                                <p md-line>{{task.description}}</p>
-                                <p md-line>Early Start:&nbsp;{{ task?.date_end | date}}</p>
-                            </md-list-item>
+                            <mat-list-item (click)="openTaskView(i)" class="listItem">
+                                <mat-icon mat-list-icon>note</mat-icon>
+                                <h4 mat-line>{{task.name}}</h4>
+                                <p mat-line>{{task.description}}</p>
+                                <p mat-line>Early Start:&nbsp;{{ task?.date_end | date}}</p>
+                            </mat-list-item>
                         </ng-template>
-                    </md-list>
+                    </mat-list>
                 </div>
-            </md-card-content>
-            <md-card-footer>
-                <md-divider></md-divider>
-                <md-icon>history</md-icon>Updated {{ tasksUpdated | timeAgo}}
-            </md-card-footer>
-        </md-card>
+            </mat-card-content>
+            <mat-card-footer>
+                <mat-divider></mat-divider>
+                <mat-icon>history</mat-icon>Updated {{ tasksUpdated | timeAgo}}
+            </mat-card-footer>
+        </mat-card>
     </div>
     <div fxFlex="auto">
-        <md-card class="card" >
-            <md-card-header>
-                <md-card-title>
+        <mat-card class="card" >
+            <mat-card-header>
+                <mat-card-title>
                     Fifth Card
-                </md-card-title>
-                <md-card-subtitle>
+                </mat-card-title>
+                <mat-card-subtitle>
                     Fifth Card
-                </md-card-subtitle>
-            </md-card-header>
-            <md-card-content>
+                </mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
                 This is the fifth card
-            </md-card-content>
-            <md-card-footer>
-                <md-divider></md-divider>
-                <md-icon>history</md-icon> Updated {{ tasksUpdated | timeAgo}}
-            </md-card-footer>
-        </md-card>
+            </mat-card-content>
+            <mat-card-footer>
+                <mat-divider></mat-divider>
+                <mat-icon>history</mat-icon> Updated {{ tasksUpdated | timeAgo}}
+            </mat-card-footer>
+        </mat-card>
     </div>
 </div>

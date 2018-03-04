@@ -29,7 +29,7 @@ import {VideotourComponent} from "./videotour.component";
 })
 export class AboutComponent {
 
-    constructor(private dialog:MdDialog){}
+    constructor(private dialog:MatDialog){}
 
     playVideoTour(){
         let videoTourDialog = this.dialog.open(VideotourComponent);

@@ -1,54 +1,54 @@
-<md-nav-list *ngIf="userMenuAvailable" >
-    <span md-line>User menu</span>
-    <md-list-item routerLinkActive="active">
-        <a md-line  [routerLink]="['dashboard']" >
-            <md-icon md-list-icon>dashboard</md-icon>
-            <span md-line>Dashboard</span>
+<mat-nav-list *ngIf="userMenuAvailable" >
+    <span mat-line>User menu</span>
+    <mat-list-item routerLinkActive="active">
+        <a mat-line  [routerLink]="['dashboard']" >
+            <mat-icon mat-list-icon>dashboard</mat-icon>
+            <span mat-line>Dashboard</span>
         </a>
-    </md-list-item>
-    <md-list-item routerLinkActive="active" >
+    </mat-list-item>
+    <mat-list-item routerLinkActive="active" >
         <a  [routerLink]="['myprojects']">
-            <md-icon md-list-icon>business_center</md-icon>
-            <span md-line>My Projects</span>
+            <mat-icon mat-list-icon>business_center</mat-icon>
+            <span mat-line>My Projects</span>
         </a>
-    </md-list-item>
-    <md-list-item routerLinkActive="active" >
+    </mat-list-item>
+    <mat-list-item routerLinkActive="active" >
         <a  [routerLink]="['mytasks']">
-            <md-icon md-list-icon>list</md-icon>
-            <span md-line>My Tasks</span>
+            <mat-icon mat-list-icon>list</mat-icon>
+            <span mat-line>My Tasks</span>
         </a>
-    </md-list-item>
-    <md-list-item routerLinkActive="active">
+    </mat-list-item>
+    <mat-list-item routerLinkActive="active">
         <a  [routerLink]="['myissues']">
-            <md-icon md-list-icon>warning</md-icon>
-            <span md-line>My Issues</span>
+            <mat-icon mat-list-icon>warning</mat-icon>
+            <span mat-line>My Issues</span>
         </a>
-    </md-list-item>
-    <md-list-item routerLinkActive="active">
+    </mat-list-item>
+    <mat-list-item routerLinkActive="active">
         <a  [routerLink]="['profile']">
-            <md-icon md-list-icon>account_circle</md-icon>
-            <span md-line>My Profile</span>
+            <mat-icon mat-list-icon>account_circle</mat-icon>
+            <span mat-line>My Profile</span>
         </a>
-    </md-list-item>
-    <md-list-item routerLinkActive="active">
-        <a md-line  [routerLink]="['calendar']" >
-            <md-icon md-list-icon>schedule</md-icon>
-            <span md-line>Calendar</span>
+    </mat-list-item>
+    <mat-list-item routerLinkActive="active">
+        <a mat-line  [routerLink]="['calendar']" >
+            <mat-icon mat-list-icon>schedule</mat-icon>
+            <span mat-line>Calendar</span>
         </a>
-    </md-list-item>
-    <md-list-item routerLinkActive="active">
+    </mat-list-item>
+    <mat-list-item routerLinkActive="active">
         <a  [routerLink]="['chat' ]"> <!-- ,{outlets: { 'messages': ['none']}} -->
-            <md-icon md-list-icon>chat</md-icon>
-            <span md-line>Chat</span>
+            <mat-icon mat-list-icon>chat</mat-icon>
+            <span mat-line>Chat</span>
         </a>
-    </md-list-item>
-    <md-list-item routerLinkActive="active">
+    </mat-list-item>
+    <mat-list-item routerLinkActive="active">
         <a  [routerLink]="['invites']">
-            <md-icon md-list-icon>group_add</md-icon>
-            <span md-line>Invites</span>
+            <mat-icon mat-list-icon>group_add</mat-icon>
+            <span mat-line>Invites</span>
         </a>
-    </md-list-item>
-</md-nav-list>
+    </mat-list-item>
+</mat-nav-list>
 
 
 <!--

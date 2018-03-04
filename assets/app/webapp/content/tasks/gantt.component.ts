@@ -7,7 +7,7 @@ import {Project} from "../../../models/project";
 import {trigger, stagger, animate, style, query, transition} from '@angular/animations';
 
 
-declare var Highcharts:any;
+declare let Highcharts:any;
 
 @Component({
     selector: 'webapp-project-gantt',
@@ -153,9 +153,5 @@ export class GanttComponent implements OnInit,AfterViewInit,OnDestroy{
         });
     }
 
-
-    ngOnDestroy(){
-
-    }
-
+    ngOnDestroy(){}
 }

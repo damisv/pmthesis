@@ -40,7 +40,7 @@ import {NotificationsService, PushNotificationsService} from "angular2-notificat
 
 import {DependenciesDialogComponent} from "./content/tasks/dependenciesdialog.component";
 import {ParticlesModule} from "angular-particle";
-import {CdkTableModule} from "@angular/cdk";
+import {CdkTableModule} from "@angular/cdk/table";
 import {ChatComponent} from "./content/chat/chat.component";
 import {UserListComponent} from "./content/chat/userlist.component";
 import {MessagesComponent} from "./content/chat/messages.component";
@@ -57,9 +57,7 @@ import {ChatService} from "./_services/chat.service";
 import {GanttComponent} from "./content/tasks/gantt.component";
 import {TeamService} from "./_services/team.service";
 
-import {TimeAgoPipe} from "time-ago-pipe";
 import {ActionLogComponent} from "./content/timeline/actionlog.component";
-
 import {InViewportModule} from "ng-in-viewport";
 import {EventCreateDialogComponent} from "./content/chat/eventCreateDialog.component";
 import {CalendarEventEditDialogComponent} from "./content/calendar/calendarEventEditDialog.component";
@@ -67,7 +65,8 @@ import {ActionService} from "./_services/action.service";
 import {UserSettingsComponent} from "./content/settings/user_settings.component";
 import {CalendarService} from "./_services/calendar.service";
 import {ViewProjectComponent} from "./content/projects/view_project.component";
-import {TimeAgoPipeModule} from "time-ago-pipe/index";
+import {TimeAgoPipe} from 'time-ago-pipe';
+import {MaterialModule} from "../material.module";
 
 @NgModule({
     declarations: [
@@ -118,6 +117,7 @@ import {TimeAgoPipeModule} from "time-ago-pipe/index";
         ParticlesModule,
         FlexLayoutModule,
         BrowserModule,
+        MaterialModule,
         BrowserAnimationsModule,
         CalendarModule.forRoot(),
         ContextMenuModule,

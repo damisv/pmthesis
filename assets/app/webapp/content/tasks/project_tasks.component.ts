@@ -5,7 +5,7 @@ import {Task} from "../../../models/task";
 import {Subscription} from "rxjs";
 import {ProfileService} from "../../_services/profile.service";
 import {Project} from "../../../models/project";
-import {MdDialog, MdDialogConfig} from "@angular/material";
+import {MatDialog, MatDialogConfig} from "@angular/material";
 import {ProfileDialogComponent} from "../user/profiledialog.component";
 import {Title} from "@angular/platform-browser";
 import {TaskService} from "../../_services/task.service";
@@ -68,7 +68,7 @@ export class ProjectTasksComponent implements OnInit{
     constructor(
         private projectService: ProjectService,
         private profileService: ProfileService,
-        public dialog: MdDialog,
+        public dialog: MatDialog,
         private titleService: Title,
         private taskService:TaskService,
         private router: Router) {
@@ -113,7 +113,7 @@ export class ProjectTasksComponent implements OnInit{
 
 
     onEmailClicked(email){
-        const configProfile = new MdDialogConfig();
+        const configProfile = new MatDialogConfig();
         configProfile.data = email;
         configProfile.width = '50%';
         configProfile.height = '30%';

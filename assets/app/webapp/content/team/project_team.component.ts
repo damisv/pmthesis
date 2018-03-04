@@ -2,7 +2,7 @@ import {Component, OnInit} from "@angular/core";
 import {Member, Project} from "../../../models/project";
 import {ProjectService} from "../../_services/projects.service";
 import {Subscription} from "rxjs";
-import {MdDialog, MdDialogConfig} from "@angular/material";
+import {MatDialog, MatDialogConfig} from "@angular/material";
 import {ProfileDialogComponent} from "../user/profiledialog.component";
 import {InviteService} from "../../_services/invite.service";
 import {trigger, stagger, animate, style, group, query, transition, keyframes} from '@angular/animations';
@@ -52,7 +52,7 @@ export class TeamProjectComponent implements OnInit{
     }
 
     constructor(private projectService: ProjectService,
-                public dialog: MdDialog,
+                public dialog: MatDialog,
                 private inviteService:InviteService){
     }
 
@@ -61,7 +61,7 @@ export class TeamProjectComponent implements OnInit{
     }
 
     onEmailHover(email:string){
-        const configProfile = new MdDialogConfig();
+        const configProfile = new MatDialogConfig();
         configProfile.data = email;
         let dialogProfile = this.dialog.open(ProfileDialogComponent,configProfile);
         dialogProfile.afterClosed().subscribe(result => {

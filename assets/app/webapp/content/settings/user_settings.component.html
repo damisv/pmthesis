@@ -4,76 +4,76 @@
         fxLayoutGap="10px"
         fxLayoutGap.xs="0">
     <div fxFlex="auto">
-        <md-card class="card">
-            <md-card-header>
-                <md-card-title>Notification Settings</md-card-title>
-                <md-card-subtitle>Change settings for all notifications</md-card-subtitle>
-            </md-card-header>
-            <md-card-content>
-                <md-slide-toggle>Error Notifications</md-slide-toggle>
+        <mat-card class="card">
+            <mat-card-header>
+                <mat-card-title>Notification Settings</mat-card-title>
+                <mat-card-subtitle>Change settings for all notifications</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <mat-slide-toggle>Error Notifications</mat-slide-toggle>
                 <br>
                 <br>
-                <md-select placeholder="Chat Messages" [(ngModel)]="settings.message" floatPlaceholder="always">
-                    <md-option *ngFor="let type of types" [value]="type">
+                <mat-select placeholder="Chat Messages" [(ngModel)]="settings.message" floatPlaceholder="always">
+                    <mat-option *ngFor="let type of types" [value]="type">
                         {{ type }}
-                    </md-option>
-                </md-select>
-                <md-select placeholder="Invite Received" [(ngModel)]="settings.invite" floatPlaceholder="always">
-                    <md-option *ngFor="let type of types" [value]="type">
+                    </mat-option>
+                </mat-select>
+                <mat-select placeholder="Invite Received" [(ngModel)]="settings.invite" floatPlaceholder="always">
+                    <mat-option *ngFor="let type of types" [value]="type">
                         {{ type }}
-                    </md-option>
-                </md-select>
-                <md-select placeholder="New Member Joined" [(ngModel)]="settings.memberJoined" floatPlaceholder="always">
-                    <md-option *ngFor="let type of types" [value]="type">
+                    </mat-option>
+                </mat-select>
+                <mat-select placeholder="New Member Joined" [(ngModel)]="settings.memberJoined" floatPlaceholder="always">
+                    <mat-option *ngFor="let type of types" [value]="type">
                         {{ type }}
-                    </md-option>
-                </md-select>
-                <md-select placeholder="Task Received" [(ngModel)]="settings.myTask" floatPlaceholder="always">
-                    <md-option *ngFor="let type of types" [value]="type">
+                    </mat-option>
+                </mat-select>
+                <mat-select placeholder="Task Received" [(ngModel)]="settings.myTask" floatPlaceholder="always">
+                    <mat-option *ngFor="let type of types" [value]="type">
                         {{ type }}
-                    </md-option>
-                </md-select>
+                    </mat-option>
+                </mat-select>
                 <button (click)="saveNotificationSettings()">Save</button>
-                <!--<md-select placeholder="Tasks Notifications">
-                    <md-option [value]="none">
+                <!--<mat-select placeholder="Tasks Notifications">
+                    <mat-option [value]="none">
                         none
-                    </md-option>
-                    <md-option [value]="push">
+                    </mat-option>
+                    <mat-option [value]="push">
                         push
-                    </md-option>
-                    <md-option [value]="toast">
+                    </mat-option>
+                    <mat-option [value]="toast">
                         toast
-                    </md-option>
-                </md-select>
+                    </mat-option>
+                </mat-select>
                 <br>
-                <md-select placeholder="Invite Notifications" >
-                    <md-option [value]="none">
+                <mat-select placeholder="Invite Notifications" >
+                    <mat-option [value]="none">
                         none
-                    </md-option>
-                    <md-option [value]="push">
+                    </mat-option>
+                    <mat-option [value]="push">
                         push
-                    </md-option>
-                    <md-option [value]="toast">
+                    </mat-option>
+                    <mat-option [value]="toast">
                         toast
-                    </md-option>
-                </md-select>
-                <md-select placeholder="Member Joined Notifications" >
-                    <md-option [value]="none">
+                    </mat-option>
+                </mat-select>
+                <mat-select placeholder="Member Joined Notifications" >
+                    <mat-option [value]="none">
                         none
-                    </md-option>
-                    <md-option [value]="push">
+                    </mat-option>
+                    <mat-option [value]="push">
                         push
-                    </md-option>
-                    <md-option [value]="toast">
+                    </mat-option>
+                    <mat-option [value]="toast">
                         toast
-                    </md-option>
-                </md-select>-->
-            </md-card-content>
-            <md-card-footer>
-                <md-divider></md-divider>
-                <md-icon>history</md-icon>Updated 3 minutes ago
-            </md-card-footer>
-        </md-card>
+                    </mat-option>
+                </mat-select>-->
+            </mat-card-content>
+            <mat-card-footer>
+                <mat-divider></mat-divider>
+                <mat-icon>history</mat-icon>Updated 3 minutes ago
+            </mat-card-footer>
+        </mat-card>
 
     </div>
 </div>

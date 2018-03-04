@@ -1,64 +1,64 @@
 import {Component, Inject} from "@angular/core";
-import {MD_DIALOG_DATA} from "@angular/material";
+import {MAT_DIALOG_DATA} from "@angular/material";
 import {Project} from "../../../models/project";
 
 @Component({
     selector:'webapp-event-create-dialog',
     template:`
-        <h1 md-dialog-title>New Event</h1>
-        <md-dialog-content>
+        <h1 mat-dialog-title>New Event</h1>
+        <mat-dialog-content>
             
                 <div    fxLayout="column"
                         fxLayoutAlign="center"
                         fxLayoutGap="10px"
                         fxLayoutGap.xs="0">
                     <div fxFlex="auto">
-                        <md-input-container>
-                            <input mdInput type="text" placeholder="Enter a title for this Event" [(ngModel)]="eventToCreate.title">
-                        </md-input-container>
+                        <mat-form-field>
+                            <input matInput type="text" placeholder="Enter a title for this Event" [(ngModel)]="eventToCreate.title">
+                        </mat-form-field>
                     </div>
                     <div fxFlex>
-                        <md-input-container>
-                            <input mdInput [mdDatepicker]="startPicker" placeholder="Choose a date to start this event" [(ngModel)]="startDate" (ngModelChange)="setStartDate($event)">
-                            <button mdSuffix [mdDatepickerToggle]="startPicker"></button>
-                        </md-input-container>
-                        <md-datepicker #startPicker></md-datepicker>
+                        <mat-form-field>
+                            <input matInput [matDatepicker]="startPicker" placeholder="Choose a date to start this event" [(ngModel)]="startDate" (ngModelChange)="setStartDate($event)">
+                            <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+                            <mat-datepicker #startPicker></mat-datepicker>
+                        </mat-form-field>
                     </div>
                     <div fxFlex>
-                        <md-input-container>
-                            <input mdInput type="time" placeholder="Start Time For This Event" (change)="setStartTime($event)">
-                        </md-input-container>
+                        <mat-form-field>
+                            <input matInput type="time" placeholder="Start Time For This Event" (change)="setStartTime($event)">
+                        </mat-form-field>
                     </div>
                     <div fxFlex>
-                        <md-input-container>
-                            <input mdInput [mdDatepicker]="picker" placeholder="Choose a date to end this event" [(ngModel)]="endDate" (ngModelChange)="setEndDate($event)">
-                            <button mdSuffix [mdDatepickerToggle]="picker"></button>
-                        </md-input-container>
-                        <md-datepicker #picker></md-datepicker>
+                        <mat-form-field>
+                            <input matInput [matDatepicker]="picker" placeholder="Choose a date to end this event" [(ngModel)]="endDate" (ngModelChange)="setEndDate($event)">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
                     </div>
                     <div fxFlex>
-                        <md-input-container>
-                            <input mdInput type="time" placeholder="End Time For This Event" (change)="setEndTime($event)">
-                        </md-input-container>
+                        <mat-form-field>
+                            <input matInput type="time" placeholder="End Time For This Event" (change)="setEndTime($event)">
+                        </mat-form-field>
                     </div>
                     <div fxFlex>
-                        <md-select placeholder="Select A Representative Color" (change)="colorSelected($event.value)">
-                            <md-option *ngFor="let color of colors" [value]="color">
+                        <mat-select placeholder="Select A Representative Color" (change)="colorSelected($event.value)">
+                            <mat-option *ngFor="let color of colors" [value]="color">
                                 {{ color.title.toUpperCase() }}
-                            </md-option>
-                        </md-select>
+                            </mat-option>
+                        </mat-select>
                     </div>
                     <div fxFlex>
-                        <md-input-container>
-                            <textarea mdInput id="" cols="30" rows="2" placeholder="Enter an Event Description" [(ngModel)]="eventToCreate.meta"></textarea>
-                        </md-input-container>
+                        <mat-form-field>
+                            <textarea matInput id="" cols="30" rows="2" placeholder="Enter an Event Description" [(ngModel)]="eventToCreate.meta"></textarea>
+                        </mat-form-field>
                     </div>
                 </div>
-        </md-dialog-content>
-        <md-dialog-actions>
-            <button md-raised-button md-dialog-close>Cancel</button>
-            <button md-raised-button [md-dialog-close]="{event:eventToCreate,project:project}">Schedule It !</button>
-        </md-dialog-actions>
+        </mat-dialog-content>
+        <mat-dialog-actions>
+            <button mat-raised-button mat-dialog-close>Cancel</button>
+            <button mat-raised-button [mat-dialog-close]="{event:eventToCreate,project:project}">Schedule It !</button>
+        </mat-dialog-actions>
     `,
     styles:[]
 })
@@ -96,7 +96,7 @@ export class EventCreateDialogComponent {
         actions:[]
     };
 
-    constructor(@Inject(MD_DIALOG_DATA) public data: any){
+    constructor(@Inject(MAT_DIALOG_DATA) public data: any){
         this.project = data;
     }
 

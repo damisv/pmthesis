@@ -29,8 +29,6 @@ import { ErrorDialogComponent} from "./errors/error.component";
 import {PushNotificationsModule,SimpleNotificationsModule} from "angular2-notifications";
 import {MaterialModule} from "./material.module";
 
-
-
 @NgModule({
     declarations: [
         AppComponent,

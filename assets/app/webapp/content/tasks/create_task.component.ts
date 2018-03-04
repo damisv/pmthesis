@@ -7,7 +7,7 @@ import {Profile} from "../../../models/profile";
 import {ProfileService} from "../../_services/profile.service";
 import { FormControl} from '@angular/forms';
 import 'rxjs/add/operator/startWith';
-import {MdDialog, MdGridList, MdSnackBar} from "@angular/material";
+import {MatDialog, MatGridList, MatSnackBar} from "@angular/material";
 import {animate, keyframes, state, style, transition, trigger} from "@angular/animations";
 import {TaskService} from "../../_services/task.service";
 import { ObservableMedia } from "@angular/flex-layout";
@@ -51,7 +51,7 @@ export class CreateTaskComponent implements OnInit{
     state: string = 'inactive';
 
     @ViewChild('grid')
-    private grid: MdGridList;
+    private grid: MatGridList;
     @ViewChild('taskname') tasknameTile;
     @ViewChild('description') descriptionTile;
 
@@ -93,8 +93,8 @@ export class CreateTaskComponent implements OnInit{
     constructor (
         private projectService: ProjectService,
         private profileService:ProfileService,
-        public snackBar: MdSnackBar,
-        private dialog: MdDialog,
+        public snackBar: MatSnackBar,
+        private dialog: MatDialog,
         private taskService:TaskService,
         private media: ObservableMedia,
         private notificationService:NotificationService

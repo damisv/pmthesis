@@ -7,11 +7,10 @@ import {SocketService} from "./_services/socket.service";
 import {ProjectService} from "./_services/projects.service";
 import {ChatService} from "./_services/chat.service";
 import {ObservableMedia} from "@angular/flex-layout";
-import {MdSidenav} from "@angular/material";
+import {MatSidenav} from "@angular/material";
 import {SidebarService} from "./sidebar/sidebar.service";
 import {NotificationService} from "./_services/notification.service";
 import {Notification} from "../models/notification";
-import {forEach} from "@angular/router/src/utils/collection";
 
 @Component({
     selector: 'my-webapp',
@@ -23,7 +22,7 @@ export class WebappComponent implements OnDestroy,OnInit,AfterViewInit{
     profile:Profile;
     subscription:Subscription;
     userMenuAvailable=true;
-    @ViewChild('sidenav') sidenav:MdSidenav;
+    @ViewChild('sidenav') sidenav:MatSidenav;
     isMobile:boolean=false;
     unseenNotifications:Notification[] = [];
     seenNotifications:Notification[] = [];
@@ -238,16 +237,13 @@ export class WebappComponent implements OnDestroy,OnInit,AfterViewInit{
         if (this.media.isActive('md')) {
             this.sidenav.close();
             this.isMobile = true;
-        }
-        else if (this.media.isActive('sm')) {
+        } else if (this.media.isActive('sm')) {
             this.sidenav.close();
             this.isMobile = true;
-        }
-        else if (this.media.isActive('xs')) {
+        } else if (this.media.isActive('xs')) {
             this.sidenav.close();
             this.isMobile=true;
-        }
-        else{
+        } else{
             this.sidenav.open();
             this.isMobile=false;
         }

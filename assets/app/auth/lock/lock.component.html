@@ -18,14 +18,14 @@
             </mat-card-header>
             <mat-card-content>
                 <div fxLayout="column" fxLayoutWrap>
-                    <mat-input-container fxFlex class="block">
+                    <mat-form-field fxFlex class="block">
                         <mat-icon matPrefix>account_circle</mat-icon>
                         <input matInput placeholder="Email or Username" type="email" formControlName="email" value="{{email}}">
-                    </mat-input-container>
-                    <mat-input-container fxFlex class="block">
+                    </mat-form-field>
+                    <mat-form-field fxFlex class="block">
                         <mat-icon matPrefix>fingerprint</mat-icon>
                         <input matInput placeholder="password" type="password" formControlName="password">
-                    </mat-input-container>
+                    </mat-form-field>
                 </div>
             </mat-card-content>
             <mat-card-actions style="text-align: center">

@@ -12,29 +12,29 @@ import {trigger, stagger, animate, style, group, query, transition, keyframes} f
                 fxLayoutGap="10px"
                 fxLayoutGap.xs="0">
             <div fxFlex="auto">
-                <md-card class="card" >
-                    <md-card-header>
-                        <md-card-title>
+                <mat-card class="card" >
+                    <mat-card-header>
+                        <mat-card-title>
                             404
-                        </md-card-title>
-                        <md-card-subtitle>
+                        </mat-card-title>
+                        <mat-card-subtitle>
                             Oops ! It seems you're lost
-                        </md-card-subtitle>
-                    </md-card-header>
-                    <md-card-content>
+                        </mat-card-subtitle>
+                    </mat-card-header>
+                    <mat-card-content>
                         The page you are looking for, doesn't exist ... Yet !
                         <br>
                         <br>
-                        <md-input-container>
-                            <md-icon mdPrefix>search</md-icon>
-                            <input mdInput placeholder="Search for something">
-                        </md-input-container>
-                    </md-card-content>
-                    <md-card-footer>
+                        <mat-input-container>
+                            <mat-icon matPrefix>search</mat-icon>
+                            <input matInput placeholder="Search for something">
+                        </mat-input-container>
+                    </mat-card-content>
+                    <mat-card-footer>
                         <hr>
-                        <md-icon>history</md-icon> Just updated
-                    </md-card-footer>
-                </md-card>
+                        <mat-icon>history</mat-icon> Just updated
+                    </mat-card-footer>
+                </mat-card>
             </div>
         </div>
     `,
